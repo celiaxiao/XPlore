@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">navUCSD</string>
+	<string name="app_name">navUCSD</string>
+	<string name="are_you_a">Are you a</string>
+	<string name="test_nothing_selected">You have selected nothing.</string>
+	<string name="next_button_text">Next</string>
+	<string-array name="type_array">
+		<item>student</item>
+		<item>visitor</item>
+	</string-array>
 </resources>
