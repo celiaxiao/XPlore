@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">navUCSD</string>
+    <string-array name="time">
+        <item>Please choose the time</item>>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>3 hours</item>
+    </string-array>
+    <string name="SpinnerAtTimeSelect"> </string>
+    <string name="ButtonAtTimeSelect">Next</string>
 </resources>
