@@ -1,5 +1,16 @@
 <resources>
-    <string name="app_name">navUCSD</string>
+	<string name="app_name">navUCSD</string>
+	
+	<!--student select strings-->
+	<string name="are_you_a">Are you a</string>
+	<string name="test_nothing_selected">You have selected nothing.</string>
+	<string name="next_button_text">Next</string>
+	<string-array name="type_array">
+		<item>student</item>
+		<item>visitor</item>
+	</string-array>
+	
+	<!--timeSelect strings-->
     <string-array name="time">
         <item>Please choose the time</item>>
         <item>1 hour</item>
@@ -8,4 +19,5 @@
     </string-array>
     <string name="SpinnerAtTimeSelect"> </string>
     <string name="ButtonAtTimeSelect">Next</string>
+
 </resources>

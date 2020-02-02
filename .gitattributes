@@ -1,0 +1,13 @@
+* text=auto
+
+# binary
+*.exe binary
+*.jar binary
+
+# text
+*.java text
+*.xml text
+*.md text
+*.txt text
+.gitattributes text
+.gitignore text
