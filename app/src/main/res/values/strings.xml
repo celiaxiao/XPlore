@@ -1,5 +1,14 @@
 <resources>
-	<string name="app_name">navUCSD</string>
+    <string name="app_name">navUCSD</string>
+
+    <string-array name="hard_code_location_name">
+        <item>Price Center</item>
+        <item>Geisel Library</item>
+        <item>Center Hall</item>
+        <item>Warren Hall</item>
+        <item>Library Walk</item>
+        <item>Conard Prebys Music Center</item>
+    </string-array>
 	
 	<!--student select strings-->
 	<string name="are_you_a">Are you a</string>
@@ -20,4 +29,5 @@
     <string name="SpinnerAtTimeSelect"> </string>
     <string name="ButtonAtTimeSelect">Next</string>
 
+>>>>>>> app/src/main/res/values/strings.xml
 </resources>
