@@ -41,12 +41,11 @@ public class locationSelectionActivity extends AppCompatActivity {
             the time for the tour.
          */
 
-         String[] hardcodeString = getResources().getStringArray(R.array.hard_code_location_name);
-        final List<String> hardcodeList = new ArrayList<>(Arrays.asList(hardcodeString));
 
-        final ArrayAdapter<String> hardCodeAdapter=new ArrayAdapter<String>(
+         ArrayAdapter<String> hardCodeAdapter=new ArrayAdapter<String>(
                 locationSelectionActivity.this, android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.hard_code_location_name));
+         hardCodeAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         firstSpinner.setAdapter(hardCodeAdapter);
         secondSpinner.setAdapter(hardCodeAdapter);
         thirdSpinner.setAdapter(hardCodeAdapter);
