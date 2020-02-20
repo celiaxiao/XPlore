@@ -9,65 +9,42 @@
 
 
     <TextView
-        android:id="@+id/thirdLocationSelected"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="The third location you just selected"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thirdLocationSpinner" />
-
-    <TextView
-        android:id="@+id/secondLocationSelected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:contentDescription="The first location you just selected"
-        android:text="The second location you just selected"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SecondLocationSpinner" />
-
-    <Spinner
-        android:id="@+id/firstLocationSpinner"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
+        android:text="Choose Your Must-Go Places"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/SecondLocationSpinner"
+    <ListView
+        android:id="@+id/mustGoListView"
         android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
+        android:layout_height="522dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstLocationSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
-    <Spinner
-        android:id="@+id/thirdLocationSpinner"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SecondLocationSpinner" />
-
-    <TextView
-        android:id="@+id/firstLocationSelected"
+    <Button
+        android:id="@+id/IDontHaveMustGoBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:contentDescription="The first location you just selected"
-        android:text="The first location you just selected"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="I don't have must-go's"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/NEXTBtn"
+        app:layout_constraintHorizontal_bias="0.262"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstLocationSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/mustGoListView" />
+
+    <Button
+        android:id="@+id/NEXTBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="@string/next_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mustGoListView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
