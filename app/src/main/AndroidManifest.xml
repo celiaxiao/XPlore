@@ -9,16 +9,18 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
-		<activity android:name=".landmarkDetailsActivity">
 
-		</activity>
-		<activity android:name=".mainPageActivity" />
-		<activity android:name=".locationSelectionActivity" >
+		<!-- Main page; main entry of the app -->
+		<activity android:name=".mainPageActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+
+		<!-- Other pages -->
+		<activity android:name=".landmarkDetailsActivity"/>
+		<activity android:name=".locationSelectionActivity" />
 		<activity android:name=".timeSelectionActivity" />
 		<activity android:name=".studentSelectionActivity" />
 	</application>
