@@ -1,14 +1,23 @@
 package com.example.navucsd;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.DialogInterface;
+import androidx.appcompat.app.AlertDialog;
+//import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,11 +25,15 @@ import java.util.List;
 
 public class locationSelectionActivity extends AppCompatActivity {
 
-
     /*
       TODO: this frontEnd activity should contain all the necessary components
           to select the locations that the student/visitor wants to visit in UCSD
     */
+    TextView title;
+    ArrayAdapter<String> LocationListAdapter;
+    ListView mustGoListView;
+    Button dontHaveMustGoBtn;
+    Button nextBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,72 +42,73 @@ public class locationSelectionActivity extends AppCompatActivity {
         /*
              ADD ALL THE LAYOUT TO ACTIVITY_LOCATION_SELECTION.xml
          */
+         mustGoListView=(ListView)findViewById(R.id.mustGoListView);
+         title=(TextView)findViewById(R.id.title);
+         dontHaveMustGoBtn=(Button)findViewById(R.id.IDontHaveMustGoBtn);
+        nextBtn=(Button)findViewById(R.id.NEXTBtn);
 
-        Spinner firstSpinner = (Spinner) findViewById(R.id.firstLocationSpinner);
-        Spinner secondSpinner = (Spinner) findViewById(R.id.SecondLocationSpinner);
-        Spinner thirdSpinner = (Spinner) findViewById(R.id.thirdLocationSpinner);
-        final TextView firstSelected= (TextView) findViewById(R.id.firstLocationSelected);
-        final TextView secondSelected= (TextView) findViewById(R.id.secondLocationSelected);
-        final TextView thirdSelected= (TextView) findViewById(R.id.thirdLocationSelected);
-        /*
-         Utilize three SPINNERS in Android studio to create a drop down list to pick
-            the time for the tour.
-         */
+        //set up the list view choices
+        String[] mustGoList = getResources().getStringArray(R.array.list_of_must_go);
+         LocationListAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_multiple_choice, mustGoList);
+        mustGoListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        mustGoListView.setAdapter(LocationListAdapter);
 
-
-         ArrayAdapter<String> hardCodeAdapter=new ArrayAdapter<String>(
-                locationSelectionActivity.this, android.R.layout.simple_list_item_1,
-                getResources().getStringArray(R.array.hard_code_location_name));
-         hardCodeAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        firstSpinner.setAdapter(hardCodeAdapter);
-        secondSpinner.setAdapter(hardCodeAdapter);
-        thirdSpinner.setAdapter(hardCodeAdapter);
-        /*
-         to verify if your SPINNER is correctly being used, please use a TEXTVIEW
-            to display the locations you have selected.
-         */
-        firstSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        //if next bottom is clicked, return the selection list
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedItemText = (String) adapterView.getItemAtPosition(i);
+            public void onClick(View view) {
 
-                // Notify the selected item text
-                firstSelected.setText("First Location selected: " +selectedItemText);
+                 SparseBooleanArray checked = mustGoListView.getCheckedItemPositions();
+                ArrayList<String> selectedItems = new ArrayList<String>();
+                for (int i = 0; i < checked.size(); i++) {
+                    // Item position in adapter
+                    int position = checked.keyAt(i);
+                    // Add location if it is checked i.e.) == TRUE
+                    if (checked.valueAt(i))
+                        selectedItems.add(LocationListAdapter.getItem(position));
+                }
+                if(selectedItems.size()>0) {
+                    String[] outputStrArr = new String[selectedItems.size()];
 
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        secondSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedItemText = (String) adapterView.getItemAtPosition(i);
-                // Notify the selected item text
-                secondSelected.setText("Second Location selected: " +selectedItemText);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+                    for (int i = 0; i < selectedItems.size(); i++) {
+                        outputStrArr[i] = selectedItems.get(i);
+                    }
+                }
+                else{
+                    //pop up alerts, nothing selected
+                    alertDialog();
+                }
             }
         });
 
-        thirdSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedItemText = (String) adapterView.getItemAtPosition(i);
-                // Notify the selected item text
-                thirdSelected.setText("Third Location selected: " +selectedItemText);
-            }
 
+        dontHaveMustGoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+            public void onClick(View view) {
+                alertDialog();
             }
         });
 
+    }
+    private void alertDialog() {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        dialog.setMessage("We will just give you our recommended tour, confirm?");
+        dialog.setTitle("Don't have must-go's?");
+        dialog.setPositiveButton("Comfirm",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+
+                    }
+                });
+        dialog.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
     }
 }

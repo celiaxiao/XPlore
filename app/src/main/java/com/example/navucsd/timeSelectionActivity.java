@@ -2,100 +2,100 @@ package com.example.navucsd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.DateFormat;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class timeSelectionActivity extends AppCompatActivity {
+import java.util.Calendar;
+
+public class timeSelectionActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
     /*
       TODO: this frontEnd activity should contain all the necessary components
           to select the time that the student/visitor wants to spend on UCSD
       */
 
-    private TextView timeSelect;
-    private Button next;
-    private Toast toast;
-    private Spinner timeList;
 
-    public String time="SelectedTime";
+    private NumberPicker hourP;
+    private NumberPicker minuteP;
+    private String[] timeChoices;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_selection);
 
-        /*
-            TODO: ADD ALL THE LAYOUT TO ACTIVITY_TIME_SELECTION.xml
-         */
+//        timeChoices = new String[]{"00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30","05:00", "05:30", "06:00"};
+//        hourP.setDisplayedValues(timeChoices);
 
-        /*
-         TODO: Utilize SPINNERS in Android studio to create a drop down list to pick
-            the time for the tour. For documentation please read:
-                https://developer.android.com/guide/topics/ui/controls/spinner
-            If you prefer a youtube video instead, please consider this:
-            https://www.youtube.com/watch?v=urQp7KsQhW8
-         */
+        hourP = findViewById(R.id.hourPicker);
+        hourP.setMaxValue(6);
+        hourP.setMinValue(0);
 
-        /*
-        TODO: to verify if your SPINNER is correctly being used, please use a TEXTVIEW
-            to display the time you have selected.
-         */
+        minuteP = findViewById(R.id.minutesPicker);
+        minuteP.setMaxValue(1);
+        minuteP.setMinValue(0);
+        timeChoices = new String[]{"00", "30"};
+        minuteP.setDisplayedValues(timeChoices);
 
-        /*
-         TODO: In the bottom right corner of this page, please include a BUTTON that
-            redirects this page to the locationSelectionActivity. This functionality
-            should have been covered in the tutorials we have sent you earlier
-         */
-        timeSelect = (TextView) findViewById(R.id.TimeSelect);
-        timeList = (Spinner) findViewById(R.id.spinnerAtTimeSelect);
-        ArrayAdapter<String> timeArray = new ArrayAdapter<String>(timeSelectionActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.time));
+        minuteP.setOnValueChangedListener((NumberPicker.OnValueChangeListener) this);
+    }
 
-        timeArray.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        timeList.setAdapter(timeArray);
-        timeList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+        if(i1 == 1 && hourP.getValue() == 6){
+            hourP.setValue(0);
+        }
+    }
+
+    public void selectTime(View view) {
+        if( minuteP.getValue() == 0 && hourP.getValue() == 0){
+            Toast.makeText(getApplicationContext(), "Houres and Minutes can't 0.", Toast.LENGTH_LONG).show();
+        }
+        else{
+            Intent intent = new Intent(this, locationSelectionActivity.class);
+            String h = String.valueOf(hourP.getValue());
+            String m = String.valueOf(minuteP.getValue()*30);
+            intent.putExtra("HOURS", h);
+            intent.putExtra("MINUTES", m);
+            startActivity(intent);
+        }
+    }
+
+
+    public void noConstraint(View view) {
+        String m = "We will just give you our recommended route regardless of how long it will take. Confirm?";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(m).setPositiveButton("Comfirm", new DialogInterface.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (!String.valueOf(timeList.getSelectedItem()).equals("Please choose the time")){
-                    timeSelect.setText("I need to finish this tour within " + String.valueOf(timeList.getSelectedItem()) + " hours");
-                }
-                else{
-                    timeSelect.setText("");
-                }
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(timeSelectionActivity.this, locationSelectionActivity.class);
+                String h = String.valueOf(0);
+                String m = String.valueOf(0);
+                intent.putExtra("HOURS", h);
+                intent.putExtra("MINUTES", m);
+                startActivity(intent);
             }
+        }).setNegativeButton("Cancel", null);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-//        while (!String.valueOf(timeList.getSelectedItem()).equals("Please choose the time")){
-//            timeSelect.setText("I need to finish this tour within " + String.valueOf(timeList.getSelectedItem()) + " hours");
-//        }
-        next = (Button) findViewById(R.id.NextButtoNAtTimeSelect);
-        next.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                if(String.valueOf(timeList.getSelectedItem()).equals("Please choose the time")){
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please, select the time.";
-                    int duration = Toast.LENGTH_SHORT;
-                    toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-                else{
-                    Intent intent = new Intent(timeSelectionActivity.this, locationSelectionActivity.class);
-                    intent.putExtra(time, String.valueOf(timeList.getSelectedItem()));
-                    startActivity(intent);
-                }
-            }
-        });
+        AlertDialog alter = builder.create();
+        alter.show();
     }
 }
