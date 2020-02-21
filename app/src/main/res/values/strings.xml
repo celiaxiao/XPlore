@@ -1,5 +1,45 @@
 <resources>
     <string name="app_name">navUCSD</string>
+    <string name="landmark_description_demo">© 2017 the Board of Regents of the University of California\n\nThe Geisel Library is the main library building on the University of California, San Diego campus.\n\nThe building is named in honor of Audrey and Theodor Seuss Geisel (better known as Dr. Seuss) for the generous contributions they have made to the library and their devotion to improving literacy.\n\nThe building is featured in the UCSD logo and is the most recognizable building on campus. It is located in the center of the campus with the library walk to its south, Thurgood Marshall College to its West and Earl Warren College to its East.\n\nThe library was simply called the "Central Library" until a renovation was completed in 1993. The library was rededicated as the University Library Building. It was renamed the Geisel Library Building in 1995.</string>
+
+    <string-array name="list_of_must_go">
+        <item>Geisel Library</item>
+        <item>Scripps Pier</item>
+        <item>Peterson Hall</item>
+        <item>Mayer Hall</item>
+        <item>Price Center</item>
+        <item>Rady School of Management</item>
+        <item>Sun God Statue</item>
+        <item>Birch Aquarium</item>
+        <item>Atkinson Hall</item>
+        <item>Stuart Collection sculpture</item>
+        <item>64 Degree</item>
+        <item>Warren Bear</item>
+        <item>Career Services Center</item>
+        <item>Canyonview pool</item>
+        <item>Jacobs School of Engineering building and Fallen Star</item>
+        <item>Galbraith Hall</item>
+        <item>York Hall</item>
+        <item>Biomedical Library</item>
+        <item>Biomedical Research Facility</item>
+        <item>UCSD Medical Center</item>
+        <item>Big Red Chair</item>
+        <item>Conrad Prebys Music Center</item>
+        <item>Keeling Apartment</item>
+        <item>Pharmaceutical Sciences Building</item>
+        <item>OceanView</item>
+    </string-array>
+
+    <!--student select strings-->
+    <string name="are_you_a">Are you a</string>
+    <string name="test_nothing_selected">You have selected nothing.</string>
+    <string name="next_button_text">Next</string>
+    <string-array name="type_array">
+        <item>student</item>
+        <item>visitor</item>
+    </string-array>
+
+    <!--timeSelect strings-->
     <string-array name="time">
         <item>Please choose the time</item>>
         <item>1 hour</item>
