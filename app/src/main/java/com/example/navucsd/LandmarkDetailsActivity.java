@@ -7,7 +7,7 @@ import android.os.Bundle;
 /**
  * This activity temporary hardcodes the landmark details page.
  */
-public class landmarkDetailsActivity extends AppCompatActivity {
+public class LandmarkDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

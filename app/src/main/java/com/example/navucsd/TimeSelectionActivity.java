@@ -3,28 +3,14 @@ package com.example.navucsd;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.DateFormat;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.NumberPicker;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.Calendar;
-
-public class timeSelectionActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
+public class TimeSelectionActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
     /*
       TODO: this frontEnd activity should contain all the necessary components
@@ -70,7 +56,7 @@ public class timeSelectionActivity extends AppCompatActivity implements NumberPi
             Toast.makeText(getApplicationContext(), "Houres and Minutes can't 0.", Toast.LENGTH_LONG).show();
         }
         else{
-            Intent intent = new Intent(this, locationSelectionActivity.class);
+            Intent intent = new Intent(this, LocationSelectionActivity.class);
             String h = String.valueOf(hourP.getValue());
             String m = String.valueOf(minuteP.getValue()*30);
             intent.putExtra("HOURS", h);
@@ -86,7 +72,7 @@ public class timeSelectionActivity extends AppCompatActivity implements NumberPi
         builder.setMessage(m).setPositiveButton("Comfirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(timeSelectionActivity.this, locationSelectionActivity.class);
+                Intent intent = new Intent(TimeSelectionActivity.this, LocationSelectionActivity.class);
                 String h = String.valueOf(0);
                 String m = String.valueOf(0);
                 intent.putExtra("HOURS", h);
