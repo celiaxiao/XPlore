@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class locationSelectionActivity extends AppCompatActivity {
+public class LocationSelectionActivity extends AppCompatActivity {
 
     /*
       TODO: this frontEnd activity should contain all the necessary components

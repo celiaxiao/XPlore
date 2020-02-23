@@ -11,7 +11,7 @@
 		android:theme="@style/AppTheme">
 
 		<!-- Main page; main entry of the app -->
-		<activity android:name=".mainPageActivity">
+		<activity android:name=".MainPageActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
@@ -19,10 +19,10 @@
 		</activity>
 
 		<!-- Other pages -->
-		<activity android:name=".landmarkDetailsActivity"/>
-		<activity android:name=".locationSelectionActivity" />
-		<activity android:name=".timeSelectionActivity" />
-		<activity android:name=".studentSelectionActivity" />
+		<activity android:name=".LandmarkDetailsActivity"/>
+		<activity android:name=".LocationSelectionActivity" />
+		<activity android:name=".TimeSelectionActivity" />
+		<activity android:name=".StudentSelectionActivity" />
 	</application>
 
 </manifest>
