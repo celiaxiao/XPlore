@@ -7,6 +7,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.renderscript.RenderScript;
+import android.util.Pair;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,7 +23,9 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class locationSelectionActivity extends AppCompatActivity {
 
@@ -110,5 +114,133 @@ public class locationSelectionActivity extends AppCompatActivity {
         });
         AlertDialog alertDialog=dialog.create();
         alertDialog.show();
+    }
+
+    /**
+     * GLORIOUS GLORIOUS NP-HARD SOLUTION TO FIGURE OUT THE MOST OPTIMAL PATH HAHAHAAH
+     * @param locationList: should be just the list of location that the user selects in the spinner
+     * @param startingPos: starting position of the user, this should be a pair if
+     */
+    private void pathfinder(String[] locationList, Pair startingPos){
+        //uses the string length to parse the shit
+        Landmark[] landmarkList = new Landmark[locationList.length];
+        //creates the pq with the order of the location list
+        PriorityQueue<Landmark> pq = new PriorityQueue<>(locationList.length,
+                new LandmarkComparator());
+        double minVal = Integer.MAX_VALUE;
+        //starting location
+        Landmark startingLoc = null;
+        //parse initial the string
+        for(int i = 0; i< locationList.length; i++){
+            //initializes the landmark object wit the necessary thing
+            Landmark t = new Landmark(locationList[i]);
+            Integer startX = (Integer)startingPos.first;
+            Integer startY = (Integer)startingPos.second;
+            Integer locX = (Integer)t.location.first;
+            Integer locY = (Integer)t.location.second;
+            //finds starting location based on the closest
+            //using a trusty distance formula
+            if(Math.sqrt(Math.pow(startX-locX,2)+Math.pow(startY-locY,2)) < minVal){
+                minVal = Math.sqrt(Math.pow(startX-locX,2)+Math.pow(startY-locY,2));
+                startingLoc = t;
+            }
+            //landmarkList[i] = t;
+            //pushes it to the priority queue
+            pq.add(t);
+        }
+        //prunes the list to find the optimal route
+        //if it is middle of pq, fuck, start it on the side that has less
+        //if it is first or last, fuck yea
+        //TODO: change direction of collegeVal if it is fucked up
+        //TODO: inner colleges need a more robust way of knowing which direction
+        // the user previously came in
+        int i =0;
+        int stop = 0;
+        boolean reached = false;
+        Landmark[] pre = new Landmark[locationList.length];
+        Landmark[] post = new Landmark[locationList.length];
+        //college vals for identifying clusters
+        int preCollegeVal = pq.peek().collegeVal;
+        //a count for how many clusters encountered thus far
+        int count = 1;
+        //set up the pruning
+        while(!pq.isEmpty()){
+            //just checking and then setting up the pre and post
+            if(!reached){
+                pre[i] = pq.poll();
+                if(pre[i].collegeVal != preCollegeVal){
+                    count++;
+                    preCollegeVal = pre[i].collegeVal;
+                }
+            }
+            if(pre[i].equals(startingLoc)){
+                reached = true;
+                stop = i;
+            }
+            //last of pre is going to be equal to
+            if(reached){
+                post[i] = pq.poll();
+                if(post[i].collegeVal != preCollegeVal){
+                    count++;
+                    preCollegeVal = post[i].collegeVal;
+                }
+            }
+            i++;
+        }
+        Landmark[] retVal = new Landmark[locationList.length];
+        //prune the list
+        if(stop > 0 ) prune(pre, post, pq, stop, locationList.length, retVal);
+    }
+
+    /**
+     *
+     * @param pre
+     * @param post
+     * @param pq
+     * @param i
+     * @param size
+     */
+    private void prune(Landmark[] pre, Landmark[] post, PriorityQueue<Landmark> pq,
+                       int i, int size, Landmark[] retVal){
+        ArrayList<Landmark> temp = new ArrayList<Landmark>();
+        if(i> size/2) {
+            //Case 1: closest to left side and upwards, but there are inputs on right side
+            //Meaning it has to be either in Marshall or in ERC, then go to the top left corner
+            //first and then go down (basically reverse)
+            reverseList(pre, post, size-i);
+            //setting the return value of the return value;
+            retVal = pre;
+        }
+        else{
+            //Case 2: a bit more nuanced, where if the starting location is in the middle, then
+            //force them to start at the bottom of the loop
+            //IF THE FIRST LOCATION PICKED PICKED IN PQ IS BIOMED OR ABOVE
+            if(pre[0].collegeVal.intValue() >= 2){
+                appendList(pre, post,i+1);
+                retVal = pre;
+            }
+            //IF THE FIRST LOCATION PICKED PICKED IN PQ IS WARREN AND YOU'RE CLOSEST TO SIXTH
+            if(pre[0].collegeVal.intValue() == 0 && pre[i].collegeVal.intValue() == 1){
+                appendList(pre, post, i+1);
+                retVal = pre;
+            }
+        }
+    }
+
+    private void appendList(Landmark[] pre, Landmark[] post, int index) {
+        for(; index < pre.length;index++){
+            pre[index] = post[index];
+        }
+    }
+
+    private void reverseList(Landmark[] pre, Landmark[] post, int index) {
+        Landmark[] temp = new Landmark[pre.length];
+        for(int i =0; i < pre.length;i++){
+            if(i < index){
+                temp[i] = post[post.length-i-1];
+            }
+            else temp[i] = pre[pre.length-i-1];
+        }
+        pre = temp;
     }
 }

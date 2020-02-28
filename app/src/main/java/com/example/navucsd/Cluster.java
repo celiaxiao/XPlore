@@ -7,8 +7,17 @@ import java.util.HashMap;
 public class Cluster{
     public HashMap<String, Pair> locationMap;
     public HashMap<String, String> collegeMap;
+    public HashMap<String, Integer> collegeValMap;
 
     public Cluster(){
+        collegeValMap.put("Warren", 0);
+        collegeValMap.put("Sixth", 1);
+        collegeValMap.put("Biomed", 2);
+        collegeValMap.put("Revelle", 3);
+        collegeValMap.put("Muir", 4);
+        collegeValMap.put("Marshall", 5);
+        collegeValMap.put("ERC", 6);
+        collegeValMap.put("centralRegion", 7);
         //Warren
         collegeMap.put("canyonViewPool", "Warren");
         locationMap.put("canyonViewPool",new Pair(32.880769, -117.231803));
