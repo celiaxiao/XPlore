@@ -22,7 +22,7 @@ public class MainPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startIntent = new Intent(MainPageActivity.this,
-                        StudentSelectionActivity.class);
+                        TourActivity.class);
                 startActivity(startIntent);
             }
         });

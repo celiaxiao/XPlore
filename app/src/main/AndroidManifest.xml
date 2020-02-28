@@ -21,8 +21,7 @@
 		<!-- Other pages -->
 		<activity android:name=".LandmarkDetailsActivity"/>
 		<activity android:name=".LocationSelectionActivity" />
-		<activity android:name=".TimeSelectionActivity" />
-		<activity android:name=".StudentSelectionActivity" />
+		<activity android:name=".TourActivity" />
 	</application>
 
 </manifest>
