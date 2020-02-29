@@ -2,10 +2,7 @@ package com.example.navucsd;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
@@ -44,7 +41,7 @@ public class TourActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tour);
 
         // Instantiate a ViewPager and a PagerAdapter.
         mainPager = findViewById(R.id.main_pager);
