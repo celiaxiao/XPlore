@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorControlNormal">@color/colorSecondary</item>
         <item name="android:textColorPrimary">@color/colorSecondary</item>
     </style>

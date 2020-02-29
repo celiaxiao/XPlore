@@ -27,6 +27,7 @@ public class LocationSelectionActivity extends AppCompatActivity {
     ListView mustGoListView;
     Button dontHaveMustGoBtn;
     Button nextBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +36,14 @@ public class LocationSelectionActivity extends AppCompatActivity {
         /*
              ADD ALL THE LAYOUT TO ACTIVITY_LOCATION_SELECTION.xml
          */
-         mustGoListView=(ListView)findViewById(R.id.mustGoListView);
-         title=(TextView)findViewById(R.id.title);
-         dontHaveMustGoBtn=(Button)findViewById(R.id.IDontHaveMustGoBtn);
-        nextBtn=(Button)findViewById(R.id.NEXTBtn);
+        mustGoListView = (ListView) findViewById(R.id.mustGoListView);
+        title = (TextView) findViewById(R.id.title);
+        dontHaveMustGoBtn = (Button) findViewById(R.id.IDontHaveMustGoBtn);
+        nextBtn = (Button) findViewById(R.id.NEXTBtn);
 
         //set up the list view choices
         String[] mustGoList = getResources().getStringArray(R.array.list_of_must_go);
-         LocationListAdapter = new ArrayAdapter<String>(this,
+        LocationListAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_multiple_choice, mustGoList);
         mustGoListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         mustGoListView.setAdapter(LocationListAdapter);
@@ -52,7 +53,7 @@ public class LocationSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                 SparseBooleanArray checked = mustGoListView.getCheckedItemPositions();
+                SparseBooleanArray checked = mustGoListView.getCheckedItemPositions();
                 ArrayList<String> selectedItems = new ArrayList<String>();
                 for (int i = 0; i < checked.size(); i++) {
                     // Item position in adapter
@@ -61,14 +62,13 @@ public class LocationSelectionActivity extends AppCompatActivity {
                     if (checked.valueAt(i))
                         selectedItems.add(LocationListAdapter.getItem(position));
                 }
-                if(selectedItems.size()>0) {
+                if (selectedItems.size() > 0) {
                     String[] outputStrArr = new String[selectedItems.size()];
 
                     for (int i = 0; i < selectedItems.size(); i++) {
                         outputStrArr[i] = selectedItems.get(i);
                     }
-                }
-                else{
+                } else {
                     //pop up alerts, nothing selected
                     alertDialog();
                 }
@@ -84,8 +84,9 @@ public class LocationSelectionActivity extends AppCompatActivity {
         });
 
     }
+
     private void alertDialog() {
-        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("We will just give you our recommended tour, confirm?");
         dialog.setTitle("Don't have must-go's?");
         dialog.setPositiveButton("Comfirm",
@@ -95,13 +96,13 @@ public class LocationSelectionActivity extends AppCompatActivity {
 
                     }
                 });
-        dialog.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
-        AlertDialog alertDialog=dialog.create();
+        AlertDialog alertDialog = dialog.create();
         alertDialog.show();
     }
 }

@@ -7,4 +7,7 @@
 
     <color name="transparent">#00FFFFFF</color>
     <color name="grey">#B6B1A9</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="shade">#2D000000</color>
 </resources>

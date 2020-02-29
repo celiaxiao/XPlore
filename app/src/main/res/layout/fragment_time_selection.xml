@@ -53,11 +53,11 @@
         android:id="@+id/hourPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:timePickerMode="spinner"
         android:theme="@style/AppTheme.Picker"
-        app:layout_constraintTop_toBottomOf="@id/gl_time_frag"
+        android:timePickerMode="spinner"
+        app:layout_constraintEnd_toStartOf="@id/time_hour"
         app:layout_constraintStart_toEndOf="@id/gl_time_frag_v1"
-        app:layout_constraintEnd_toStartOf="@id/time_hour"/>
+        app:layout_constraintTop_toBottomOf="@id/gl_time_frag" />
 
     <TextView
         android:id="@+id/time_hour"
@@ -65,20 +65,20 @@
         android:layout_height="wrap_content"
         android:text="hour"
         android:textColor="@color/colorSecondary"
-        app:layout_constraintTop_toBottomOf="@id/gl_time_frag"
-        app:layout_constraintStart_toEndOf="@id/hourPicker"
+        app:layout_constraintBottom_toBottomOf="@id/hourPicker"
         app:layout_constraintEnd_toStartOf="@id/minutesPicker"
-        app:layout_constraintBottom_toBottomOf="@id/hourPicker"/>
+        app:layout_constraintStart_toEndOf="@id/hourPicker"
+        app:layout_constraintTop_toBottomOf="@id/gl_time_frag" />
 
     <NumberPicker
         android:id="@+id/minutesPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:timePickerMode="spinner"
         android:theme="@style/AppTheme.Picker"
-        app:layout_constraintTop_toBottomOf="@id/gl_time_frag"
+        android:timePickerMode="spinner"
+        app:layout_constraintEnd_toStartOf="@id/time_minute"
         app:layout_constraintStart_toEndOf="@id/time_hour"
-        app:layout_constraintEnd_toStartOf="@id/time_minute"/>
+        app:layout_constraintTop_toBottomOf="@id/gl_time_frag" />
 
     <TextView
         android:id="@+id/time_minute"
@@ -86,9 +86,9 @@
         android:layout_height="wrap_content"
         android:text="minute"
         android:textColor="@color/colorSecondary"
-        app:layout_constraintTop_toBottomOf="@id/gl_time_frag"
         app:layout_constraintBottom_toBottomOf="@id/minutesPicker"
+        app:layout_constraintEnd_toStartOf="@id/gl_time_frag_v2"
         app:layout_constraintStart_toEndOf="@id/minutesPicker"
-        app:layout_constraintEnd_toStartOf="@id/gl_time_frag_v2"/>
+        app:layout_constraintTop_toBottomOf="@id/gl_time_frag" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

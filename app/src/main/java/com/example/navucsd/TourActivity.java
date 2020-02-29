@@ -75,12 +75,11 @@ public class TourActivity extends AppCompatActivity {
                 }
                 break;
             case TIME_SELECTION_FRAG:
-                if( minuteP.getValue() == 0 && hourP.getValue() == 0){
+                if (minuteP.getValue() == 0 && hourP.getValue() == 0) {
                     Toast.makeText(getApplicationContext(), getString(R.string.time_cannot_be_zero), Toast.LENGTH_LONG).show();
-                }
-                else{
+                } else {
                     String h = String.valueOf(hourP.getValue());
-                    String m = String.valueOf(minuteP.getValue()*30);
+                    String m = String.valueOf(minuteP.getValue() * 30);
                     mainPager.setCurrentItem(LOCATION_SELECTION_FRAG, true);
                 }
                 break;
@@ -108,7 +107,7 @@ public class TourActivity extends AppCompatActivity {
         minuteP.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                if(newVal == 1 && hourP.getValue() == 6){
+                if (newVal == 1 && hourP.getValue() == 6) {
                     hourP.setValue(0);
                 }
             }

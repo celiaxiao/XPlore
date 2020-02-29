@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TourActivity">
@@ -18,11 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Are you a ..."
-        android:textSize="32sp"
         android:textColor="@color/colorSecondary"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gl_type_frag"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_type_frag" />
 
     <ImageButton
         android:id="@+id/imgbtn_tourist"
@@ -30,10 +30,10 @@
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:background="@drawable/round_image_button"
+        android:onClick="touristSelected"
         android:padding="0dp"
         android:scaleType="fitXY"
         android:src="@drawable/tourist"
-        android:onClick="touristSelected"
         app:layout_constraintBottom_toTopOf="@id/gl_type_btn_frag"
         app:layout_constraintEnd_toStartOf="@id/imgbtn_freshman"
         app:layout_constraintStart_toStartOf="parent" />
@@ -42,14 +42,14 @@
         android:id="@+id/imgbtn_freshman"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:background="@drawable/round_image_button"
+        android:onClick="freshmanSelected"
+        android:padding="0dp"
         android:scaleType="fitXY"
+        android:src="@drawable/freshman"
         app:layout_constraintBottom_toTopOf="@id/gl_type_btn_frag"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imgbtn_tourist"
-        android:src="@drawable/freshman"
-        android:onClick="freshmanSelected"
-        android:background="@drawable/round_image_button"
-        android:padding="0dp"/>
+        app:layout_constraintStart_toEndOf="@id/imgbtn_tourist" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_type_btn_frag"

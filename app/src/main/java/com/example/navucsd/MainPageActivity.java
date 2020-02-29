@@ -6,8 +6,14 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainPageActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private MainPagePlacesAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,5 +42,13 @@ public class MainPageActivity extends AppCompatActivity {
                 startActivity(startIntent);
             }
         });
+
+        recyclerView = findViewById(R.id.recycler_main);
+//        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        mAdapter = new MainPagePlacesAdapter();
+        recyclerView.setAdapter(mAdapter);
+
     }
 }
