@@ -1,8 +1,8 @@
 package com.example.navucsd;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * This activity temporary hardcodes the landmark details page.
