@@ -11,9 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import java.sql.Time;
-import java.util.concurrent.TimeUnit;
-
 public class MainPageActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;

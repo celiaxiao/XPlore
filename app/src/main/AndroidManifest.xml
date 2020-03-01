@@ -20,7 +20,6 @@
 
         <!-- Other pages -->
         <activity android:name=".LandmarkDetailsActivity" />
-        <activity android:name=".LocationSelectionActivity" />
         <activity android:name=".TourActivity" />
     </application>
 
