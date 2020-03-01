@@ -9,13 +9,19 @@ public class Landmark extends Cluster{
     public String college;
     public Pair location;
     public Integer collegeVal;
+    public String name;
 
     public Landmark(String location){
         //initializes the "database" lmao
         super();
+        this.name = location;
         this.college = super.collegeMap.get(location);
         this.location = super.locationMap.get(location);
         this.collegeVal = super.collegeValMap.get(this.college);
+    }
+
+    public String toString(){
+        return name;
     }
 }
 

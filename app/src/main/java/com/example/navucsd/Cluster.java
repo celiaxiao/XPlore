@@ -5,9 +5,9 @@ import android.util.Pair;
 import java.util.HashMap;
 
 public class Cluster{
-    public HashMap<String, Pair> locationMap;
-    public HashMap<String, String> collegeMap;
-    public HashMap<String, Integer> collegeValMap;
+    public static HashMap<String, Pair> locationMap = new HashMap<>();
+    public static HashMap<String, String> collegeMap = new HashMap<>();
+    public static HashMap<String, Integer> collegeValMap = new HashMap<>();
 
     public Cluster(){
         collegeValMap.put("Warren", 0);

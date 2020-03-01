@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.renderscript.RenderScript;
+import android.util.Log;
 import android.util.Pair;
 import android.util.SparseBooleanArray;
 import android.view.View;
@@ -84,8 +85,13 @@ public class locationSelectionActivity extends AppCompatActivity {
                     alertDialog();
                 }
             }
-        });
 
+        });
+        String[] test = {"canyonViewPool", "JSOE", "sunGodStatue"};
+        String [] hehe = pathfinder(test, new Pair(32.882261, -117.234064));
+        for(int i =0; i < hehe.length; i++){
+            Log.d("TEST", "at index " + i+ " is location " + hehe[i]);
+        }
 
         dontHaveMustGoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +127,7 @@ public class locationSelectionActivity extends AppCompatActivity {
      * @param locationList: should be just the list of location that the user selects in the spinner
      * @param startingPos: starting position of the user, this should be a pair if
      */
-    private void pathfinder(String[] locationList, Pair startingPos){
+    private String[] pathfinder(String[] locationList, Pair startingPos){
         //uses the string length to parse the shit
         Landmark[] landmarkList = new Landmark[locationList.length];
         //creates the pq with the order of the location list
@@ -134,13 +140,17 @@ public class locationSelectionActivity extends AppCompatActivity {
         for(int i = 0; i< locationList.length; i++){
             //initializes the landmark object wit the necessary thing
             Landmark t = new Landmark(locationList[i]);
-            Integer startX = (Integer)startingPos.first;
-            Integer startY = (Integer)startingPos.second;
-            Integer locX = (Integer)t.location.first;
-            Integer locY = (Integer)t.location.second;
+            double startX = (double)startingPos.first;
+            double startY = (double)startingPos.second;
+            double locX = (double)t.location.first;
+            double locY = (double)t.location.second;
+            Log.d("PATHFINDER", "before testing the thing ");
             //finds starting location based on the closest
             //using a trusty distance formula
+            Log.d("PATHFINDER", "the distance found is " + Math.sqrt(Math.pow(startX-locX,2)+Math.pow(startY-locY,2)));
+            Log.d("PATHFINDER", "current min value is " + minVal);
             if(Math.sqrt(Math.pow(startX-locX,2)+Math.pow(startY-locY,2)) < minVal){
+                Log.d("PATHFINDER", "what the fuck");
                 minVal = Math.sqrt(Math.pow(startX-locX,2)+Math.pow(startY-locY,2));
                 startingLoc = t;
             }
@@ -163,23 +173,29 @@ public class locationSelectionActivity extends AppCompatActivity {
         int preCollegeVal = pq.peek().collegeVal;
         //a count for how many clusters encountered thus far
         int count = 1;
+        Log.d("PATHFINDER", "starting location is "+ startingLoc.toString());
         //set up the pruning
         while(!pq.isEmpty()){
+            Log.d("PATHFINDER", "how many fucking times am I here");
             //just checking and then setting up the pre and post
             if(!reached){
+                Log.d("PATHFINDER", "In pre");
                 pre[i] = pq.poll();
+                Log.d("PATHFINDER", "popped is a "+ pre[i].toString());
                 if(pre[i].collegeVal != preCollegeVal){
                     count++;
                     preCollegeVal = pre[i].collegeVal;
                 }
             }
-            if(pre[i].equals(startingLoc)){
+            if(!reached && pre[i].equals(startingLoc)){
                 reached = true;
                 stop = i;
             }
             //last of pre is going to be equal to
-            if(reached){
+            else if(reached){
+                Log.d("PATHFINDER", "in post");
                 post[i] = pq.poll();
+                Log.d("PATHFINDER", "popped is a "+ post[i].toString());
                 if(post[i].collegeVal != preCollegeVal){
                     count++;
                     preCollegeVal = post[i].collegeVal;
@@ -189,7 +205,14 @@ public class locationSelectionActivity extends AppCompatActivity {
         }
         Landmark[] retVal = new Landmark[locationList.length];
         //prune the list
-        if(stop > 0 ) prune(pre, post, pq, stop, locationList.length, retVal);
+        retVal = prune(pre, post, pq, stop, locationList.length, retVal);
+        Log.d("PATHFINDER", "outside of everything and retVal is" + retVal[0]);
+        String[] ret = new String[locationList.length];
+        for(int ind = 0; ind < retVal.length; ind++){
+            Log.d("PATHFINDER", "ind at " + ind + "is " + retVal[ind]);
+            ret[ind] = retVal[ind].toString();
+        }
+        return ret;
     }
 
     /**
@@ -200,31 +223,57 @@ public class locationSelectionActivity extends AppCompatActivity {
      * @param i
      * @param size
      */
-    private void prune(Landmark[] pre, Landmark[] post, PriorityQueue<Landmark> pq,
+    private Landmark[] prune(Landmark[] pre, Landmark[] post, PriorityQueue<Landmark> pq,
                        int i, int size, Landmark[] retVal){
         ArrayList<Landmark> temp = new ArrayList<Landmark>();
+        //checking the start of the loop first and everything before it
+//        int collegeVal = pre[i].collegeVal;
+//        int clusters = 1;
+//        int preVal = pre[0].collegeVal;
+//        //finds all the clusters before it
+//        for(int x = 1; x < i; x++){
+//            if(pre[x].collegeVal.intValue() != preVal){
+//                //counting how many clusters it has before the starting point
+//                preVal = pre[x].collegeVal.intValue();
+//                clusters++;
+//            }
+//        }
+        Log.d("PATHFINDER", "size is "+ size + " and i is " + i);
         if(i> size/2) {
+            Log.d("PATHFINDER", "first if better be here");
             //Case 1: closest to left side and upwards, but there are inputs on right side
             //Meaning it has to be either in Marshall or in ERC, then go to the top left corner
             //first and then go down (basically reverse)
             reverseList(pre, post, size-i);
             //setting the return value of the return value;
             retVal = pre;
+            Log.d("PATHFINDER", "1111"+retVal);
         }
         else{
+            Log.d("PATHFINDER", "first else better be here");
             //Case 2: a bit more nuanced, where if the starting location is in the middle, then
             //force them to start at the bottom of the loop
             //IF THE FIRST LOCATION PICKED PICKED IN PQ IS BIOMED OR ABOVE
             if(pre[0].collegeVal.intValue() >= 2){
                 appendList(pre, post,i+1);
                 retVal = pre;
+                return retVal;
+
             }
             //IF THE FIRST LOCATION PICKED PICKED IN PQ IS WARREN AND YOU'RE CLOSEST TO SIXTH
-            if(pre[0].collegeVal.intValue() == 0 && pre[i].collegeVal.intValue() == 1){
+            else if(pre[0].collegeVal.intValue() == 0 && pre[i].collegeVal.intValue() == 1){
                 appendList(pre, post, i+1);
                 retVal = pre;
+                return retVal;
+            }
+            else{
+                appendList(pre, post, i+1);
+                retVal = pre;
+                Log.d("PATHFINDER", "4444"+retVal[0].toString());
+                return retVal;
             }
         }
+        return null;
     }
 
     private void appendList(Landmark[] pre, Landmark[] post, int index) {
