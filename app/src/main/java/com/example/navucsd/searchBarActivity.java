@@ -1,8 +1,10 @@
 package com.example.navucsd;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuItemCompat;
 
+import android.content.DialogInterface;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -87,11 +89,8 @@ public class searchBarActivity extends AppCompatActivity {
                     //TODO: set to intent if needed
                 } else {
                     // Search query not found in List View
-                    Toast
-                            .makeText(searchBarActivity.this,
-                                    "Not found",
-                                    Toast.LENGTH_LONG)
-                            .show( );
+                    
+                    alertDialog();
                 }
                 return false;
             }
@@ -120,6 +119,21 @@ public class searchBarActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void alertDialog() {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        dialog.setMessage("Sorry we can't find your input location. Explore our main page?");
+        dialog.setTitle("Location not found");
+        dialog.setPositiveButton("Comfirm",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+
+                    }
+                });
+
+        AlertDialog alertDialog=dialog.create();
+        alertDialog.show();
     }
 
 }

@@ -48,5 +48,7 @@
     </string-array>
     <string name="SpinnerAtTimeSelect"> </string>
     <string name="ButtonAtTimeSelect">Next</string>
-
+    <string name="select_the_time">Select the time</string>
+    <string name="i_don_t_have_time_constraints">I don\'t have time constraints</string>
+    <string name="_00_00">00:00</string>
 </resources>

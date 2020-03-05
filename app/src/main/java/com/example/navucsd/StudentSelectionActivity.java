@@ -14,7 +14,7 @@ import android.widget.TextView;
 /**
  * This front-end activity displays the selection between a visitor and a UCSD student.
  */
-public class studentSelectionActivity extends AppCompatActivity {
+public class StudentSelectionActivity extends AppCompatActivity {
 
 	/**
 	 * Listens for the spinner selected event and sets the test text.
@@ -51,11 +51,11 @@ public class studentSelectionActivity extends AppCompatActivity {
 
 		spinner.setOnItemSelectedListener(new SpinnerOnItemSelectedListener());
 
-		// sets up the button used to go to the next screen (timeSelectionActivity)
+		// sets up the button used to go to the next screen (TimeSelectionActivity)
 		Button nextButton = findViewById(R.id.nextButton);
 
 		nextButton.setOnClickListener(v -> startActivity(
-			new Intent(getApplicationContext(), timeSelectionActivity.class)
+			new Intent(getApplicationContext(), TimeSelectionActivity.class)
 		));
 	}
 }
