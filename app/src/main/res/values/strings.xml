@@ -4,30 +4,32 @@
 
     <string-array name="list_of_must_go">
         <item>Geisel Library</item>
-        <item>Scripps Pier</item>
         <item>Peterson Hall</item>
         <item>Mayer Hall</item>
         <item>Price Center</item>
+        <item>RIMAC Gym</item>
+        <item>American Institute</item>
         <item>Rady School of Management</item>
         <item>Sun God Statue</item>
-        <item>Birch Aquarium</item>
-        <item>Atkinson Hall</item>
-        <item>Stuart Collection sculpture</item>
-        <item>64 Degree</item>
+        <item>64 Degrees</item>
         <item>Warren Bear</item>
         <item>Career Services Center</item>
         <item>Canyonview pool</item>
-        <item>Jacobs School of Engineering building and Fallen Star</item>
+        <item>Jacobs School of Engineering Building and Fallen Star</item>
+        <item>Atkinson Hall</item>
         <item>Galbraith Hall</item>
         <item>York Hall</item>
         <item>Biomedical Library</item>
-        <item>Biomedical Research Facility</item>
-        <item>UCSD Medical Center</item>
-        <item>Big Red Chair</item>
         <item>Conrad Prebys Music Center</item>
         <item>Keeling Apartment</item>
         <item>Pharmaceutical Sciences Building</item>
         <item>OceanView</item>
+    </string-array>
+
+    <string-array name="warrenCollege">
+        <item>Canyonview pool</item>
+        <item>Warren Bear</item>
+        <item>Jacobs School of Engineering Building and Fallen Star</item>
     </string-array>
 
     <!--student select strings-->
@@ -49,6 +51,7 @@
     <string name="SpinnerAtTimeSelect"> </string>
     <string name="ButtonAtTimeSelect">Next</string>
     <string name="select_the_time">Select the time</string>
+    <string name="time_cannot_be_zero">Houres and Minutes can\'t be 0.</string>
     <string name="i_don_t_have_time_constraints">I don\'t have time constraints</string>
     <string name="_00_00">00:00</string>
     <string name="title_activity_encyclopedia">EncyclopediaActivity</string>
