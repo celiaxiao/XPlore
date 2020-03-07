@@ -54,4 +54,6 @@
     <string name="time_cannot_be_zero">Houres and Minutes can\'t be 0.</string>
     <string name="i_don_t_have_time_constraints">I don\'t have time constraints</string>
     <string name="_00_00">00:00</string>
+    <string name="title_activity_encyclopedia">EncyclopediaActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>
