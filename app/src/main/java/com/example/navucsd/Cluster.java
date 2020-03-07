@@ -19,52 +19,54 @@ public class Cluster{
         collegeValMap.put("ERC", 6);
         collegeValMap.put("centralRegion", 7);
         //Warren
-        collegeMap.put("canyonViewPool", "Warren");
-        locationMap.put("canyonViewPool",new Pair(32.880769, -117.231803));
-        collegeMap.put("warrenBear", "Warren");
-        locationMap.put("warrenBear",new Pair(32.882261, -117.234064));
-        collegeMap.put("JSOE", "Warren");
-        locationMap.put("JSOE",new Pair(32.881711, -117.235416));
-        collegeMap.put("atkinsonHall", "Warren");
-        locationMap.put("atkinsonHall",new Pair(32.882602, -117.234693));
+        collegeMap.put("Canyonview pool", "Warren");
+        locationMap.put("Canyonview pool",new Pair(32.880769, -117.231803));
+        collegeMap.put("Warren Bear", "Warren");
+        locationMap.put("Warren Bear",new Pair(32.882261, -117.234064));
+        collegeMap.put("Jacobs School of Engineering Building and Fallen Star", "Warren");
+        locationMap.put("Jacobs School of Engineering Building and Fallen Star",new Pair(32.881711, -117.235416));
+        collegeMap.put("Atkinson Hall", "Warren");
+        locationMap.put("Atkinson Hall",new Pair(32.882602, -117.234693));
         //Sixth
-        collegeMap.put("conradPrebysMusicCenter", "Sixth");
-        locationMap.put("conradPrebysMusicCenter",new Pair(32.878094, -117.234814));
+        collegeMap.put("Conrad Prebys Music Center", "Sixth");
+        locationMap.put("Conrad Prebys Music Center",new Pair(32.878094, -117.234814));
         //Biomed Area
-        collegeMap.put("biomedicalLibrary", "Biomed");
-        locationMap.put("biomedicalLibrary",new Pair(32.875522, -117.236930));
-        collegeMap.put("pharmaceuticalSciencesBuilding", "Biomed");
-        locationMap.put("pharmaceuticalSciencesBuilding",new Pair(32.874366, -117.235775));
+        collegeMap.put("Biomedical Library", "Biomed");
+        locationMap.put("Biomedical Library",new Pair(32.875522, -117.236930));
+        collegeMap.put("Pharmaceutical Sciences Building", "Biomed");
+        locationMap.put("Pharmaceutical Sciences Building",new Pair(32.874366, -117.235775));
         //Revelle
-        collegeMap.put("keelingAparmtnet", "Revelle");
-        locationMap.put("keelingAparmtnet",new Pair(32.873986, -117.243350));
-        collegeMap.put("yorkHall", "Revelle");
-        locationMap.put("yorkHall",new Pair(32.874701, -117.240061));
-        collegeMap.put("galbraith", "Revelle");
-        locationMap.put("galbraith",new Pair(32.873809, -117.240962));
-        collegeMap.put("mayerHall", "Revelle");
-        locationMap.put("mayerHall",new Pair(32.875988, -117.239862));
-        collegeMap.put("64Degrees", "Revelle");
-        locationMap.put("64Degrees",new Pair(32.874944, -117.242034));
+        collegeMap.put("Keeling Apartment", "Revelle");
+        locationMap.put("Keeling Apartment",new Pair(32.873986, -117.243350));
+        collegeMap.put("York Hall", "Revelle");
+        locationMap.put("York Hall",new Pair(32.874701, -117.240061));
+        collegeMap.put("Galbraith Hall", "Revelle");
+        locationMap.put("Galbraith Hall",new Pair(32.873809, -117.240962));
+        collegeMap.put("Mayer Hall", "Revelle");
+        locationMap.put("Mayer Hall",new Pair(32.875988, -117.239862));
+        collegeMap.put("64 Degrees", "Revelle");
+        locationMap.put("64 Degrees",new Pair(32.874944, -117.242034));
         //Muir
-        collegeMap.put("sunGodStatue", "Muir");
-        locationMap.put("sunGodStatue",new Pair(32.878723, -117.239707));
+        collegeMap.put("Sun God Statue", "Muir");
+        locationMap.put("Sun God Statue",new Pair(32.878723, -117.239707));
         //Marshall
-        collegeMap.put("oceanView", "Marshall");
-        locationMap.put("oceanView", new Pair(32.883275, -117.242692));
+        collegeMap.put("OceanView", "Marshall");
+        locationMap.put("OceanView", new Pair(32.883275, -117.242692));
+        collegeMap.put("Peterson Hall", "Marshall");
+        locationMap.put("Peterson Hall", new Pair(32.880117, -117.240340));
         //ERC
-        collegeMap.put("radySchoolOfManagement", "ERC");
-        locationMap.put("radySchoolOfManagement", new Pair(32.886794, -117.241162));
-        collegeMap.put("RIMAC", "ERC");
-        locationMap.put("RIMAC", new Pair(32.885197, -117.240474));
-        collegeMap.put("americanInstitute", "ERC");
-        locationMap.put("americanInstitute", new Pair(32.885381, -117.241032));
+        collegeMap.put("Rady School of Management", "ERC");
+        locationMap.put("Rady School of Management", new Pair(32.886794, -117.241162));
+        collegeMap.put("RIMAC Gym", "ERC");
+        locationMap.put("RIMAC Gym", new Pair(32.885197, -117.240474));
+        collegeMap.put("American Institute", "ERC");
+        locationMap.put("American Institute", new Pair(32.885381, -117.241032));
         //Central Region
-        collegeMap.put("careerServiceCenter", "centralRegion");
-        locationMap.put("americanInstitute", new Pair(32.878693, -117.237961));
-        collegeMap.put("geiselLibrary", "centralRegion");
-        locationMap.put("americanInstitute", new Pair(32.881324, -117.237473));
-        collegeMap.put("priceCenter", "centralRegion");
-        locationMap.put("americanInstitute", new Pair(32.879838, -117.236206));
+        collegeMap.put("Career Services Center", "centralRegion");
+        locationMap.put("Career Services Center", new Pair(32.878693, -117.237961));
+        collegeMap.put("Geisel Library", "centralRegion");
+        locationMap.put("Geisel Library", new Pair(32.881324, -117.237473));
+        collegeMap.put("Price Center", "centralRegion");
+        locationMap.put("Price Center", new Pair(32.879838, -117.236206));
     }
 }

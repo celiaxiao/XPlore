@@ -1,8 +1,9 @@
 package com.example.navucsd;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
 import android.content.DialogInterface;
-import androidx.appcompat.app.AlertDialog;
 //import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
@@ -49,8 +50,8 @@ public class LocationSelectionActivity extends AppCompatActivity {
          */
          mustGoListView=(ListView)findViewById(R.id.mustGoListView);
          title=(TextView)findViewById(R.id.title);
-         dontHaveMustGoBtn=(Button)findViewById(R.id.IDontHaveMustGoBtn);
-        nextBtn=(Button)findViewById(R.id.NEXTBtn);
+//         dontHaveMustGoBtn=(Button)findViewById(R.id.IDontHaveMustGoBtn);
+//        nextBtn=(Button)findViewById(R.id.NEXTBtn);
 
         //set up the list view choices
         String[] mustGoList = getResources().getStringArray(R.array.list_of_must_go);
