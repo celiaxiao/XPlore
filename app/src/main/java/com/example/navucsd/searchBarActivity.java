@@ -89,7 +89,7 @@ public class searchBarActivity extends AppCompatActivity {
                     //TODO: set to intent if needed
                 } else {
                     // Search query not found in List View
-                    
+
                     alertDialog();
                 }
                 return false;

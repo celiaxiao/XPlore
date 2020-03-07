@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TourActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_type_frag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <TextView
+        android:id="@+id/text_user_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you a ..."
+        android:textColor="@color/colorSecondary"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_type_frag" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_tourist"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:background="@drawable/round_image_button"
+        android:onClick="touristSelected"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/tourist"
+        app:layout_constraintBottom_toTopOf="@id/gl_type_btn_frag"
+        app:layout_constraintEnd_toStartOf="@id/imgbtn_freshman"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imgbtn_freshman"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:background="@drawable/round_image_button"
+        android:onClick="freshmanSelected"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/freshman"
+        app:layout_constraintBottom_toTopOf="@id/gl_type_btn_frag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgbtn_tourist" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_type_btn_frag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

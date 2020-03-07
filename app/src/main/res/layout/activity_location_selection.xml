@@ -1,50 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context=".LocationSelectionActivity">
+=======
+    tools:context=".TourActivity">
+>>>>>>> temp
 
-
-    <TextView
-        android:id="@+id/title"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_loc_frag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <TextView
+        android:id="@+id/title_loc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Choose Your Must-Go Places"
+        android:textColor="@color/colorSecondary"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/gl_loc_frag" />
 
     <ListView
         android:id="@+id/mustGoListView"
-        android:layout_width="409dp"
-        android:layout_height="522dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <Button
-        android:id="@+id/IDontHaveMustGoBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I don't have must-go's"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/NEXTBtn"
-        app:layout_constraintHorizontal_bias="0.262"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mustGoListView" />
-
-    <Button
-        android:id="@+id/NEXTBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:text="@string/next_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mustGoListView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_loc" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
