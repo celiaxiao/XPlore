@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class mainPageActivity extends AppCompatActivity {
+public class MainPageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +21,8 @@ public class mainPageActivity extends AppCompatActivity {
         guidedTourTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startIntent = new Intent(mainPageActivity.this,
-                        studentSelectionActivity.class);
+                Intent startIntent = new Intent(MainPageActivity.this,
+                        StudentSelectionActivity.class);
                 startActivity(startIntent);
             }
         });
@@ -31,8 +31,8 @@ public class mainPageActivity extends AppCompatActivity {
         GotoEncyclopedia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startIntent = new Intent(mainPageActivity.this,
-                        landmarkDetailsActivity.class);
+                Intent startIntent = new Intent(MainPageActivity.this,
+                        LandmarkDetailsActivity.class);
                 startActivity(startIntent);
             }
         });

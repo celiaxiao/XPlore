@@ -1,13 +1,13 @@
 package com.example.navucsd;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * This activity temporary hardcodes the landmark details page.
  */
-public class landmarkDetailsActivity extends AppCompatActivity {
+public class LandmarkDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

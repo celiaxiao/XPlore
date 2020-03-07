@@ -28,7 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class locationSelectionActivity extends AppCompatActivity {
+public class LocationSelectionActivity extends AppCompatActivity {
 
     /*
       TODO: this frontEnd activity should contain all the necessary components
