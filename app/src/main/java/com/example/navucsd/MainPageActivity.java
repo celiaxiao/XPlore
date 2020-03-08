@@ -11,57 +11,61 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+/**
+ * The main activity of NavUCSD.
+ */
 public class MainPageActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private LinearLayoutManager layoutManager;
-    private MainPagePlacesAdapter mAdapter;
-    private SwipeRefreshLayout swipeContainer;
+	private RecyclerView recyclerView;
+	private LinearLayoutManager layoutManager;
+	private MainPagePlacesAdapter mAdapter;
+	private SwipeRefreshLayout swipeContainer;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_page);
+	/**
+	 * Sets the main page up.
+	 * @param savedInstanceState ignored, passed to parent constructor
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_page);
 
-        Button guidedTourTrack = findViewById(R.id.tourTrackBtn);
-        Button GotoEncyclopedia = findViewById((R.id.encyclopediaBtn));
+		Button guidedTourTrack = findViewById(R.id.tourTrackBtn);
+		Button GotoEncyclopedia = findViewById((R.id.encyclopediaBtn));
 
-        //go to the student selection page
-        guidedTourTrack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent startIntent = new Intent(MainPageActivity.this,
-                        TourActivity.class);
-                startActivity(startIntent);
-            }
-        });
+		// go to the student selection page
+		// TODO change to lambda
+		guidedTourTrack.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent startIntent = new Intent(MainPageActivity.this,
+						TourActivity.class);
+				startActivity(startIntent);
+			}
+		});
 
-        //go to the encyclopedia page
-        GotoEncyclopedia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent startIntent = new Intent(MainPageActivity.this,
-                        LandmarkDetailsActivity.class);
-                startActivity(startIntent);
-            }
-        });
+		// go to the encyclopedia page
+		GotoEncyclopedia.setOnClickListener(view ->
+				startActivity(new Intent(this, EncyclopediaActivity.class)));
 
-        swipeContainer = findViewById(R.id.swipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Toast.makeText(MainPageActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
-                swipeContainer.setRefreshing(false);
-            }
-        });
-        swipeContainer.setColorSchemeResources(R.color.colorSecondary);
+		swipeContainer = findViewById(R.id.swipeContainer);
+		// TODO change to lambda
+		swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				Toast.makeText(MainPageActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
+				swipeContainer.setRefreshing(false);
+			}
+		});
+		swipeContainer.setColorSchemeResources(R.color.colorSecondary);
 
-        recyclerView = findViewById(R.id.recycler_main);
+		recyclerView = findViewById(R.id.recycler_main);
+		// TODO fix this
 //        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MainPagePlacesAdapter();
-        recyclerView.setAdapter(mAdapter);
+		layoutManager = new LinearLayoutManager(this);
+		recyclerView.setLayoutManager(layoutManager);
+		mAdapter = new MainPagePlacesAdapter();
+		recyclerView.setAdapter(mAdapter);
 
-    }
+	}
 }
