@@ -12,10 +12,6 @@
 
         <!-- Main page; main entry of the app -->
         <activity android:name=".MainPageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!-- Other pages -->
@@ -23,6 +19,10 @@
 			android:name=".EncyclopediaActivity"
 			android:label="@string/title_activity_encyclopedia"
 			android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".LandmarkDetailsActivity" />
         <activity android:name=".TourActivity" />
