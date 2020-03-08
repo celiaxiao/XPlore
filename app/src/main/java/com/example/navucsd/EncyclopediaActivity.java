@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -23,10 +24,22 @@ import java.util.Objects;
 public final class EncyclopediaActivity extends AppCompatActivity {
 
 	/**
+	 * If the encyclopedia landmark list has been clicked, used to prevent multiple clicks.
+	 */
+	private boolean clicked;
+
+	/**
 	 * A smarter {@code ImageView} that automatically resizes its internal upon size change.
 	 */
 	private final class SmartImageView extends androidx.appcompat.widget.AppCompatImageView {
+		/**
+		 * The desired aspect ratio (width / height).
+		 */
 		private double aspectRatio;
+		/**
+		 * The last set width, defaults to 0 at first.
+		 * Used to detect changes and decide when to resize.
+		 */
 		private int width;
 
 		/**
@@ -104,6 +117,15 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 		};
 
 		addLandmarks(res_ids, names);
+	}
+
+	/**
+	 * Called on resume of this activity and resets the {@code clicked} attribute
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		clicked = false;
 	}
 
 	/**
@@ -185,10 +207,17 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 		);
 		layout_end.setMarginStart(dpToXp(HALF_MARGIN_DP));
 
-		// add images
-		row.addView(new SmartImageView(resId[0], ASPECT_RATIO), layout_start);
-		row.addView(new SmartImageView(resId.length == 2 ? resId[1] : null, ASPECT_RATIO),
-				layout_end);
+		SmartImageView image;
+
+		// add start column image
+		image = new SmartImageView(resId[0], ASPECT_RATIO);
+		image.setOnClickListener(getOnClickListener());
+		row.addView(image, layout_start);
+
+		// add end column image
+		image = new SmartImageView(resId.length == 2 ? resId[1] : null, ASPECT_RATIO);
+		image.setOnClickListener(getOnClickListener());
+		row.addView(image, layout_end);
 
 		// set row layout
 		row.setLayoutParams(
@@ -242,6 +271,7 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 		label.setTextColor(0xFF000000);
 		label.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE_SP);
 		label.setGravity(Gravity.CENTER);
+		label.setOnClickListener(getOnClickListener());
 		label_row.addView(label, layout_start);
 
 		// add the second label
@@ -252,6 +282,7 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 			label.setTextColor(0xFF000000);
 			label.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE_SP);
 			label.setGravity(Gravity.CENTER);
+			label.setOnClickListener(getOnClickListener());
 		}
 		label_row.addView(label, layout_end);
 
@@ -265,6 +296,20 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 		label_row.setLayoutParams(row_layout);
 
 		return label_row;
+	}
+
+	/**
+	 * Get the @{code OnClickListener} that starts the {@code LandmarkDetailsActivity}.
+	 * @return the @{code OnClickListener} that starts the {@code LandmarkDetailsActivity}.
+	 */
+	// TODO target argument
+	private View.OnClickListener getOnClickListener() {
+		return view -> {
+			if (!clicked) {
+				clicked = true;
+				startActivity(new Intent(this, LandmarkDetailsActivity.class));
+			}
+		};
 	}
 
 	/**
