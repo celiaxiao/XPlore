@@ -2,6 +2,7 @@ package com.example.navucsd;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -113,11 +114,16 @@ public class TourActivity extends AppCompatActivity {
                     for (int i = 0; i < selectedItems.size(); i++) {
                         outputStrArr[i] = selectedItems.get(i);
                     }
-                    String [] pathfind = new String[selectedItems.size()];
-                    pathfind = pathfinder(outputStrArr, new Pair(32.882261, -117.234064));
-                    for (int i = 0; i < selectedItems.size(); i++) {
-                        Log.d("PATHFIND", pathfind[i]);
-                    }
+
+                    Intent intent = new Intent(this, NavigationActivity.class);
+                    intent.putExtra("LOCATIONS", outputStrArr);
+                    startActivity(intent);
+
+//                    String [] pathfind = new String[selectedItems.size()];
+//                    pathfind = pathfinder(outputStrArr, new Pair(32.882261, -117.234064));
+//                    for (int i = 0; i < selectedItems.size(); i++) {
+//                        Log.d("PATHFIND", pathfind[i]);
+//                    }
 
                 } else {
                     //pop up alerts, nothing selected
