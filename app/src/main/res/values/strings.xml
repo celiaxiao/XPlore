@@ -1,37 +1,37 @@
 <resources>
     <string name="app_name">navUCSD</string>
     <string name="landmark_description_demo">© 2017 the Board of Regents of the University of California\n\nThe Geisel Library is the main library building on the University of California, San Diego campus.\n\nThe building is named in honor of Audrey and Theodor Seuss Geisel (better known as Dr. Seuss) for the generous contributions they have made to the library and their devotion to improving literacy.\n\nThe building is featured in the UCSD logo and is the most recognizable building on campus. It is located in the center of the campus with the library walk to its south, Thurgood Marshall College to its West and Earl Warren College to its East.\n\nThe library was simply called the "Central Library" until a renovation was completed in 1993. The library was rededicated as the University Library Building. It was renamed the Geisel Library Building in 1995.</string>
-
     <string name="access_token">pk.eyJ1IjoiamFzb255dXlqYyIsImEiOiJjazdmOTRzcTMwMGg0M2dtazhmMWx1MTc4In0.A6Lq7IZw91jLnkDgKXNfsg</string>
     <string name="user_location_permission_explanation">This app needs location permissions to show its functionality.</string>
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
-
     <string-array name="list_of_must_go">
         <item>Geisel Library</item>
-        <item>Scripps Pier</item>
         <item>Peterson Hall</item>
         <item>Mayer Hall</item>
         <item>Price Center</item>
+        <item>RIMAC Gym</item>
+        <item>American Institute</item>
         <item>Rady School of Management</item>
         <item>Sun God Statue</item>
-        <item>Birch Aquarium</item>
-        <item>Atkinson Hall</item>
-        <item>Stuart Collection sculpture</item>
-        <item>64 Degree</item>
+        <item>64 Degrees</item>
         <item>Warren Bear</item>
         <item>Career Services Center</item>
         <item>Canyonview pool</item>
-        <item>Jacobs School of Engineering building and Fallen Star</item>
+        <item>Jacobs School of Engineering Building and Fallen Star</item>
+        <item>Atkinson Hall</item>
         <item>Galbraith Hall</item>
         <item>York Hall</item>
         <item>Biomedical Library</item>
-        <item>Biomedical Research Facility</item>
-        <item>UCSD Medical Center</item>
-        <item>Big Red Chair</item>
         <item>Conrad Prebys Music Center</item>
         <item>Keeling Apartment</item>
         <item>Pharmaceutical Sciences Building</item>
         <item>OceanView</item>
+    </string-array>
+
+    <string-array name="warrenCollege">
+        <item>Canyonview pool</item>
+        <item>Warren Bear</item>
+        <item>Jacobs School of Engineering Building and Fallen Star</item>
     </string-array>
 
     <!--student select strings-->
@@ -56,4 +56,6 @@
     <string name="time_cannot_be_zero">Houres and Minutes can\'t be 0.</string>
     <string name="i_don_t_have_time_constraints">I don\'t have time constraints</string>
     <string name="_00_00">00:00</string>
+    <string name="title_activity_encyclopedia">EncyclopediaActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>

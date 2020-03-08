@@ -5,11 +5,13 @@
     <color name="colorSecondary">#FFCD00</color>
     <color name="colorAccent">#FC8900</color>
 
-    <color name="mapboxGrayLight">#c6d2e1</color>
-
     <color name="transparent">#00FFFFFF</color>
     <color name="grey">#B6B1A9</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="shade">#2D000000</color>
+
+    <color name="mapboxwWhite">#ffffff</color>
+    <color name="mapboxBlue">#4264fb</color>
+    <color name="mapboxGrayLight">#c6d2e1</color>
 </resources>
