@@ -1,12 +1,16 @@
 package com.example.navucsd;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.widget.ImageView;
+import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -16,9 +20,55 @@ import java.util.Objects;
 /**
  * This is an encyclopedia activity that contains a grid of landmarks.
  */
-public class EncyclopediaActivity extends AppCompatActivity {
+public final class EncyclopediaActivity extends AppCompatActivity {
 
-	// TODO support fixed aspect ratio
+	/**
+	 * A smarter {@code ImageView} that automatically resizes its internal upon size change.
+	 */
+	private final class SmartImageView extends androidx.appcompat.widget.AppCompatImageView {
+		private double aspectRatio;
+		private int width;
+
+		/**
+		 * Constructs a {@code SmartImageView} with an image resource id and an aspect ratio.
+		 * @param resId the resouce id of the image, if {@code null} the background is not set
+		 * @param aspectRatio the desired aspect ratio (width / height)
+		 */
+		public SmartImageView(Integer resId, double aspectRatio) {
+			super(EncyclopediaActivity.this);
+
+			if (resId != null) setBackgroundResource(resId);
+
+			this.getViewTreeObserver().addOnPreDrawListener(() -> {
+				int new_width = getWidth();
+
+				if (new_width != width) {
+					ViewGroup.LayoutParams layout = getLayoutParams();
+
+					layout.height = (int) (new_width / aspectRatio);
+					width = new_width;
+					if (resId != null) setBackground(resize(resId, width, layout.height));
+					requestLayout();
+				}
+
+				return true;
+			});
+		}
+
+		/**
+		 * Get a resized image.
+		 * @param resId the resource id of the image
+		 * @param width the target width of the image
+		 * @param height the target height of the image
+		 * @return the resized image
+		 */
+		private Drawable resize(int resId, int width, int height) {
+			return new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(
+					((BitmapDrawable) getResources().getDrawable(resId)).getBitmap(), width, height,
+					true));
+		}
+	}
+
 	/**
 	 * Called on creation of this activity and sets up everything at once.
 	 * @param savedInstanceState ignored in this class, passed to super class constructor
@@ -106,46 +156,41 @@ public class EncyclopediaActivity extends AppCompatActivity {
 	}
 
 	/**
-	 * Returns a new TableRow composed of 1 to 2 {@code ImageView}s.
+	 * Returns a new TableRow composed of 1 to 2 images.
 	 * Behavior with a {@code null} or an incorrect number of {@code resId} is undefined.
 	 * @param resId the resource ids of the images, only 1 to 2 are supported
 	 * @return the new TableRow
 	 */
 	private TableRow getImageRow(int... resId) {
-		final int IMAGE_HEIGHT_DP = 135;
+		final double ASPECT_RATIO = 5.0 / 4;
 		final int HALF_MARGIN_DP = halfMargin();
 
 		TableRow row = new TableRow(this);
-		ImageView image;
 
 		TableRow.LayoutParams layout_start, layout_end;
 
-		// sets the start layout
+		// set the start layout
 		layout_start = new TableRow.LayoutParams(
 				TableRow.LayoutParams.WRAP_CONTENT, // XXX 0?
-				dpToXp(IMAGE_HEIGHT_DP),
+				0,
 				1
 		);
 		layout_start.setMarginEnd(dpToXp(HALF_MARGIN_DP));
 
-		// sets the end layout
+		// set the end layout
 		layout_end = new TableRow.LayoutParams(
 				TableRow.LayoutParams.WRAP_CONTENT, // XXX 0?
-				dpToXp(IMAGE_HEIGHT_DP),
+				0,
 				1
 		);
 		layout_end.setMarginStart(dpToXp(HALF_MARGIN_DP));
 
-		// add the first image
-		image = new ImageView(this);
-		image.setBackgroundResource(resId[0]);
-		row.addView(image, layout_start);
+		// add images
+		row.addView(new SmartImageView(resId[0], ASPECT_RATIO), layout_start);
+		row.addView(new SmartImageView(resId.length == 2 ? resId[1] : null, ASPECT_RATIO),
+				layout_end);
 
-		// add the second image
-		image = new ImageView(this);
-		if (resId.length >= 2) image.setBackgroundResource(resId[1]);
-		row.addView(image, layout_end);
-
+		// set row layout
 		row.setLayoutParams(
 			new TableLayout.LayoutParams(
 				TableLayout.LayoutParams.MATCH_PARENT,
