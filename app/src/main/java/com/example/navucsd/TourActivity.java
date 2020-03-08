@@ -165,7 +165,7 @@ public class TourActivity extends AppCompatActivity {
     }
 
     private void setUpTimeFrag() {
-        hourP = findViewById(R.id.hoursPicker);
+        hourP = findViewById(R.id.hourPicker);
         hourP.setWrapSelectorWheel(false);
         hourP.setMaxValue(6);
         hourP.setMinValue(0);

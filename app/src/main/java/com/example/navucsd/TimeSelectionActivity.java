@@ -57,7 +57,7 @@ public class TimeSelectionActivity extends AppCompatActivity implements NumberPi
         }
         else{
             Intent intent = new Intent(this, LocationSelectionActivity.class);
-            String h = String.valueOf(hoursP.getValue());
+            String h = String.valueOf(hourP.getValue());
             String m = String.valueOf(minuteP.getValue()*30);
             intent.putExtra("HOURS", h);
             intent.putExtra("MINUTES", m);

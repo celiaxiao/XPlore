@@ -6,25 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".TourActivity">
 
-<!--        <Button-->
-<!--            android:id="@+id/callTimeSelect"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/select_the_time"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.387" />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/callTimeSelect"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:onClick="selectTime"-->
+    <!--        android:text="@string/select_the_time"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.387" />-->
 
-<!--        <Button-->
-<!--            android:id="@+id/noConstraint"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/i_don_t_have_time_constraints"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.537" />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/noConstraint"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:onClick="noConstraint"-->
+    <!--        android:text="@string/i_don_t_have_time_constraints"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.537" />-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_time_frag"
@@ -48,7 +50,7 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <NumberPicker
-        android:id="@+id/hoursPicker"
+        android:id="@+id/hourPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.Picker"
@@ -63,9 +65,9 @@
         android:layout_height="wrap_content"
         android:text="hour"
         android:textColor="@color/colorSecondary"
-        app:layout_constraintBottom_toBottomOf="@id/hoursPicker"
+        app:layout_constraintBottom_toBottomOf="@id/hourPicker"
         app:layout_constraintEnd_toStartOf="@id/minutesPicker"
-        app:layout_constraintStart_toEndOf="@id/hoursPicker"
+        app:layout_constraintStart_toEndOf="@id/hourPicker"
         app:layout_constraintTop_toBottomOf="@id/gl_time_frag" />
 
     <NumberPicker
