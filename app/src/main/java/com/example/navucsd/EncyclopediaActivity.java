@@ -1,12 +1,17 @@
 package com.example.navucsd;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.widget.ImageView;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -16,9 +21,67 @@ import java.util.Objects;
 /**
  * This is an encyclopedia activity that contains a grid of landmarks.
  */
-public class EncyclopediaActivity extends AppCompatActivity {
+public final class EncyclopediaActivity extends AppCompatActivity {
 
-	// TODO support fixed aspect ratio
+	/**
+	 * If the encyclopedia landmark list has been clicked, used to prevent multiple clicks.
+	 */
+	private boolean clicked;
+
+	/**
+	 * A smarter {@code ImageView} that automatically resizes its internal upon size change.
+	 */
+	private final class SmartImageView extends androidx.appcompat.widget.AppCompatImageView {
+		/**
+		 * The desired aspect ratio (width / height).
+		 */
+		private double aspectRatio;
+		/**
+		 * The last set width, defaults to 0 at first.
+		 * Used to detect changes and decide when to resize.
+		 */
+		private int width;
+
+		/**
+		 * Constructs a {@code SmartImageView} with an image resource id and an aspect ratio.
+		 * @param resId the resouce id of the image, if {@code null} the background is not set
+		 * @param aspectRatio the desired aspect ratio (width / height)
+		 */
+		public SmartImageView(Integer resId, double aspectRatio) {
+			super(EncyclopediaActivity.this);
+
+			if (resId != null) setBackgroundResource(resId);
+
+			this.getViewTreeObserver().addOnPreDrawListener(() -> {
+				int new_width = getWidth();
+
+				if (new_width != width) {
+					ViewGroup.LayoutParams layout = getLayoutParams();
+
+					layout.height = (int) (new_width / aspectRatio);
+					width = new_width;
+					if (resId != null) setBackground(resize(resId, width, layout.height));
+					requestLayout();
+				}
+
+				return true;
+			});
+		}
+
+		/**
+		 * Get a resized image.
+		 * @param resId the resource id of the image
+		 * @param width the target width of the image
+		 * @param height the target height of the image
+		 * @return the resized image
+		 */
+		private Drawable resize(int resId, int width, int height) {
+			return new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(
+					((BitmapDrawable) getResources().getDrawable(resId)).getBitmap(), width, height,
+					true));
+		}
+	}
+
 	/**
 	 * Called on creation of this activity and sets up everything at once.
 	 * @param savedInstanceState ignored in this class, passed to super class constructor
@@ -54,6 +117,15 @@ public class EncyclopediaActivity extends AppCompatActivity {
 		};
 
 		addLandmarks(res_ids, names);
+	}
+
+	/**
+	 * Called on resume of this activity and resets the {@code clicked} attribute
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		clicked = false;
 	}
 
 	/**
@@ -106,46 +178,48 @@ public class EncyclopediaActivity extends AppCompatActivity {
 	}
 
 	/**
-	 * Returns a new TableRow composed of 1 to 2 {@code ImageView}s.
+	 * Returns a new TableRow composed of 1 to 2 images.
 	 * Behavior with a {@code null} or an incorrect number of {@code resId} is undefined.
 	 * @param resId the resource ids of the images, only 1 to 2 are supported
 	 * @return the new TableRow
 	 */
 	private TableRow getImageRow(int... resId) {
-		final int IMAGE_HEIGHT_DP = 135;
+		final double ASPECT_RATIO = 5.0 / 4;
 		final int HALF_MARGIN_DP = halfMargin();
 
 		TableRow row = new TableRow(this);
-		ImageView image;
 
 		TableRow.LayoutParams layout_start, layout_end;
 
-		// sets the start layout
+		// set the start layout
 		layout_start = new TableRow.LayoutParams(
 				TableRow.LayoutParams.WRAP_CONTENT, // XXX 0?
-				dpToXp(IMAGE_HEIGHT_DP),
+				0,
 				1
 		);
 		layout_start.setMarginEnd(dpToXp(HALF_MARGIN_DP));
 
-		// sets the end layout
+		// set the end layout
 		layout_end = new TableRow.LayoutParams(
 				TableRow.LayoutParams.WRAP_CONTENT, // XXX 0?
-				dpToXp(IMAGE_HEIGHT_DP),
+				0,
 				1
 		);
 		layout_end.setMarginStart(dpToXp(HALF_MARGIN_DP));
 
-		// add the first image
-		image = new ImageView(this);
-		image.setBackgroundResource(resId[0]);
+		SmartImageView image;
+
+		// add start column image
+		image = new SmartImageView(resId[0], ASPECT_RATIO);
+		image.setOnClickListener(getOnClickListener());
 		row.addView(image, layout_start);
 
-		// add the second image
-		image = new ImageView(this);
-		if (resId.length >= 2) image.setBackgroundResource(resId[1]);
+		// add end column image
+		image = new SmartImageView(resId.length == 2 ? resId[1] : null, ASPECT_RATIO);
+		image.setOnClickListener(getOnClickListener());
 		row.addView(image, layout_end);
 
+		// set row layout
 		row.setLayoutParams(
 			new TableLayout.LayoutParams(
 				TableLayout.LayoutParams.MATCH_PARENT,
@@ -197,6 +271,7 @@ public class EncyclopediaActivity extends AppCompatActivity {
 		label.setTextColor(0xFF000000);
 		label.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE_SP);
 		label.setGravity(Gravity.CENTER);
+		label.setOnClickListener(getOnClickListener());
 		label_row.addView(label, layout_start);
 
 		// add the second label
@@ -207,6 +282,7 @@ public class EncyclopediaActivity extends AppCompatActivity {
 			label.setTextColor(0xFF000000);
 			label.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE_SP);
 			label.setGravity(Gravity.CENTER);
+			label.setOnClickListener(getOnClickListener());
 		}
 		label_row.addView(label, layout_end);
 
@@ -220,6 +296,20 @@ public class EncyclopediaActivity extends AppCompatActivity {
 		label_row.setLayoutParams(row_layout);
 
 		return label_row;
+	}
+
+	/**
+	 * Get the @{code OnClickListener} that starts the {@code LandmarkDetailsActivity}.
+	 * @return the @{code OnClickListener} that starts the {@code LandmarkDetailsActivity}.
+	 */
+	// TODO target argument
+	private View.OnClickListener getOnClickListener() {
+		return view -> {
+			if (!clicked) {
+				clicked = true;
+				startActivity(new Intent(this, LandmarkDetailsActivity.class));
+			}
+		};
 	}
 
 	/**
