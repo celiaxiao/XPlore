@@ -31,5 +31,9 @@
         <item name="android:textColorPrimary">@color/colorSecondary</item>
     </style>
 
->>>>>>> app/src/main/res/values/styles.xml
+    <style name="ThinnerChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipMinHeight">20dp</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
 </resources>
