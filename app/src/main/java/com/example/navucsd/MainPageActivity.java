@@ -22,6 +22,11 @@ public class MainPageActivity extends AppCompatActivity {
 	private SwipeRefreshLayout swipeContainer;
 
 	/**
+	 * If the encyclopedia landmark list has been clicked, used to prevent multiple clicks.
+	 */
+	private boolean clicked;
+
+	/**
 	 * Sets the main page up.
 	 * @param savedInstanceState ignored, passed to parent constructor
 	 */
@@ -35,18 +40,18 @@ public class MainPageActivity extends AppCompatActivity {
 
 		// go to the student selection page
 		// TODO change to lambda
-		guidedTourTrack.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent startIntent = new Intent(MainPageActivity.this,
-						TourActivity.class);
-				startActivity(startIntent);
-			}
+		guidedTourTrack.setOnClickListener(view -> {
+			if (clicked) return;
+			clicked = true;
+			startActivity(new Intent(this, TourActivity.class));
 		});
 
 		// go to the encyclopedia page
-		GotoEncyclopedia.setOnClickListener(view ->
-				startActivity(new Intent(this, EncyclopediaActivity.class)));
+		GotoEncyclopedia.setOnClickListener(view -> {
+			if (clicked) return;
+			clicked = true;
+			startActivity(new Intent(this, EncyclopediaActivity.class));
+		});
 
 		swipeContainer = findViewById(R.id.swipeContainer);
 		// TODO change to lambda
@@ -67,5 +72,14 @@ public class MainPageActivity extends AppCompatActivity {
 		mAdapter = new MainPagePlacesAdapter();
 		recyclerView.setAdapter(mAdapter);
 
+	}
+
+	/**
+	 * Called on resume of this activity and resets the {@code clicked} attribute.
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		clicked = false;
 	}
 }
