@@ -72,8 +72,7 @@
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/transparent"
             android:onClick="go_to_nav"
-            android:scaleType="center"
-            android:src="@drawable/ic_location_grey_24dp"
+            android:src="@drawable/nav_button"
             app:layout_constraintBottom_toBottomOf="@id/chipgroup_landmark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/chipgroup_landmark" />

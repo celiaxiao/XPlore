@@ -62,6 +62,17 @@ public class TourActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        int currPage = mainPager.getCurrentItem();
+        if (currPage == USER_TYPE_FRAG) {
+            super.onBackPressed();
+        }
+        else {
+            lastPage(null);
+        }
+    }
+
     public void touristSelected(View view) {
         isTourist = true;
         nextPage(view);
