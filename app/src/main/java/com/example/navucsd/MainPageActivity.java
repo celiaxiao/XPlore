@@ -30,6 +30,11 @@ public class MainPageActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_page);
 
+		//TODO: TEST CODE PLEASE REMOVE WHEN DONE
+		Location test = new Location("Geisel", this);
+		//TODO: END OF TEST CODE
+
+
 		Button guidedTourTrack = findViewById(R.id.tourTrackBtn);
 		Button GotoEncyclopedia = findViewById((R.id.encyclopediaBtn));
 
