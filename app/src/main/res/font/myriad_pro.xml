@@ -4,16 +4,16 @@
     <font
         android:font="@font/myriadpro_regular"
         android:fontStyle="normal"
-        android:fontWeight="400"
+        android:fontWeight="600"
         app:font="@font/myriadpro_regular"
         app:fontStyle="normal"
-        app:fontWeight="400" />
+        app:fontWeight="600" />
 
     <font
         android:font="@font/myriadpro_bold"
         android:fontStyle="normal"
-        android:fontWeight="700"
+        android:fontWeight="900"
         app:font="@font/myriadpro_bold"
         app:fontStyle="normal"
-        app:fontWeight="700" />
+        app:fontWeight="900" />
 </font-family>

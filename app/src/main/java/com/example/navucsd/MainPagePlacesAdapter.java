@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MainPagePlacesAdapter extends RecyclerView.Adapter<MainPagePlacesAdapter.MyViewHolder> {
 
+    private static int PLACE_NUMBER = 3;
+
     private String[] nameSet = {"Geisel Library", "Price Center", "Fallen Star", "Jacobs School of Engineering"};
     private String[] distanceSet = {"<100m", "300m", "350m", "350m"};
     private int[] pictures = {R.drawable.geisel_landmark, R.drawable.price_center_east, R.drawable.fallen_star, R.drawable.ucsd};
@@ -47,7 +49,7 @@ public class MainPagePlacesAdapter extends RecyclerView.Adapter<MainPagePlacesAd
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return nameSet.length;
+        return PLACE_NUMBER;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
