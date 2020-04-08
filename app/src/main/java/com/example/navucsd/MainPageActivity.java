@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -20,9 +21,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  */
 public class MainPageActivity extends AppCompatActivity {
 
-	private RecyclerView recyclerView;
+	private RecyclerView recyclerViewNear, recyclerViewSig;
 	private LinearLayoutManager layoutManager;
 	private MainPagePlacesAdapter mAdapter;
+	private MainSignatureAdapter sigAdapter;
 	private SwipeRefreshLayout swipeContainer;
 
 	/**
@@ -68,11 +70,11 @@ public class MainPageActivity extends AppCompatActivity {
 		});
 		swipeContainer.setColorSchemeResources(R.color.colorSecondary);
 
-		recyclerView = findViewById(R.id.recycler_main);
+		recyclerViewNear = findViewById(R.id.recycler_main);
 		// TODO fix this
-//        recyclerView.setHasFixedSize(true);
+        recyclerViewNear.setHasFixedSize(true);
 		layoutManager = new LinearLayoutManager(this);
-		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerViewNear.getContext(),
 				LinearLayoutManager.VERTICAL) {
 			@Override
 			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
@@ -91,11 +93,47 @@ public class MainPageActivity extends AppCompatActivity {
 		else {
 			dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.horizontal_divider_16dp));
 		}
-		recyclerView.addItemDecoration(dividerItemDecoration);
+		recyclerViewNear.addItemDecoration(dividerItemDecoration);
 
-		recyclerView.setLayoutManager(layoutManager);
+		recyclerViewNear.setLayoutManager(layoutManager);
 		mAdapter = new MainPagePlacesAdapter();
-		recyclerView.setAdapter(mAdapter);
+		recyclerViewNear.setAdapter(mAdapter);
+
+		recyclerViewSig = findViewById(R.id.recycler_main_sig_land);
+
+		// use this setting to improve performance if you know that changes
+		// in content do not change the layout size of the RecyclerView
+		recyclerViewSig.setHasFixedSize(true);
+
+		// use a linear layout manager
+		layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+		DividerItemDecoration dividerItemDecorationSig = new DividerItemDecoration(recyclerViewSig.getContext(),
+				LinearLayoutManager.HORIZONTAL) {
+			@Override
+			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+				int position = parent.getChildAdapterPosition(view);
+				int px_16 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16,getResources().getDisplayMetrics()));
+				// hide the divider for the last child
+				if (position == state.getItemCount() - 1) {
+					outRect.set(0,0, px_16,0);
+				} else {
+					super.getItemOffsets(outRect, view, parent, state);
+				}
+			}
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			dividerItemDecorationSig.setDrawable(getDrawable(R.drawable.horizontal_divider_20dp));
+		}
+		else {
+			dividerItemDecorationSig.setDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.horizontal_divider_20dp));
+		}
+		recyclerViewSig.addItemDecoration(dividerItemDecorationSig);
+
+		recyclerViewSig.setLayoutManager(layoutManager);
+
+		// specify an adapter (see also next example)
+		sigAdapter = new MainSignatureAdapter();
+		recyclerViewSig.setAdapter(sigAdapter);
 
 	}
 
