@@ -1,9 +1,13 @@
 package com.example.navucsd;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,11 +23,13 @@ public class MainSignatureAdapter extends RecyclerView.Adapter<MainSignatureAdap
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
+        public ConstraintLayout layout;
         public CardView cardViewTop, cardViewBottom;
         public TextView textViewTop, textViewBottom;
         public ImageView imageViewTop, imageViewBottom;
         public MyViewHolder(ConstraintLayout constraintLayout) {
             super(constraintLayout);
+            layout = constraintLayout;
             cardViewTop = constraintLayout.findViewById(R.id.column_top);
             cardViewTop.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -64,10 +70,31 @@ public class MainSignatureAdapter extends RecyclerView.Adapter<MainSignatureAdap
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 //        holder.textViewTop.setText(mDataset[position]);
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
         holder.textViewTop.setText(nameSet[position]);
         holder.textViewBottom.setText(nameSet[position + NUMBER_COL]);
+        adjustLayoutParam(holder.imageViewTop, (metrics.widthPixels - (int) (52 * metrics.density)) / 2);
         holder.imageViewTop.setImageResource(pictures[position]);
+
+        adjustLayoutParam(holder.imageViewBottom, (metrics.widthPixels - (int) (52 * metrics.density)) / 2);
         holder.imageViewBottom.setImageResource(pictures[position + NUMBER_COL]);
+
+        adjustLayoutParam(holder.layout, (metrics.widthPixels - (int) (52 * metrics.density)) / 2,
+                (metrics.widthPixels - (int) (32 * metrics.density)));
+    }
+
+    private void adjustLayoutParam(View v, int width, int height) {
+        ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
+        layoutParams.width = width;
+        layoutParams.height = height;
+        v.setLayoutParams(layoutParams);
+    }
+
+    private void adjustLayoutParam(View v, int size) {
+        ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
+        layoutParams.width = size;
+        layoutParams.height = size;
+        v.setLayoutParams(layoutParams);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -75,4 +102,5 @@ public class MainSignatureAdapter extends RecyclerView.Adapter<MainSignatureAdap
     public int getItemCount() {
         return NUMBER_COL;
     }
+
 }
