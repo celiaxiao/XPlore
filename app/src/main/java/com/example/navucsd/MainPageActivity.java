@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -111,9 +112,10 @@ public class MainPageActivity extends AppCompatActivity {
 			@Override
 			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
 				int position = parent.getChildAdapterPosition(view);
+				int px_16 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16,getResources().getDisplayMetrics()));
 				// hide the divider for the last child
 				if (position == state.getItemCount() - 1) {
-					outRect.setEmpty();
+					outRect.set(0,0, px_16,0);
 				} else {
 					super.getItemOffsets(outRect, view, parent, state);
 				}
