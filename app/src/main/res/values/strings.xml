@@ -64,4 +64,17 @@
     <string name="style"><u>Style &amp; Architecture</u></string>
     <string name="demo_style">The building\'s distinctive Brutalist architecture has resulted in its being featured in the UC San Diego logo and becoming the most recognizable building on campus.</string>
     <string name="suggestion">You May Also Want to Know...</string>
+
+    <string-array name="placesName">
+        <item>Shogun</item>>
+        <item>Panda Express</item>
+    </string-array>
+    <string-array name="availability">
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+    </string-array>
+    <string-array name="distances">
+        <item>200m</item>>
+        <item>225m</item>
+    </string-array>
 </resources>

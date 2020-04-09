@@ -129,7 +129,8 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 		};
 
 		addLandmarks(res_ids, names);
-
+	}
+		/*
 		//implement search bar activity
 		//set up the string list that appears in the search bar hint
 		String[] mustGoList = getResources( ).getStringArray(R.array.list_of_must_go);
@@ -145,6 +146,7 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 		searchHintList.setAdapter(LocationListAdapter);
 
 		searchBar = (SearchView) findViewById(R.id.search_bar);
+	}
 		//first hide the suggestion listview
 		searchHintList.setVisibility(View.GONE);
 
@@ -216,7 +218,7 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 		alertDialog.show();
 
 	}
-
+*/
 	/**
 	 * Called on resume of this activity and resets the {@code clicked} attribute
 	 */
