@@ -40,15 +40,15 @@ public class MainPageActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main_page);
 
 		//TODO: TEST CODE PLEASE REMOVE WHEN DONE
-		ArrayList<String> test = new ArrayList<>();
-		ArrayList<Module> test2 = new ArrayList<>();
-		test.add("what");
-		Location loc = new Location("hehe",
-				new Pair("hehe", "hehe"), "hehe", "hehe",test,test,
-				test,test,test, "hehe", "hehe", test2);
+//		ArrayList<String> test = new ArrayList<>();
+//		ArrayList<Module> test2 = new ArrayList<>();
+//		test.add("what");
+//		Location loc = new Location("hehe",
+//				new Pair("hehe", "hehe"), "hehe", "hehe",test,test,
+//				test,test,test, "hehe", "hehe", test2);
 		Gson gson = new Gson();
-		String json = gson.toJson(loc);
-		Log.d("WHAT", json);
+//		String json = gson.toJson(loc);
+//		Log.d("WHAT", json);
 		String testJson = loadJSONFromAsset();
 		Location tstLoc = gson.fromJson(testJson, Location.class);
 		//TODO: END OF TEST CODE
