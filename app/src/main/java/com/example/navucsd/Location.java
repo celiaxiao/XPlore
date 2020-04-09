@@ -6,24 +6,60 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.Pair;
 
+import java.util.ArrayList;
+
 public class Location {
 
     public  String name;
-    private String tags;
     private Pair coordinates;
+    private String about;
+    //This is a file name
+    private String thumbnailPhoto;
+    private ArrayList<String> otherPhotos;
+    private ArrayList<String> amenities;
+    private ArrayList<String> descriptive;
+    private ArrayList<String> relatedPlaces;
+    private ArrayList<String> relatedTours;
+    //This is a file name
+    private String audio;
     private String description;
-    private Location relatedLocation;
+    private ArrayList<Module> modules;
 
-    public Location(String locName, Context context){
-        this.name = locName;
-        //TODO: I HAVE NO FUCKING CLUE IF THIS WORKS OR NOT, TAKEN FROM THIS PAGE
-        //  https://stackoverflow.com/questions/7493287/android-how-do-i-get-string-from-resources-using-its-name
-        Resources res = context.getResources();
-        //gets the tag from the strings.xml file
-        this.tags = res.getString(res.getIdentifier(locName+"tag", "string", context.getPackageName()));
-        //Coordinates are pair so ned to think aof another way to get it
-        //this.coordinates = res.getString(res.getIdentifier(locName+"tag", "string", context.getPackageName()));
-        this.description = res.getString(res.getIdentifier(locName+"tag", "string", context.getPackageName()));
-        //i want to die
+
+    public Location(String name, Pair coordinates, String about, String thumbnailPhoto,
+                    ArrayList<String> otherPhotos, ArrayList<String> amenities,
+                    ArrayList<String> descriptive, ArrayList<String> relatedPlaces,
+                    ArrayList<String> relatedTours, String audio, String description,
+                    ArrayList<Module> modules) {
+        this.name = name;
+        this.coordinates = coordinates;
+        this.about = about;
+        this.thumbnailPhoto = thumbnailPhoto;
+        this.otherPhotos = otherPhotos;
+        this.amenities = amenities;
+        this.descriptive = descriptive;
+        this.relatedPlaces = relatedPlaces;
+        this.relatedTours = relatedTours;
+        this.audio = audio;
+        this.description = description;
+        this.modules = modules;
     }
+}
+
+class Module{
+    private String name;
+    private String description;
+    //These are video links
+    private ArrayList<String> videos;
+    //These are video links
+    private ArrayList<String> links;
+
+
+    public Module(String name, String description, ArrayList<String> videos, ArrayList<String> links) {
+        this.name = name;
+        this.description = description;
+        this.videos = videos;
+        this.links = links;
+    }
+
 }
