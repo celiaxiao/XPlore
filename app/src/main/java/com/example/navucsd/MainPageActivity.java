@@ -92,6 +92,10 @@ public class MainPageActivity extends AppCompatActivity {
 
 	}
 
+
+	/*
+		Function that reads in a file and then spits out their json string
+	 */
 	public String loadJSONFromAsset() {
 		String json = null;
 		Log.d("WHAT", "I'm in this function call");
