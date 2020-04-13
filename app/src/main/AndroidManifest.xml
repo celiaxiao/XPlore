@@ -15,10 +15,7 @@
         <!-- Main page; main entry of the app -->
         <activity android:name=".MainPageActivity"
             android:theme="@style/AppTheme.Material">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <!-- Other pages -->
@@ -31,6 +28,12 @@
         <activity android:name=".LandmarkDetailsActivity"
             android:theme="@style/AppTheme.Material"/>
         <activity android:name=".TourActivity" />
+        <activity android:name=".SearchBarActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 

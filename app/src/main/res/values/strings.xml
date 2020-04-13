@@ -66,15 +66,78 @@
     <string name="suggestion">You May Also Want to Know...</string>
 
     <string-array name="placesName">
-        <item>Shogun</item>>
-        <item>Panda Express</item>
+        <item>Canyonview pool</item>
+        <item>Warren bear</item>
+        <item>JSOE (Fallen star) </item>
+        <item>Atkinson Hall</item>
+        <item>Conrad Prebys Music Center</item>
+        <item>Biomedical library </item>
+        <item>Pharmaceutical Sciences Building </item>
+        <item>Big Red Chair </item>
+        <item>Keeling Apartment</item>
+        <item>York Hall</item>
+        <item>Galbraith Hall</item>
+        <item>Mayer Hall </item>
+        <item>64 Degrees </item>
+        <item>Sun God statue </item>
+        <item>Oceanview Restaurant</item>
+        <item>Peterson Hall</item>
+        <item>Rady School of management</item>
+        <item>RIMAC Field/gym </item>
+        <item>American Institute </item>
+        <item>Career service center  </item>
+        <item>Geisel library </item>
+        <item>Price Center</item>
+        <item>UCSD Bookstore</item>
     </string-array>
     <string-array name="availability">
         <item>Open ・Closes at 9pm</item>>
         <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
+        <item>Open ・Closes at 11pm</item>
+        <item>Open ・Closes at 9pm</item>>
     </string-array>
     <string-array name="distances">
         <item>200m</item>>
         <item>225m</item>
+        <item>200m</item>>
+        <item>225m</item>
+        <item>200m</item>>
+        <item>225m</item>
+        <item>200m</item>>
+        <item>225m</item>
+        <item>200m</item>>
+        <item>225m</item>
+        <item>200m</item>>
+        <item>225m</item>
+        <item>200m</item>>
+        <item>225m</item>
+        <item>200m</item>>
+        <item>225m</item>
+        <item>200m</item>>
+        <item>225m</item>
+        <item>200m</item>>
+        <item>225m</item>
+        <item>200m</item>>
+        <item>225m</item>
+        <item>200m</item>
     </string-array>
 </resources>

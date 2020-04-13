@@ -1,6 +1,7 @@
 package com.example.navucsd;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,9 @@ public class SearchBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_bar);
         searchBar = (SearchView) findViewById(R.id.actual_search_bar);
+        CardView cardplaces=(CardView)findViewById(R.id.placesCardView);
+        CardView cardSearch=(CardView)findViewById(R.id.searchBarCardView);
+
         ListView searchPlaces=(ListView)findViewById(R.id.searchHintList);
         ArrayAdapter<String> placesAdapter=new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
