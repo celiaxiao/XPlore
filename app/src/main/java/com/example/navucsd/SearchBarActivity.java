@@ -3,6 +3,7 @@ package com.example.navucsd;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,8 +29,12 @@ public class SearchBarActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 getResources( ).getStringArray(R.array.placesName));
         //add title to the lisy
-        View headerView = getLayoutInflater().inflate(R.layout.search_bar_list_title, null);
-        searchPlaces.addHeaderView(headerView);
+        /*View headerView = getLayoutInflater().inflate(R.layout.search_bar_list_title, null);
+        searchPlaces.addHeaderView(headerView);*/
+        ColorDrawable divider = new ColorDrawable(this.getResources().getColor(R.color.divider));
+        searchPlaces.setDivider(divider);
+        searchPlaces.setDividerHeight(3);
+
         //initialize the main context of list
         SearchBarPlacesView placesAdaptor=new SearchBarPlacesView(this,
                 getResources( ).getStringArray(R.array.placesName),
@@ -37,7 +42,8 @@ public class SearchBarActivity extends AppCompatActivity {
                 getResources( ).getStringArray(R.array.distances));
         searchPlaces.setAdapter(placesAdaptor);
 
-
+        //first hide the suggestion listview
+        //searchPlaces.setVisibility(View.GONE);
 
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener( ) {
             // Override onQueryTextSubmit method which is call when submitquery is searched
@@ -60,7 +66,10 @@ public class SearchBarActivity extends AppCompatActivity {
             // when the user is typing search
             @Override
             public boolean onQueryTextChange(String s) {
-
+                /*if(s.isEmpty()){
+                    searchPlaces.setVisibility(View.GONE);
+                }
+                else searchPlaces.setVisibility(View.VISIBLE);*/
                 placesAdaptor.getFilter( ).filter(s);
 
                 //set up clike item functionality
