@@ -21,11 +21,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  */
 public class MainPageActivity extends AppCompatActivity {
 
-	private RecyclerView recyclerViewNear, recyclerViewSig;
+	private RecyclerView recyclerViewSig;
 	private LinearLayoutManager layoutManager;
-	private MainPagePlacesAdapter mAdapter;
 	private MainSignatureAdapter sigAdapter;
-	private SwipeRefreshLayout swipeContainer;
+	private AutoSlideViewPager autoSlideViewPager;
+	private AutoSlideViewPagerAdapter autoSlideViewPagerAdapter;
 
 	/**
 	 * If the encyclopedia landmark list has been clicked, used to prevent multiple clicks.
@@ -59,45 +59,11 @@ public class MainPageActivity extends AppCompatActivity {
 			startActivity(new Intent(this, EncyclopediaActivity.class));
 		});
 
-		swipeContainer = findViewById(R.id.swipeContainer);
-		// TODO change to lambda
-		swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-			@Override
-			public void onRefresh() {
-				Toast.makeText(MainPageActivity.this, "Refreshing", Toast.LENGTH_SHORT).show();
-				swipeContainer.setRefreshing(false);
-			}
-		});
-		swipeContainer.setColorSchemeResources(R.color.colorSecondary);
-
-		recyclerViewNear = findViewById(R.id.recycler_main);
-		// TODO fix this
-        recyclerViewNear.setHasFixedSize(true);
-		layoutManager = new LinearLayoutManager(this);
-		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerViewNear.getContext(),
-				LinearLayoutManager.VERTICAL) {
-			@Override
-			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-				int position = parent.getChildAdapterPosition(view);
-				// hide the divider for the last child
-				if (position == state.getItemCount() - 1) {
-					outRect.setEmpty();
-				} else {
-					super.getItemOffsets(outRect, view, parent, state);
-				}
-			}
-		};
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			dividerItemDecoration.setDrawable(getDrawable(R.drawable.horizontal_divider_16dp));
-		}
-		else {
-			dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.horizontal_divider_16dp));
-		}
-		recyclerViewNear.addItemDecoration(dividerItemDecoration);
-
-		recyclerViewNear.setLayoutManager(layoutManager);
-		mAdapter = new MainPagePlacesAdapter();
-		recyclerViewNear.setAdapter(mAdapter);
+		// set up auto slide viewpager
+		autoSlideViewPager = findViewById(R.id.auto_slider);
+		autoSlideViewPagerAdapter = new AutoSlideViewPagerAdapter(this);
+		autoSlideViewPager.setAdapter(autoSlideViewPagerAdapter);
+		autoSlideViewPager.setAutoPlay(true);
 
 		recyclerViewSig = findViewById(R.id.recycler_main_sig_land);
 

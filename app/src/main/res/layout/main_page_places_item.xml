@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -11,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/ucsd" />
+        android:src="@drawable/ucsd"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -74,6 +73,42 @@
                 app:chipBackgroundColor="@color/white"/>
 
         </com.google.android.material.chip.ChipGroup>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/main_card_icon_size"
+            app:layout_constraintTop_toTopOf="@id/place_tags"
+            app:layout_constraintBottom_toBottomOf="@id/place_tags"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/main_card_icon_size"
+                android:layout_height="@dimen/main_card_icon_size"
+                android:src="@drawable/ic_wc_24dp"/>
+
+            <ImageView
+                android:layout_width="@dimen/main_card_icon_size"
+                android:layout_height="@dimen/main_card_icon_size"
+                android:src="@drawable/ic_breakfast_24dp"/>
+
+            <ImageView
+                android:layout_width="@dimen/main_card_icon_size"
+                android:layout_height="@dimen/main_card_icon_size"
+                android:src="@drawable/ic_restaurant_24dp"/>
+
+            <ImageView
+                android:layout_width="@dimen/main_card_icon_size"
+                android:layout_height="@dimen/main_card_icon_size"
+                android:src="@drawable/ic_bus_24dp"/>
+
+            <ImageView
+                android:layout_width="@dimen/main_card_icon_size"
+                android:layout_height="@dimen/main_card_icon_size"
+                android:src="@drawable/ic_local_parking_24dp"/>
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
