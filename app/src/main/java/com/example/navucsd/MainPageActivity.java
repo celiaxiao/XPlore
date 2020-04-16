@@ -1,8 +1,14 @@
 package com.example.navucsd;
 
 import android.content.Intent;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
+
 import android.util.Log;
+
+import android.util.TypedValue;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -10,12 +16,16 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Pair;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,10 +36,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  */
 public class MainPageActivity extends AppCompatActivity {
 
-	private RecyclerView recyclerView;
+	private RecyclerView recyclerViewNear, recyclerViewSig;
 	private LinearLayoutManager layoutManager;
 	private MainPagePlacesAdapter mAdapter;
+	private MainSignatureAdapter sigAdapter;
 	private SwipeRefreshLayout swipeContainer;
+
+	/**
+	 * If the encyclopedia landmark list has been clicked, used to prevent multiple clicks.
+	 */
+	private boolean clicked;
 
 	/**
 	 * Sets the main page up.
@@ -80,18 +96,18 @@ public class MainPageActivity extends AppCompatActivity {
 
 		// go to the student selection page
 		// TODO change to lambda
-		guidedTourTrack.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent startIntent = new Intent(MainPageActivity.this,
-						TourActivity.class);
-				startActivity(startIntent);
-			}
+		guidedTourTrack.setOnClickListener(view -> {
+			if (clicked) return;
+			clicked = true;
+			startActivity(new Intent(this, TourActivity.class));
 		});
 
 		// go to the encyclopedia page
-		GotoEncyclopedia.setOnClickListener(view ->
-				startActivity(new Intent(this, EncyclopediaActivity.class)));
+		GotoEncyclopedia.setOnClickListener(view -> {
+			if (clicked) return;
+			clicked = true;
+			startActivity(new Intent(this, EncyclopediaActivity.class));
+		});
 
 		swipeContainer = findViewById(R.id.swipeContainer);
 		// TODO change to lambda
@@ -104,14 +120,80 @@ public class MainPageActivity extends AppCompatActivity {
 		});
 		swipeContainer.setColorSchemeResources(R.color.colorSecondary);
 
-		recyclerView = findViewById(R.id.recycler_main);
+		recyclerViewNear = findViewById(R.id.recycler_main);
 		// TODO fix this
-//        recyclerView.setHasFixedSize(true);
+        recyclerViewNear.setHasFixedSize(true);
 		layoutManager = new LinearLayoutManager(this);
-		recyclerView.setLayoutManager(layoutManager);
-		mAdapter = new MainPagePlacesAdapter();
-		recyclerView.setAdapter(mAdapter);
+		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerViewNear.getContext(),
+				LinearLayoutManager.VERTICAL) {
+			@Override
+			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+				int position = parent.getChildAdapterPosition(view);
+				// hide the divider for the last child
+				if (position == state.getItemCount() - 1) {
+					outRect.setEmpty();
+				} else {
+					super.getItemOffsets(outRect, view, parent, state);
+				}
+			}
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			dividerItemDecoration.setDrawable(getDrawable(R.drawable.horizontal_divider_16dp));
+		}
+		else {
+			dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.horizontal_divider_16dp));
+		}
+		recyclerViewNear.addItemDecoration(dividerItemDecoration);
 
+		recyclerViewNear.setLayoutManager(layoutManager);
+		mAdapter = new MainPagePlacesAdapter();
+		recyclerViewNear.setAdapter(mAdapter);
+
+		recyclerViewSig = findViewById(R.id.recycler_main_sig_land);
+
+		// use this setting to improve performance if you know that changes
+		// in content do not change the layout size of the RecyclerView
+		recyclerViewSig.setHasFixedSize(true);
+
+		// use a linear layout manager
+		layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+		DividerItemDecoration dividerItemDecorationSig = new DividerItemDecoration(recyclerViewSig.getContext(),
+				LinearLayoutManager.HORIZONTAL) {
+			@Override
+			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+				int position = parent.getChildAdapterPosition(view);
+				int px_16 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16,getResources().getDisplayMetrics()));
+				// hide the divider for the last child
+				if (position == state.getItemCount() - 1) {
+					outRect.set(0,0, px_16,0);
+				} else {
+					super.getItemOffsets(outRect, view, parent, state);
+				}
+			}
+		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			dividerItemDecorationSig.setDrawable(getDrawable(R.drawable.horizontal_divider_20dp));
+		}
+		else {
+			dividerItemDecorationSig.setDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.horizontal_divider_20dp));
+		}
+		recyclerViewSig.addItemDecoration(dividerItemDecorationSig);
+
+		recyclerViewSig.setLayoutManager(layoutManager);
+
+		// specify an adapter (see also next example)
+		sigAdapter = new MainSignatureAdapter();
+		recyclerViewSig.setAdapter(sigAdapter);
+
+	}
+
+	/**
+	 * Called on resume of this activity and resets the {@code clicked} attribute.
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		clicked = false;
 	}
 
 
