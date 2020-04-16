@@ -17,26 +17,6 @@ public class MainSignatureAdapter extends RecyclerView.Adapter<MainSignatureAdap
     private String[] nameSet = {"Fallen Star", "Sun God", "Geisel", "Vice and Virtues", "Stone Bear", "Biomedical Library"};
     private int[] pictures = {R.drawable.fallen_star, R.drawable.sun_god, R.drawable.geisel, R.drawable.vice_and_virtues, R.drawable.stone_bear, R.drawable.biomed_lib};
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-
-        public CardView cardView;
-        public TextView textView;
-        public ImageView imageView;
-        public MyViewHolder(CardView rootView) {
-            super(rootView);
-            cardView = rootView;
-            textView = rootView.findViewById(R.id.sig_text);
-            imageView = rootView.findViewById(R.id.sig_image);
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), LandmarkDetailsActivity.class);
-                    v.getContext().startActivity(intent);
-                }
-            });
-        }
-    }
-
     // Create new views (invoked by the layout manager)
     @Override
     public MainSignatureAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
@@ -86,6 +66,27 @@ public class MainSignatureAdapter extends RecyclerView.Adapter<MainSignatureAdap
     @Override
     public int getItemCount() {
         return nameSet.length;
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+
+        public CardView cardView;
+        public TextView textView;
+        public ImageView imageView;
+
+        public MyViewHolder(CardView rootView) {
+            super(rootView);
+            cardView = rootView;
+            textView = rootView.findViewById(R.id.sig_text);
+            imageView = rootView.findViewById(R.id.sig_image);
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), LandmarkDetailsActivity.class);
+                    v.getContext().startActivity(intent);
+                }
+            });
+        }
     }
 
 }

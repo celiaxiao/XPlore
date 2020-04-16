@@ -22,8 +22,8 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
     // Duplicate the first and the last images for recyclable scrolling
     private Integer[] images = {R.drawable.fallen_star,     // jump to images[3]
-                                R.drawable.geisel, R.drawable.price_center_east, R.drawable.fallen_star,
-                                R.drawable.geisel};    // jump to images[1]
+            R.drawable.geisel, R.drawable.price_center_east, R.drawable.fallen_star,
+            R.drawable.geisel};    // jump to images[1]
     private String[] nameSet = {"Fallen Star", "Geisel Library", "Price Center", "Fallen Star", "Geisel Library"};
     private String[] distanceSet = {"350m", "<100m", "300m", "350m", "<100m"};
 

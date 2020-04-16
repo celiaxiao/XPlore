@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.annotation.AttrRes;
@@ -20,43 +19,40 @@ import androidx.viewpager.widget.ViewPager;
 /**
  * Auto scrolling and recycling ViewPager
  * Source: https://www.jianshu.com/p/58f356eaa6e9
+ *
  * @param <T>
  */
 public class AutoSlideViewPager<T extends PagerAdapter> extends CardView {
+    private static long time = 3000; // autoplay time delay
+    private static boolean autoPlay = true;
     private ViewPager viewPager;
     private PagerAdapter mAdapter;
     private LinearLayout mLinearLayout;
     private Context mContext;
-
     private int oldPosition = 0;
     private int currentIndex = 1;
     private int pageMargin = 0;
     private int leftMargin = 20;
     private int bottomMargin = 10;
-    private static long time = 3000; // autoplay time delay
-    private static boolean autoPlay = true;
-
-
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            play();
-        }
-    };
-
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
             viewPager.setCurrentItem(++currentIndex);
         }
     };
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            play();
+        }
+    };
 
     public AutoSlideViewPager(@NonNull Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public AutoSlideViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public AutoSlideViewPager(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
@@ -88,7 +84,7 @@ public class AutoSlideViewPager<T extends PagerAdapter> extends CardView {
 
         mLinearLayout.setGravity(Gravity.CENTER);
         mLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-        addView(mLinearLayout,params);
+        addView(mLinearLayout, params);
     }
 
     @Override
@@ -107,7 +103,7 @@ public class AutoSlideViewPager<T extends PagerAdapter> extends CardView {
      * Initialize viewpager with dots
      */
     private void initViewPager() {
-        if (mAdapter==null){
+        if (mAdapter == null) {
             return;
         }
 
@@ -119,16 +115,17 @@ public class AutoSlideViewPager<T extends PagerAdapter> extends CardView {
         // add page change listener
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset,int positionOffsetPixels) {}
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
 
             @Override
             public void onPageSelected(int position) {
                 // recycle through images
-                if (position == 0){
+                if (position == 0) {
                     currentIndex = mAdapter.getCount() - 2; // [x][1][2][3][4] --> [0][1][2][x][4]
-                }else if (position == mAdapter.getCount() - 1){
+                } else if (position == mAdapter.getCount() - 1) {
                     currentIndex = 1; // [0][1][2][3][x] --> [0][x][2][3][4]
-                }else {
+                } else {
                     currentIndex = position;
                 }
                 // recycle through dots
@@ -140,10 +137,10 @@ public class AutoSlideViewPager<T extends PagerAdapter> extends CardView {
             @Override
             public void onPageScrollStateChanged(int state) {
                 // auto play unless user is dragging
-                if(state == ViewPager.SCROLL_STATE_IDLE){
-                    viewPager.setCurrentItem(currentIndex,false);
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    viewPager.setCurrentItem(currentIndex, false);
                     play();
-                }else if(state == ViewPager.SCROLL_STATE_DRAGGING){
+                } else if (state == ViewPager.SCROLL_STATE_DRAGGING) {
                     cancel();
                 }
             }
@@ -157,10 +154,10 @@ public class AutoSlideViewPager<T extends PagerAdapter> extends CardView {
     /**
      * Start auto scrolling if autoPlay is true
      */
-    public void play(){
-        if (autoPlay){
-            handler.postDelayed(runnable,time);
-        }else {
+    public void play() {
+        if (autoPlay) {
+            handler.postDelayed(runnable, time);
+        } else {
             handler.removeCallbacks(runnable);
         }
     }
@@ -168,7 +165,7 @@ public class AutoSlideViewPager<T extends PagerAdapter> extends CardView {
     /**
      * Cancel autoPlay
      */
-    public void cancel(){
+    public void cancel() {
         handler.removeCallbacks(runnable);
     }
 
@@ -177,16 +174,16 @@ public class AutoSlideViewPager<T extends PagerAdapter> extends CardView {
      */
     private void setIndicatorDot() {
         // add one dot for three images
-        for (int i = 0; i < mAdapter.getCount() - 2; i++){
+        for (int i = 0; i < mAdapter.getCount() - 2; i++) {
             // add gray dot
             View v = new View(mContext);
             v.setBackgroundResource(R.drawable.album_dot);
             v.setEnabled(false);
 
             // set up layout
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20,20);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20, 20);
             // set up margins between dots
-            if (i != 0){
+            if (i != 0) {
                 params.leftMargin = leftMargin;
             }
             params.bottomMargin = bottomMargin;
@@ -195,7 +192,7 @@ public class AutoSlideViewPager<T extends PagerAdapter> extends CardView {
         }
     }
 
-    public void setAdapter(T adpter){
+    public void setAdapter(T adpter) {
         mAdapter = adpter;
         viewPager.setAdapter(mAdapter);
         initViewPager();
@@ -203,7 +200,7 @@ public class AutoSlideViewPager<T extends PagerAdapter> extends CardView {
 
     public void setAutoPlay(boolean autoPlay) {
         AutoSlideViewPager.autoPlay = autoPlay;
-        if (!autoPlay){
+        if (!autoPlay) {
             cancel();
         }
     }

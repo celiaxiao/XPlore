@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/ucsd"/>
+        android:src="@drawable/ucsd" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -53,60 +53,60 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.chip.Chip
+                style="@style/ThinnerChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/ThinnerChip"
-                app:chipMinTouchTargetSize="0dp"
                 android:text="Library"
                 android:textColor="@color/place_tag_text"
                 android:textStyle="bold"
-                app:chipBackgroundColor="@color/white"/>
+                app:chipBackgroundColor="@color/white"
+                app:chipMinTouchTargetSize="0dp" />
 
             <com.google.android.material.chip.Chip
+                style="@style/ThinnerChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/ThinnerChip"
-                app:chipMinTouchTargetSize="0dp"
                 android:text="Must-See"
                 android:textColor="@color/place_tag_text"
                 android:textStyle="bold"
-                app:chipBackgroundColor="@color/white"/>
+                app:chipBackgroundColor="@color/white"
+                app:chipMinTouchTargetSize="0dp" />
 
         </com.google.android.material.chip.ChipGroup>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="@dimen/main_card_icon_size"
-            app:layout_constraintTop_toTopOf="@id/place_tags"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@id/place_tags"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toTopOf="@id/place_tags">
 
             <ImageView
                 android:layout_width="@dimen/main_card_icon_size"
                 android:layout_height="@dimen/main_card_icon_size"
-                android:src="@drawable/ic_wc_24dp"/>
+                android:src="@drawable/ic_wc_24dp" />
 
             <ImageView
                 android:layout_width="@dimen/main_card_icon_size"
                 android:layout_height="@dimen/main_card_icon_size"
-                android:src="@drawable/ic_breakfast_24dp"/>
+                android:src="@drawable/ic_breakfast_24dp" />
 
             <ImageView
                 android:layout_width="@dimen/main_card_icon_size"
                 android:layout_height="@dimen/main_card_icon_size"
-                android:src="@drawable/ic_restaurant_24dp"/>
+                android:src="@drawable/ic_restaurant_24dp" />
 
             <ImageView
                 android:layout_width="@dimen/main_card_icon_size"
                 android:layout_height="@dimen/main_card_icon_size"
-                android:src="@drawable/ic_bus_24dp"/>
+                android:src="@drawable/ic_bus_24dp" />
 
             <ImageView
                 android:layout_width="@dimen/main_card_icon_size"
                 android:layout_height="@dimen/main_card_icon_size"
-                android:src="@drawable/ic_local_parking_24dp"/>
+                android:src="@drawable/ic_local_parking_24dp" />
 
         </LinearLayout>
 

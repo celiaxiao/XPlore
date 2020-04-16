@@ -1,7 +1,5 @@
 package com.example.navucsd;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class TimeSelectionActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
@@ -41,24 +41,23 @@ public class TimeSelectionActivity extends AppCompatActivity implements NumberPi
         timeChoices = new String[]{"00", "30"};
         minuteP.setDisplayedValues(timeChoices);
 
-        minuteP.setOnValueChangedListener((NumberPicker.OnValueChangeListener) this);
+        minuteP.setOnValueChangedListener(this);
     }
 
     @Override
     public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-        if(i1 == 1 && hoursP.getValue() == 6){
+        if (i1 == 1 && hoursP.getValue() == 6) {
             hoursP.setValue(0);
         }
     }
 
     public void selectTime(View view) {
-        if( minuteP.getValue() == 0 && hoursP.getValue() == 0){
+        if (minuteP.getValue() == 0 && hoursP.getValue() == 0) {
             Toast.makeText(getApplicationContext(), "Houres and Minutes can't 0.", Toast.LENGTH_LONG).show();
-        }
-        else{
+        } else {
             Intent intent = new Intent(this, LocationSelectionActivity.class);
             String h = String.valueOf(hoursP.getValue());
-            String m = String.valueOf(minuteP.getValue()*30);
+            String m = String.valueOf(minuteP.getValue() * 30);
             intent.putExtra("HOURS", h);
             intent.putExtra("MINUTES", m);
             startActivity(intent);

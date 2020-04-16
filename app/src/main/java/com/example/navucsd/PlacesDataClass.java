@@ -6,10 +6,11 @@ public class PlacesDataClass {
     private String placesName;
     private String avalability;
     private String distances;
-    public PlacesDataClass(String name,String ava,String distance){
-        this.placesName=name;
-        this.avalability=ava;
-        this.distances=distance;
+
+    public PlacesDataClass(String name, String ava, String distance) {
+        this.placesName = name;
+        this.avalability = ava;
+        this.distances = distance;
     }
 
     @NonNull
@@ -22,20 +23,20 @@ public class PlacesDataClass {
         return avalability;
     }
 
-    public String getDistances() {
-        return distances;
-    }
-
-    public String getPlacesName() {
-        return placesName;
-    }
-
     public void setAvalability(String avalability) {
         this.avalability = avalability;
     }
 
+    public String getDistances() {
+        return distances;
+    }
+
     public void setDistances(String distances) {
         this.distances = distances;
+    }
+
+    public String getPlacesName() {
+        return placesName;
     }
 
     public void setPlacesName(String placesName) {

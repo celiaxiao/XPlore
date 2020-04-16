@@ -1,8 +1,5 @@
 package com.example.navucsd;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -11,23 +8,27 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import java.util.ArrayList;
 
 public class SearchBarActivity extends AppCompatActivity {
 
     private SearchView searchBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_bar);
-        searchBar = (SearchView) findViewById(R.id.actual_search_bar);
-        CardView cardplaces=(CardView)findViewById(R.id.placesCardView);
-        CardView cardSearch=(CardView)findViewById(R.id.searchBarCardView);
+        searchBar = findViewById(R.id.actual_search_bar);
+        CardView cardplaces = findViewById(R.id.placesCardView);
+        CardView cardSearch = findViewById(R.id.searchBarCardView);
 
-        ListView searchPlaces=(ListView)findViewById(R.id.searchHintList);
-        ArrayAdapter<String> placesAdapter=new ArrayAdapter<String>(this,
+        ListView searchPlaces = findViewById(R.id.searchHintList);
+        ArrayAdapter<String> placesAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
-                getResources( ).getStringArray(R.array.placesName));
+                getResources().getStringArray(R.array.placesName));
         //add title to the lisy
         /*View headerView = getLayoutInflater().inflate(R.layout.search_bar_list_title, null);
         searchPlaces.addHeaderView(headerView);*/
@@ -36,16 +37,16 @@ public class SearchBarActivity extends AppCompatActivity {
         searchPlaces.setDividerHeight(3);
 
         //initialize the main context of list
-        SearchBarPlacesView placesAdaptor=new SearchBarPlacesView(this,
-                getResources( ).getStringArray(R.array.placesName),
-                getResources( ).getStringArray(R.array.availability),
-                getResources( ).getStringArray(R.array.distances));
+        SearchBarPlacesView placesAdaptor = new SearchBarPlacesView(this,
+                getResources().getStringArray(R.array.placesName),
+                getResources().getStringArray(R.array.availability),
+                getResources().getStringArray(R.array.distances));
         searchPlaces.setAdapter(placesAdaptor);
 
         //first hide the suggestion listview
         //searchPlaces.setVisibility(View.GONE);
 
-        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener( ) {
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // Override onQueryTextSubmit method which is call when submitquery is searched
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -53,9 +54,9 @@ public class SearchBarActivity extends AppCompatActivity {
                 // than filter the adapter
                 // using the filter method
                 // with the query as its argument
-                ArrayList<String> mustGoArrayList=new ArrayList<>(R.array.placesName);
+                ArrayList<String> mustGoArrayList = new ArrayList<>(R.array.placesName);
                 if (mustGoArrayList.contains(query)) {
-                    placesAdaptor.getFilter( ).filter(query);
+                    placesAdaptor.getFilter().filter(query);
                     //TODO: set to intent if needed
                 }
                 return false;
@@ -70,10 +71,10 @@ public class SearchBarActivity extends AppCompatActivity {
                     searchPlaces.setVisibility(View.GONE);
                 }
                 else searchPlaces.setVisibility(View.VISIBLE);*/
-                placesAdaptor.getFilter( ).filter(s);
+                placesAdaptor.getFilter().filter(s);
 
                 //set up clike item functionality
-                searchPlaces.setOnItemClickListener(new ListView.OnItemClickListener( ) {
+                searchPlaces.setOnItemClickListener(new ListView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
