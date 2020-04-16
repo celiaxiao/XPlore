@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/myriad_pro</item>
     </style>
 
     <style name="AppTheme.Material" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -13,12 +14,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/myriad_pro</item>
     </style>
 
     <!-- changes made by jason jing// remove if buggy-->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/myriad_pro</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -31,5 +34,10 @@
         <item name="android:textColorPrimary">@color/colorSecondary</item>
     </style>
 
->>>>>>> app/src/main/res/values/styles.xml
+    <style name="ThinnerChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipMinHeight">20dp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/myriad_pro</item>
+    </style>
+
 </resources>

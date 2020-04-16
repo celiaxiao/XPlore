@@ -7,15 +7,15 @@
     tools:context=".StudentSelectionActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="220dp"
-        android:layout_height="46dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="171dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/promptTextView"
@@ -55,4 +55,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.75" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

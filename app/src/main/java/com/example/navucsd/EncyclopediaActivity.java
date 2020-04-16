@@ -1,21 +1,29 @@
 package com.example.navucsd;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -28,6 +36,10 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 	 */
 	private boolean clicked;
 
+	//search bar activity instances
+	ArrayAdapter<String> LocationListAdapter;
+	ArrayList<String> mustGoArrayList;
+	SearchView searchBar;
 	/**
 	 * A smarter {@code ImageView} that automatically resizes its internal upon size change.
 	 */
@@ -118,7 +130,95 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 
 		addLandmarks(res_ids, names);
 	}
+		/*
+		//implement search bar activity
+		//set up the string list that appears in the search bar hint
+		String[] mustGoList = getResources( ).getStringArray(R.array.list_of_must_go);
+		mustGoArrayList = new ArrayList<>( );
+		for (String i : mustGoList) {
+			mustGoArrayList.add(i);
+		}
+		LocationListAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, mustGoList);
 
+		ListView searchHintList = (ListView) findViewById(R.id.searchHintList);
+		searchHintList.setBackgroundColor(Color.WHITE);
+		searchHintList.setAdapter(LocationListAdapter);
+
+		searchBar = (SearchView) findViewById(R.id.search_bar);
+	}
+		//first hide the suggestion listview
+		searchHintList.setVisibility(View.GONE);
+
+
+
+		searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener( ) {
+			// Override onQueryTextSubmit method
+			// which is call
+			// when submitquery is searched
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// If the list contains the search query
+				// than filter the adapter
+				// using the filter method
+				// with the query as its argument
+				if (mustGoArrayList.contains(query)) {
+					LocationListAdapter.getFilter( ).filter(query);
+					//TODO: set to intent if needed
+				} else {
+					// Search query not found in List View
+
+					alertDialog();
+				}
+				return false;
+			}
+
+			// This method is overridden to filter
+			// the adapter according to a search query
+			// when the user is typing search
+			@Override
+			public boolean onQueryTextChange(String s) {
+				if(s.isEmpty()){
+					searchHintList.setVisibility(View.GONE);
+				}
+				else searchHintList.setVisibility(View.VISIBLE);
+				LocationListAdapter.getFilter( ).filter(s);
+
+				//set up clike item functionality
+				searchHintList.setOnItemClickListener(new ListView.OnItemClickListener( ) {
+					@Override
+					public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+						//if user clicks the suggestion, auto complete the search bar
+						searchBar.setQuery(LocationListAdapter.getItem(i), true);
+						//hide the listview
+						searchHintList.setVisibility(View.GONE);
+						//TODO: set to intent if needed
+					}
+				});
+				return false;
+			}
+		});
+
+	}
+	private void alertDialog() {
+		AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+		dialog.setMessage("Sorry we can't find your input location. Explore our main page?");
+		dialog.setTitle("Location not found");
+		dialog.setPositiveButton("Comfirm",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+										int which) {
+
+					}
+				});
+
+		AlertDialog alertDialog=dialog.create();
+		alertDialog.show();
+
+	}
+*/
 	/**
 	 * Called on resume of this activity and resets the {@code clicked} attribute
 	 */
