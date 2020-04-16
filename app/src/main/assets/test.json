@@ -1,0 +1,27 @@
+{
+  "about": "hehe",
+  "amenities": [
+    "what"
+  ],
+  "audio": "hehe",
+  "coordinates": {
+    "first": 123,
+    "second": 321
+  },
+  "description": "hehe",
+  "descriptive": [
+    "what"
+  ],
+  "modules": [],
+  "name": "hehe",
+  "otherPhotos": [
+    "what"
+  ],
+  "relatedPlaces": [
+    "what"
+  ],
+  "relatedTours": [
+    "what"
+  ],
+  "thumbnalPhoto": "hehe"
+}

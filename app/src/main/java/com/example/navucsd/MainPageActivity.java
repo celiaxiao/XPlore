@@ -4,14 +4,28 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+
+import android.util.Log;
+
 import android.util.TypedValue;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Pair;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -40,6 +54,20 @@ public class MainPageActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_page);
+
+		//TODO: TEST CODE PLEASE REMOVE WHEN DONE
+//		ArrayList<String> test = new ArrayList<>();
+//		ArrayList<Module> test2 = new ArrayList<>();
+//		test.add("what");
+//		Location loc = new Location("hehe",
+//				new Pair("hehe", "hehe"), "hehe", "hehe",test,test,
+//				test,test,test, "hehe", "hehe", test2);
+		Gson gson = new Gson();
+//		String json = gson.toJson(loc);
+//		Log.d("WHAT", json);
+		String testJson = loadJSONFromAsset();
+		Location tstLoc = gson.fromJson(testJson, Location.class);
+		//TODO: END OF TEST CODE
 
 		Button guidedTourTrack = findViewById(R.id.tourTrackBtn);
 		Button GotoEncyclopedia = findViewById((R.id.encyclopediaBtn));
@@ -145,4 +173,30 @@ public class MainPageActivity extends AppCompatActivity {
 		super.onResume();
 		clicked = false;
 	}
+
+
+	/*
+		Function that reads in a file and then spits out their json string
+	 */
+	public String loadJSONFromAsset() {
+		String json = null;
+		Log.d("WHAT", "I'm in this function call");
+		try {
+			Log.d("WHAT", "in try block");
+			InputStream is = this.getAssets().open("test.json");
+			Log.d("WHAT","after opening file");
+			int size = is.available();
+			byte[] buffer = new byte[size];
+			is.read(buffer);
+			is.close();
+			Log.d("WHAT", "finished reading buffer");
+			json = new String(buffer, "UTF-8");
+			Log.d("WHAT", json);
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		return json;
+	}
+
 }
