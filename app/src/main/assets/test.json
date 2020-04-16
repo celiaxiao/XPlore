@@ -1,27 +1,39 @@
 {
-  "about": "hehe",
-  "amenities": [
-    "what"
-  ],
-  "audio": "hehe",
-  "coordinates": {
-    "first": 123,
-    "second": 321
+  "about": "short description",
+  "amenities": {
+    "parking": true,
+    "cafe": true,
+    "busstop": true,
+    "restaurant": true,
+    "restroom": true
   },
-  "description": "hehe",
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "x-coord",
+    "second": "y-coord"
+  },
   "descriptive": [
-    "what"
+    "Must see"
   ],
-  "modules": [],
-  "name": "hehe",
+  "links": [
+    "ucsd.edu",
+    "hehehe.com"
+  ],
+  "name": "name",
   "otherPhotos": [
-    "what"
+    "somelink/somestuff",
+    "somelink/somestuff2"
   ],
   "relatedPlaces": [
-    "what"
+    "Muir",
+    "Sun God"
   ],
   "relatedTours": [
-    "what"
+    "the best tour",
+    "the other best tour"
   ],
-  "thumbnalPhoto": "hehe"
+  "thumbnailPhoto": "somedirectory/somefile",
+  "videos": [
+    "https://www.youtube.com/watch?v\u003ddQw4w9WgXcQ"
+  ]
 }
