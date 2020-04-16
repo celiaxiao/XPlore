@@ -15,6 +15,7 @@ import android.util.Pair;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,17 +41,38 @@ public class MainPageActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main_page);
 
 		//TODO: TEST CODE PLEASE REMOVE WHEN DONE
-//		ArrayList<String> test = new ArrayList<>();
-//		ArrayList<Module> test2 = new ArrayList<>();
-//		test.add("what");
-//		Location loc = new Location("hehe",
-//				new Pair("hehe", "hehe"), "hehe", "hehe",test,test,
-//				test,test,test, "hehe", "hehe", test2);
+		ArrayList<String> test = new ArrayList<>();
+		ArrayList<String> otherPhotos = new ArrayList<>();
+		otherPhotos.add("somelink/somestuff");
+		otherPhotos.add("somelink/somestuff2");
+		ArrayList<String> descriptive = new ArrayList<>();
+		descriptive.add("Must see");
+		ArrayList<String> relatedPlaces = new ArrayList<>();
+		relatedPlaces.add("Muir");
+		relatedPlaces.add("Sun God");
+		ArrayList<String> relatedTours = new ArrayList<>();
+		relatedTours.add("the best tour");
+		relatedTours.add("the other best tour");
+		HashMap<String, Boolean> ameneitiesTest = new HashMap<>();
+		ameneitiesTest.put("restaurant", true);
+		ameneitiesTest.put("cafe", true);
+		ameneitiesTest.put("restroom", true);
+		ameneitiesTest.put("parking", true);
+		ameneitiesTest.put("busstop", true);
+		ArrayList<String> links = new ArrayList<>();
+		links.add("ucsd.edu");
+		links.add("hehehe.com");
+		test.add("what");
+		ArrayList<String> videos = new ArrayList<>();
+		videos.add("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+		Location loc = new Location("name", new Pair("x-coord", "y-coord"), "short description",
+				"somedirectory/somefile",otherPhotos,ameneitiesTest,
+				descriptive,relatedPlaces,relatedTours, "somedirectory/somefile",links, videos);
 		Gson gson = new Gson();
-//		String json = gson.toJson(loc);
-//		Log.d("WHAT", json);
-		String testJson = loadJSONFromAsset();
-		Location tstLoc = gson.fromJson(testJson, Location.class);
+		String json = gson.toJson(loc);
+		Log.d("WHAT", json);
+//		String testJson = loadJSONFromAsset();
+//		Location tstLoc = gson.fromJson(testJson, Location.class);
 		//TODO: END OF TEST CODE
 
 		Button guidedTourTrack = findViewById(R.id.tourTrackBtn);
