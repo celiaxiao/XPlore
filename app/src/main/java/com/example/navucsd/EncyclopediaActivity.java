@@ -7,11 +7,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
+import android.text.InputType;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -90,6 +93,17 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_encyclopedia);
+
+		SearchView searchView = findViewById(R.id.encyclopediaSearchView);
+		searchView.setInputType(InputType.TYPE_NULL);
+		ImageView search_mag_icon = searchView.findViewById(
+				androidx.appcompat.R.id.search_mag_icon
+		);
+		ViewGroup search_view_parent = (ViewGroup) search_mag_icon.getParent();
+		// the parent is probably a linear layout, so remove and add
+		// to put the icon at the end instead of the front
+		search_view_parent.removeView(search_mag_icon);
+		search_view_parent.addView(search_mag_icon);
 
 		TableLayout landmarkTableLayout = findViewById(R.id.landmarkTableLayout);
 

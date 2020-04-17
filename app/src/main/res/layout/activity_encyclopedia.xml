@@ -7,7 +7,7 @@
 	tools:context=".LandmarkDetailsActivity">
 
 	<androidx.cardview.widget.CardView
-		android:id="@+id/encyclopedia_place_holder"
+		android:id="@+id/encyclopediaSearchViewCard"
 		android:layout_width="match_parent"
 		android:layout_height="41dp"
 		android:layout_marginStart="25dp"
@@ -15,7 +15,16 @@
 		android:layout_marginTop="24dp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
+		app:layout_constraintTop_toTopOf="parent">
+
+		<androidx.appcompat.widget.SearchView
+			android:id="@+id/encyclopediaSearchView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:queryHint="@string/encyclopedia_search_places_or_key_words"
+			app:iconifiedByDefault="false" />
+
+	</androidx.cardview.widget.CardView>
 
 	<ScrollView
 		android:layout_width="match_parent"
@@ -26,7 +35,7 @@
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0.5"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/encyclopedia_place_holder">
+		app:layout_constraintTop_toBottomOf="@id/encyclopediaSearchViewCard">
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="match_parent"
@@ -34,12 +43,12 @@
 			android:paddingBottom="16dp">
 
 			<TextView
-				android:id="@+id/encyclopedia_place_of_the_day"
+				android:id="@+id/encyclopediaPlaceOfTheDay"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="32dp"
 				android:layout_marginTop="21dp"
-				android:text="@string/encyclopedia_place_of_the_day"
+				android:text="@string/encyclopediaPlaceOfTheDay"
 				android:textColor="@color/black"
 				android:textSize="20sp"
 				android:lineHeight="24dp"
@@ -56,7 +65,7 @@
 				android:layout_marginTop="12dp"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@id/encyclopedia_place_of_the_day">
+				app:layout_constraintTop_toBottomOf="@id/encyclopediaPlaceOfTheDay">
 
 				<ImageView
 					android:layout_width="match_parent"
@@ -113,6 +122,7 @@
 						app:rippleColor="@android:color/transparent" />
 
 				</com.google.android.material.chip.ChipGroup>
+
 			</androidx.cardview.widget.CardView>
 
 			<androidx.cardview.widget.CardView
@@ -147,6 +157,7 @@
 					android:textColor="@color/gold"
 					android:textSize="15sp"
 					android:textFontWeight="600" />
+
 			</androidx.cardview.widget.CardView>
 
 			<TableLayout
@@ -157,6 +168,9 @@
 				android:layout_marginLeft="19dp"
 				android:layout_marginRight="19dp"
 				app:layout_constraintTop_toBottomOf="@id/cardViewPlaceOfTheDayDescription" />
+
 		</androidx.constraintlayout.widget.ConstraintLayout>
+
 	</ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
