@@ -17,6 +17,20 @@
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
 
+	<TextView
+		android:id="@+id/encyclopedia_place_of_the_day"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginTop="21dp"
+		android:text="@string/encyclopedia_place_of_the_day"
+		android:textColor="@color/black"
+		android:textSize="20sp"
+		android:lineHeight="24dp"
+		android:textStyle="bold"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/encyclopedia_place_holder" />
+
 	<ScrollView
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
@@ -26,7 +40,7 @@
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0.5"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/encyclopedia_place_holder">
+		app:layout_constraintTop_toBottomOf="@id/encyclopedia_place_of_the_day">
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="match_parent"
