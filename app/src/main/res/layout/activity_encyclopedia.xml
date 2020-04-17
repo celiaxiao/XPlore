@@ -95,7 +95,8 @@
 						android:textFontWeight="600"
 						android:textStyle="bold"
 						app:chipMinHeight="19dp"
-						app:chipBackgroundColor="@color/white" />
+						app:chipBackgroundColor="@color/white"
+						app:rippleColor="@android:color/transparent" />
 
 					<com.google.android.material.chip.Chip
 						android:layout_width="wrap_content"
@@ -108,7 +109,8 @@
 						android:textFontWeight="600"
 						android:textStyle="bold"
 						app:chipMinHeight="19dp"
-						app:chipBackgroundColor="@color/white" />
+						app:chipBackgroundColor="@color/white"
+						app:rippleColor="@android:color/transparent" />
 
 				</com.google.android.material.chip.ChipGroup>
 			</androidx.cardview.widget.CardView>
