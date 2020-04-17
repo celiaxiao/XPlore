@@ -11,7 +11,6 @@ import android.util.TypedValue;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -29,7 +28,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * The main activity of NavUCSD.

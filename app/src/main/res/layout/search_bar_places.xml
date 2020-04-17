@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="75"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
+        android:layout_weight="75"
         android:orientation="vertical">
 
         <TextView
@@ -29,36 +29,29 @@
             android:layout_alignRight="@+id/NameOfThePlace"
             android:layout_marginTop="4.5dp"
             android:layout_marginBottom="13dp"
-            android:textSize="10dp"
-            android:text="open·closes until 9pm" />
+            android:text="open·closes until 9pm"
+            android:textSize="10dp" />
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_weight="237"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_height="wrap_content" >
+        android:layout_weight="237">
 
 
         <TextView
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="29.5dp"
             android:text="200m"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:textSize="15dp" />
     </LinearLayout>
-
-
-
-
-
-
-
-
 
 
 </LinearLayout>
