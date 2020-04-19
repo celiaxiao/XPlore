@@ -24,7 +24,7 @@
 		<!-- Other pages -->
 		<activity
 			android:name=".PlacesActivity"
-			android:label="@string/title_activity_encyclopedia"
+			android:label="@string/title_activity_places"
 			android:theme="@style/AppTheme.Material" />
 		<activity android:name=".SearchBarActivity"/>
         <activity android:name=".NavigationActivity"/>
@@ -32,6 +32,4 @@
             android:theme="@style/AppTheme.Material"/>
         <activity android:name=".TourActivity" />
     </application>
-
-
 </manifest>

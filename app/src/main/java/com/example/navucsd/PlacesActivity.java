@@ -22,12 +22,12 @@ import android.widget.TextView;
 import java.util.Objects;
 
 /**
- * This is an encyclopedia activity that contains a grid of landmarks.
+ * This is an places activity that contains some places and a grid of landmarks.
  */
 public final class PlacesActivity extends AppCompatActivity {
 
 	/**
-	 * If the encyclopedia landmark list has been clicked, used to prevent multiple clicks.
+	 * If the landmark list has been clicked, used to prevent multiple clicks.
 	 */
 	private boolean clicked;
 
@@ -101,7 +101,7 @@ public final class PlacesActivity extends AppCompatActivity {
 			}
 		});
 
-		SearchView searchView = findViewById(R.id.encyclopediaSearchView);
+		SearchView searchView = findViewById(R.id.placesSearchView);
 		searchView.setInputType(InputType.TYPE_NULL);
 		ImageView search_mag_icon = searchView.findViewById(
 				androidx.appcompat.R.id.search_mag_icon
@@ -150,7 +150,7 @@ public final class PlacesActivity extends AppCompatActivity {
 	}
 
 	/**
-	 * Adds the landmarks provided to the encyclopedia table.
+	 * Adds the landmarks provided to the table.
 	 * If {@code resId} and {@code names} are {@code null}, nothing will be added.
 	 * @param resId the resource ids of the images
 	 * @param names the names of the landmarks

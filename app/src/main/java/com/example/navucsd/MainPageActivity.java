@@ -28,7 +28,7 @@ public class MainPageActivity extends AppCompatActivity {
 	private SwipeRefreshLayout swipeContainer;
 
 	/**
-	 * If the encyclopedia landmark list has been clicked, used to prevent multiple clicks.
+	 * If this activity has been clicked, used to prevent multiple clicks.
 	 */
 	private boolean clicked;
 
