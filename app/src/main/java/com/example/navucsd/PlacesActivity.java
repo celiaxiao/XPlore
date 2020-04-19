@@ -24,7 +24,7 @@ import java.util.Objects;
 /**
  * This is an encyclopedia activity that contains a grid of landmarks.
  */
-public final class EncyclopediaActivity extends AppCompatActivity {
+public final class PlacesActivity extends AppCompatActivity {
 
 	/**
 	 * If the encyclopedia landmark list has been clicked, used to prevent multiple clicks.
@@ -51,7 +51,7 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 		 * @param aspectRatio the desired aspect ratio (width / height)
 		 */
 		public SmartImageView(Integer resId, double aspectRatio) {
-			super(EncyclopediaActivity.this);
+			super(PlacesActivity.this);
 
 			if (resId != null) setBackgroundResource(resId);
 
@@ -92,7 +92,7 @@ public final class EncyclopediaActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_encyclopedia);
+		setContentView(R.layout.activity_places);
 
 		SearchView searchView = findViewById(R.id.encyclopediaSearchView);
 		searchView.setInputType(InputType.TYPE_NULL);

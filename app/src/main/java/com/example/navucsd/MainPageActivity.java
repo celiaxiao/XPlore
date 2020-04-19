@@ -56,7 +56,7 @@ public class MainPageActivity extends AppCompatActivity {
 		GotoEncyclopedia.setOnClickListener(view -> {
 			if (clicked) return;
 			clicked = true;
-			startActivity(new Intent(this, EncyclopediaActivity.class));
+			startActivity(new Intent(this, PlacesActivity.class));
 		});
 
 		swipeContainer = findViewById(R.id.swipeContainer);
