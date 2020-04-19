@@ -44,7 +44,7 @@ import java.util.ArrayList;
 
 
 
-public class searchBarActivity extends AppCompatActivity {
+public class SearchBarActivity extends AppCompatActivity {
 
 
     ArrayAdapter<String> LocationListAdapter;
