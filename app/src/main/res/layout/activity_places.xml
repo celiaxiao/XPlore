@@ -87,7 +87,7 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_gravity="bottom|left"
+					android:layout_gravity="bottom|start"
 					android:layout_marginStart="16dp"
 					android:layout_marginTop="12dp"
 					android:layout_marginBottom="35dp"
@@ -134,6 +134,41 @@
 
 				</com.google.android.material.chip.ChipGroup>
 
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="14dp"
+					android:layout_gravity="bottom|end"
+					android:layout_marginEnd="9.4dp"
+					android:layout_marginBottom="14dp"
+					android:showDividers="middle"
+					android:divider="@drawable/places_divider">
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ic_restroom" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ic_local_cafe" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ic_restaurant" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ic_directions_bus" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ic_local_parking" />
+
+				</LinearLayout>
 			</androidx.cardview.widget.CardView>
 
 			<androidx.cardview.widget.CardView
