@@ -7,6 +7,7 @@
 	tools:context=".LandmarkDetailsActivity">
 
 	<androidx.cardview.widget.CardView
+		android:id="@+id/placesSearchBarCardView"
 		android:layout_width="match_parent"
 		android:layout_height="41dp"
 		android:layout_marginStart="25dp"
@@ -23,6 +24,16 @@
 			android:layout_height="match_parent"
 			app:queryHint="@string/encyclopedia_search_places_or_key_words"
 			app:iconifiedByDefault="false" />
+
+		<LinearLayout
+			android:id="@+id/placesSearchBarMask"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@android:color/transparent"
+			android:visibility="visible"
+			android:clickable="true"
+			android:focusable="true"
+			android:orientation="horizontal" />
 
 	</androidx.cardview.widget.CardView>
 

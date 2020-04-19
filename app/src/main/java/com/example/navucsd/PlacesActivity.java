@@ -94,6 +94,13 @@ public final class PlacesActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_places);
 
+		findViewById(R.id.placesSearchBarMask).setOnClickListener(view -> {
+			if (!clicked) {
+				clicked = true;
+				startActivity(new Intent(PlacesActivity.this, SearchBarActivity.class));
+			}
+		});
+
 		SearchView searchView = findViewById(R.id.encyclopediaSearchView);
 		searchView.setInputType(InputType.TYPE_NULL);
 		ImageView search_mag_icon = searchView.findViewById(
