@@ -41,7 +41,7 @@ public class MainPageActivity extends AppCompatActivity {
 	private SwipeRefreshLayout swipeContainer;
 
 	/**
-	 * If the encyclopedia landmark list has been clicked, used to prevent multiple clicks.
+	 * If this activity has been clicked, used to prevent multiple clicks.
 	 */
 	private boolean clicked;
 
@@ -104,7 +104,7 @@ public class MainPageActivity extends AppCompatActivity {
 		GotoEncyclopedia.setOnClickListener(view -> {
 			if (clicked) return;
 			clicked = true;
-			startActivity(new Intent(this, EncyclopediaActivity.class));
+			startActivity(new Intent(this, PlacesActivity.class));
 		});
 
 		swipeContainer = findViewById(R.id.swipeContainer);
