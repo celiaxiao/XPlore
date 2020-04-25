@@ -19,8 +19,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- Main page; main entry of the app -->
+        </activity> <!-- Main page; main entry of the app -->
         <activity
             android:name=".MainPageActivity"
             android:theme="@style/AppTheme.Material">
@@ -31,15 +30,24 @@
             </intent-filter>
         </activity> <!-- Other pages -->
         <activity
+            android:name=".ToursActivity"
+            android:theme="@style/AppTheme.Material">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- Other pages -->
+        <activity
             android:name=".EncyclopediaActivity"
             android:label="@string/title_activity_encyclopedia"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".NavigationActivity" />
         <activity
             android:name=".LandmarkDetailsActivity"
             android:theme="@style/AppTheme.Material" />
         <activity android:name=".TourActivity" />
-        <activity android:name=".SearchBarActivity"></activity>
+        <activity android:name=".SearchBarActivity" />
     </application>
 
 </manifest>
