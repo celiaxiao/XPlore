@@ -6,10 +6,14 @@ public class PlacesDataClass {
     private String placesName;
     private String avalability;
     private String distances;
-    public PlacesDataClass(String name,String ava,String distance){
+    private boolean[] amenities;
+    public PlacesDataClass(String name,String ava,String distance, boolean[] amanities){
         this.placesName=name;
         this.avalability=ava;
         this.distances=distance;
+        if(amanities!=null) this.amenities=amanities;
+        //
+        // else this.amenities=new boolean[5];
     }
 
     @NonNull
@@ -30,6 +34,10 @@ public class PlacesDataClass {
         return placesName;
     }
 
+    public boolean[] getAmenities() {
+        return amenities;
+    }
+
     public void setAvalability(String avalability) {
         this.avalability = avalability;
     }
@@ -42,5 +50,7 @@ public class PlacesDataClass {
         this.placesName = placesName;
     }
 
-
+    public void setAmenities(boolean[] amenities) {
+        this.amenities = amenities;
+    }
 }

@@ -22,6 +22,10 @@ public class SearchBarPlacesView extends ArrayAdapter {
     private final String[] placesName;
     private final String[] availability;
     private final String[] distance;//default to string, could replace to int/Integer
+    private final boolean[][] amentities;
+    private static final String[] amenFilter=
+            new String[]{"Amentity_bathromm","Amentity_cafe","Amentity_resturant",
+                    "Amentity_bus","Amentity_parking"};
     private ArrayList<PlacesDataClass> places;
     private Activity context;
     private Filter filter;
@@ -29,7 +33,7 @@ public class SearchBarPlacesView extends ArrayAdapter {
 
     ArrayAdapter<String> placesAdapter;
     public SearchBarPlacesView(Activity context, String[] maintitle, String[] subtitle,
-                               String[] imgid) {
+                               String[] imgid, boolean[][] amentities) {
         super(context, R.layout.search_bar_places, maintitle);
         //  Auto-generated constructor stub
         this.context=context;
@@ -38,11 +42,12 @@ public class SearchBarPlacesView extends ArrayAdapter {
         this.distance=imgid;
         filtered =new ArrayList<PlacesDataClass>();
         for(int i=0;i<maintitle.length;i++){
-            PlacesDataClass place=new PlacesDataClass(maintitle[i],subtitle[i],imgid[i]);
+            PlacesDataClass place=new PlacesDataClass(maintitle[i],subtitle[i],imgid[i],amentities[i]);
             filtered.add(place);
         }
         this.places=filtered;
         filter=new AppFilter<PlacesDataClass>(filtered);
+        this.amentities=amentities;
     }
 
     //set up the list overall view with title, avalibility, and distances
@@ -51,12 +56,27 @@ public class SearchBarPlacesView extends ArrayAdapter {
         //get the xml layout file as an item for the list
         LayoutInflater inflater=context.getLayoutInflater();
         View rowView=inflater.inflate(R.layout.search_bar_places, null,true);
+        //set up the list view item
         TextView nameText = (TextView) rowView.findViewById(R.id.NameOfThePlace);
         TextView avaiText = (TextView) rowView.findViewById(R.id.availability);
         TextView distanceText = (TextView) rowView.findViewById(R.id.distance);
+        ImageView bathroomIcon=(ImageView)rowView.findViewById(R.id.bathroomIcon);
+        ImageView resturantIcon=(ImageView)rowView.findViewById(R.id.resturantIcon);
+        ImageView cafeIcon=(ImageView)rowView.findViewById(R.id.cafeIcon);
+        ImageView busStationIcon=(ImageView)rowView.findViewById(R.id.busStationIcon);
+        ImageView parkingIcon=(ImageView)rowView.findViewById(R.id.parkingIcon);
+
+        //initialize places information
         nameText.setText(filtered.get(position).getPlacesName());
         avaiText.setText(filtered.get(position).getAvalability());
         distanceText.setText(filtered.get(position).getDistances());
+        //initialize amentities
+        boolean[] amen=filtered.get(position).getAmenities();
+        if(amen[0]) bathroomIcon.setImageResource(R.drawable.b1);
+        if(amen[1]) cafeIcon.setImageResource(R.drawable.b2);
+        if(amen[2]) resturantIcon.setImageResource(R.drawable.b3);
+        if(amen[3]) busStationIcon.setImageResource(R.drawable.b4);
+        if(amen[4]) parkingIcon.setImageResource(R.drawable.b5);
         return rowView;
     };
 
@@ -106,6 +126,11 @@ public class SearchBarPlacesView extends ArrayAdapter {
                     // the filtering itself:
                     if (object.toString().toLowerCase().contains(filterSeq))
                         filter.add(object);
+                   /* for(int i=0;i<amenFilter.length;i++){
+                        if(filterSeq.equals(amenFilter[i])){
+                            if(object.)
+                        }
+                    }*/
                 }
                 result.count = filter.size();
                 result.values = filter;
