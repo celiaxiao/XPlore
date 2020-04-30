@@ -49,4 +49,20 @@
         <item name="tabSelectedTextColor">@color/colorSecondary</item>
     </style>
 
+    <style name="ClickableText">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="MoreInfoItem" parent="ClickableText">
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:layout_marginBottom">14dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+    </style>
+
+    <style name="SectionTitle">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>
