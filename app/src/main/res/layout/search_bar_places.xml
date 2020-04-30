@@ -7,8 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="100"
-        android:layout_marginLeft="15dp"
+        android:layout_weight="140"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:orientation="vertical">
 
@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medium Text"
+            android:paddingStart="5dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000000"
             android:textSize="15dp"
@@ -26,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp"
+
             android:layout_marginBottom="5dp">
 
             <ImageView
@@ -36,7 +37,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="15dp"
 
-                android:layout_marginRight="3dp"
+
 
                 android:src="@drawable/g1" />
             <ImageView
@@ -46,7 +47,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="15dp"
 
-                android:layout_marginRight="3dp"
+
 
                 android:src="@drawable/g2" />
             <ImageView
@@ -55,17 +56,16 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="15dp"
-                android:layout_marginRight="3dp"
 
                 android:src="@drawable/g3" />
             <ImageView
                 android:id="@+id/busStationIcon"
-                android:layout_width="27dp"
+                android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="15dp"
 
-                android:layout_marginRight="7dp"
+
 
                 android:src="@drawable/g4" />
 
@@ -75,7 +75,7 @@
                 android:layout_height="20dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="15dp"
-                android:layout_marginRight="3dp"
+
                 android:src="@drawable/g5" />
 
 
@@ -90,6 +90,8 @@
         android:layout_weight="200"
         android:layout_marginTop="12dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+
         android:orientation="vertical">
 
 
@@ -97,18 +99,19 @@
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="7dp"
-            android:layout_marginStart="55dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="right"
             android:text="200m"
-            android:gravity="right"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:textSize="15dp" />
         <TextView
             android:id="@+id/availability"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/NameOfThePlace"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="right"
             android:layout_marginTop="4.5dp"
             android:layout_marginBottom="13dp"
             android:textSize="10dp"

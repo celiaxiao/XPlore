@@ -5,9 +5,11 @@ import androidx.cardview.widget.CardView;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -20,15 +22,18 @@ import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SearchBarActivity extends AppCompatActivity {
 
     private SearchView searchBar;
     private ChipGroup chipGroup;
-    private LinearLayout amenityLinearLayout;
+    //private LinearLayout amenityLinearLayout;
     private static final String[] amenFilter=
             new String[]{"Amentity_bathromm","Amentity_cafe","Amentity_resturant",
                     "Amentity_bus","Amentity_parking"};
+    ArrayList<String> filteredList=new ArrayList<>();
 
 
     @Override
@@ -43,9 +48,7 @@ public class SearchBarActivity extends AppCompatActivity {
         ArrayAdapter<String> placesAdapter=new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
                 getResources( ).getStringArray(R.array.placesName));
-        //add title to the lisy
-        /*View headerView = getLayoutInflater().inflate(R.layout.search_bar_list_title, null);
-        searchPlaces.addHeaderView(headerView);*/
+
         ColorDrawable divider = new ColorDrawable(this.getResources().getColor(R.color.divider));
         searchPlaces.setDivider(divider);
         searchPlaces.setDividerHeight(3);
@@ -93,7 +96,7 @@ public class SearchBarActivity extends AppCompatActivity {
                 }
                 else searchPlaces.setVisibility(View.VISIBLE);
                 placesAdaptor.getFilter( ).filter(s);
-
+               // filteredList=placesAdapter.
                 //set up clike item functionality
                 searchPlaces.setOnItemClickListener(new ListView.OnItemClickListener( ) {
                     @Override
@@ -110,50 +113,30 @@ public class SearchBarActivity extends AppCompatActivity {
             }
         });
 
-        //set up amentities button
-        ImageView bathroomIcon=(ImageView)findViewById(R.id.bathroomIcon);
-        ImageView resturantIcon=(ImageView)findViewById(R.id.resturantIcon);
-        ImageView cafeIcon=(ImageView)findViewById(R.id.cafeIcon);
-        ImageView busStationIcon=(ImageView)findViewById(R.id.busStationIcon);
-        ImageView parkingIcon=(ImageView)findViewById(R.id.parkingIcon);
 
-        int[] checkedIcon=new int[]{R.drawable.b1, R.drawable.b2,
-                R.drawable.b3, R.drawable.b4, R.drawable.b5};
-        chipGroup=(ChipGroup)findViewById(R.id.place_tags);
-        Chip bathroom=findViewById(R.id.bathroom);
+        ChipGroup chipGroup=(ChipGroup)findViewById(R.id.place_tags);
 
-
-        chipGroup.setOnClickListener(new View.OnClickListener( ) {
-            @Override
-            public void onClick(View view) {
-
-                ArrayList<String> checkedAmenity=new ArrayList<>();
-                ChipGroup chg = chipGroup;
-                int chipsCount = chg.getChildCount();
-                if (chipsCount == 0) {
-                    //
-                } else {
-                    int i = 0;
-                    while (i < chipsCount) {
-                        Chip chip = (Chip) chg.getChildAt(i);
-                        if (chip.isChecked() ) {
-                            //this is the checked amenity
-                            checkedAmenity.add(amenFilter[i]);
-
-                        }
-                        i++;
-                    };
-                    //this is the filtered list
-                    ArrayList<String> filteredList=new ArrayList<>();
-                    for(int j=0;j<placesAdapter.getCount();j++){
-                        filteredList.add(placesAdapter.getItem(j));
+        //chipGroup's method can only apply to single selection mode
+        //so this is a customize version for multi selection to get checked chips
+        ArrayList<String> amenList=new ArrayList<>();
+        for(int i=0;i<chipGroup.getChildCount();i++){
+            Chip ameChip=(Chip)chipGroup.getChildAt(i);
+            int index = i;
+            ameChip.setOnCheckedChangeListener(new Chip.OnCheckedChangeListener( ) {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(ameChip.isChecked()){
+                        amenList.add(amenFilter[index]);
+                        Log.i("add to list", amenFilter[index]);
                     }
+                    else{
+                        amenList.remove(amenFilter[index]);
+                    }
+                    Log.i("filter ", Arrays.toString(placesAdaptor.filtered.toArray()));
+                    //TODO: pass in amenList and placesAdaptor.filtered for database filtering
                 }
-
-
-
-            }
-        });
+            });
+        }
 
     }
 

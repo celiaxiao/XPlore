@@ -126,11 +126,6 @@ public class SearchBarPlacesView extends ArrayAdapter {
                     // the filtering itself:
                     if (object.toString().toLowerCase().contains(filterSeq))
                         filter.add(object);
-                   /* for(int i=0;i<amenFilter.length;i++){
-                        if(filterSeq.equals(amenFilter[i])){
-                            if(object.)
-                        }
-                    }*/
                 }
                 result.count = filter.size();
                 result.values = filter;
