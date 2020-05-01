@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return LandmarkDetailsOverviewFragment.newInstance("","");
+                case 2:
+                    return LandmarkDetailsHistoryFragment.newInstance("","");
             }
             return new MainPageFragment();
         }

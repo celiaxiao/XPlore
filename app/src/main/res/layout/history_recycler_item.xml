@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:overScrollMode="never">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -46,12 +47,14 @@
             app:layout_constraintTop_toTopOf="@id/history_title"/>
 
         <TextView
+            android:id="@+id/history_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
-            android:text="The UC San Diego Library, ranked among the nation\'s top 25 public academic libraries, plays a critical role in advancing and supporting the university\'s research, teaching, patient care, and public service missions. \n\nThe world-renowned research for which UC San Diego is known starts at the UC San Diego Library, which provides the foundation of knowledge needed to advance cutting-edge discoveries in a wide range of disciplines, from healthcare and science to public policy and the arts.\n\nIn 1958, Roger Revelle\'s efforts to establish an Institute of Science and Engineering adjacent to the Scripps Institution of Oceanography were spearheaded by his desire to immediately construct a science and library building on the present Revelle College site. \n\nWhen the university was eventually constructed, university librarian Melvin Voigt devised a plan to purchase books for the three new UC campuses: UC San Diego, UC Santa Cruz, and UC Irvine. The first Science and Engineering Library in Urey Hall satisfied the science-focused school\'s needs. However, as faculty recruits began to found social science and humanities departments, it became clear to Chancellor John Semple Galbraith that the time had come to establish the campus\'s main library collections."
+            android:lineSpacingMultiplier="1.3"
+            android:paddingBottom="24dp"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/history_description"/>

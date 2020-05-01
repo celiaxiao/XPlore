@@ -4,11 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 
 /**
@@ -26,8 +36,15 @@ public class LandmarkDetailsHistoryFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RecyclerView recyclerViewHistoy;
-//    private
+    private String[] titleSet = {"Great Research Starts Here", "A Brutalist Icon"};
+    private String[] descriptionSet = {"Geisel Library’s Foundation ・3 Min Read", "Architecture・2 Min Read"};
+    private int[] storySet = {R.string.history_1, R.string.history_2};
+    private int currItem = 0;
+
+    private TextView textViewTitle, textViewDescription, textViewNumber, textViewContent;
+
+    private ImageButton upButton, downButton;
+    private View seperator;
 
     public LandmarkDetailsHistoryFragment() {
         // Required empty public constructor
@@ -70,8 +87,58 @@ public class LandmarkDetailsHistoryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerViewHistoy = view.findViewById(R.id.history_recycler);
 
+        textViewTitle = view.findViewById(R.id.history_title);
+        textViewDescription = view.findViewById(R.id.history_description);
+        textViewNumber = view.findViewById(R.id.history_number);
+        textViewContent = view.findViewById(R.id.history_content);
 
+        upButton = view.findViewById(R.id.history_up);
+        downButton = view.findViewById(R.id.history_down);
+        seperator = view.findViewById(R.id.history_up_down_divider);
+
+        setContent(0);
+
+        upButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContent(--currItem);
+                updateButtons();
+            }
+        });
+
+        downButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContent(++currItem);
+                updateButtons();
+            }
+        });
     }
+
+    private void updateButtons() {
+        if (currItem == 0) {
+            upButton.setVisibility(View.GONE);
+            seperator.setVisibility(View.GONE);
+            downButton.setVisibility(View.VISIBLE);
+        }
+        else if (currItem == storySet.length - 1) {
+            upButton.setVisibility(View.VISIBLE);
+            seperator.setVisibility(View.GONE);
+            downButton.setVisibility(View.GONE);
+        }
+        else {
+            upButton.setVisibility(View.VISIBLE);
+            downButton.setVisibility(View.VISIBLE);
+            seperator.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setContent(int index) {
+        textViewTitle.setText(titleSet[index]);
+        textViewDescription.setText(descriptionSet[index]);
+        textViewNumber.setText(Integer.toString(index + 1));
+        textViewContent.setText(storySet[index]);
+    }
+
 }
