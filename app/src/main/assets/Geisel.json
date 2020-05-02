@@ -1,0 +1,44 @@
+{
+  "about": "Geisel Library is the main library building of the University of California San Diego Library. It is named in honor of Audrey and Theodor Seuss Geisel. Theodor is better known as children's author Dr. Seuss",
+  "amenities": {
+    "parking": false,
+    "cafe": true,
+    "busstop": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "x-coord",
+    "second": "y-coord"
+  },
+  "descriptive": [
+    "Must see"
+  ],
+  "links": [
+    "https://library.ucsd.edu/",
+    "https://library.ucsd.edu/hours/"
+    "https://en.wikipedia.org/wiki/Geisel_Library",
+    "https://www.facebook.com/ucsdgeisel/"
+
+  ],
+  "name": "name",
+  "otherPhotos": [
+    "https://ucpa.ucsd.edu/images/work/_standard/geisel-wss-6.jpg",
+    "https://ucpa.ucsd.edu/images/work/_standard/geisel-wss-2.jpg",
+    "https://ucpa.ucsd.edu/images/work/_standard/geisel-wss-1.jpg"
+  ],
+  "relatedPlaces": [
+    "Price Center",
+    "Biomedical library",
+    "UCSD Bookstore"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "thumbnailPhoto": "https://live.staticflickr.com/7177/13535412304_8571d152b8_b.jpg",
+  "videos": [
+    "https://www.youtube.com/watch?v=EgJo8gW9jy0"
+  ]
+}

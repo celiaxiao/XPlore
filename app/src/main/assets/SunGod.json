@@ -1,0 +1,42 @@
+{
+  "about": "Sun God is a monumental statue by French-American sculptor Niki de Saint Phalle located on the campus of the University of California San Diego. The figurative sculpture is a 14-foot multicolored bird-like creature, perched atop a 15-foot tall arch-shaped, vine-covered concrete pedestal.",
+  "amenities": {
+    "parking": true,
+    "cafe": false,
+    "busstop": false,
+    "restaurant": false,
+    "restroom": false
+  },
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "x-coord",
+    "second": "y-coord"
+  },
+  "descriptive": [
+    "Must see"
+  ],
+  "links": [
+    "http://sgf.ucsd.edu/",
+    "https://en.wikipedia.org/wiki/Sun_God_Festival",
+    "http://asce.ucsd.edu/sun-god/"
+  ],
+  "name": "name",
+  "otherPhotos": [
+    "https://upload.wikimedia.org/wikipedia/en/a/a9/Sun_God_UC_San_Diego.jpg",
+    "https://stuartcollection.ucsd.edu/_images/artists/de-saint-phalle-sungod/Main_de-saint-phalle-01.jpg"
+    
+  ],
+  "relatedPlaces": [
+    "Peterson Hall",
+    "Oceanview Restaurant"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "thumbnailPhoto": "https://media.breitbart.com/media/2015/05/UCSD-Sun-God-Alejandro-Mallea-Flickr-CC-Cropped.png",
+  "videos": [
+    "https://www.youtube.com/watch?v=9FPN1cSf540",
+    "https://www.youtube.com/watch?v=52yrl2Iid2A"
+  ]
+}
