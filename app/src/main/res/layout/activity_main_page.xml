@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:overScrollMode="always"
     android:scrollbars="none"
-    tools:context=".MainPageActivity">
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -16,19 +16,9 @@
             android:theme="@style/AppTheme.Material">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-		<!-- Main page; main entry of the app -->
-<!--		<activity android:name=".MainPageActivity"-->
-<!--			android:theme="@style/AppTheme.Material">-->
-<!--			<intent-filter>-->
-<!--				<action android:name="android.intent.action.MAIN" />-->
-<!--				<category android:name="android.intent.category.LAUNCHER" />-->
-<!--			</intent-filter>-->
-<!--		</activity>-->
 
 		<!-- Other pages -->
 		<activity
