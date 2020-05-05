@@ -19,7 +19,7 @@ import java.util.List;
  *
  */
 public class TourOverviewPageFragment extends Fragment {
-    ArrayList<Object> items;
+    ArrayList<Object> items = new ArrayList<>();
 
     public TourOverviewPageFragment() {
         // Required empty public constructor
@@ -40,15 +40,6 @@ public class TourOverviewPageFragment extends Fragment {
         ListViewAdapterTourOverViewPage listViewAdapter = new ListViewAdapterTourOverViewPage(getContext(), items);
         TourOverviewPageListView.setAdapter(listViewAdapter);
 
-
-        Button deleteButton = (Button) view.findViewById(R.id.deleteButtonTourOverviewPage);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                items.remove("item 1");
-                listViewAdapter.notifyDataSetChanged();
-            }
-        });
 
 
         return view;
