@@ -11,28 +11,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        tools:layout_editor_absoluteX="161dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <Button
         android:id="@+id/addButtonTourOverviewPage"
         android:layout_width="33dp"
         android:layout_height="33dp"
-        android:layout_marginEnd="16dp"
         android:text="+"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
-        tools:layout_editor_absoluteY="368dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintVertical_bias="0.8" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/AddAditionalStopsTextView"
+        android:layout_width="240dp"
+        android:layout_height="15dp"
         android:text="Add aditional stops you want to visit"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
-        tools:layout_editor_absoluteX="98dp" />
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
     <fragment
-        android:id="@+id/fragment"
+        android:id="@+id/TourOverviewPageFragment"
         android:name="com.example.navucsd.TourOverviewPageFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -61,4 +63,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="421dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="89dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
