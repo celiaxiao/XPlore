@@ -7,7 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -15,7 +19,7 @@ import android.widget.ListView;
  *
  */
 public class TourOverviewPageFragment extends Fragment {
-    Object[] items = {"item 1", "item 2", "item 3", "item 4", "item 5"};
+    ArrayList<Object> items;
 
     public TourOverviewPageFragment() {
         // Required empty public constructor
@@ -28,10 +32,23 @@ public class TourOverviewPageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tour_overview_page, container, false);
+        for (int i = 0; i < 5; i++) {
+            items.add("item " + i);
+        }
+
         ListView TourOverviewPageListView = (ListView) view.findViewById(R.id.TourOverviewPageListView);
         ListViewAdapterTourOverViewPage listViewAdapter = new ListViewAdapterTourOverViewPage(getContext(), items);
         TourOverviewPageListView.setAdapter(listViewAdapter);
 
+
+        Button deleteButton = (Button) view.findViewById(R.id.deleteButtonTourOverviewPage);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                items.remove("item 1");
+                listViewAdapter.notifyDataSetChanged();
+            }
+        });
 
 
         return view;

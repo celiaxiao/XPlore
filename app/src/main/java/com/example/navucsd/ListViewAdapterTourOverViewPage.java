@@ -7,23 +7,25 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ListViewAdapterTourOverViewPage extends BaseAdapter {
-    Object[] items;
+    ArrayList<Object> items;
     Context context;
 
-    public ListViewAdapterTourOverViewPage(Context context, Object[] items) {
+    public ListViewAdapterTourOverViewPage(Context context, ArrayList<Object> items) {
         this.context = context;
         this.items = items;
     }
 
     @Override
     public int getCount() {
-        return items.length;
+        return items.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return items[i];
+        return items.get(i);
     }
 
     @Override
@@ -41,8 +43,8 @@ public class ListViewAdapterTourOverViewPage extends BaseAdapter {
         TextView containerTextViewTourOverviewPage = (TextView) view.findViewById
                 (R.id.containerTextViewTourOverviewPage);
 
-        String operator = (String) items[i];
-        containerTextViewTourOverviewPage.setText(operator);
+        String item = (String) items.get(i);
+        containerTextViewTourOverviewPage.setText(item);
         return view;
 
     }
