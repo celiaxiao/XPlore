@@ -18,8 +18,6 @@
     "name": "64 Degrees",
     "thumbnailPhoto": "dir/dir2/file.png"
   },
-
-
   "canyonVista": {
     "about": "Canyon Vista Marketplace is the largest halal-certified residential dining facility in the nation. Their menu features healthy, sustainable menu offerings and groceries. Stations include Fusion Grill, Fresh, Three-Sixty and Earl's Coffee House.",
     "amenities": {
@@ -39,8 +37,6 @@
     "name": "Canyon Vista",
     "thumbnailPhoto": "dir/dir2/file.png"
   },
-
-
   "BiomedicalLibrary": {
     "about": "A Library of UC San Diego specified in biomedical area, the second largest library of UCSD.",
     "amenities": {
@@ -50,7 +46,6 @@
       "restaurant": false,
       "restroom": true
     },
-
     "coordinates": {
       "first": "x-coord",
       "second": "y-coord"
@@ -61,8 +56,6 @@
     "name": "Biomedical Library",
     "thumbnailPhoto": "https://bwesd.com/content/uploads/2017/03/UCSD-Biomed-Library.jpg"
   },
-
-
   "CanyonViewAquaticCenter": {
     "about": "Located on the eastern end of campus between Eleanor Roosevelt College and Warren College, the Canyonview Aquatic Center features two outdoor, Olympic-sized pools, each of which can be divided into eight lanes of 50 meters in length, or 19 lanes of 25 yards in length. The aquatic center also features a state-of-the-art weight room. Canyonview is home to the UCSD men's and women's water polo teams, as well as the men's and women's swimming and diving programs.",
     "amenities": {
@@ -82,9 +75,7 @@
     "name": "Canyonview Aquatic Center",
     "thumbnailPhoto": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Canyonview_West_Pool.jpg"
   },
-
-
-  "AtkinsonHall":{
+  "AtkinsonHall": {
     "about": "The Rady School of Management was created due to a need expressed to the school's founders by the San Diego business community. Experiential learning is at the core of all programs, providing students the opportunity to graduate with both an education and applied experience.",
     "amenities": {
       "parking": true,
@@ -97,7 +88,6 @@
       "first": "x-coord",
       "second": "y-coord"
     },
-
     "descriptive": [
       "Must see"
     ],
@@ -117,14 +107,12 @@
       "first": "x-coord",
       "second": "y-coord"
     },
-
     "descriptive": [
       "Must see"
     ],
     "name": "Conrad Prebys Music Center",
     "thumbnailPhoto": "https://upload.wikimedia.org/wikipedia/commons/9/96/Conrad_Prebys_Music_Center%2C_UCSD.JPG"
   },
-
   "GalbraithHall": {
     "about": "Occupied in September 1965 in Revelle College, Galbraith Hall was UC San Diego’s first central library. Today the building’s primary occupants are the Center for Library & Instructional Services (CLICS) and the department of theatre and dance.",
     "amenities": {
@@ -138,14 +126,12 @@
       "first": "x-coord",
       "second": "y-coord"
     },
-
     "descriptive": [
       "Must see"
     ],
     "name": "Galbraith Hall",
     "thumbnailPhoto": "https://images.adsttc.com/media/images/5876/5096/e58e/ce26/2e00/024f/slideshow/bradley_kda_galbraith_smallset_Alt_11.jpg?1484148881"
   },
-
   "Geisel": {
     "about": "Geisel Library is the main library building of the University of California San Diego Library. It is named in honor of Audrey and Theodor Seuss Geisel. Theodor is better known as children's author Dr. Seuss",
     "amenities": {
@@ -165,7 +151,6 @@
     "name": "Geisel Library",
     "thumbnailPhoto": "https://live.staticflickr.com/7177/13535412304_8571d152b8_b.jpg"
   },
-
   "JSOE": {
     "about": "Fallen Star is an art installation by South Korean artist Do Ho Suh on the grounds of the University of California San Diego. It is a cottage perched at an angle off the edge of Jacobs Hall",
     "amenities": {
@@ -179,7 +164,6 @@
       "first": "x-coord",
       "second": "y-coord"
     },
-
     "descriptive": [
       "Must see"
     ],
@@ -199,7 +183,6 @@
       "first": "x-coord",
       "second": "y-coord"
     },
-
     "descriptive": [
       "Must see"
     ],
@@ -219,7 +202,6 @@
       "first": "x-coord",
       "second": "y-coord"
     },
-
     "descriptive": [
       "Must see"
     ],
@@ -277,7 +259,6 @@
       "first": "x-coord",
       "second": "y-coord"
     },
-
     "descriptive": [
       "Must see"
     ],
@@ -316,7 +297,6 @@
       "first": "x-coord",
       "second": "y-coord"
     },
-
     "descriptive": [
       "Must see"
     ],
