@@ -15,16 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
-    <Button
-        android:id="@+id/addButtonTourOverviewPage"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
-        android:text="+"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="0.8" />
-
     <TextView
         android:id="@+id/AddAditionalStopsTextView"
         android:layout_width="240dp"
@@ -79,5 +69,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="40dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_gravity="bottom|right"
+
+        android:background="#182B49"
+        app:srcCompat="@drawable/ic_add_white_24dp" />
+<!--        tools:layout_editor_absoluteX="180dp"-->
+<!--        tools:layout_editor_absoluteY="171dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
