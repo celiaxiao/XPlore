@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".TourOverviewPageFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewTourOverviewPage"
+    <ListView
+        android:id="@+id/TourOverviewPageListView"
         android:layout_width="409dp"
         android:layout_height="328dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="1dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

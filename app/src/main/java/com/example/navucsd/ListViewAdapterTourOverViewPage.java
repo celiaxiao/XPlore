@@ -42,7 +42,7 @@ public class ListViewAdapterTourOverViewPage extends BaseAdapter {
                     null);
         }
         TextView containerTextViewTourOverviewPage = (TextView) view.findViewById
-                (R.id.containerTextViewTourOverviewPage);
+                (R.id.textView3);
 
         Button deleteButton = (Button) view.findViewById(R.id.deleteButtonTourOverviewPage);
         deleteButton.setOnClickListener(new View.OnClickListener() {

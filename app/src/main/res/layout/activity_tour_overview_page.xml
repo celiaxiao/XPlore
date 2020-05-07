@@ -83,13 +83,6 @@
         app:layout_constraintVertical_bias="0.782"
         app:srcCompat="@drawable/ic_add_white_8dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action_start_button_tour_overview_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#182B49"
-        app:borderWidth="0dp"
-        app:fabCustomSize="33dp"
-        app:srcCompat="@drawable/ic_add_white_8dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

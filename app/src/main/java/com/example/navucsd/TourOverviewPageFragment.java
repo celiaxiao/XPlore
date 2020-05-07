@@ -3,6 +3,8 @@ package com.example.navucsd;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,11 @@ import java.util.List;
  *
  */
 public class TourOverviewPageFragment extends Fragment {
-    ArrayList<Object> items = new ArrayList<>();
+    private ArrayList<Object> items = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
 
     public TourOverviewPageFragment() {
         // Required empty public constructor
@@ -36,11 +42,18 @@ public class TourOverviewPageFragment extends Fragment {
             items.add("item " + i);
         }
 
+
+//        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewTourOverviewPage);
+//        mRecyclerView.setHasFixedSize(true);
+//        mLayoutManager = new LinearLayoutManager(getContext());
+//        mAdapter = new RecyclerViewAdapterTourOverviewPage(getContext(), items);
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//        mRecyclerView.setAdapter(mAdapter);
+
+
         ListView TourOverviewPageListView = (ListView) view.findViewById(R.id.TourOverviewPageListView);
         ListViewAdapterTourOverViewPage listViewAdapter = new ListViewAdapterTourOverViewPage(getContext(), items);
         TourOverviewPageListView.setAdapter(listViewAdapter);
-
-
 
         return view;
     }
