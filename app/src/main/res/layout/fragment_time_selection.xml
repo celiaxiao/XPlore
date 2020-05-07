@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".TourActivity">
 
-    <!-- FIXME delete or use commented code -->
-
     <!--    <Button-->
     <!--        android:id="@+id/callTimeSelect"-->
     <!--        android:layout_width="match_parent"-->

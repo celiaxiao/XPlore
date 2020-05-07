@@ -7,7 +7,7 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".TourActivity">
 
-    <org.ucsdtriplec.xploreucsd.NonSwipePager
+    <com.example.navucsd.NonSwipePager
         android:id="@+id/main_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
