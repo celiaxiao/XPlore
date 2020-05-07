@@ -72,13 +72,13 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_action_button"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
-        android:layout_gravity="bottom|right"
-
-        android:background="#182B49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabCustomSize="33dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:borderWidth="0dp"
+        android:backgroundTint="#182B49"
         app:srcCompat="@drawable/ic_add_white_24dp" />
-<!--        tools:layout_editor_absoluteX="180dp"-->
-<!--        tools:layout_editor_absoluteY="171dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
