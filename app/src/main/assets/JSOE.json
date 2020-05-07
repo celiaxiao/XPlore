@@ -1,0 +1,60 @@
+{
+  "name": "JSOE (Fallen Star)",
+
+  "about": "Fallen Star is an art installation by South Korean artist Do Ho Suh on the grounds of the University of California San Diego. It is a cottage perched at an angle off the edge of Jacobs Hall",
+
+  "amenities": {
+    "parking": false,
+    "cafe": true,
+    "busstop": false,
+    "restaurant": true,
+    "restroom": true
+  },
+
+
+  "links": [
+    "Wikipedia: https://en.wikipedia.org/wiki/Fallen_Star"
+    "UCSD official website for JSOE: https://stuartcollection.ucsd.edu/artist/suh.html",
+    "Wikipedia for Stutart Collection: https://en.wikipedia.org/wiki/Stuart_Collection"
+  ],
+
+
+  "thumbnailPhoto": "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-3.jpg",
+
+  "otherPhotos": [
+    "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-4.jpg",
+    "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-7.jpg",
+    "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-8.jpg",
+    "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-1.jpg"
+  ],
+
+  "relatedPlaces": [
+    "Warren Bear",
+    "Sun God",
+    "Geisel Library"
+  ],
+
+
+  "videos": [
+    "https://youtu.be/jbL4jsC0itw",
+    "https://youtu.be/jbVAv2AENfI",
+    "https://youtu.be/1gNrq7HtQvM"
+  ],
+
+
+  "relatedTours": [ 
+    "the best tour",
+    "the other best tour"
+  ],
+
+  "audio": "somedirectory/somefile", 
+
+  "coordinates": { 
+    "first": "x-coord",
+    "second": "y-coord"
+  },
+
+  "descriptive": [ 
+    "Must see"
+  ]
+}

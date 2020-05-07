@@ -3,5 +3,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
-    <dimen name="column_card_size">175dp</dimen>
+    <dimen name="sig_card_size">145dp</dimen>
+    <dimen name="sig_image_height">110dp</dimen>
+    <dimen name="main_card_icon_size">16dp</dimen>
 </resources>

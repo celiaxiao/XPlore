@@ -17,6 +17,7 @@
             android:layout_height="144dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/geisel_landmark" />
@@ -233,12 +234,12 @@
                 android:layout_gravity="bottom|start"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
-                app:chipMinTouchTargetSize="0dp"
                 android:text="Library"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:chipBackgroundColor="#003E57" />
+                app:chipBackgroundColor="#003E57"
+                app:chipMinTouchTargetSize="0dp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -275,12 +276,12 @@
                 android:layout_gravity="bottom|start"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
-                app:chipMinTouchTargetSize="0dp"
                 android:text="Must-See"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                app:chipBackgroundColor="#00CEA9" />
+                app:chipBackgroundColor="#00CEA9"
+                app:chipMinTouchTargetSize="0dp" />
 
         </androidx.cardview.widget.CardView>
 

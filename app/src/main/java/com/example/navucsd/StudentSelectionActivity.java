@@ -1,7 +1,5 @@
 package com.example.navucsd;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,51 +9,53 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * This front-end activity displays the selection between a visitor and a UCSD student.
  */
 public class StudentSelectionActivity extends AppCompatActivity {
 
-	/**
-	 * Listens for the spinner selected event and sets the test text.
-	 */
-	private class SpinnerOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_student_selection);
 
-		private TextView testChoiceTextView = findViewById(R.id.testChoiceTextView);
+        // sets up the spinner
+        Spinner spinner = findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.type_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
-		@Override
-		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-			testChoiceTextView.setText((String) parent.getItemAtPosition(position));
-		}
+        // connect the testChoiceTextView with the spinner
+        TextView testChoiceTextView = findViewById(R.id.testChoiceTextView);
 
-		@Override
-		public void onNothingSelected(AdapterView<?> adapterView) {
-			testChoiceTextView.setText(R.string.test_nothing_selected);
-		}
-	}
+        spinner.setOnItemSelectedListener(new SpinnerOnItemSelectedListener());
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_student_selection);
+        // sets up the button used to go to the next screen (TimeSelectionActivity)
+        Button nextButton = findViewById(R.id.nextButton);
 
-		// sets up the spinner
-		Spinner spinner = findViewById(R.id.spinner);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-				R.array.type_array, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(adapter);
+        nextButton.setOnClickListener(v -> startActivity(
+                new Intent(getApplicationContext(), TimeSelectionActivity.class)
+        ));
+    }
 
-		// connect the testChoiceTextView with the spinner
-		TextView testChoiceTextView = findViewById(R.id.testChoiceTextView);
+    /**
+     * Listens for the spinner selected event and sets the test text.
+     */
+    private class SpinnerOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
-		spinner.setOnItemSelectedListener(new SpinnerOnItemSelectedListener());
+        private TextView testChoiceTextView = findViewById(R.id.testChoiceTextView);
 
-		// sets up the button used to go to the next screen (TimeSelectionActivity)
-		Button nextButton = findViewById(R.id.nextButton);
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            testChoiceTextView.setText((String) parent.getItemAtPosition(position));
+        }
 
-		nextButton.setOnClickListener(v -> startActivity(
-			new Intent(getApplicationContext(), TimeSelectionActivity.class)
-		));
-	}
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+            testChoiceTextView.setText(R.string.test_nothing_selected);
+        }
+    }
 }

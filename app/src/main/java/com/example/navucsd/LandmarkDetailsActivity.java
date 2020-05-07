@@ -6,8 +6,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 /**
  * This activity temporary hardcodes the landmark details page.
  */

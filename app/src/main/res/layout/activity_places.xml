@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".LandmarkDetailsActivity">
+
+	<androidx.cardview.widget.CardView
+		android:id="@+id/placesSearchBarCardView"
+		android:layout_width="match_parent"
+		android:layout_height="41dp"
+		android:layout_marginStart="25dp"
+		android:layout_marginEnd="24dp"
+		android:layout_marginTop="24dp"
+		android:elevation="2dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<androidx.appcompat.widget.SearchView
+			android:id="@+id/placesSearchView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:queryHint="@string/places_search_places_or_key_words"
+			app:iconifiedByDefault="false" />
+
+		<LinearLayout
+			android:id="@+id/placesSearchBarMask"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@android:color/transparent"
+			android:visibility="visible"
+			android:clickable="true"
+			android:focusable="true"
+			android:orientation="horizontal" />
+
+	</androidx.cardview.widget.CardView>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:scrollbarStyle="insideOverlay"
+		android:scrollbars="vertical"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.5"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingBottom="16dp">
+
+			<TextView
+				android:id="@+id/placesPlaceOfTheDay"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="86dp"
+				android:layout_marginStart="32dp"
+				android:text="@string/placesPlaceOfTheDay"
+				android:textColor="@color/black"
+				android:textSize="20sp"
+				android:lineHeight="24dp"
+				android:textStyle="bold"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<androidx.cardview.widget.CardView
+				android:id="@+id/cardViewPlaceOfTheDay"
+				android:layout_width="match_parent"
+				android:layout_height="170dp"
+				android:layout_marginStart="25dp"
+				android:layout_marginEnd="25dp"
+				android:layout_marginTop="12dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/placesPlaceOfTheDay">
+
+				<ImageView
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:scaleType="centerCrop"
+					android:src="@drawable/biomed_lib" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom|start"
+					android:layout_marginStart="16dp"
+					android:layout_marginTop="12dp"
+					android:layout_marginBottom="35dp"
+					android:text="Biomedical Library"
+					android:textColor="@color/white"
+					android:textSize="25sp"
+					android:letterSpacing="0.01"
+					android:textStyle="bold" />
+
+				<com.google.android.material.chip.ChipGroup
+					android:layout_width="match_parent"
+					android:layout_height="19dp"
+					android:layout_gravity="bottom|start"
+					android:layout_marginStart="15.4dp"
+					android:layout_marginBottom="11dp">
+
+					<com.google.android.material.chip.Chip
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						app:chipMinTouchTargetSize="0dp"
+						android:text="Library"
+						android:textColor="#2D2D2D"
+						android:textSize="10sp"
+						android:lineHeight="12dp"
+						android:textFontWeight="600"
+						android:textStyle="bold"
+						app:chipMinHeight="19dp"
+						app:chipBackgroundColor="@color/white"
+						app:rippleColor="@android:color/transparent" />
+
+					<com.google.android.material.chip.Chip
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						app:chipMinTouchTargetSize="0dp"
+						android:text="Biology"
+						android:textColor="#2D2D2D"
+						android:textSize="10sp"
+						android:lineHeight="12dp"
+						android:textFontWeight="600"
+						android:textStyle="bold"
+						app:chipMinHeight="19dp"
+						app:chipBackgroundColor="@color/white"
+						app:rippleColor="@android:color/transparent" />
+
+				</com.google.android.material.chip.ChipGroup>
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="14dp"
+					android:layout_gravity="bottom|end"
+					android:layout_marginEnd="9.4dp"
+					android:layout_marginBottom="14dp"
+					android:showDividers="middle"
+					android:divider="@drawable/places_divider">
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ic_restroom" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ic_local_cafe" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ic_restaurant" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ic_directions_bus" />
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/ic_local_parking" />
+
+				</LinearLayout>
+			</androidx.cardview.widget.CardView>
+
+			<androidx.cardview.widget.CardView
+				android:id="@+id/cardViewPlaceOfTheDayDescription"
+				android:layout_width="match_parent"
+				android:layout_height="107dp"
+				android:layout_marginStart="25dp"
+				android:layout_marginEnd="25dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/cardViewPlaceOfTheDay">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="top|left"
+					android:layout_marginStart="15dp"
+					android:layout_marginTop="13dp"
+					android:text="@string/places_card_description"
+					android:lineSpacingMultiplier="1.2"
+					android:textColor="@color/black"
+					android:textSize="15sp" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom|right"
+					android:layout_marginEnd="12dp"
+					android:layout_marginBottom="12dp"
+					android:text="@string/places_learn_more"
+					android:lineSpacingMultiplier="1.2"
+					android:textColor="@color/gold"
+					android:textSize="15sp"
+					android:textFontWeight="600" />
+
+			</androidx.cardview.widget.CardView>
+
+			<TableLayout
+				android:id="@+id/landmarkTableLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="16dp"
+				android:layout_marginStart="19dp"
+				android:layout_marginEnd="19dp"
+				app:layout_constraintTop_toBottomOf="@id/cardViewPlaceOfTheDayDescription" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
