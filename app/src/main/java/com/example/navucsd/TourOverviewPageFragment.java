@@ -43,17 +43,17 @@ public class TourOverviewPageFragment extends Fragment {
         }
 
 
-//        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewTourOverviewPage);
-//        mRecyclerView.setHasFixedSize(true);
-//        mLayoutManager = new LinearLayoutManager(getContext());
-//        mAdapter = new RecyclerViewAdapterTourOverviewPage(getContext(), items);
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview_tour_overview_page);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mAdapter = new RecyclerViewAdapterTourOverviewPage(getContext(), items);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
 
-        ListView TourOverviewPageListView = (ListView) view.findViewById(R.id.TourOverviewPageListView);
-        ListViewAdapterTourOverViewPage listViewAdapter = new ListViewAdapterTourOverViewPage(getContext(), items);
-        TourOverviewPageListView.setAdapter(listViewAdapter);
+//        ListView TourOverviewPageListView = (ListView) view.findViewById(R.id.TourOverviewPageListView);
+//        ListViewAdapterTourOverViewPage listViewAdapter = new ListViewAdapterTourOverViewPage(getContext(), items);
+//        TourOverviewPageListView.setAdapter(listViewAdapter);
 
         return view;
     }
