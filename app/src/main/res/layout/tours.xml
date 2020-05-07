@@ -65,7 +65,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/card_own_tour" />
 
-        <org.ucsdtriplec.xploreucsd.ListViewForScrollView
+        <com.example.navucsd.ListViewForScrollView
             android:id="@+id/tours_lv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2"></com.example.navucsd.ListViewForScrollView>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
