@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.example.navucsd.NonSwipePager
+    <org.ucsdtriplec.xploreucsd.NonSwipePager
         android:id="@+id/main_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.example.navucsd.CurvedBottomNavigationViewTabLayout
+    <org.ucsdtriplec.xploreucsd.CurvedBottomNavigationViewTabLayout
         android:id="@+id/customBottomBar"
         style="@style/TabLayout"
         android:layout_width="match_parent"
