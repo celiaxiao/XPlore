@@ -1,0 +1,327 @@
+{
+  "64Degrees": {
+    "about": "Located in UCSD’s Revelle College, 64 Degrees is the first dining hall at UCSD and is still one of the best dining options",
+    "amenities": {
+      "parking": true,
+      "cafe": true,
+      "busstop": true,
+      "restaurant": true,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "64 Degrees",
+    "thumbnailPhoto": "dir/dir2/file.png"
+  },
+
+
+  "canyonVista": {
+    "about": "Canyon Vista Marketplace is the largest halal-certified residential dining facility in the nation. Their menu features healthy, sustainable menu offerings and groceries. Stations include Fusion Grill, Fresh, Three-Sixty and Earl's Coffee House.",
+    "amenities": {
+      "parking": true,
+      "cafe": true,
+      "busstop": false,
+      "restaurant": true,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "0",
+      "second": "1"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Canyon Vista",
+    "thumbnailPhoto": "dir/dir2/file.png"
+  },
+
+
+  "BiomedicalLibrary": {
+    "about": "A Library of UC San Diego specified in biomedical area, the second largest library of UCSD.",
+    "amenities": {
+      "parking": true,
+      "cafe": true,
+      "busstop": true,
+      "restaurant": false,
+      "restroom": true
+    },
+
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Biomedical Library",
+    "thumbnailPhoto": "https://bwesd.com/content/uploads/2017/03/UCSD-Biomed-Library.jpg"
+  },
+
+
+  "CanyonViewAquaticCenter": {
+    "about": "Located on the eastern end of campus between Eleanor Roosevelt College and Warren College, the Canyonview Aquatic Center features two outdoor, Olympic-sized pools, each of which can be divided into eight lanes of 50 meters in length, or 19 lanes of 25 yards in length. The aquatic center also features a state-of-the-art weight room. Canyonview is home to the UCSD men's and women's water polo teams, as well as the men's and women's swimming and diving programs.",
+    "amenities": {
+      "parking": true,
+      "cafe": true,
+      "busstop": false,
+      "restaurant": true,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Canyonview Aquatic Center",
+    "thumbnailPhoto": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Canyonview_West_Pool.jpg"
+  },
+
+
+  "AtkinsonHall":{
+    "about": "The Rady School of Management was created due to a need expressed to the school's founders by the San Diego business community. Experiential learning is at the core of all programs, providing students the opportunity to graduate with both an education and applied experience.",
+    "amenities": {
+      "parking": true,
+      "cafe": true,
+      "busstop": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Atkinson Hall",
+    "thumbnailPhoto": "https://library.ucsd.edu/news-events/wp-content/uploads/2016/04/atkinson-hall-entrance.jpg"
+  },
+  "ConradPrebysMusicCenter": {
+    "about": "The Music Center houses the university's music department, and is anchored by the 400-seat Concert Hall, in addition to the 170-seat Recital Hall and an Experimental Theatre with variable digital acoustics system.",
+    "amenities": {
+      "parking": true,
+      "cafe": true,
+      "busstop": true,
+      "restaurant": true,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Conrad Prebys Music Center",
+    "thumbnailPhoto": "https://upload.wikimedia.org/wikipedia/commons/9/96/Conrad_Prebys_Music_Center%2C_UCSD.JPG"
+  },
+
+  "GalbraithHall": {
+    "about": "Occupied in September 1965 in Revelle College, Galbraith Hall was UC San Diego’s first central library. Today the building’s primary occupants are the Center for Library & Instructional Services (CLICS) and the department of theatre and dance.",
+    "amenities": {
+      "parking": true,
+      "cafe": true,
+      "busstop": true,
+      "restaurant": true,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Galbraith Hall",
+    "thumbnailPhoto": "https://images.adsttc.com/media/images/5876/5096/e58e/ce26/2e00/024f/slideshow/bradley_kda_galbraith_smallset_Alt_11.jpg?1484148881"
+  },
+
+  "Geisel": {
+    "about": "Geisel Library is the main library building of the University of California San Diego Library. It is named in honor of Audrey and Theodor Seuss Geisel. Theodor is better known as children's author Dr. Seuss",
+    "amenities": {
+      "parking": false,
+      "cafe": true,
+      "busstop": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Geisel Library",
+    "thumbnailPhoto": "https://live.staticflickr.com/7177/13535412304_8571d152b8_b.jpg"
+  },
+
+  "JSOE": {
+    "about": "Fallen Star is an art installation by South Korean artist Do Ho Suh on the grounds of the University of California San Diego. It is a cottage perched at an angle off the edge of Jacobs Hall",
+    "amenities": {
+      "parking": false,
+      "cafe": true,
+      "busstop": false,
+      "restaurant": true,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "JSOE (Fallen Star)",
+    "thumbnailPhoto": "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-3.jpg"
+  },
+  "MayerHall": {
+    "about": "Mayer Hall is a five story research building in Revelle College. The facility has an assignable area of 58,447 square feet, primarily serving the department of physics. First occupied in 1963, the building was later renamed to honor former UC San Diego professors Maria and Joseph Mayer. ",
+    "amenities": {
+      "parking": true,
+      "cafe": true,
+      "busstop": true,
+      "restaurant": true,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Mayer Hall",
+    "thumbnailPhoto": "https://mbmlab.ucsd.edu/images/mayerfront001.jpg"
+  },
+  "OceanViewRestaurant": {
+    "about": "Oceanview is one of the biggest dining halls on campus, and people can enjoy the best view when dining: Ocean! Oceanview is also the first dining hall that offers 24/7 services.",
+    "amenities": {
+      "parking": false,
+      "cafe": true,
+      "busstop": false,
+      "restaurant": true,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Oceanview Restaurant",
+    "thumbnailPhoto": "https://www.randalllamb.com/wp-content/uploads/2017/10/ucsd-ocean-view-terrace-exterior-3-1.jpg"
+  },
+  "PetersonHall": {
+    "about": "Peterson Hall is named for Robert O. Peterson, an early and generous benefactor of UC San Diego who is known for founding the Jack-In-The-Box restaurant chain in the early 1950s. Peterson Hall contains two large lecture halls that seat 300 to 400 students, serving the instructional needs of the campus and providing a venue for lectures and events open to the outside community. ",
+    "amenities": {
+      "parking": true,
+      "cafe": false,
+      "busstop": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "PetersonHall",
+    "thumbnailPhoto": "http://m.ucsd.edu/assets/min/img.php?img=http%3a%2f%2fact.ucsd.edu%2fmaps%2fimgProxy%3fimgFile%3d7001221855537948.jpg&browser_width_percent=80&browser_height_percent=60&max_width=480"
+  },
+  "PriceCenter": {
+    "about": "Price Center is a student center located in the center of the University of California San Diego campus, just south of Geisel Library. As one of the largest student centers in the country, Price Center serves more than 30,000 visitors a day. ",
+    "amenities": {
+      "parking": true,
+      "cafe": true,
+      "busstop": true,
+      "restaurant": true,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Price Center",
+    "thumbnailPhoto": "https://www.cannondesign.com/assets/Price1-e1515003216991.jpg"
+  },
+  "RadySchoolOfManagement": {
+    "about": "The Rady School of Management was created due to a need expressed to the school's founders by the San Diego business community. Experiential learning is at the core of all programs, providing students the opportunity to graduate with both an education and applied experience.",
+    "amenities": {
+      "parking": true,
+      "cafe": true,
+      "busstop": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Rady School of Management",
+    "thumbnailPhoto": "https://ucsdnews.ucsd.edu/news_uploads/Rady_School_Lytx_700.jpg"
+  },
+  "SunGod": {
+    "about": "Sun God is a monumental statue by French-American sculptor Niki de Saint Phalle located on the campus of the University of California San Diego. The figurative sculpture is a 14-foot multicolored bird-like creature, perched atop a 15-foot tall arch-shaped, vine-covered concrete pedestal.",
+    "amenities": {
+      "parking": true,
+      "cafe": false,
+      "busstop": false,
+      "restaurant": false,
+      "restroom": false
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Sun God",
+    "thumbnailPhoto": "https://media.breitbart.com/media/2015/05/UCSD-Sun-God-Alejandro-Mallea-Flickr-CC-Cropped.png"
+  },
+  "WarrenBear": {
+    "about": "Warren Bear is a statue created by Tim Hawkinson, and it is part of the Stuart Collection of UC San Diego",
+    "amenities": {
+      "parking": true,
+      "cafe": false,
+      "busstop": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "x-coord",
+      "second": "y-coord"
+    },
+
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Warren Bear",
+    "thumbnailPhoto": "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/Main_hawkinson-01.jpg"
+  }
+}
+

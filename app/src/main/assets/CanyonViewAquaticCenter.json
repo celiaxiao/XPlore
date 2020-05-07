@@ -35,8 +35,6 @@
     
       ],
 
-
-
   "relatedTours": [ 
     "the best tour",
     "the other best tour"
@@ -49,7 +47,7 @@
     "second": "y-coord"
   },
 
-  "descriptive": [ 
+  "descriptive": [
     "Must see"
   ]
 }
