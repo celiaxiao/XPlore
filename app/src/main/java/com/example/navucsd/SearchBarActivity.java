@@ -1,4 +1,4 @@
-package com.example.navucsd;
+/*package com.example.navucsd;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -141,3 +141,4 @@ public class SearchBarActivity extends AppCompatActivity {
     }
 
 }
+*/

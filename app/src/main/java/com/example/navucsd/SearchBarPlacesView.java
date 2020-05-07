@@ -1,4 +1,9 @@
-package com.example.navucsd;
+import com.example.navucsd.PlacesDataClass;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/*package com.example.navucsd;
 
 import android.app.Activity;
 import android.content.Context;
@@ -104,6 +109,7 @@ public class SearchBarPlacesView extends ArrayAdapter {
      * inspired by Alxandr (http://stackoverflow.com/a/2726348/570168)
      *
      */
+/*
     private class AppFilter<T> extends Filter {
 
         private ArrayList<T> sourceObjects;
@@ -152,3 +158,4 @@ public class SearchBarPlacesView extends ArrayAdapter {
 
 
 }
+*/
