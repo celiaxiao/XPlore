@@ -30,8 +30,6 @@
         <activity android:name=".TourActivity" />
         <activity android:name=".SearchBarActivity"
             android:theme="@style/ChipTheme">
-
-
         </activity>
 
     </application>
