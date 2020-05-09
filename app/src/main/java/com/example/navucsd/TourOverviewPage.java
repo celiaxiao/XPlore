@@ -25,13 +25,8 @@ public class TourOverviewPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_overview_page);
 
-        FloatingActionButton fabButton = (FloatingActionButton) findViewById(R.id.floating_action_add_button_tour_overview_page);
-        fabButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(TourOverviewPage.this, "Testing", Toast.LENGTH_LONG).show();
-            }
-        });
+        FloatingActionButton addButton = (FloatingActionButton) findViewById(R.id.floating_action_add_button_tour_overview_page);
+
 
         items = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
