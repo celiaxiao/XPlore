@@ -15,10 +15,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<RecyclerViewAdapterTourOverviewPage.ViewHolder> {
-    private ArrayList<Object> items;
+    private ArrayList<String> items;
     private Context context;
 
-    public RecyclerViewAdapterTourOverviewPage(Context context, ArrayList<Object> items) {
+    public RecyclerViewAdapterTourOverviewPage(Context context, ArrayList<String> items) {
         this.context = context;
         this.items = items;
     }
@@ -31,9 +31,8 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            fabDeleteButton = (FloatingActionButton) itemView.findViewById(R.id.floating_action_delete_button_tour_overview_page);
-            cardView = (CardView) itemView.findViewById(R.id.cardview_tour_overview_page);
-            textView = (TextView) itemView.findViewById(R.id.textView_in_cardview_tour_overview_page);
+            fabDeleteButton = (FloatingActionButton) itemView.findViewById(R.id.fab_delete_button_tour_overview_page);
+            textView = (TextView) itemView.findViewById(R.id.testTextView);
         }
     }
 
@@ -41,19 +40,26 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_detail_tour_overview_page, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tour_overview_page_detail, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Object item = items.get(position);
+        String item = items.get(position);
         holder.textView.setText(item.toString());
+        holder.fabDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                items.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return items.size();
     }
 }

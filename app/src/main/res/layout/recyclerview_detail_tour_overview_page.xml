@@ -13,7 +13,7 @@
         app:borderWidth="0dp"
         app:fabCustomSize="33dp"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
-        app:srcCompat="@drawable/ic_add_white_8dp"
+        app:srcCompat="@drawable/ic_remove_white_8dp"
         tools:layout_editor_absoluteY="108dp" />
 
     <androidx.constraintlayout.widget.Guideline
