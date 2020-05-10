@@ -1,12 +1,14 @@
 package com.example.navucsd;
 
 import android.graphics.Rect;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -27,6 +29,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.security.interfaces.RSAKey;
 import java.util.concurrent.TimeUnit;
@@ -80,6 +83,8 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     // Related Tours
     private RecyclerView relatedToursRecycler;
     private RelatedToursAdapter relatedToursAdapter;
+    private LinearLayoutManager layoutManager;
+    private FloatingActionButton navButton;
 
     public LandmarkDetailsOverviewFragment() {
         // Required empty public constructor
@@ -195,11 +200,18 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         amenitiesRecycler.setLayoutManager(new GridLayoutManager(getContext(), AMENITIES_NUM_COL));
         amenitiesRecycler.setAdapter(amenitiesAdapter);
         amenitiesRecycler.setNestedScrollingEnabled(false);
+        
+        navButton = view.findViewById(R.id.overview_nav_button);
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
         // Set up related stories
         relatedVideosRecycler = view.findViewById(R.id.related_videos_recycler);
         relatedVideosRecycler.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         DividerItemDecoration dividerItemDecorationRelatedVideos = new DividerItemDecoration(relatedVideosRecycler.getContext(),
                 LinearLayoutManager.VERTICAL) {
             @Override
