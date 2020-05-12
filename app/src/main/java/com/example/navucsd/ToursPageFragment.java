@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ToursFragment extends Fragment {
+public class ToursPageFragment extends Fragment {
 
     ListViewForScrollView v;
     ScrollView sv;
@@ -29,7 +29,7 @@ public class ToursFragment extends Fragment {
     private int[] stopsSet = {5, 3, 2, 3, 4, 5};
     private int[] pictures = {R.drawable.tours_landmark, R.drawable.tours_restaurants, R.drawable.tours_brutalism, R.drawable.tours_historical_sites, R.drawable.tours_hidden_artworks, R.drawable.tours_revelle};
 
-    public ToursFragment() {
+    public ToursPageFragment() {
         // Required empty public constructor
     }
 

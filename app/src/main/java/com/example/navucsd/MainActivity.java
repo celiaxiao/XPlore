@@ -55,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0: return new PlacesPageFragment();
-                case 2:
-                    return LandmarkDetailsHistoryFragment.newInstance("","");
+                case 1: return new MainPageFragment();
+                case 2: return new ToursPageFragment();
+                default: throw new IllegalStateException();
             }
-            return new MainPageFragment();
         }
 
         @Override
