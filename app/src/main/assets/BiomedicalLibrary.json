@@ -1,8 +1,6 @@
 {
   "name": "Biomedical Library",
-
   "about": "A Library of UC San Diego specified in biomedical area, the second largest library of UCSD.",
-
   "amenities": {
     "parking": true,
     "cafe": true,
@@ -10,45 +8,33 @@
     "restaurant": false,
     "restroom": true
   },
-
   "links": [
     "Open time: https://library.ucsd.edu/hours/?v=month&l=biomedical-library-building",
-    "UCSD library home page: https://library.ucsd.edu/",
+    "UCSD library home page: https://library.ucsd.edu/"
   ],
-
-
   "thumbnailPhoto": "https://bwesd.com/content/uploads/2017/03/UCSD-Biomed-Library.jpg",
-
   "otherPhotos": [
     "https://library.ucsd.edu/news-events/wp-content/uploads/2019/01/biomed.jpg",
     "https://libraries.ucsd.edu/bmcl/building/photos/done/done_05.jpg",
     "https://pfeifferpartners.com/wp-content/uploads/2016/01/pfeiffer-ucsd-biomed-ext-2-L.jpg"
   ],
-
   "relatedPlaces": [
     "Geisel Library",
     "Pharmaceutical Sciences Building",
     "York Hall"
-
   ],
-
   "videos": [
     "https://www.youtube.com/watch?v=Ek0kZO-soGk"
       ],
-
-
   "relatedTours": [ 
     "the best tour",
     "the other best tour"
   ],
-
-  "audio": "somedirectory/somefile", 
-
+  "audio": "somedirectory/somefile",
   "coordinates": { 
     "first": "x-coord",
     "second": "y-coord"
   },
-
   "descriptive": [ 
     "Must see"
   ]
