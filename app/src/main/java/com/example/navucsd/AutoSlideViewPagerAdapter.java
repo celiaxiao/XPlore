@@ -46,10 +46,10 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
         // create a new view
         CardView view = (CardView) LayoutInflater.from(container.getContext())
                 .inflate(R.layout.main_page_places_item, container, false);
-        ImageView imageView = view.findViewById(R.id.place_photo);
+        ImageView imageView = view.findViewById(R.id.tours_photo);
         imageView.setImageResource(images[position]);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        TextView textName = view.findViewById(R.id.place_name);
+        TextView textName = view.findViewById(R.id.tours_name);
         textName.setText(nameSet[position]);
         TextView textDistance = view.findViewById(R.id.place_distance);
         textDistance.setText(distanceSet[position]);

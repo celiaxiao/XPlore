@@ -1,0 +1,40 @@
+{
+  "about": "Peterson Hall is named for Robert O. Peterson, an early and generous benefactor of UC San Diego who is known for founding the Jack-In-The-Box restaurant chain in the early 1950s. Peterson Hall contains two large lecture halls that seat 300 to 400 students, serving the instructional needs of the campus and providing a venue for lectures and events open to the outside community. ",
+  "amenities": {
+    "parking": true,
+    "cafe": false,
+    "busstop": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "x-coord",
+    "second": "y-coord"
+  },
+  "descriptive": [
+    "Must see"
+  ],
+  "links": [
+    "https://blink.ucsd.edu/sponsor/advancement/advancement-services/stewardship/named-buildings/Peterson%20Hall.html",
+    "https://library.ucsd.edu/dc/object/bb7339213s/_2.pdf"
+  ],
+  "name": "PetersonHall",
+  "otherPhotos": [
+    "https://library.ucsd.edu/dc/object/bb7748727x/zoom/0",
+    "https://library.ucsd.edu/tellushowucit/files/original/a634def4364fb3ce328d19e75f99a317.jpg"
+  ],
+  "relatedPlaces": [
+    "Sun God statue",
+    "Geisel library",
+    "Price Center"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "thumbnailPhoto": "http://m.ucsd.edu/assets/min/img.php?img=http%3a%2f%2fact.ucsd.edu%2fmaps%2fimgProxy%3fimgFile%3d7001221855537948.jpg&browser_width_percent=80&browser_height_percent=60&max_width=480",
+  "videos": [
+    "https://www.youtube.com/watch?v=hAhmNWbutDM"
+  ]
+}

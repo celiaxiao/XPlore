@@ -58,9 +58,9 @@ public class TemplateAdapter extends RecyclerView.Adapter<TemplateAdapter.MyView
 
         public MyViewHolder(CardView v) {
             super(v);
-            textViewPlaceName = v.findViewById(R.id.place_name);
+            textViewPlaceName = v.findViewById(R.id.tours_name);
             textViewPlaceDistance = v.findViewById(R.id.place_distance);
-            imageViewPlacePhoto = v.findViewById(R.id.place_photo);
+            imageViewPlacePhoto = v.findViewById(R.id.tours_photo);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

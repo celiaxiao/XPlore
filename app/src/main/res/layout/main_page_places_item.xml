@@ -6,7 +6,7 @@
     app:cardCornerRadius="5dp">
 
     <ImageView
-        android:id="@+id/place_photo"
+        android:id="@+id/tours_photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -27,11 +27,11 @@
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/place_name"
+            app:layout_constraintBottom_toTopOf="@id/tours_name"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/place_name"
+            android:id="@+id/tours_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
