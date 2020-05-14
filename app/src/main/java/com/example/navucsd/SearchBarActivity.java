@@ -49,14 +49,7 @@ public class SearchBarActivity extends AppCompatActivity {
             "CanyonViewAquaticCenter.json",
             "CanyonVista.json",
             "ConradPrebysMusicCenter.json",
-            "GalbraithHall.json",
-            "MayerHall.json",
-            "OceanviewRestaurant.json",
-            "PetersonHall.json",
-            "PriceCenter.json",
-            "RadySchoolOfManagement.json",
-            "SunGod.json",
-            "WarrenBear.json"
+            "GalbraithHall.json"
     };
 
     @Override
@@ -79,7 +72,7 @@ public class SearchBarActivity extends AppCompatActivity {
 
         sbdatebase=new SearchBarDB(this,"one by one");
 
-    //get main context from json file
+        //get main context from json file
         Gson gson = new Gson();
         boolean[][] dbAmentityList=new boolean[FILELIST.length][5];
         String[] placesName=new String[FILELIST.length];
@@ -110,6 +103,10 @@ public class SearchBarActivity extends AppCompatActivity {
         //first hide the suggestion listview
         searchPlaces.setVisibility(View.GONE);
 
+
+        ArrayList<String> locationlist=new ArrayList<String>();
+        ArrayList<String> origin=new ArrayList<String>();
+
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener( ) {
             // Override onQueryTextSubmit method which is call when submitquery is searched
             @Override
@@ -122,7 +119,9 @@ public class SearchBarActivity extends AppCompatActivity {
                 if (mustGoArrayList.contains(query)) {
                     placesAdaptor.getFilter( ).filter(query);
                     //TODO: set to intent if needed
+
                 }
+
                 return false;
             }
 
@@ -135,7 +134,14 @@ public class SearchBarActivity extends AppCompatActivity {
                     searchPlaces.setVisibility(View.GONE);
                 }
                 else searchPlaces.setVisibility(View.VISIBLE);
+
                 placesAdaptor.getFilter( ).filter(s);
+
+                // ---------------Change-----------------
+                while(!origin.isEmpty()){
+                    origin.remove(0);
+                }
+                // --------------------------------------
                 // filteredList=placesAdapter.
                 //set up clike item functionality
                 searchPlaces.setOnItemClickListener(new ListView.OnItemClickListener( ) {
@@ -149,12 +155,16 @@ public class SearchBarActivity extends AppCompatActivity {
                         //TODO: set to intent if needed
                     }
                 });
+
+
                 return false;
             }
         });
 
 
         ChipGroup chipGroup=(ChipGroup)findViewById(R.id.place_tags);
+
+
 
         //chipGroup's method can only apply to single selection mode
         //so this is a customize version for multi selection to get checked chips
@@ -165,6 +175,25 @@ public class SearchBarActivity extends AppCompatActivity {
             ameChip.setOnCheckedChangeListener(new Chip.OnCheckedChangeListener( ) {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                    placesAdaptor.filtered = origin;
+                    Log.i("Origin list", String.valueOf(origin.size()));
+
+                    // ---------------Change-----------------
+                    if(origin.isEmpty()){
+                        for(int i=0;i<placesAdaptor.filtered.size();i++){
+                            origin.add(placesAdaptor.filtered.get(i).toString());
+                        }
+                    }
+
+                    while(!locationlist.isEmpty()){
+                        locationlist.remove(0);
+                    }
+                    Log.i("Before list first", String.valueOf(locationlist.size()));
+
+                    for(int i=0;i<origin.size();i++){
+                        locationlist.add(origin.get(i));
+                    }
+                    // ----------------------------------------
                     if(ameChip.isChecked()){
                         amenList.add(amenFilter[index]);
                         Log.i("add to list", amenFilter[index]);
@@ -176,24 +205,41 @@ public class SearchBarActivity extends AppCompatActivity {
 
                     //TODO: pass in amenList and placesAdaptor.filtered for database filtering
                     //extract arraylist of filtered places' name
-                    ArrayList<String> locationlist=new ArrayList<String>();
-                    for(int i=0;i<placesAdaptor.filtered.size();i++){
-                        locationlist.add(placesAdaptor.filtered.get(i).toString());
-                    }
+
+//                    while(!locationlist.isEmpty()){
+//                        locationlist.remove(0);
+//                    }
+//                    Log.i("Before list first", String.valueOf(locationlist.size()));
+//
+//                    for(int i=0;i<placesAdaptor.filtered.size();i++){
+//                        locationlist.add(placesAdaptor.filtered.get(i).toString());
+//                    }
+//                    Log.i("After list first", String.valueOf(locationlist.size()));
+
+
                     ArrayList<Location> listOfLocations = sbdatebase.filter(locationlist, amenList);
                     ArrayList<PlacesDataClass> filteredAmen=new ArrayList<PlacesDataClass>();
                     //TODO SOLVE THE CONFLICT
                     //placesAdaptor.getFilter().filter(searchBar.getQuery());
+
                     for(int k=0;k<listOfLocations.size();k++){
                         Log.i("list",listOfLocations.get(k).name);
                         filteredAmen.add(new PlacesDataClass(listOfLocations.get(k)));
                     }
+
                     placesAdaptor.filtered=filteredAmen;
                     placesAdaptor.notifyDataSetChanged();
-                    if(!amenList.isEmpty()) searchPlaces.setVisibility(View.VISIBLE);
+                    if(!amenList.isEmpty()) {
+                        searchPlaces.setVisibility(View.VISIBLE);
+                    }
+                    else if(searchBar.getQuery().length()==0) {
+                        searchPlaces.setVisibility(View.VISIBLE);
+                    }
                 }
             });
         }
+
+
 
 
     }

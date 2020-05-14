@@ -118,38 +118,83 @@ public class SearchBarDB {
     }
 
     public Location getByName(String name){
-        return this.map.get(name);
+        if( name == null ){
+            return null;
+        }
+        else{
+            return this.map.get(name);
+        }
     }
 
+    public ArrayList<Pair<Location, Double>> nearestLocations(Pair<Integer, Integer>  userLocation, int num){
+        ArrayList<Pair<Location, Double>> nearestList = new ArrayList<>();
+        for(int i = 0; i < this.list.size(); i++){
+            double dist = this.distant(userLocation, this.list.get(i).coordinates);
+            int origin = nearestList.size();
+            for( int j = 0; j < nearestList.size(); j++ ){
+                if( dist >= nearestList.get(j).second ){
+                    nearestList.add(j, new Pair<>(this.list.get(i), dist));
+                    break;
+                }
+            }
+            if( origin == nearestList.size() ){
+                if( nearestList.size() < num ){
+                    nearestList.add(new Pair<>(this.list.get(i), dist));
+                }
+            }
+        }
+        return nearestList;
+    }
 
-    public ArrayList<Location> filter(ArrayList<String> locations, ArrayList<String> amenities){
+    public double distant(Pair<Integer, Integer>  p1, Pair<Integer, Integer>  p2){
+        return Math.sqrt(Math.abs(p1.first-p2.first) + Math.abs(p1.second-p2.second));
+    }
+
+    public ArrayList<Location> filter(ArrayList<String> locations, ArrayList<String> amen){
         ArrayList<Pair<Location, Integer>> trackingList = new ArrayList<>();
         ArrayList<Location> outputList = new ArrayList<>();
-        for(int i = 0; i < this.list.size(); i++){
-            if(locations.contains(this.list.get(i).name) == true){
-                int weight = 0;
-                for( int z = 0; z < amenities.size(); z++ ){
-                    if( this.list.get(i).amenities.get(amenities.get(z)) == true ){
-                       weight = (weight*10) + 5 - z;
-                    }
+        ArrayList<String> amenities = new ArrayList<>();
+        for( int i = 0; i < amen.size(); i++ ){
+            if(amen.get(i) != null){
+                amenities.add(amen.get(i));
+            }
+        }
+        if(amenities.size() == 0){
+            for( int i = 0; i < locations.size(); i++){
+                Location location = this.getByName(locations.get(i));
+                if(location != null){
+                    outputList.add(location);
                 }
-                if( weight > 0 ){
-                    if( outputList.isEmpty()){
-                        trackingList.add(new Pair<>(this.list.get(i), weight));
-                        outputList.add(this.list.get(i));
-                    }
-                    else{
-                        int origin = trackingList.size();
-                        for( int j = 0; j < trackingList.size(); j++ ){
-                            if( weight >= trackingList.get(j).second ){
-                                trackingList.add(j, new Pair<>(this.list.get(i), weight));
-                                outputList.add(j, this.list.get(i));
-                                break;
-                            }
+            }
+        }
+        else{
+            for( int i = 0; i < locations.size(); i++){
+                Location location = this.getByName(locations.get(i));
+                if( location != null ){
+                    int weight = 0;
+                    for( int z = 0; z < amenities.size(); z++ ){
+                        if( location.amenities.get(amenities.get(z)) == true ){
+                            weight = (weight*10) + 5 - z;
                         }
-                        if( origin == trackingList.size() ){
-                            trackingList.add( new Pair<>(this.list.get(i), weight) );
-                            outputList.add( this.list.get(i) );
+                    }
+                    if( weight > 0 ){
+                        if( outputList.isEmpty()){
+                            trackingList.add(new Pair<>(location, weight));
+                            outputList.add(location);
+                        }
+                        else{
+                            int origin = trackingList.size();
+                            for( int j = 0; j < trackingList.size(); j++ ){
+                                if( weight >= trackingList.get(j).second ){
+                                    trackingList.add(j, new Pair<>(location, weight));
+                                    outputList.add(j, location);
+                                    break;
+                                }
+                            }
+                            if( origin == trackingList.size() ){
+                                trackingList.add( new Pair<>(location, weight) );
+                                outputList.add( location );
+                            }
                         }
                     }
                 }
