@@ -126,7 +126,7 @@ public class SearchBarDB {
         }
     }
 
-    public ArrayList<Pair<Location, Double>> nearestLocations(Pair<Integer, Integer>  userLocation, int num){
+    public ArrayList<Pair<Location, Double>> nearestLocations(Pair<Double, Double>  userLocation, int num){
         ArrayList<Pair<Location, Double>> nearestList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
             double dist = this.distant(userLocation, this.list.get(i).coordinates);
@@ -146,7 +146,7 @@ public class SearchBarDB {
         return nearestList;
     }
 
-    public double distant(Pair<Integer, Integer>  p1, Pair<Integer, Integer>  p2){
+    public double distant(Pair<Double, Double>  p1, Pair<Double, Double>  p2){
         return Math.sqrt(Math.abs(p1.first-p2.first) + Math.abs(p1.second-p2.second));
     }
 
