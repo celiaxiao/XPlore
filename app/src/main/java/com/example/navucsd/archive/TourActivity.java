@@ -1,4 +1,4 @@
-package com.example.navucsd;
+package com.example.navucsd.archive;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,6 +16,12 @@ import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
+
+import com.example.navucsd.archive.LandmarkComparator;
+import com.example.navucsd.LocationSelectionFragment;
+import com.example.navucsd.R;
+import com.example.navucsd.TimeSelectionFragment;
+import com.example.navucsd.UserTypeFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;

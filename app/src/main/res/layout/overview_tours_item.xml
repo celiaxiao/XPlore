@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    app:cardCornerRadius="5dp">
+
+    <ImageView
+        android:id="@+id/overview_tours_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/overview" />
+
+    <TextView
+        android:id="@+id/overview_tours_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="UCSD’s Landmark Tour"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_gravity="bottom|left"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_time_24dp" />
+
+        <TextView
+            android:id="@+id/overview_tours_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="12dp"
+            android:text="90min"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_location_grey_24dp"
+            android:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/overview_tours_stops"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="5 Stops"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

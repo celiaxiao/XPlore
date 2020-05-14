@@ -1,4 +1,4 @@
-package com.example.navucsd;
+package com.example.navucsd.archive;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.navucsd.archive.LandmarkComparator;
+import com.example.navucsd.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,8 +1,10 @@
-package com.example.navucsd;
+package com.example.navucsd.archive;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.navucsd.R;
 
 public class ToursActivity extends AppCompatActivity {
 

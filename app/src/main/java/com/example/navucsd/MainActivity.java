@@ -47,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return LandmarkDetailsOverviewFragment.newInstance("","");
+                case 2:
+                    return LandmarkDetailsHistoryFragment.newInstance("","");
+            }
             return new MainPageFragment();
         }
 

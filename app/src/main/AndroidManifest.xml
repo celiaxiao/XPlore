@@ -3,6 +3,7 @@
     package="com.example.navucsd">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -12,31 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".TourOverviewPage"
+            android:exported="true"
+            />
+        <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.Material">
-
-        </activity>
-
-		<!-- Other pages -->
-		<activity
-			android:name=".PlacesActivity"
-			android:label="@string/title_activity_places"
-			android:theme="@style/AppTheme.Material" />
-
-        <activity android:name=".NavigationActivity"/>
-		<activity android:name=".LandmarkDetailsActivity"
-            android:theme="@style/AppTheme.Material"/>
-        <activity android:name=".TourActivity" />
-
-        <activity android:name=".SearchBarActivity"
-            android:theme="@style/ChipTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity> <!-- Other pages -->
+        <activity
+            android:name=".LandmarkDetailsActivity"
+            android:theme="@style/AppTheme.Material" />
+        <activity android:name=".SearchBarActivity"
+            android:theme="@style/ChipTheme">
 
         </activity>
 
-
     </application>
+
 </manifest>
