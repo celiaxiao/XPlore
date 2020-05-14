@@ -34,6 +34,7 @@ dependencies {
 
     //Jason Jing's change, remove/change if it has errors 
     implementation 'com.google.android.material:material:1.2.0-alpha05'
+    implementation 'com.google.android.material:material:1.0.0-beta01'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
@@ -52,4 +53,6 @@ dependencies {
 
     //gson implementation
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'com.google.android.material:material:1.0.0'
 }
