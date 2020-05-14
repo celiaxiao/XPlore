@@ -57,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
                 case 0: return new PlacesPageFragment();
                 case 1: return new MainPageFragment();
                 case 2: return new ToursPageFragment();
-                default: throw new IllegalStateException();
             }
+            // If this happens there must be a bug in our code.
+            // TODO error reporting
+            return new MainPageFragment();
         }
 
         @Override
