@@ -1,5 +1,6 @@
 package com.example.navucsd;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -25,10 +26,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        // Onboarding Activity
-//        SharedPreferences sharedPreferences =
-//                PreferenceManager.getDefaultSharedPreferences(this);
-//        if (!sharedPreferences.getBoolean())
+        // Onboarding Activity
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        if (sharedPreferences.getBoolean("Onboarding finished", false)) {
+            Intent intent = new Intent(this, OnboardingActivity.class);
+            this.startActivity(intent);
+
+            finish();
+            return;
+        }
 
         CurvedBottomNavigationViewTabLayout tabLayout = findViewById(R.id.customBottomBar);
         mainPager = findViewById(R.id.main_pager);

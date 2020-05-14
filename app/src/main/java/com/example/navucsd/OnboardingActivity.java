@@ -3,6 +3,7 @@ package com.example.navucsd;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
@@ -29,6 +30,17 @@ public class OnboardingActivity extends AppCompatActivity {
 
         addDotsIndicator();
 
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences sharedPreferences = getPreferences(this.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("Onboarding finished", true);
+        editor.commit();
 
     }
 
