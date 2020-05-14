@@ -19,7 +19,6 @@ import androidx.viewpager.widget.ViewPager;
 public class AutoSlideViewPagerAdapter extends PagerAdapter {
 
     private Context context;
-    private LayoutInflater layoutInflater;
     // Duplicate the first and the last images for recyclable scrolling
     private Integer[] images = {R.drawable.fallen_star,     // jump to images[3]
             R.drawable.geisel, R.drawable.price_center_east, R.drawable.fallen_star,

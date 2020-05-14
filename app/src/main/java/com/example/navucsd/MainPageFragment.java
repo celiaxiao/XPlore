@@ -22,7 +22,7 @@ public class MainPageFragment extends Fragment {
 
     private RecyclerView recyclerViewSig;
     private LinearLayoutManager layoutManager;
-    private MainSignatureAdapter sigAdapter;
+    private HorizontalRecyclerAdapter sigAdapter;
     private AutoSlideViewPager autoSlideViewPager;
     private AutoSlideViewPagerAdapter autoSlideViewPagerAdapter;
 
@@ -68,12 +68,12 @@ public class MainPageFragment extends Fragment {
                 }
             }
         };
-        dividerItemDecorationSig.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_20dp));
+        dividerItemDecorationSig.setDrawable(getResources().getDrawable(R.drawable.vertical_divider_20dp));
         recyclerViewSig.addItemDecoration(dividerItemDecorationSig);
         recyclerViewSig.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        sigAdapter = new MainSignatureAdapter();
+        sigAdapter = new HorizontalRecyclerAdapter(16, 20);
         recyclerViewSig.setAdapter(sigAdapter);
     }
 }

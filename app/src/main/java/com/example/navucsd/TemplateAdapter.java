@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainPagePlacesAdapter extends RecyclerView.Adapter<MainPagePlacesAdapter.MyViewHolder> {
+public class TemplateAdapter extends RecyclerView.Adapter<TemplateAdapter.MyViewHolder> {
 
     private static int PLACE_NUMBER = 3;
 
@@ -19,13 +19,13 @@ public class MainPagePlacesAdapter extends RecyclerView.Adapter<MainPagePlacesAd
     private int[] pictures = {R.drawable.geisel_landmark, R.drawable.price_center_east, R.drawable.fallen_star, R.drawable.ucsd};
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MainPagePlacesAdapter() {
+    public TemplateAdapter() {
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MainPagePlacesAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                                 int viewType) {
+    public TemplateAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+                                                           int viewType) {
         // create a new view
         CardView v = (CardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.main_page_places_item, parent, false);
