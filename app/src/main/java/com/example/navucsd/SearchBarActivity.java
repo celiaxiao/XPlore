@@ -49,7 +49,14 @@ public class SearchBarActivity extends AppCompatActivity {
             "CanyonViewAquaticCenter.json",
             "CanyonVista.json",
             "ConradPrebysMusicCenter.json",
-            "GalbraithHall.json"
+            "GalbraithHall.json",
+            "MayerHall.json",
+            "OceanviewRestaurant.json",
+            "PetersonHall.json",
+            "PriceCenter.json",
+            "RadySchoolOfManagement.json",
+            "SunGod.json",
+            "WarrenBear.json"
     };
 
     @Override
