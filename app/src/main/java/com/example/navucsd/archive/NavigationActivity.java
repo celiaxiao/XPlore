@@ -1,4 +1,4 @@
-package com.example.navucsd;
+package com.example.navucsd.archive;
 
 import android.content.Intent;
 import android.location.Location;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.navucsd.R;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.api.directions.v5.DirectionsCriteria;

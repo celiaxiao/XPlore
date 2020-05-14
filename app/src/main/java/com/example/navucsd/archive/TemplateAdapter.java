@@ -1,4 +1,4 @@
-package com.example.navucsd;
+package com.example.navucsd.archive;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.navucsd.LandmarkDetailsActivity;
+import com.example.navucsd.R;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;

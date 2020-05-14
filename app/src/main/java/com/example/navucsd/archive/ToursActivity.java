@@ -1,14 +1,16 @@
-package com.example.navucsd;
+package com.example.navucsd.archive;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class TestLayoutActivity extends AppCompatActivity {
+import com.example.navucsd.R;
+
+public class ToursActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_landmark_detail_overview);
+        setContentView(R.layout.activity_tours);
     }
 }

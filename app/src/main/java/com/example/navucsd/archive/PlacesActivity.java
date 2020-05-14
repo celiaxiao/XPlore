@@ -1,4 +1,4 @@
-package com.example.navucsd;
+package com.example.navucsd.archive;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.example.navucsd.LandmarkDetailsActivity;
+import com.example.navucsd.R;
 
 import java.util.Objects;
 
@@ -127,12 +130,12 @@ public final class PlacesActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_places);
 
-		findViewById(R.id.placesSearchBarMask).setOnClickListener(view -> {
-			if (!clicked) {
-				clicked = true;
-				startActivity(new Intent(PlacesActivity.this, SearchBarActivity.class));
-			}
-		});
+//		findViewById(R.id.placesSearchBarMask).setOnClickListener(view -> {
+//			if (!clicked) {
+//				clicked = true;
+//				startActivity(new Intent(PlacesActivity.this, SearchBarActivity.class));
+//			}
+//		});
 
 		SearchView searchView = findViewById(R.id.placesSearchView);
 		searchView.setInputType(InputType.TYPE_NULL);
