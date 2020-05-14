@@ -146,6 +146,16 @@ public class SearchBarDB {
         return nearestList;
     }
 
+
+    public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double>  userLocation){
+        ArrayList<Pair<Location, Double>> distanceList = new ArrayList<>();
+        for(int i = 0; i < this.list.size(); i++){
+            double dist = this.distant(userLocation, this.list.get(i).coordinates);
+            distanceList.add(new Pair<>(this.list.get(i), dist));
+        }
+        return distanceList;
+    }
+
     public double distant(Pair<Double, Double>  p1, Pair<Double, Double>  p2){
         return Math.sqrt(Math.abs(p1.first-p2.first) + Math.abs(p1.second-p2.second));
     }
