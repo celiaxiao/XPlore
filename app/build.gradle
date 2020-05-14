@@ -55,4 +55,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation 'com.google.android.material:material:1.0.0'
+
+    // Gif image support
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
 }
+
