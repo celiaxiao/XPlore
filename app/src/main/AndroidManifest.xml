@@ -27,6 +27,10 @@
         <activity
             android:name=".LandmarkDetailsActivity"
             android:theme="@style/AppTheme.Material" />
+        <activity android:name=".SearchBarActivity"
+            android:theme="@style/ChipTheme">
+        </activity>
+
     </application>
 
 </manifest>
