@@ -13,6 +13,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import pl.droidsonroids.gif.GifImageView;
 
+
 public class SliderAdapterOnboarding extends PagerAdapter {
     Context context;
     LayoutInflater layoutInflater;
@@ -59,6 +60,7 @@ public class SliderAdapterOnboarding extends PagerAdapter {
         TextView descriptionTextView = (TextView) view.findViewById(R.id.descriptionTextView);
 
         gifImageView.setImageResource(sliderGifs[position]);
+        gifImageView.refreshDrawableState();
         gifNameTextView.setText(sliderTitles[position]);
         descriptionTextView.setText(sliderDescriptions[position]);
 

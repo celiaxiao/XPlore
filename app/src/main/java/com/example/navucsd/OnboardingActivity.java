@@ -58,6 +58,10 @@ public class OnboardingActivity extends AppCompatActivity {
         // Set the first dot as the active dot
         mDots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.dots_indicator_active));
 
+
+        startButton = findViewById(R.id.startButtonOnboarding);
+        // Set startButton as invisible since on the first page this button should be invisible
+        startButton.setVisibility(View.INVISIBLE);
         mViewPagerOnboarding.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
@@ -71,14 +75,20 @@ public class OnboardingActivity extends AppCompatActivity {
 
                 // Set the corresponding dot as active
                 mDots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.dots_indicator_active));
+
+
+                // startButton visible only on the last page
+                if (position != sliderAdapter.getCount() - 1) {
+                    startButton.setVisibility(View.INVISIBLE);
+                } else {
+                    startButton.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) { }
         });
 
-
-        startButton = findViewById(R.id.startButtonOnboarding);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
