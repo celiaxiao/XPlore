@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
-import pl.droidsonroids.gif.GifImageView;
+import com.bumptech.glide.Glide;
 
 
 public class SliderAdapterOnboarding extends PagerAdapter {
@@ -55,12 +55,11 @@ public class SliderAdapterOnboarding extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.onboarding_slider_first, container, false);
 
-        GifImageView gifImageView = (GifImageView) view.findViewById(R.id.gifImageView);
+        ImageView gifImageView = (ImageView) view.findViewById(R.id.gifImageView);
         TextView gifNameTextView = (TextView) view.findViewById(R.id.gifNameTextView);
         TextView descriptionTextView = (TextView) view.findViewById(R.id.descriptionTextView);
 
-        gifImageView.setImageResource(sliderGifs[position]);
-        gifImageView.refreshDrawableState();
+        Glide.with(this.context).load(sliderGifs[position]).into(gifImageView);
         gifNameTextView.setText(sliderTitles[position]);
         descriptionTextView.setText(sliderDescriptions[position]);
 

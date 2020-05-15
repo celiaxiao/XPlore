@@ -33,6 +33,9 @@ public class OnboardingActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("Onboarding finished", true);
         editor.commit();
+
+
+
         mViewPagerOnboarding = (ViewPager) findViewById(R.id.viewPagerOnboarding);
         mDotLayout = (LinearLayout) findViewById(R.id.linearLayoutOnboarding);
 
