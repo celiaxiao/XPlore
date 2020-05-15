@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+        // ------------------------
 
         CurvedBottomNavigationViewTabLayout tabLayout = findViewById(R.id.customBottomBar);
         mainPager = findViewById(R.id.main_pager);

@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +22,7 @@ public class OnboardingActivity extends AppCompatActivity {
     private SliderAdapterOnboarding sliderAdapter; // Adapter for viewPager
     private ImageView[] mDots; // Dot indicators
     private int dotsCount;
+    private Button startButton; // Button that leads to main activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +78,16 @@ public class OnboardingActivity extends AppCompatActivity {
         });
 
 
-    }
+        startButton = findViewById(R.id.startButtonOnboarding);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
 }
