@@ -20,7 +20,7 @@ public class SliderAdapterOnboarding extends PagerAdapter {
 
     int[] sliderGifs = {
             R.drawable.customization,
-            R.drawable.landmark,
+            R.drawable.landmark_shorten,
             R.drawable.multimedia};
 
     String[] sliderTitles = {
