@@ -12,25 +12,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".TourOverviewPage"
-            android:exported="true"
-            />
+            android:exported="true" />
+
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.Material">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Other pages -->
+        </activity>
+
+        <!-- Other pages -->
+
         <activity
             android:name=".LandmarkDetailsActivity"
             android:theme="@style/AppTheme.Material" />
-        <activity android:name=".SearchBarActivity"
-            android:theme="@style/ChipTheme">
-        </activity>
 
+        <activity
+            android:name=".SearchBarActivity"
+            android:theme="@style/ChipTheme"/>
     </application>
-
 </manifest>

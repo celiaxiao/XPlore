@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -16,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,6 +27,20 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This is the Places page which contains some places and a grid of landmarks.
@@ -125,6 +141,55 @@ public final class PlacesPageFragment extends Fragment {
 	}
 
 	/**
+	 * Json to string
+	 *
+	 * @param filename
+	 * @return json string
+	 */
+	public String loadJSONFromAsset(String filename) {
+		String json = null;
+		try {
+			InputStream is = getActivity().getAssets().open(filename);
+			int size = is.available();
+			byte[] buffer = new byte[size];
+			is.read(buffer);
+			is.close();
+			Log.d("WHAT", "finished reading buffer");
+			json = new String(buffer, "UTF-8");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		return json;
+	}
+
+	/**
+	 * Hash function for Place of the Day
+	 *
+	 * @param placeSize
+	 * @return the hash value
+	 */
+	private int hashDate(int placeSize) {
+		long ms = System.currentTimeMillis();
+		Date date = new Date(ms);
+		String str = String.format("%tj",date); // Get day-of-the-year (1 to 366)
+		String strY = String.format("%tY",date);
+		int day = Integer.parseInt(str);
+		int year = Integer.parseInt(strY);
+		if (year%4 == 0){ // Adjust value for leap year
+			if (day == 60){
+				day = day - (placeSize)/2;
+			}
+			else if (day > 60){
+				day = day - 1;
+			}
+		}
+		int hashValue = day % placeSize; // Get hash value
+		return hashValue;
+	}
+
+
+	/**
 	 * Called on creation of this view and inflates the page.
 	 *
 	 * @param inflater the inflater used to inflate the page
@@ -137,6 +202,7 @@ public final class PlacesPageFragment extends Fragment {
 		ViewGroup container,
 		Bundle savedInstanceState
 	) {
+
 		return inflater.inflate(R.layout.fragment_places_page, container, false);
 	}
 
@@ -149,6 +215,46 @@ public final class PlacesPageFragment extends Fragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+
+		String placesMinJsonString = loadJSONFromAsset("placesMin.json");
+		Gson gson = new Gson();
+		Type type = new TypeToken<HashMap<String, Location>>(){}.getType();
+		HashMap<String, Location> placesMinObject = gson.fromJson(placesMinJsonString, type);
+
+		int placeSize = placesMinObject.size();
+
+		int hashValue = hashDate(placeSize);
+
+		String key = placesMinObject.keySet().toArray()[hashValue].toString();
+
+		Location place = placesMinObject.get(key);
+
+		ImageView iv_restroom = (ImageView) getView().findViewById(R.id.POTD_restroom);
+		ImageView iv_cafe = (ImageView) getView().findViewById(R.id.POTD_cafe);
+		ImageView iv_restaurant = (ImageView) getView().findViewById(R.id.POTD_restaurant);
+		ImageView iv_busstop = (ImageView) getView().findViewById(R.id.POTD_busstop);
+		ImageView iv_parking = (ImageView) getView().findViewById(R.id.POTD_parking);
+		TextView tv_name = (TextView) getView().findViewById(R.id.POTD_name);
+		TextView tv_about = (TextView) getView().findViewById(R.id.POTD_about);
+
+		if (place.amenities.get("restroom")){
+			iv_restaurant.setColorFilter(Color.WHITE);
+		}
+		if (place.amenities.get("cafe")){
+			iv_cafe.setColorFilter(Color.WHITE);
+		}
+		if (place.amenities.get("restaurant")){
+			iv_restaurant.setColorFilter(Color.WHITE);
+		}
+		if (place.amenities.get("busstop")){
+			iv_busstop.setColorFilter(Color.WHITE);
+		}
+		if (place.amenities.get("parking")){
+			iv_parking.setColorFilter(Color.WHITE);
+		}
+		tv_name.setText(place.name);
+		tv_about.setText(place.about);
+
 
 		view
 			.findViewById(R.id.placesSearchBarMask)
