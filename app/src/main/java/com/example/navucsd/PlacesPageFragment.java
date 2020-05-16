@@ -244,24 +244,13 @@ public final class PlacesPageFragment extends Fragment {
 				landmarks[landmarks.length - 1]
 			));
 		} else {
-			landmarkTableLayout.addView(
-				getRow(
-					context,
-					BOTTOM_MARGIN,
-					GAP,
-					landmarks[landmarks.length - 2],
-					landmarks[landmarks.length - 1]
-				)
-			);
-			landmarkTableLayout.addView(
-				getRow(
-					context,
-					BOTTOM_MARGIN,
-					GAP,
-					landmarks[landmarks.length - 2],
-					landmarks[landmarks.length - 1]
-				)
-			);
+			landmarkTableLayout.addView(getRow(
+				context,
+				BOTTOM_MARGIN,
+				GAP,
+				landmarks[landmarks.length - 2],
+				landmarks[landmarks.length - 1]
+			));
 		}
 	}
 
