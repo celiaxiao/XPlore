@@ -2,6 +2,7 @@ package com.example.navucsd;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import java.util.ArrayList;
 
 /**
  * Adapter for ViewPager in HomeActivity
@@ -25,6 +28,9 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
             R.drawable.geisel};    // jump to images[1]
     private String[] nameSet = {"Fallen Star", "Geisel Library", "Price Center", "Fallen Star", "Geisel Library"};
     private String[] distanceSet = {"350m", "<100m", "300m", "350m", "<100m"};
+    private ImageView imageView;
+    private TextView textName;
+    private TextView textDistance;
 
     public AutoSlideViewPagerAdapter(Context context) {
         this.context = context;
@@ -46,12 +52,12 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
         // create a new view
         CardView view = (CardView) LayoutInflater.from(container.getContext())
                 .inflate(R.layout.main_page_places_item, container, false);
-        ImageView imageView = view.findViewById(R.id.tours_photo);
+        imageView = view.findViewById(R.id.tours_photo);
         imageView.setImageResource(images[position]);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        TextView textName = view.findViewById(R.id.tours_name);
+        textName = view.findViewById(R.id.tours_name);
         textName.setText(nameSet[position]);
-        TextView textDistance = view.findViewById(R.id.place_distance);
+        textDistance = view.findViewById(R.id.place_distance);
         textDistance.setText(distanceSet[position]);
 
         // add onClickListener for each card
@@ -76,4 +82,15 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
         vp.removeView(view);
 
     }
+
+    public void setContent(ArrayList<Pair<Location, Double>> places) {
+        nameSet[1] = nameSet[4] = places.get(0).first.name;
+        nameSet[0] = nameSet[3] = places.get(2).first.name;
+        nameSet[2] = places.get(1).first.name;
+        distanceSet[1] = distanceSet[4] = places.get(0).second + "km";
+        distanceSet[0] = distanceSet[3] = places.get(2).second + "km";
+        distanceSet[2] = places.get(1).second + "km";
+        notifyDataSetChanged();
+    }
+
 }
