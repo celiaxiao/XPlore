@@ -3,6 +3,7 @@ package com.example.navucsd;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.ImageView;
@@ -34,10 +35,18 @@ public class SplashPageActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("Splash", true);
-                startActivity(intent);
-                finish();
+                SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+                if (sharedPreferences.getBoolean("Onboarding finished", false)) {
+                    Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
+                    startActivity(intent);
+                    finish(); // Close onboarding
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("Splash", true);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         }, SPLASH_TIME_OUT);
 
