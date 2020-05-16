@@ -254,7 +254,7 @@ public final class PlacesPageFragment extends Fragment {
 		}
 		tv_name.setText(place.name);
 		tv_about.setText(place.about);
-
+		
 		view
 				.findViewById(R.id.cardViewPlaceOfTheDay)
 				.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
