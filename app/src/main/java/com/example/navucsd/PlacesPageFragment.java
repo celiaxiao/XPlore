@@ -238,7 +238,7 @@ public final class PlacesPageFragment extends Fragment {
 		TextView tv_about = (TextView) getView().findViewById(R.id.POTD_about);
 
 		if (place.amenities.get("restroom")){
-			iv_restaurant.setColorFilter(Color.WHITE);
+			iv_restroom.setColorFilter(Color.WHITE);
 		}
 		if (place.amenities.get("cafe")){
 			iv_cafe.setColorFilter(Color.WHITE);
@@ -255,6 +255,12 @@ public final class PlacesPageFragment extends Fragment {
 		tv_name.setText(place.name);
 		tv_about.setText(place.about);
 
+		view
+				.findViewById(R.id.cardViewPlaceOfTheDay)
+				.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+		view
+				.findViewById(R.id.cardViewPlaceOfTheDayDescription)
+				.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
 
 		view
 			.findViewById(R.id.placesSearchBarMask)
