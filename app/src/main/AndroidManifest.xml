@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SplashPageActivity"
+            android:exported="true"
+            />
+
+        <activity
             android:name=".OnboardingActivity"
             android:exported="true" />
         <activity
