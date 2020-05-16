@@ -26,7 +26,7 @@
         android:text="Xplore UCSD"
         android:textColor="#F0C308"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@+id/LogoImageView"
+        app:layout_constraintTop_toBottomOf="@+id/LogoImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@color/white"/>
@@ -40,7 +40,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LogoImageView"
+        app:layout_constraintTop_toBottomOf="@+id/AppNameTextView"
         android:background="@color/white"/>
 
     <ImageView
