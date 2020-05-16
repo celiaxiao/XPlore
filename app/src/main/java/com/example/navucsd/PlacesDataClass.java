@@ -2,7 +2,7 @@ package com.example.navucsd;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
+import com.example.navucsd.database.Location;
 
 public class PlacesDataClass {
     private String placesName;

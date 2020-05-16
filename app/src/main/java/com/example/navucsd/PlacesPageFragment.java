@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,6 +26,11 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.example.navucsd.database.Location;
+import com.example.navucsd.database.LocationDatabase;
+
+import java.util.ArrayList;
 
 /**
  * This is the Places page which contains some places and a grid of landmarks.
@@ -165,19 +171,27 @@ public final class PlacesPageFragment extends Fragment {
 		search_view_parent.removeView(search_mag_icon);
 		search_view_parent.addView(search_mag_icon);
 
-		LandmarkInfo[] landmarks = {
-			new LandmarkInfo(R.drawable.geisel, "Geisel Library"),
-			new LandmarkInfo(R.drawable.peterson, "Peterson Hall"),
-			new LandmarkInfo(R.drawable.mayer, "Mayer Hall"),
-			new LandmarkInfo(R.drawable.price_center_east, "Price Center East"),
-			new LandmarkInfo(R.drawable.rady, "Rady School of Mgt"),
-			new LandmarkInfo(R.drawable.geisel, "Geisel Library"),
-			new LandmarkInfo(R.drawable.peterson, "Peterson Hall"),
-			new LandmarkInfo(R.drawable.mayer, "Mayer Hall"),
-			new LandmarkInfo(R.drawable.price_center_east, "Price Center East"),
+		int[] res_ids = {
+			R.drawable.geisel,
+			R.drawable.peterson,
+			R.drawable.mayer,
+			R.drawable.price_center_east,
+			R.drawable.rady,
 		};
 
-		addLandmarks(getContext(), view, landmarks);
+		ArrayList<Location> locations = LocationDatabase.getLocations(getContext());
+
+		if (locations != null) {
+			ArrayList<LandmarkInfo> landmarks = new ArrayList<>(locations.size());
+
+			int count = 0;
+			for (Location loc : locations) {
+				landmarks.add(new LandmarkInfo(res_ids[count], loc.name));
+				count = (count + 1) % res_ids.length;
+			}
+
+			addLandmarks(getContext(), view, landmarks.toArray(new LandmarkInfo[0]));
+		}
 	}
 
 	/**
