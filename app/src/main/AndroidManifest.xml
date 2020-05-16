@@ -14,9 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashPageActivity"
-            android:exported="true"
-            />
-
+            android:exported="true" />
         <activity
             android:name=".OnboardingActivity"
             android:exported="true" />
@@ -35,9 +33,9 @@
         <activity
             android:name=".LandmarkDetailsActivity"
             android:theme="@style/AppTheme.Material" />
-        <activity
-            android:name=".SearchBarActivity"
-            android:theme="@style/ChipTheme" />
+        <activity android:name=".SearchBarActivity"
+            android:theme="@style/ChipTheme">
+        </activity>
     </application>
 
 </manifest>
