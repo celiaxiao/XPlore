@@ -80,12 +80,14 @@
 				app:layout_constraintTop_toBottomOf="@id/placesPlaceOfTheDay">
 
 				<ImageView
+					android:id="@+id/POTD_photo"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
 					android:scaleType="centerCrop"
 					android:src="@drawable/biomed_lib" />
 
 				<TextView
+					android:id="@+id/POTD_name"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="bottom|start"
@@ -98,76 +100,49 @@
 					android:textSize="25sp"
 					android:textStyle="bold" />
 
-				<com.google.android.material.chip.ChipGroup
-					android:layout_width="match_parent"
-					android:layout_height="19dp"
-					android:layout_gravity="bottom|start"
-					android:layout_marginStart="15.4dp"
-					android:layout_marginBottom="11dp">
-
-					<com.google.android.material.chip.Chip
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:lineHeight="12dp"
-						android:text="Library"
-						android:textColor="#2D2D2D"
-						android:textFontWeight="600"
-						android:textSize="10sp"
-						android:textStyle="bold"
-						app:chipBackgroundColor="@color/white"
-						app:chipMinHeight="19dp"
-						app:chipMinTouchTargetSize="0dp"
-						app:rippleColor="@android:color/transparent" />
-
-					<com.google.android.material.chip.Chip
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:lineHeight="12dp"
-						android:text="Biology"
-						android:textColor="#2D2D2D"
-						android:textFontWeight="600"
-						android:textSize="10sp"
-						android:textStyle="bold"
-						app:chipBackgroundColor="@color/white"
-						app:chipMinHeight="19dp"
-						app:chipMinTouchTargetSize="0dp"
-						app:rippleColor="@android:color/transparent" />
-
-				</com.google.android.material.chip.ChipGroup>
-
 				<LinearLayout
 					android:layout_width="wrap_content"
 					android:layout_height="14dp"
-					android:layout_gravity="bottom|end"
-					android:layout_marginEnd="9.4dp"
+					android:layout_gravity="bottom|start"
+					android:layout_marginStart="16dp"
 					android:layout_marginBottom="14dp"
 					android:divider="@drawable/places_divider"
 					android:showDividers="middle">
 
 					<ImageView
+						android:id="@+id/POTD_restroom"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:src="@drawable/ic_restroom" />
+						android:src="@drawable/ic_restroom"
+						android:tint="#949292" />
 
 					<ImageView
+						android:id="@+id/POTD_cafe"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:src="@drawable/ic_local_cafe" />
+						android:src="@drawable/ic_local_cafe"
+						android:tint="#949292" />
 
 					<ImageView
+						android:id="@+id/POTD_restaurant"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:src="@drawable/ic_restaurant" />
+						android:src="@drawable/ic_restaurant"
+						android:tint="#949292" />
 
 					<ImageView
+						android:id="@+id/POTD_busstop"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:src="@drawable/ic_directions_bus" />
+						android:src="@drawable/ic_directions_bus"
+						android:tint="#949292" />
 
 					<ImageView
+						android:id="@+id/POTD_parking"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:src="@drawable/ic_local_parking" />
+						android:src="@drawable/ic_local_parking"
+						android:tint="#949292" />
 
 				</LinearLayout>
 			</androidx.cardview.widget.CardView>
@@ -183,12 +158,16 @@
 				app:layout_constraintTop_toBottomOf="@id/cardViewPlaceOfTheDay">
 
 				<TextView
+					android:id="@+id/POTD_about"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="top|left"
 					android:layout_marginStart="15dp"
 					android:layout_marginTop="13dp"
+					android:layout_marginEnd="15dp"
 					android:lineSpacingMultiplier="1.2"
+					android:maxLines="3"
+					android:ellipsize="end"
 					android:text="@string/places_card_description"
 					android:textColor="@color/black"
 					android:textSize="15sp" />
