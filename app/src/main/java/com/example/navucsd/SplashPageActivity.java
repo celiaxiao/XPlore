@@ -29,7 +29,7 @@ public class SplashPageActivity extends AppCompatActivity {
 
 
         ImageView splashPageGifImageView = (ImageView) findViewById(R.id.SplashPageGifImageView);
-        Glide.with(this).load(getDrawable(R.drawable.splash_page_loading_dots)).into(splashPageGifImageView);
+        Glide.with(this).load(getDrawable(R.drawable.dots_loading)).into(splashPageGifImageView);
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
