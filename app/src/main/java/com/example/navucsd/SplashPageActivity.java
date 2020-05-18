@@ -15,7 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashPageActivity extends AppCompatActivity {
-    public static final int SPLASH_TIME_OUT = 2000;
+    public static final int SPLASH_TIME_OUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
