@@ -208,7 +208,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
             }
         });
 
-        // Set up related stories
+        // Set up related videos
         relatedVideosRecycler = view.findViewById(R.id.related_videos_recycler);
         relatedVideosRecycler.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
