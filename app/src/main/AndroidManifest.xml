@@ -44,7 +44,8 @@
         </activity>
 
         <activity
-            android:name=".TourOverviewPage">
+            android:name=".TourOverviewPage"
+            android:exported="true">
         </activity>
     </application>
 </manifest>
