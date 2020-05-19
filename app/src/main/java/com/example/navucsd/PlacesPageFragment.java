@@ -9,13 +9,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-
 import android.text.InputType;
 import android.util.Log;
 import android.util.TypedValue;
@@ -28,6 +21,14 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
+import com.example.navucsd.database.Location;
+import com.example.navucsd.database.LocationDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,10 +38,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * This is the Places page which contains some places and a grid of landmarks.
@@ -254,7 +251,7 @@ public final class PlacesPageFragment extends Fragment {
 		}
 		tv_name.setText(place.name);
 		tv_about.setText(place.about);
-		
+
 		view
 				.findViewById(R.id.cardViewPlaceOfTheDay)
 				.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
@@ -277,19 +274,27 @@ public final class PlacesPageFragment extends Fragment {
 		search_view_parent.removeView(search_mag_icon);
 		search_view_parent.addView(search_mag_icon);
 
-		LandmarkInfo[] landmarks = {
-			new LandmarkInfo(R.drawable.geisel, "Geisel Library"),
-			new LandmarkInfo(R.drawable.peterson, "Peterson Hall"),
-			new LandmarkInfo(R.drawable.mayer, "Mayer Hall"),
-			new LandmarkInfo(R.drawable.price_center_east, "Price Center East"),
-			new LandmarkInfo(R.drawable.rady, "Rady School of Mgt"),
-			new LandmarkInfo(R.drawable.geisel, "Geisel Library"),
-			new LandmarkInfo(R.drawable.peterson, "Peterson Hall"),
-			new LandmarkInfo(R.drawable.mayer, "Mayer Hall"),
-			new LandmarkInfo(R.drawable.price_center_east, "Price Center East"),
+		int[] res_ids = {
+			R.drawable.geisel,
+			R.drawable.peterson,
+			R.drawable.mayer,
+			R.drawable.price_center_east,
+			R.drawable.rady,
 		};
 
-		addLandmarks(getContext(), view, landmarks);
+		ArrayList<Location> locations = LocationDatabase.getLocations(getContext());
+
+		if (locations != null) {
+			ArrayList<LandmarkInfo> landmarks = new ArrayList<>(locations.size());
+
+			int count = 0;
+			for (Location loc : locations) {
+				landmarks.add(new LandmarkInfo(res_ids[count], loc.name));
+				count = (count + 1) % res_ids.length;
+			}
+
+			addLandmarks(getContext(), view, landmarks.toArray(new LandmarkInfo[0]));
+		}
 	}
 
 	/**
@@ -342,24 +347,13 @@ public final class PlacesPageFragment extends Fragment {
 				landmarks[landmarks.length - 1]
 			));
 		} else {
-			landmarkTableLayout.addView(
-				getRow(
-					context,
-					BOTTOM_MARGIN,
-					GAP,
-					landmarks[landmarks.length - 2],
-					landmarks[landmarks.length - 1]
-				)
-			);
-			landmarkTableLayout.addView(
-				getRow(
-					context,
-					BOTTOM_MARGIN,
-					GAP,
-					landmarks[landmarks.length - 2],
-					landmarks[landmarks.length - 1]
-				)
-			);
+			landmarkTableLayout.addView(getRow(
+				context,
+				BOTTOM_MARGIN,
+				GAP,
+				landmarks[landmarks.length - 2],
+				landmarks[landmarks.length - 1]
+			));
 		}
 	}
 

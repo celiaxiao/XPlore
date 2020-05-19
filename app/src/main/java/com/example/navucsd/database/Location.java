@@ -1,4 +1,4 @@
-package com.example.navucsd;
+package com.example.navucsd.database;
 
 import com.example.navucsd.R;
 
