@@ -48,14 +48,21 @@ public class MainActivity extends AppCompatActivity {
             super(fm);
         }
 
+        /**
+         * Returns the fragment for each position.
+         *
+         * @param position the position queried
+         * @return the fragment for each position
+         */
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 0:
-                    return LandmarkDetailsOverviewFragment.newInstance("","");
-                case 2:
-                    return LandmarkDetailsHistoryFragment.newInstance("","");
+                case 0: return new PlacesPageFragment();
+                case 1: return new MainPageFragment();
+                case 2: return new ToursPageFragment();
             }
+            // If this happens there must be a bug in our code.
+            // TODO error reporting
             return new MainPageFragment();
         }
 

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/tours_fragment"
-        android:name="com.example.navucsd.ToursFragment">
+        android:name="com.example.navucsd.ToursPageFragment">
     </fragment>
 
 </LinearLayout>
