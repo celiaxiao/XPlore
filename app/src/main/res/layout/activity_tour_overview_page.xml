@@ -4,7 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TourOverviewPage">
+    tools:context=".TourOverviewPage"
+    android:background="#182B49">
+
+    <ImageView
+        android:id="@+id/tourImageView"
+        android:layout_width="373dp"
+        android:layout_height="220dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="38dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/tourNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tourImageView"
+        android:layout_marginTop="22dp"
+        android:textAllCaps="false"
+        android:text="Tour Name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/tourDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tourNameTextView"
+        android:layout_marginTop="15dp"
+        android:text="Tour Descriptions"
+        android:textColor="@color/white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tourTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tourDescriptionTextView"
+        android:layout_marginTop="18dp"
+        android:text="Tour Time"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        />
+
+
+    <Button
+        android:id="@+id/startButtonTourOverviewPage"
+        android:layout_width="157dp"
+        android:layout_height="45dp"
+        android:background="@drawable/ic_round_corner_button"
+        android:text="Start The Tour"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tourTimeTextView"
+        android:layout_marginTop="18dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_tour_overview_page"
@@ -15,83 +82,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/startButtonTourOverviewPage"
+        android:layout_marginTop="38dp"
         app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/AddAditionalStopsTextView"
-        android:layout_width="240dp"
-        android:layout_height="15dp"
-        android:text="Add aditional stops you want to visit"
-        app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="288dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="377dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="422dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="89dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="40dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action_add_button_tour_overview_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="12.37dp"
-        android:layout_marginBottom="12.37dp"
-        android:backgroundTint="#182B49"
-        android:scaleType="center"
-        app:borderWidth="0dp"
-        app:fabCustomSize="34dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toStartOf="@+id/AddAditionalStopsTextView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="0.909"
-        app:srcCompat="@drawable/ic_add_white_8dp"
-        app:maxImageSize="14dp"/>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="110dp"
-        android:layout_height="39dp"
-        android:background="@drawable/ic_round_corner_button"
-        android:text="START"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
