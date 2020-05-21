@@ -19,10 +19,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.Material">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity> <!-- Other pages -->
         <activity
             android:name=".LandmarkDetailsActivity"
@@ -31,7 +28,6 @@
             android:theme="@style/ChipTheme">
 
         </activity>
-
     </application>
 
 </manifest>

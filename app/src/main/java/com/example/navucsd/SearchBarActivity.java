@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -88,7 +89,10 @@ public class SearchBarActivity extends AppCompatActivity {
                 dbAmentityList[i][j]=locationList.get(i).amenities.get(amenFilter[j]);
             }
             //TODO:fix the hard code
-            availability[i]=getResources( ).getStringArray(R.array.availability)[i];
+            //availability[i]=getResources( ).getStringArray(R.array.availability)[i];
+            //temporarily hide the availability
+            availability[i]="";
+            //ArrayList<Pair<Location, Double>> distancePair=sbdatebase.locationWithDistance();
             distances[i]=getResources( ).getStringArray(R.array.distances)[i];
 
         }
