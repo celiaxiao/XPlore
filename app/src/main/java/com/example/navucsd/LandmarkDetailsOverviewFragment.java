@@ -1,14 +1,12 @@
 package com.example.navucsd;
 
 import android.graphics.Rect;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -31,9 +29,11 @@ import android.widget.VideoView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.security.interfaces.RSAKey;
-import java.util.concurrent.TimeUnit;
+import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,14 +41,12 @@ import java.util.concurrent.TimeUnit;
  * create an instance of this fragment.
  */
 public class LandmarkDetailsOverviewFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "placeName";
+    private static final String DEFAULT_LOCATION = "Geisel Library";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String placeName;
+    private SearchBarDB database;
+    private Location currLocation;
 
     // Audio playing related fields
     private MediaPlayer mediaPlayer;
@@ -60,9 +58,12 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     private Runnable seekBarRunnable;
     private final int UPDATE_INTERVAL = 50;
 
+    // Description
+    private TextView description;
+
     // Amenities
     private RecyclerView amenitiesRecycler;
-    private AmentitiesAdapter amenitiesAdapter;
+    private AmenitiesAdapter amenitiesAdapter;
     private final int AMENITIES_NUM_COL = 2;
 
     // Related Videos
@@ -94,16 +95,14 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param placeName Parameter 1.
      * @return A new instance of fragment LandmarkDetailsOverviewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LandmarkDetailsOverviewFragment newInstance(String param1, String param2) {
+    public static LandmarkDetailsOverviewFragment newInstance(String placeName) {
         LandmarkDetailsOverviewFragment fragment = new LandmarkDetailsOverviewFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM1, placeName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -111,9 +110,13 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        database = new SearchBarDB(getContext(), "one by one");
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            placeName = getArguments().getString(ARG_PARAM1);
+            currLocation = database.getByName(placeName);
+        }
+        else {
+            currLocation = database.getByName(DEFAULT_LOCATION);
         }
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.troll_song);
         mediaPlayer.setWakeMode(getContext(), PowerManager.PARTIAL_WAKE_LOCK);
@@ -129,6 +132,9 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        description = view.findViewById(R.id.overview_description);
+        description.setText(currLocation.getAbout());
 
         // Set up Seekbar
         int duration = mediaPlayer.getDuration();
@@ -180,27 +186,16 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
 
         // Set up amenities table
         amenitiesRecycler = view.findViewById(R.id.amenities_content_recycler);
-        amenitiesAdapter = new AmentitiesAdapter();
+        amenitiesAdapter = new AmenitiesAdapter();
+        amenitiesAdapter.setAmenities(currLocation.getAmenities());
         DividerItemDecoration dividerItemDecorationAmenities = new DividerItemDecoration(getContext(),
-                LinearLayoutManager.VERTICAL) {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                int position = parent.getChildAdapterPosition(view);
-                int px_16 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, getResources().getDisplayMetrics()));
-                // hide the divider for the last child
-                if (position == state.getItemCount() - 1) {
-                    outRect.set(0, 0, px_16, 0);
-                } else {
-                    super.getItemOffsets(outRect, view, parent, state);
-                }
-            }
-        };
+                LinearLayoutManager.VERTICAL);
         dividerItemDecorationAmenities.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_12dp));
         amenitiesRecycler.addItemDecoration(dividerItemDecorationAmenities);
         amenitiesRecycler.setLayoutManager(new GridLayoutManager(getContext(), AMENITIES_NUM_COL));
         amenitiesRecycler.setAdapter(amenitiesAdapter);
         amenitiesRecycler.setNestedScrollingEnabled(false);
-        
+
         navButton = view.findViewById(R.id.overview_nav_button);
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -365,10 +360,37 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
 //                TimeUnit.MILLISECONDS.toSeconds(currTime) % TimeUnit.MINUTES.toSeconds(1));
     }
 
-    private class AmentitiesAdapter extends RecyclerView.Adapter<AmentitiesAdapter.MyViewHolder> {
+    private class AmenitiesAdapter extends RecyclerView.Adapter<AmenitiesAdapter.MyViewHolder> {
 
-        private int[] icons = {R.drawable.ic_wc_24dp, R.drawable.ic_bus_24dp, R.drawable.ic_local_parking_24dp, R.drawable.ic_restaurant_24dp, R.drawable.ic_breakfast_24dp};
-        private String[] names = {"Restroom", "Bus Stop", "Parking", "Restaurant", "Cafe"};
+        private ArrayList<Integer> icons = new ArrayList<Integer>() {
+            {
+                add(R.drawable.ic_wc_24dp);
+                add(R.drawable.ic_bus_24dp);
+                add(R.drawable.ic_local_parking_24dp);
+                add(R.drawable.ic_restaurant_24dp);
+                add(R.drawable.ic_breakfast_24dp);
+            }
+        };
+        private ArrayList<String> names = new ArrayList<String>() {
+            {
+                add("Restroom");
+                add("Bus Stop");
+                add("Parking");
+                add("Restaurant");
+                add("Cafe");
+            }
+        };
+        private String[] nameMap = {"restroom","busstop","parking","restaurant","cafe"};
+
+        public void setAmenities(HashMap<String, Boolean> amenities) {
+            for (int i = nameMap.length - 1; i >= 0; i--) {
+                if (!amenities.get(nameMap[i])) {
+                    icons.remove(i);
+                    names.remove(i);
+                }
+            }
+            notifyDataSetChanged();
+        }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
@@ -384,8 +406,8 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         }
 
         @Override
-        public AmentitiesAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                         int viewType) {
+        public AmenitiesAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                int viewType) {
             LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.overview_amenities_item, parent, false);
             MyViewHolder vh = new MyViewHolder(v);
@@ -394,14 +416,14 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            holder.icon.setImageResource(icons[position]);
-            holder.textView.setText(names[position]);
+            holder.icon.setImageResource(icons.get(position));
+            holder.textView.setText(names.get(position));
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return icons.length;
+            return icons.size();
         }
     }
 
@@ -416,7 +438,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         // Create new views (invoked by the layout manager)
         @Override
         public RelatedVideosAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                                   int viewType) {
+                                                                    int viewType) {
             // create a new view
             CardView v = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.overview_videos_item, parent, false);
@@ -477,7 +499,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         // Create new views (invoked by the layout manager)
         @Override
         public RelatedStoriesAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                                    int viewType) {
+                                                                     int viewType) {
             // create a new view
             CardView v = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.overview_stories_item, parent, false);

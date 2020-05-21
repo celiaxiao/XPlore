@@ -63,7 +63,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return LandmarkDetailsOverviewFragment.newInstance("","");
+                    return LandmarkDetailsOverviewFragment.newInstance("Geisel Library");
                 case 1:
                     return LandmarkDetailsHistoryFragment.newInstance("","");
             }
@@ -80,6 +80,10 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return TAB_TITLES[position];
         }
+    }
+
+    public void setTitle(String placeName) {
+        collapsingToolbarLayout.setTitle(placeName);
     }
 
 }
