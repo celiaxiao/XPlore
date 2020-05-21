@@ -363,19 +363,18 @@ public final class PlacesPageFragment extends Fragment {
 	 *
 	 * @param context the context used when creating children
 	 * @param bottomMargin the bottom margin of this row
-	 * @param gap the space in between the landmark blocks, must be multiple of 2
+	 * @param gap the space in between the landmark blocks
 	 * @param landmarks the landmarks, only 1 to 2 are supported
 	 * @return the new TableRow
-	 * @throws IllegalArgumentException when {@code gap} is not a multiple of 2 or
-	 * either {@code bottomMargin} or {@code gap} is negative
+	 * @throws IllegalArgumentException when either {@code bottomMargin} or {@code gap} is negative
 	 */
 	private TableRow getRow(
 		Context context,
 		final int bottomMargin,
-		final int gap, // TODO fix gap must be multiple of 2; try using it on head
+		final int gap,
 		LandmarkInfo... landmarks
 	) {
-		if (bottomMargin < 0 || gap < 0 || gap % 2 == 1) throw new IllegalArgumentException();
+		if (bottomMargin < 0 || gap < 0) throw new IllegalArgumentException();
 
 		// TODO make this a constant too somehow
 		final double ASPECT_RATIO = 5.0 / 4;
