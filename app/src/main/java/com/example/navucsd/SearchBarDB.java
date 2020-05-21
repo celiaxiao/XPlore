@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.util.Pair;
 
+import com.example.navucsd.database.Location;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

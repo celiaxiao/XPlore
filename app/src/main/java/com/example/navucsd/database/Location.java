@@ -1,4 +1,4 @@
-package com.example.navucsd;
+package com.example.navucsd.database;
 
 import com.example.navucsd.R;
 
@@ -8,9 +8,10 @@ import android.util.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/*
+    beautiful location database
+ */
 public class Location {
-
     public  String name;
     public Pair coordinates;
     public String about;
@@ -26,7 +27,6 @@ public class Location {
     public String audio;
     public ArrayList<String> videos;
     public ArrayList<String> links;
-
 
     public Location(String name, Pair coordinates, String about, String thumbnailPhoto,
                     ArrayList<String> otherPhotos, HashMap<String,Boolean> amenities,
@@ -46,22 +46,53 @@ public class Location {
         this.links = links;
         this.videos = videos;
     }
-}
 
-class Module{
-    public String name;
-    public String description;
-    //These are video links
-    public ArrayList<String> videos;
-    //These are video links
-    public ArrayList<String> links;
-
-
-    public Module(String name, String description, ArrayList<String> videos, ArrayList<String> links) {
-        this.name = name;
-        this.description = description;
-        this.videos = videos;
-        this.links = links;
+    public String getName() {
+        return name;
     }
 
+    public Pair getCoordinates() {
+        return coordinates;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public String getThumbnailPhoto() {
+        return thumbnailPhoto;
+    }
+
+    public ArrayList<String> getOtherPhotos() {
+        return otherPhotos;
+    }
+
+    public HashMap<String, Boolean> getAmenities() {
+        return amenities;
+    }
+
+    public ArrayList<String> getDescriptive() {
+        return descriptive;
+    }
+
+    public ArrayList<String> getRelatedPlaces() {
+        return relatedPlaces;
+    }
+
+    public ArrayList<String> getRelatedTours() {
+        return relatedTours;
+    }
+
+    public String getAudio() {
+        return audio;
+    }
+
+    public ArrayList<String> getVideos() {
+        return videos;
+    }
+
+    public ArrayList<String> getLinks() {
+        return links;
+    }
 }
+

@@ -3,6 +3,8 @@
     package="com.example.navucsd">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -12,22 +14,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".TourOverviewPage"
-            android:exported="true"
-            />
+
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.Material">
+            android:theme="@style/AppTheme.Material"/>
 
-        </activity> <!-- Other pages -->
+
+        <!-- Other pages -->
+
         <activity
             android:name=".LandmarkDetailsActivity"
             android:theme="@style/AppTheme.Material" />
-        <activity android:name=".SearchBarActivity"
-            android:theme="@style/ChipTheme">
 
+        <activity
+            android:name=".SearchBarActivity"
+            android:theme="@style/ChipTheme"/>
+
+        <activity
+            android:name=".SplashPageActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-    </application>
 
+        <activity
+            android:name=".OnboardingActivity">
+        </activity>
+
+        <activity
+            android:name=".TourOverviewPage"
+            android:exported="true" />
+
+
+
+    </application>
 </manifest>
