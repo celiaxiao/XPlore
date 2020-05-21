@@ -138,53 +138,26 @@ public final class PlacesPageFragment extends Fragment {
 	}
 
 	/**
-	 * Json to string
+	 * Hash function to get the place of the day.
 	 *
-	 * @param filename
-	 * @return json string
+	 * @param size the size of the array, must be at least 1
+	 * @return the hash value (the index into the array)
 	 */
-	public String loadJSONFromAsset(String filename) {
-		String json = null;
-		try {
-			InputStream is = getActivity().getAssets().open(filename);
-			int size = is.available();
-			byte[] buffer = new byte[size];
-			is.read(buffer);
-			is.close();
-			Log.d("WHAT", "finished reading buffer");
-			json = new String(buffer, "UTF-8");
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			return null;
-		}
-		return json;
-	}
-
-	/**
-	 * Hash function for Place of the Day
-	 *
-	 * @param placeSize
-	 * @return the hash value
-	 */
-	private int hashDate(int placeSize) {
-		long ms = System.currentTimeMillis();
-		Date date = new Date(ms);
-		String str = String.format("%tj",date); // Get day-of-the-year (1 to 366)
-		String strY = String.format("%tY",date);
-		int day = Integer.parseInt(str);
-		int year = Integer.parseInt(strY);
-		if (year%4 == 0){ // Adjust value for leap year
-			if (day == 60){
-				day = day - (placeSize)/2;
-			}
-			else if (day > 60){
+	private int hashDate(int size) {
+		Date date = new Date(System.currentTimeMillis());
+		// Get day-of-the-year (1 to 366)
+		int day = Integer.parseInt(String.format("%tj", date));
+		int year = Integer.parseInt(String.format("%tY", date));
+		// Adjust value for leap year
+		if (year % 4 == 0) {
+			if (day == 60) {
+				day = day - size / 2;
+			} else if (day > 60) {
 				day = day - 1;
 			}
 		}
-		int hashValue = day % placeSize; // Get hash value
-		return hashValue;
+		return day % size;
 	}
-
 
 	/**
 	 * Called on creation of this view and inflates the page.
@@ -213,18 +186,24 @@ public final class PlacesPageFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		String placesMinJsonString = loadJSONFromAsset("placesMin.json");
-		Gson gson = new Gson();
-		Type type = new TypeToken<HashMap<String, Location>>(){}.getType();
-		HashMap<String, Location> placesMinObject = gson.fromJson(placesMinJsonString, type);
+		view
+			.findViewById(R.id.placesSearchBarMask)
+			.setOnClickListener(getOnClickListener(SearchBarActivity.class));
 
-		int placeSize = placesMinObject.size();
+		SearchView searchView = view.findViewById(R.id.placesSearchView);
+		searchView.setInputType(InputType.TYPE_NULL);
+		ImageView search_mag_icon = searchView.findViewById(
+				androidx.appcompat.R.id.search_mag_icon
+		);
+		ViewGroup search_view_parent = (ViewGroup) search_mag_icon.getParent();
+		// the parent is probably a linear layout, so remove and add
+		// to put the icon at the end instead of the front
+		search_view_parent.removeView(search_mag_icon);
+		search_view_parent.addView(search_mag_icon);
 
-		int hashValue = hashDate(placeSize);
-
-		String key = placesMinObject.keySet().toArray()[hashValue].toString();
-
-		Location place = placesMinObject.get(key);
+		ArrayList<Location> locations = LocationDatabase.getLocations(getContext());
+		if (locations == null) return;
+		Location place = locations.get(hashDate(locations.size()));
 
 		ImageView iv_restroom = (ImageView) getView().findViewById(R.id.POTD_restroom);
 		ImageView iv_cafe = (ImageView) getView().findViewById(R.id.POTD_cafe);
@@ -253,26 +232,11 @@ public final class PlacesPageFragment extends Fragment {
 		tv_about.setText(place.about);
 
 		view
-				.findViewById(R.id.cardViewPlaceOfTheDay)
-				.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+			.findViewById(R.id.cardViewPlaceOfTheDay)
+			.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
 		view
-				.findViewById(R.id.cardViewPlaceOfTheDayDescription)
-				.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
-
-		view
-			.findViewById(R.id.placesSearchBarMask)
-			.setOnClickListener(getOnClickListener(SearchBarActivity.class));
-
-		SearchView searchView = view.findViewById(R.id.placesSearchView);
-		searchView.setInputType(InputType.TYPE_NULL);
-		ImageView search_mag_icon = searchView.findViewById(
-				androidx.appcompat.R.id.search_mag_icon
-		);
-		ViewGroup search_view_parent = (ViewGroup) search_mag_icon.getParent();
-		// the parent is probably a linear layout, so remove and add
-		// to put the icon at the end instead of the front
-		search_view_parent.removeView(search_mag_icon);
-		search_view_parent.addView(search_mag_icon);
+			.findViewById(R.id.cardViewPlaceOfTheDayDescription)
+			.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
 
 		int[] res_ids = {
 			R.drawable.geisel,
@@ -282,19 +246,15 @@ public final class PlacesPageFragment extends Fragment {
 			R.drawable.rady,
 		};
 
-		ArrayList<Location> locations = LocationDatabase.getLocations(getContext());
+		ArrayList<LandmarkInfo> landmarks = new ArrayList<>(locations.size());
 
-		if (locations != null) {
-			ArrayList<LandmarkInfo> landmarks = new ArrayList<>(locations.size());
-
-			int count = 0;
-			for (Location loc : locations) {
-				landmarks.add(new LandmarkInfo(res_ids[count], loc.name));
-				count = (count + 1) % res_ids.length;
-			}
-
-			addLandmarks(getContext(), view, landmarks.toArray(new LandmarkInfo[0]));
+		int count = 0;
+		for (Location loc : locations) {
+			 landmarks.add(new LandmarkInfo(res_ids[count], loc.name));
+			 count = (count + 1) % res_ids.length;
 		}
+
+		addLandmarks(getContext(), view, landmarks.toArray(new LandmarkInfo[0]));
 	}
 
 	/**
