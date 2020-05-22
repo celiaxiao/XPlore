@@ -27,13 +27,11 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
 
     // ViewHolder Class
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public FloatingActionButton fabDeleteButton;
         public CardView cardView;
         public TextView textView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            fabDeleteButton = (FloatingActionButton) itemView.findViewById(R.id.fab_delete_button_tour_overview_page);
             textView = (TextView) itemView.findViewById(R.id.testTextView);
         }
     }
@@ -51,13 +49,6 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String item = items.get(position);
         holder.textView.setText(item.toString());
-        holder.fabDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                items.remove(position);
-                notifyDataSetChanged();
-            }
-        });
     }
 
     @Override

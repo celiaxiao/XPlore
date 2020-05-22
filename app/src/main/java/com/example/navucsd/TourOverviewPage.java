@@ -25,8 +25,9 @@ public class TourOverviewPage extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private String tourName = "UC San Diego’s Landmark Tour";
-    private String tourTime = "90 Min";
     private String tourDescription = "A tour that highlights all must-see landmarks in UC San Diego";
+    private String tourTime = "90 Min";
+    private String tourPlaceNumber = "5 Stops";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +44,13 @@ public class TourOverviewPage extends AppCompatActivity {
         TextView tourNameTextView = (TextView) findViewById(R.id.tourNameTextView);
         TextView tourDescriptionTextView = (TextView) findViewById(R.id.tourDescriptionTextView);
         TextView tourTimeTextView = (TextView) findViewById(R.id.tourTimeTextView);
+        TextView tourPlaceNumberTextView = (TextView) findViewById(R.id.tourPlaceNumberTextView);
 
         tourImageView.setImageDrawable(getDrawable(R.drawable.geisel_pic));
         tourNameTextView.setText(tourName);
         tourDescriptionTextView.setText(tourDescription);
         tourTimeTextView.setText(tourTime);
+        tourPlaceNumberTextView.setText(tourPlaceNumber);
         // --------------------------------
 
 
