@@ -9,8 +9,10 @@
 
     <ImageView
         android:id="@+id/tourImageView"
-        android:layout_width="373dp"
-        android:layout_height="220dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.908"
+        app:layout_constraintDimensionRatio="1.695:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="38dp"
@@ -19,42 +21,49 @@
 
     <TextView
         android:id="@+id/tourNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tourImageView"
-        android:layout_marginTop="22dp"
-        android:textAllCaps="false"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
         android:text="Tour Name"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/white"/>
+        app:layout_constraintDimensionRatio="8:1"
+        app:layout_constraintStart_toStartOf="@id/tourImageView"
+        app:layout_constraintTop_toBottomOf="@id/tourImageView"
+        app:layout_constraintWidth_percent="0.808" />
 
     <TextView
         android:id="@+id/tourDescriptionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tourNameTextView"
-        android:layout_marginTop="15dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:autoSizeTextType="uniform"
         android:text="Tour Descriptions"
+        android:textAlignment="viewStart"
         android:textColor="@color/white"
-        android:textSize="13sp"/>
+        android:textSize="13sp"
+        app:layout_constraintDimensionRatio="20:1"
+        app:layout_constraintStart_toStartOf="@id/tourNameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/tourNameTextView"
+        app:layout_constraintWidth_percent="0.927" />
 
     <TextView
         android:id="@+id/tourTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tourDescriptionTextView"
         android:layout_marginTop="18dp"
         android:text="Tour Time"
-        android:textSize="20sp"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tourDescriptionTextView" />
 
 
     <Button
@@ -77,12 +86,13 @@
         android:id="@+id/recyclerview_tour_overview_page"
         android:layout_width="409dp"
         android:layout_height="0dp"
-        android:scrollbars="vertical"
+        android:layout_marginTop="38dp"
         android:overScrollMode="never"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startButtonTourOverviewPage"
-        android:layout_marginTop="38dp"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
