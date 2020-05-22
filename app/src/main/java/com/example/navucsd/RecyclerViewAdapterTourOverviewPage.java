@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,11 +29,11 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
     // ViewHolder Class
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CardView cardView;
-        public TextView textView;
+        public TextView placeNameTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.testTextView);
+            placeNameTextView = (TextView) itemView.findViewById(R.id.placeNameTextView);
         }
     }
 
@@ -48,11 +49,12 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String item = items.get(position);
-        holder.textView.setText(item.toString());
+        holder.placeNameTextView.setText(item.toString());
     }
 
     @Override
     public int getItemCount() {
         return items.size();
     }
+
 }
