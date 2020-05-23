@@ -57,4 +57,27 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
         return items.size();
     }
 
+
+    /**
+     * Customized Remove function
+     * Remove the item at the specified position
+     * @param position the specified position in RecyclerView
+     */
+    public void removeItem(int position) {
+        items.remove(position);
+        notifyItemChanged(position);
+    }
+
+
+    /**
+     * Customized function to restore removed item
+     * TODO: Change the param String item to Places object to get
+     * more info from places such as amenities
+     * @param item a string that represents an item
+     * @param position the specified item to restore item
+     */
+    public void restoreItem(String item, int position) {
+        items.add(position, item);
+        notifyItemChanged(position);
+    }
 }

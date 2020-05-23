@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="4dp">
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
@@ -39,12 +40,83 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:text="Place Name"
+                />
+
+            <ImageView
+                android:id="@+id/restroomIconTourOverview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent="0.06"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+
+                android:src="@drawable/g1"
+                />
+
+            <ImageView
+                android:id="@+id/cafeIconTourOverview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/restroomIconTourOverview"
+                app:layout_constraintWidth_percent="0.06"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
+
+                android:src="@drawable/g2"
+                />
+
+            <ImageView
+                android:id="@+id/restaurantIconTourOverview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cafeIconTourOverview"
+                app:layout_constraintWidth_percent="0.06"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
+
+                android:src="@drawable/g3"
+                />
+
+            <ImageView
+                android:id="@+id/busstopIconTourOverview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/restaurantIconTourOverview"
+                app:layout_constraintWidth_percent="0.06"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
+
+                android:src="@drawable/g4"
+                />
+
+            <ImageView
+                android:id="@+id/parkinglotIconTourOverview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/busstopIconTourOverview"
+                app:layout_constraintWidth_percent="0.06"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
+
+                android:src="@drawable/g5"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-    
+
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"

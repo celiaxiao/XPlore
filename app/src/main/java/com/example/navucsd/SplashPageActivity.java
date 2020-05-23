@@ -35,6 +35,9 @@ public class SplashPageActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+
+                // TODO: Debug? SharedPreference does not work as expected,
+                //  onboarding page doesn't start
                 SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
                 if (sharedPreferences.getBoolean("Onboarding finished", false)) {
                     Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
