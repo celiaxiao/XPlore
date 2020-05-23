@@ -114,7 +114,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="12dp"
                     android:text="90 Mins"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
@@ -122,12 +121,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_location_grey_24dp"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/ic_main_page_location"
                     android:tint="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
                     android:text="5 Stops"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
@@ -225,7 +226,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="12dp"
                     android:text="45 Mins"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
@@ -233,12 +233,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_location_grey_24dp"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/ic_main_page_location"
                     android:tint="@color/colorPrimaryDark" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
                     android:text="6 Stops"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
@@ -336,7 +338,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="12dp"
                     android:text="3 Hours"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
@@ -344,12 +345,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_location_grey_24dp"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/ic_main_page_location"
                     android:tint="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
                     android:text="9 Stops"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
