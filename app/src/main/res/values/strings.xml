@@ -147,8 +147,17 @@
         <item>200m</item>
     </string-array>
 
+    <string name="main_page_places_near_you">Places Near You</string>
+    <string name="main_page_must_see_landmarks_title">Must-See Landmarks</string>
+    <string name="main_page_must_see_landmarks_subtitle">Eye-opening sights for every tourist to UC San Diego.</string>
+    <string name="main_page_must_see_landmarks_tour_name">UCSD’s Landmark Tour</string>
+    <string name="main_page_academic_spots_title">Academic Spots</string>
+    <string name="main_page_academic_spots_subtitle">Learn about the academics of this top 10 public university.</string>
+    <string name="main_page_academic_spots_tour_name">Academic Highlights Tour</string>
+    <string name="main_page_campus_life_title">Campus Life</string>
+    <string name="main_page_campus_life_subtitle">What is it like being a student here at UC San Diego?</string>
+    <string name="main_page_campus_life_tour_name">One-day as Student Tour</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="must_see_landmarks_subtitle">Eye-opening sights for every tourist to UC San Diego.</string>
-    <string name="main_page_must_see_landmarks_title">Must-See Landmarks</string>
 </resources>
