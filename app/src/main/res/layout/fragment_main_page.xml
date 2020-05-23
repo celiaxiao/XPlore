@@ -179,7 +179,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/main_page_academic_spots_card_view"
-            app:cardBackgroundColor="@color/colorPrimaryDark"
+            app:cardBackgroundColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="136dp"
             android:layout_marginStart="16dp"
@@ -189,12 +189,12 @@
             app:layout_constraintTop_toBottomOf="@id/main_page_academic_spots_subtitle_text_view">
 
             <ImageView
-                android:layout_width="132dp"
-                android:layout_height="78dp"
+                android:layout_width="97dp"
+                android:layout_height="106dp"
                 android:layout_marginEnd="12dp"
                 android:layout_gravity="bottom|end"
                 android:scaleType="centerCrop"
-                android:src="@drawable/landmark_tour" />
+                android:src="@drawable/academic_highlights_tour" />
 
             <TextView
                 android:id="@+id/main_page_academic_spots_tour"
@@ -204,7 +204,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/main_page_academic_spots_tour_name"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -219,27 +219,28 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_time_24dp" />
+                    android:src="@drawable/ic_time_24dp"
+                    android:tint="@color/colorPrimaryDark" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="12dp"
                     android:text="45 Mins"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_location_grey_24dp"
-                    android:tint="@color/white" />
+                    android:tint="@color/colorPrimaryDark" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="6 Stops"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -289,7 +290,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/main_page_campus_life_card_view"
-            app:cardBackgroundColor="@color/colorPrimaryDark"
+            app:cardBackgroundColor="@color/orange"
             android:layout_width="match_parent"
             android:layout_height="136dp"
             android:layout_marginStart="16dp"
@@ -299,12 +300,13 @@
             app:layout_constraintTop_toBottomOf="@id/main_page_campus_life_subtitle_text_view">
 
             <ImageView
-                android:layout_width="132dp"
-                android:layout_height="78dp"
-                android:layout_marginEnd="12dp"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_marginEnd="13dp"
                 android:layout_gravity="bottom|end"
                 android:scaleType="centerCrop"
-                android:src="@drawable/landmark_tour" />
+                android:rotation="6.12121875259"
+                android:src="@drawable/one_day_as_student_tour" />
 
             <TextView
                 android:id="@+id/text_main_sig_land_name"
