@@ -55,16 +55,17 @@
 
         <TextView
             android:id="@+id/main_page_must_see_landmarks_subtitle_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="9dp"
             android:text="@string/main_page_must_see_landmarks_subtitle"
-            android:textAlignment="center"
+            android:gravity="start"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:letterSpacing="0.017"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_page_must_see_landmarks_title_text_view" />
 
         <androidx.cardview.widget.CardView
@@ -157,7 +158,7 @@
             android:layout_marginTop="38dp"
             android:layout_marginEnd="16dp"
             android:text="@string/main_page_academic_spots_title"
-            android:textAlignment="center"
+            android:gravity="start"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -166,16 +167,17 @@
 
         <TextView
             android:id="@+id/main_page_academic_spots_subtitle_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="9dp"
             android:text="@string/main_page_academic_spots_subtitle"
-            android:textAlignment="center"
+            android:gravity="start"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:letterSpacing="0.017"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_page_academic_spots_title_text_view" />
 
         <androidx.cardview.widget.CardView
@@ -278,16 +280,17 @@
 
         <TextView
             android:id="@+id/main_page_campus_life_subtitle_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="9dp"
             android:text="@string/main_page_campus_life_subtitle"
-            android:textAlignment="center"
+            android:gravity="start"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:letterSpacing="0.017"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_page_campus_life_title_text_view" />
 
         <androidx.cardview.widget.CardView
