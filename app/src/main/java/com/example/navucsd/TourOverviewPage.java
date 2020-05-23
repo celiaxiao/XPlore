@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -47,12 +49,15 @@ public class TourOverviewPage extends AppCompatActivity {
 
 
         // Basic Layout Components set up, contents of the components are temporarily
-        // set up with instance variables
+        // hardcoded using predefined constants
         ImageView tourImageView = (ImageView) findViewById(R.id.tourImageView);
         TextView tourNameTextView = (TextView) findViewById(R.id.tourNameTextView);
         TextView tourDescriptionTextView = (TextView) findViewById(R.id.tourDescriptionTextView);
         TextView tourTimeTextView = (TextView) findViewById(R.id.tourTimeTextView);
         TextView tourPlaceNumberTextView = (TextView) findViewById(R.id.tourPlaceNumberTextView);
+
+
+
 
         tourImageView.setImageDrawable(getDrawable(R.drawable.geisel_pic));
         tourNameTextView.setText(tourName);
@@ -94,9 +99,8 @@ public class TourOverviewPage extends AppCompatActivity {
             mAdapter.notifyItemRemoved(position);
 
 
-            // TODO Customize Snackbar color?
             Snackbar.make(mRecyclerView, deletedItem, Snackbar.LENGTH_LONG)
-                    .setAction("Undo Delete", new View.OnClickListener() {
+                    .setAction(Html.fromHtml("<font color=\"#FE372F\">Undo Delete</font>"), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     items.add(position, deletedItem);
@@ -111,7 +115,7 @@ public class TourOverviewPage extends AppCompatActivity {
 
             // Use a customized dependency from GitHub to implement swipe to delete function
             new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(TourOverviewPage.this, R.color.colorAccent))
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(TourOverviewPage.this, R.color.delete_red))
                     .addSwipeLeftActionIcon(R.drawable.ic_delete_white_24dp)
                     .create()
                     .decorate();

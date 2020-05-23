@@ -5,6 +5,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,12 +29,26 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
 
     // ViewHolder Class
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView cardView;
         public TextView placeNameTextView;
+        ImageView restroomIconTourOverview;
+        ImageView cafeIconTourOverview;
+        ImageView restaurantIconTourOverview;
+        ImageView busstopIconTourOverview;
+        ImageView parkinglotIconTourOverview;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             placeNameTextView = (TextView) itemView.findViewById(R.id.placeNameTextView);
+
+            // Amenities ImageViews,
+            // drawable b1.png ---> b5.png are activated version of amenities icons,
+            // g1.png ---> g5.png are deactivated icons
+            // TODO: Set up amenities icon using activated or deactivated drawable icons
+            restroomIconTourOverview = (ImageView) itemView.findViewById(R.id.restroomIconTourOverview);
+            cafeIconTourOverview = (ImageView) itemView.findViewById(R.id.cafeIconTourOverview);
+            restaurantIconTourOverview = (ImageView) itemView.findViewById(R.id.restaurantIconTourOverview);
+            busstopIconTourOverview = (ImageView) itemView.findViewById(R.id.busstopIconTourOverview);
+            parkinglotIconTourOverview = (ImageView) itemView.findViewById(R.id.parkinglotIconTourOverview);
         }
     }
 
@@ -58,26 +73,4 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
     }
 
 
-    /**
-     * Customized Remove function
-     * Remove the item at the specified position
-     * @param position the specified position in RecyclerView
-     */
-    public void removeItem(int position) {
-        items.remove(position);
-        notifyItemChanged(position);
-    }
-
-
-    /**
-     * Customized function to restore removed item
-     * TODO: Change the param String item to Places object to get
-     * more info from places such as amenities
-     * @param item a string that represents an item
-     * @param position the specified item to restore item
-     */
-    public void restoreItem(String item, int position) {
-        items.add(position, item);
-        notifyItemChanged(position);
-    }
 }
