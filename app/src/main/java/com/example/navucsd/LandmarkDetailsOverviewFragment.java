@@ -26,6 +26,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.example.navucsd.utils.ClickTracker;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -83,8 +84,16 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     private FloatingActionButton navButton;
 
+    /**
+     * The click tracker used in this fragment.
+     */
+    private ClickTracker clickTracker;
+
+    /**
+     * Constructor that initializes the click tracker.
+     */
     public LandmarkDetailsOverviewFragment() {
-        // Required empty public constructor
+        clickTracker = new ClickTracker();
     }
 
     /**
@@ -290,7 +299,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedPlacesRecycler.setLayoutManager(layoutManager);
         String[] names = {"Fallen Star", "Sun God", "Geisel", "Vice and Virtues", "Stone Bear", "Biomedical Library"};
         int[] images = {R.drawable.fallen_star, R.drawable.sun_god, R.drawable.geisel, R.drawable.vice_and_virtues, R.drawable.stone_bear, R.drawable.biomed_lib};
-        relatedPlacesAdapter = new HorizontalRecyclerAdapter(names, images, MARGIN_RELATED_PLACES, 20);
+        relatedPlacesAdapter = new HorizontalRecyclerAdapter(clickTracker, names, images, MARGIN_RELATED_PLACES, 20);
         relatedPlacesRecycler.setAdapter(relatedPlacesAdapter);
 
         // Set up related tours
@@ -315,6 +324,15 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedToursRecycler.setLayoutManager(layoutManager);
         relatedToursAdapter = new RelatedToursAdapter();
         relatedToursRecycler.setAdapter(relatedToursAdapter);
+    }
+
+    /**
+     * Called on resume of this fragment and resets the {@code clickTracker}.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        clickTracker.reset();
     }
 
     @Override

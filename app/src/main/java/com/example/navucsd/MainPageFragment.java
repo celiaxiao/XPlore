@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.navucsd.utils.ClickTracker;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,9 +26,16 @@ public class MainPageFragment extends Fragment {
 	private HorizontalRecyclerAdapter sigAdapter;
 	private AutoSlideViewPager autoSlideViewPager;
 	private AutoSlideViewPagerAdapter autoSlideViewPagerAdapter;
+	/**
+	 * The click tracker used in this fragment.
+	 */
+	private ClickTracker clickTracker;
 
+	/**
+	 * Constructor that initializes the click tracker.
+	 */
 	public MainPageFragment() {
-		// Required empty public constructor
+		clickTracker = new ClickTracker();
 	}
 
 	@Override
@@ -38,13 +46,28 @@ public class MainPageFragment extends Fragment {
 	}
 
 	/**
+	 * Called on resume of this fragment and resets the {@code clickTracker}.
+	 */
+	@Override
+	public void onResume() {
+		super.onResume();
+		clickTracker.reset();
+	}
+
+	/**
 	 * Sets up the recycler view.
 	 *
 	 * @param view the recycler view to setup
+	 * @param tracker the click tracker used
 	 * @param names the names of the cards
 	 * @param images the images id of the cards
 	 */
-	private void setupRecyclerView(RecyclerView view, String[] names, int[] images) {
+	private void setupRecyclerView(
+		RecyclerView view,
+		ClickTracker tracker,
+		String[] names,
+		int[] images
+	) {
 		layoutManager = new LinearLayoutManager(
 			getContext(),
 			LinearLayoutManager.HORIZONTAL,
@@ -85,7 +108,7 @@ public class MainPageFragment extends Fragment {
 		// use a linear layout manager
 		view.setLayoutManager(layoutManager);
 
-		view.setAdapter(new HorizontalRecyclerAdapter(names, images, 16, 20));
+		view.setAdapter(new HorizontalRecyclerAdapter(tracker, names, images, 16, 20));
 	}
 
 	@Override
@@ -99,14 +122,16 @@ public class MainPageFragment extends Fragment {
 
 		setupRecyclerView(
 			view.findViewById(R.id.main_page_must_see_landmarks_recycler_view),
-			new String[]{"Fallen Star", "Sun God", "Dr. Seuss Statue"},
-			new int[]{R.drawable.fallen_star, R.drawable.sun_god, R.drawable.dr_seuss_statue}
+			clickTracker,
+			new String[] {"Fallen Star", "Sun God", "Dr. Seuss Statue"},
+			new int[] {R.drawable.fallen_star, R.drawable.sun_god, R.drawable.dr_seuss_statue}
 		);
 
 		setupRecyclerView(
 			view.findViewById(R.id.main_page_academic_spots_recycler_view),
-			new String[]{"Biomedical Library", "Jacobs Building", "Peterson Hall"},
-			new int[]{
+			clickTracker,
+			new String[] {"Biomedical Library", "Jacobs Building", "Peterson Hall"},
+			new int[] {
 				R.drawable.biomedical_library,
 				R.drawable.jacobs_building,
 				R.drawable.peterson_hall,
@@ -115,8 +140,9 @@ public class MainPageFragment extends Fragment {
 
 		setupRecyclerView(
 			view.findViewById(R.id.main_page_campus_life_recycler_view),
-			new String[]{"Price Center", "Main Gym", "64 Degrees"},
-			new int[]{R.drawable.price_center, R.drawable.main_gym, R.drawable._64_degrees}
+			clickTracker,
+			new String[] {"Price Center", "Main Gym", "64 Degrees"},
+			new int[] {R.drawable.price_center, R.drawable.main_gym, R.drawable._64_degrees}
 		);
 	}
 }
