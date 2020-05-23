@@ -105,14 +105,18 @@ public class MainPageFragment extends Fragment {
 
 		setupRecyclerView(
 			view.findViewById(R.id.main_page_academic_spots_recycler_view),
-			new String[]{"Fallen Star", "Sun God", "Dr. Seuss Statue"},
-			new int[]{R.drawable.fallen_star, R.drawable.sun_god, R.drawable.dr_seuss_statue}
+			new String[]{"Biomedical Library", "Jacobs Building", "Peterson Hall"},
+			new int[]{
+				R.drawable.biomedical_library,
+				R.drawable.jacobs_building,
+				R.drawable.peterson_hall,
+			}
 		);
 
 		setupRecyclerView(
 			view.findViewById(R.id.main_page_campus_life_recycler_view),
-			new String[]{"Fallen Star", "Sun God", "Dr. Seuss Statue"},
-			new int[]{R.drawable.fallen_star, R.drawable.sun_god, R.drawable.dr_seuss_statue}
+			new String[]{"Price Center", "Main Gym", "64 Degrees"},
+			new int[]{R.drawable.price_center, R.drawable.main_gym, R.drawable._64_degrees}
 		);
 	}
 }

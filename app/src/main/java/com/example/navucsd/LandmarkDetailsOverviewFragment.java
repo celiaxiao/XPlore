@@ -1,14 +1,12 @@
 package com.example.navucsd;
 
 import android.graphics.Rect;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -31,7 +29,6 @@ import android.widget.VideoView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.security.interfaces.RSAKey;
 import java.util.concurrent.TimeUnit;
 
 
