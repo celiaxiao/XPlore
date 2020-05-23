@@ -15,10 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRecyclerAdapter.MyViewHolder> {
 
     private int marginSize, dividerSize;
-    private String[] nameSet = {"Fallen Star", "Sun God", "Geisel", "Vice and Virtues", "Stone Bear", "Biomedical Library"};
-    private int[] pictures = {R.drawable.fallen_star, R.drawable.sun_god, R.drawable.geisel, R.drawable.vice_and_virtues, R.drawable.stone_bear, R.drawable.biomed_lib};
+    private String[] names;
+    private int[] images;
 
-    public HorizontalRecyclerAdapter(int marginSize, int dividerSize){
+    /**
+     * The constructor.
+     *
+     * @param names the names to display
+     * @param images the images to display
+     * @param marginSize the size of the margins
+     * @param dividerSize the size of the divider
+     */
+    public HorizontalRecyclerAdapter(String[] names, int[] images, int marginSize, int dividerSize){
+        this.names = names;
+        this.images = images;
         this.marginSize = marginSize;
         this.dividerSize = dividerSize;
     }
@@ -38,11 +48,11 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
     public void onBindViewHolder(MyViewHolder holder, int position) {
 //        holder.textViewTop.setText(mDataset[position]);
         DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-        holder.textView.setText(nameSet[position]);
+        holder.textView.setText(names[position]);
 //        holder.textViewBottom.setText(nameSet[position + NUMBER_COL]);
         adjustLayoutParam(holder.imageView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize) * metrics.density)) / 2,
                 (metrics.widthPixels - (int) ((2 * marginSize + dividerSize) * metrics.density)) / 2 - (int) (35 * metrics.density));
-        holder.imageView.setImageResource(pictures[position]);
+        holder.imageView.setImageResource(images[position]);
 //
 //        adjustLayoutParam(holder.imageViewBottom, (metrics.widthPixels - (int) (52 * metrics.density)) / 2);
 //        holder.imageViewBottom.setImageResource(pictures[position + NUMBER_COL]);
@@ -68,7 +78,7 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return nameSet.length;
+        return names.length;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

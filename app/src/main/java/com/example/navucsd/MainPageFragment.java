@@ -73,7 +73,9 @@ public class MainPageFragment extends Fragment {
         recyclerViewSig.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        sigAdapter = new HorizontalRecyclerAdapter(16, 20);
+        String[] names = {"Fallen Star", "Sun God", "Dr. Seuss Statue"};
+        int[] images = {R.drawable.fallen_star, R.drawable.sun_god, R.drawable.dr_seuss_statue};
+        sigAdapter = new HorizontalRecyclerAdapter(names, images, 16, 20);
         recyclerViewSig.setAdapter(sigAdapter);
     }
 }

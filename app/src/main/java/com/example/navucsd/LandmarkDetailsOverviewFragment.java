@@ -291,7 +291,9 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         dividerItemDecorationRelatedPlaces.setDrawable(getResources().getDrawable(R.drawable.vertical_divider_20dp));
         relatedPlacesRecycler.addItemDecoration(dividerItemDecorationRelatedPlaces);
         relatedPlacesRecycler.setLayoutManager(layoutManager);
-        relatedPlacesAdapter = new HorizontalRecyclerAdapter(MARGIN_RELATED_PLACES, 20);
+        String[] names = {"Fallen Star", "Sun God", "Geisel", "Vice and Virtues", "Stone Bear", "Biomedical Library"};
+        int[] images = {R.drawable.fallen_star, R.drawable.sun_god, R.drawable.geisel, R.drawable.vice_and_virtues, R.drawable.stone_bear, R.drawable.biomed_lib};
+        relatedPlacesAdapter = new HorizontalRecyclerAdapter(names, images, MARGIN_RELATED_PLACES, 20);
         relatedPlacesRecycler.setAdapter(relatedPlacesAdapter);
 
         // Set up related tours
