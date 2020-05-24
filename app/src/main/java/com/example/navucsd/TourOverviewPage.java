@@ -105,6 +105,7 @@ public class TourOverviewPage extends AppCompatActivity {
                 public void onClick(View view) {
                     items.add(position, deletedItem);
                     mAdapter.notifyItemInserted(position);
+                    mRecyclerView.scrollToPosition(position); // Scroll back to the restored item
                 }
             }).show();
         }
