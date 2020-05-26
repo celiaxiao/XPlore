@@ -40,13 +40,13 @@
         </activity>
 
         <activity
-            android:name=".OnboardingActivity">
+            android:name=".OnboardingActivity"
+            android:exported="true">
         </activity>
 
         <activity
             android:name=".TourOverviewPage"
-            android:exported="true" />
-
-
+            android:exported="true">
+        </activity>
     </application>
 </manifest>

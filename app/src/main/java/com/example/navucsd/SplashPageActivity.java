@@ -15,7 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashPageActivity extends AppCompatActivity {
-    public static final int SPLASH_TIME_OUT = 1000;
+    public static final int SPLASH_TIME_OUT = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,9 @@ public class SplashPageActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+
+                // TODO: Debug? SharedPreference does not work as expected,
+                //  onboarding page doesn't start
                 SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
                 if (sharedPreferences.getBoolean("Onboarding finished", false)) {
                     Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);

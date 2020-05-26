@@ -9,8 +9,10 @@
 
     <ImageView
         android:id="@+id/LogoImageView"
-        android:layout_width="237dp"
-        android:layout_height="237dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.39444"
+        app:layout_constraintDimensionRatio="1:1"
         android:src="@drawable/logo_2nd_version"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,36 +23,48 @@
 
     <TextView
         android:id="@+id/AppNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
         android:text="Xplore UCSD"
+        android:textAlignment="center"
         android:textColor="#F0C308"
         android:textSize="25sp"
-        app:layout_constraintTop_toBottomOf="@+id/LogoImageView"
+        android:autoSizeTextType="uniform"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="6.17:1"
+        app:layout_constraintWidth_percent="0.395"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/white"/>
+        app:layout_constraintTop_toBottomOf="@+id/LogoImageView"
+         />
 
     <TextView
         android:id="@+id/AppDescriptionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
+        android:autoSizeTextType="uniform"
+        android:background="@color/white"
         android:text="A virtual tour guide for everyone"
+        android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.6917"
+        app:layout_constraintDimensionRatio="15.56:1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AppNameTextView"
-        android:background="@color/white"/>
+        app:layout_constraintTop_toBottomOf="@+id/AppNameTextView" />
 
     <ImageView
         android:id="@+id/SplashPageGifImageView"
-        android:layout_width="108dp"
-        android:layout_height="108dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.1687"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="143dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="148dp"
+        app:layout_constraintTop_toBottomOf="@id/AppDescriptionTextView"
+        android:layout_marginTop="30dp"
         android:background="@color/white"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
