@@ -1,7 +1,9 @@
 package com.example.navucsd;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -71,6 +73,10 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     private RelatedStoriesAdapter relatedStoriesAdapter;
     private MaterialButton moreStoriesBtn;
     private boolean isExpanded = false;
+
+    // Related Links
+    private RecyclerView relatedLinksRecycler;
+    private RelatedLinksAdapter relatedLinksAdapter;
 
     // Related Places
     private RecyclerView relatedPlacesRecycler;
@@ -239,6 +245,15 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedStoriesRecycler.setLayoutManager(layoutManager);
         relatedStoriesAdapter = new RelatedStoriesAdapter();
         relatedStoriesRecycler.setAdapter(relatedStoriesAdapter);
+
+        // Set up related links
+        relatedLinksRecycler = view.findViewById(R.id.related_links_recycler);
+        relatedLinksRecycler.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        relatedLinksRecycler.setLayoutManager(layoutManager);
+        relatedLinksAdapter = new RelatedLinksAdapter();
+        relatedLinksAdapter.setLinks(currLocation.getLinks());
+        relatedLinksRecycler.setAdapter(relatedLinksAdapter);
 
         moreStoriesBtn = view.findViewById(R.id.story_view_more);
         moreStoriesBtn.setOnClickListener(new View.OnClickListener() {
@@ -543,6 +558,58 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         }
     }
 
+    private class RelatedLinksAdapter extends RecyclerView.Adapter<RelatedLinksAdapter.MyViewHolder> {
+
+        private ArrayList<String> Links = new ArrayList<>();
+
+        public void setLinks(ArrayList<String> links) {
+            Links = links;
+            notifyDataSetChanged();
+        }
+
+        // Create new views (invoked by the layout manager)
+        @Override
+        public RelatedLinksAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                     int viewType) {
+            // create a new view
+            TextView v = (TextView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.overview_links_item, parent, false);
+
+            MyViewHolder vh = new MyViewHolder(v);
+            return vh;
+        }
+
+        // Replace the contents of a view (invoked by the layout manager)
+        @Override
+        public void onBindViewHolder(MyViewHolder holder, int position) {
+            String link = Links.get(position);
+            String[] split = link.split(":", 2);
+            holder.linkText.setText(split[0]);
+            holder.linkText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browse = new Intent(Intent.ACTION_VIEW , Uri.parse(split[1].replace(" ","")));
+                    startActivity(browse);
+                }
+            });
+        }
+
+        // Return the size of your dataset (invoked by the layout manager)
+        @Override
+        public int getItemCount() {
+            return Links.size();
+        }
+
+        public class MyViewHolder extends RecyclerView.ViewHolder {
+            // each data item is just a string in this case
+            public TextView linkText;
+
+            public MyViewHolder(TextView v) {
+                super(v);
+                linkText = v;
+            }
+        }
+    }
 
     private class RelatedToursAdapter extends RecyclerView.Adapter<RelatedToursAdapter.MyViewHolder> {
 
