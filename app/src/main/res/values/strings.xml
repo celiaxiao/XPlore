@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">navUCSD</string>
+    <string name="app_name">XploreUCSD</string>
     <string name="landmark_description_demo">© 2017 the Board of Regents of the University of California\n\nThe Geisel Library is the main library building on the University of California, San Diego campus.\n\nThe building is named in honor of Audrey and Theodor Seuss Geisel (better known as Dr. Seuss) for the generous contributions they have made to the library and their devotion to improving literacy.\n\nThe building is featured in the UCSD logo and is the most recognizable building on campus. It is located in the center of the campus with the library walk to its south, Thurgood Marshall College to its West and Earl Warren College to its East.\n\nThe library was simply called the "Central Library" until a renovation was completed in 1993. The library was rededicated as the University Library Building. It was renamed the Geisel Library Building in 1995.</string>
     <string name="access_token">pk.eyJ1IjoiamFzb255dXlqYyIsImEiOiJjazdmOTRzcTMwMGg0M2dtazhmMWx1MTc4In0.A6Lq7IZw91jLnkDgKXNfsg</string>
     <string name="user_location_permission_explanation">This app needs location permissions to show its functionality.</string>
@@ -146,6 +146,17 @@
         <item>225m</item>
         <item>200m</item>
     </string-array>
+
+    <string name="main_page_places_near_you">Places Near You</string>
+    <string name="main_page_must_see_landmarks_title">Must-See Landmarks</string>
+    <string name="main_page_must_see_landmarks_subtitle">Eye-opening sights for every tourist to UC San Diego.</string>
+    <string name="main_page_must_see_landmarks_tour_name">UCSD’s Landmark Tour</string>
+    <string name="main_page_academic_spots_title">Academic Spots</string>
+    <string name="main_page_academic_spots_subtitle">Learn about the academics of this top 10 public university.</string>
+    <string name="main_page_academic_spots_tour_name">Academic Highlights Tour</string>
+    <string name="main_page_campus_life_title">Campus Life</string>
+    <string name="main_page_campus_life_subtitle">What is it like being a student here at UC San Diego?</string>
+    <string name="main_page_campus_life_tour_name">One-day as Student Tour</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

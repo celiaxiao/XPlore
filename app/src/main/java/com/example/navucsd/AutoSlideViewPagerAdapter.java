@@ -13,6 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.navucsd.database.Location;
+
 import java.util.ArrayList;
 
 /**

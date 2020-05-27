@@ -9,13 +9,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-
 import android.text.InputType;
 import android.util.Log;
 import android.util.TypedValue;
@@ -28,6 +21,14 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
+import com.example.navucsd.database.Location;
+import com.example.navucsd.database.LocationDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,10 +38,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * This is the Places page which contains some places and a grid of landmarks.
@@ -141,53 +138,26 @@ public final class PlacesPageFragment extends Fragment {
 	}
 
 	/**
-	 * Json to string
+	 * Hash function to get the place of the day.
 	 *
-	 * @param filename
-	 * @return json string
+	 * @param size the size of the array, must be at least 1
+	 * @return the hash value (the index into the array)
 	 */
-	public String loadJSONFromAsset(String filename) {
-		String json = null;
-		try {
-			InputStream is = getActivity().getAssets().open(filename);
-			int size = is.available();
-			byte[] buffer = new byte[size];
-			is.read(buffer);
-			is.close();
-			Log.d("WHAT", "finished reading buffer");
-			json = new String(buffer, "UTF-8");
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			return null;
-		}
-		return json;
-	}
-
-	/**
-	 * Hash function for Place of the Day
-	 *
-	 * @param placeSize
-	 * @return the hash value
-	 */
-	private int hashDate(int placeSize) {
-		long ms = System.currentTimeMillis();
-		Date date = new Date(ms);
-		String str = String.format("%tj",date); // Get day-of-the-year (1 to 366)
-		String strY = String.format("%tY",date);
-		int day = Integer.parseInt(str);
-		int year = Integer.parseInt(strY);
-		if (year%4 == 0){ // Adjust value for leap year
-			if (day == 60){
-				day = day - (placeSize)/2;
-			}
-			else if (day > 60){
+	private int hashDate(int size) {
+		Date date = new Date(System.currentTimeMillis());
+		// Get day-of-the-year (1 to 366)
+		int day = Integer.parseInt(String.format("%tj", date));
+		int year = Integer.parseInt(String.format("%tY", date));
+		// Adjust value for leap year
+		if (year % 4 == 0) {
+			if (day == 60) {
+				day = day - size / 2;
+			} else if (day > 60) {
 				day = day - 1;
 			}
 		}
-		int hashValue = day % placeSize; // Get hash value
-		return hashValue;
+		return day % size;
 	}
-
 
 	/**
 	 * Called on creation of this view and inflates the page.
@@ -216,18 +186,24 @@ public final class PlacesPageFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		String placesMinJsonString = loadJSONFromAsset("placesMin.json");
-		Gson gson = new Gson();
-		Type type = new TypeToken<HashMap<String, Location>>(){}.getType();
-		HashMap<String, Location> placesMinObject = gson.fromJson(placesMinJsonString, type);
+		view
+			.findViewById(R.id.placesSearchBarMask)
+			.setOnClickListener(getOnClickListener(SearchBarActivity.class));
 
-		int placeSize = placesMinObject.size();
+		SearchView searchView = view.findViewById(R.id.placesSearchView);
+		searchView.setInputType(InputType.TYPE_NULL);
+		ImageView search_mag_icon = searchView.findViewById(
+				androidx.appcompat.R.id.search_mag_icon
+		);
+		ViewGroup search_view_parent = (ViewGroup) search_mag_icon.getParent();
+		// the parent is probably a linear layout, so remove and add
+		// to put the icon at the end instead of the front
+		search_view_parent.removeView(search_mag_icon);
+		search_view_parent.addView(search_mag_icon);
 
-		int hashValue = hashDate(placeSize);
-
-		String key = placesMinObject.keySet().toArray()[hashValue].toString();
-
-		Location place = placesMinObject.get(key);
+		ArrayList<Location> locations = LocationDatabase.getLocations(getContext());
+		if (locations == null) return;
+		Location place = locations.get(hashDate(locations.size()));
 
 		ImageView iv_restroom = (ImageView) getView().findViewById(R.id.POTD_restroom);
 		ImageView iv_cafe = (ImageView) getView().findViewById(R.id.POTD_cafe);
@@ -254,42 +230,31 @@ public final class PlacesPageFragment extends Fragment {
 		}
 		tv_name.setText(place.name);
 		tv_about.setText(place.about);
-		
-		view
-				.findViewById(R.id.cardViewPlaceOfTheDay)
-				.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
-		view
-				.findViewById(R.id.cardViewPlaceOfTheDayDescription)
-				.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
 
 		view
-			.findViewById(R.id.placesSearchBarMask)
-			.setOnClickListener(getOnClickListener(SearchBarActivity.class));
+			.findViewById(R.id.cardViewPlaceOfTheDay)
+			.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+		view
+			.findViewById(R.id.cardViewPlaceOfTheDayDescription)
+			.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
 
-		SearchView searchView = view.findViewById(R.id.placesSearchView);
-		searchView.setInputType(InputType.TYPE_NULL);
-		ImageView search_mag_icon = searchView.findViewById(
-				androidx.appcompat.R.id.search_mag_icon
-		);
-		ViewGroup search_view_parent = (ViewGroup) search_mag_icon.getParent();
-		// the parent is probably a linear layout, so remove and add
-		// to put the icon at the end instead of the front
-		search_view_parent.removeView(search_mag_icon);
-		search_view_parent.addView(search_mag_icon);
-
-		LandmarkInfo[] landmarks = {
-			new LandmarkInfo(R.drawable.geisel, "Geisel Library"),
-			new LandmarkInfo(R.drawable.peterson, "Peterson Hall"),
-			new LandmarkInfo(R.drawable.mayer, "Mayer Hall"),
-			new LandmarkInfo(R.drawable.price_center_east, "Price Center East"),
-			new LandmarkInfo(R.drawable.rady, "Rady School of Mgt"),
-			new LandmarkInfo(R.drawable.geisel, "Geisel Library"),
-			new LandmarkInfo(R.drawable.peterson, "Peterson Hall"),
-			new LandmarkInfo(R.drawable.mayer, "Mayer Hall"),
-			new LandmarkInfo(R.drawable.price_center_east, "Price Center East"),
+		int[] res_ids = {
+			R.drawable.geisel,
+			R.drawable.peterson,
+			R.drawable.mayer,
+			R.drawable.price_center_east,
+			R.drawable.rady,
 		};
 
-		addLandmarks(getContext(), view, landmarks);
+		ArrayList<LandmarkInfo> landmarks = new ArrayList<>(locations.size());
+
+		int count = 0;
+		for (Location loc : locations) {
+			 landmarks.add(new LandmarkInfo(res_ids[count], loc.name));
+			 count = (count + 1) % res_ids.length;
+		}
+
+		addLandmarks(getContext(), view, landmarks.toArray(new LandmarkInfo[0]));
 	}
 
 	/**
@@ -342,24 +307,13 @@ public final class PlacesPageFragment extends Fragment {
 				landmarks[landmarks.length - 1]
 			));
 		} else {
-			landmarkTableLayout.addView(
-				getRow(
-					context,
-					BOTTOM_MARGIN,
-					GAP,
-					landmarks[landmarks.length - 2],
-					landmarks[landmarks.length - 1]
-				)
-			);
-			landmarkTableLayout.addView(
-				getRow(
-					context,
-					BOTTOM_MARGIN,
-					GAP,
-					landmarks[landmarks.length - 2],
-					landmarks[landmarks.length - 1]
-				)
-			);
+			landmarkTableLayout.addView(getRow(
+				context,
+				BOTTOM_MARGIN,
+				GAP,
+				landmarks[landmarks.length - 2],
+				landmarks[landmarks.length - 1]
+			));
 		}
 	}
 
@@ -369,19 +323,18 @@ public final class PlacesPageFragment extends Fragment {
 	 *
 	 * @param context the context used when creating children
 	 * @param bottomMargin the bottom margin of this row
-	 * @param gap the space in between the landmark blocks, must be multiple of 2
+	 * @param gap the space in between the landmark blocks
 	 * @param landmarks the landmarks, only 1 to 2 are supported
 	 * @return the new TableRow
-	 * @throws IllegalArgumentException when {@code gap} is not a multiple of 2 or
-	 * either {@code bottomMargin} or {@code gap} is negative
+	 * @throws IllegalArgumentException when either {@code bottomMargin} or {@code gap} is negative
 	 */
 	private TableRow getRow(
 		Context context,
 		final int bottomMargin,
-		final int gap, // TODO fix gap must be multiple of 2; try using it on head
+		final int gap,
 		LandmarkInfo... landmarks
 	) {
-		if (bottomMargin < 0 || gap < 0 || gap % 2 == 1) throw new IllegalArgumentException();
+		if (bottomMargin < 0 || gap < 0) throw new IllegalArgumentException();
 
 		// TODO make this a constant too somehow
 		final double ASPECT_RATIO = 5.0 / 4;
