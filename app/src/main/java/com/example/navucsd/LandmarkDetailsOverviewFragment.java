@@ -1,5 +1,6 @@
 package com.example.navucsd;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.navucsd.database.Location;
@@ -602,13 +604,23 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
             String link = Links.get(position);
-            String[] split = link.split(":", 2);
+            String[] split;
+            if (!link.startsWith("http")) {
+                split = link.split(":", 2);
+            }
+            else {
+                split = new String[]{"Link", link};
+            }
             holder.linkText.setText(split[0]);
             holder.linkText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent browse = new Intent(Intent.ACTION_VIEW , Uri.parse(split[1].replace(" ","")));
-                    startActivity(browse);
+                    try {
+                        startActivity(browse);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }

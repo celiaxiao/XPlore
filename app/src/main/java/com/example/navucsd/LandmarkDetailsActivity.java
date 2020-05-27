@@ -38,7 +38,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
     private SearchBarDB database;
     private Location currLocation;
     private String currLocationName;
-    private static final String DEFAULT_LOCATION = "Canyon Vista";
+    private static final String DEFAULT_LOCATION = "64 Degrees";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
