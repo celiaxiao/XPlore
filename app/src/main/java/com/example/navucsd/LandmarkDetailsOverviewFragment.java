@@ -41,11 +41,7 @@ import java.util.concurrent.TimeUnit;
  * create an instance of this fragment.
  */
 public class LandmarkDetailsOverviewFragment extends Fragment {
-    private static final String ARG_PARAM1 = "placeName";
-    private static final String DEFAULT_LOCATION = "Geisel Library";
 
-    private String placeName;
-    private SearchBarDB database;
     private Location currLocation;
 
     // Audio playing related fields
@@ -95,29 +91,24 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param placeName Parameter 1.
+     * @param currLocation Location Object that represents the Location of interest.
      * @return A new instance of fragment LandmarkDetailsOverviewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LandmarkDetailsOverviewFragment newInstance(String placeName) {
+    public static LandmarkDetailsOverviewFragment newInstance(Location currLocation) {
         LandmarkDetailsOverviewFragment fragment = new LandmarkDetailsOverviewFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, placeName);
-        fragment.setArguments(args);
+        fragment.setLocation(currLocation);
         return fragment;
+    }
+
+    private void setLocation(Location currLocation) {
+        this.currLocation = currLocation;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        database = new SearchBarDB(getContext(), "one by one");
-        if (getArguments() != null) {
-            placeName = getArguments().getString(ARG_PARAM1);
-            currLocation = database.getByName(placeName);
-        }
-        else {
-            currLocation = database.getByName(DEFAULT_LOCATION);
-        }
+
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.troll_song);
         mediaPlayer.setWakeMode(getContext(), PowerManager.PARTIAL_WAKE_LOCK);
     }
