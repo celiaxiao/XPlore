@@ -77,19 +77,6 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
 
         new DownloadImageTask(landmarkThumbnail).execute(currLocation.getThumbnailPhoto());
 
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try  {
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//
-//        thread.start();
-
         TabLayout tabLayout = findViewById(R.id.landmark_tablayout);
         landmarkPager = findViewById(R.id.landmark_viewpager);
         LandmarkAdapter pagerAdapter = new LandmarkAdapter(getSupportFragmentManager());
@@ -141,7 +128,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return LandmarkDetailsOverviewFragment.newInstance(currLocation);
+                    return LandmarkDetailsOverviewFragment.newInstance(currLocation, database);
                 case 1:
                     return LandmarkDetailsHistoryFragment.newInstance("","");
             }

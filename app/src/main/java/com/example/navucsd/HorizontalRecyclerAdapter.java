@@ -87,6 +87,10 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 		return names.length;
 	}
 
+	public void setContent() {
+
+	}
+
 	public static class MyViewHolder extends RecyclerView.ViewHolder {
 
 		public CardView cardView;

@@ -45,6 +45,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class LandmarkDetailsOverviewFragment extends Fragment {
 
+    private SearchBarDB searchBarDB;
     private Location currLocation;
 
     // Audio playing related fields
@@ -109,15 +110,19 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
      * @param currLocation Location Object that represents the Location of interest.
      * @return A new instance of fragment LandmarkDetailsOverviewFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static LandmarkDetailsOverviewFragment newInstance(Location currLocation) {
+    public static LandmarkDetailsOverviewFragment newInstance(Location currLocation, SearchBarDB database) {
         LandmarkDetailsOverviewFragment fragment = new LandmarkDetailsOverviewFragment();
+        fragment.setSearchBarDB(database);
         fragment.setLocation(currLocation);
         return fragment;
     }
 
     private void setLocation(Location currLocation) {
         this.currLocation = currLocation;
+    }
+
+    private void setSearchBarDB(SearchBarDB searchBarDB) {
+        this.searchBarDB = searchBarDB;
     }
 
     @Override
