@@ -9,8 +9,8 @@
   },
   "audio": "somedirectory/somefile",
   "coordinates": {
-    "first": "x-coord",
-    "second": "y-coord"
+    "first": "32.878741",
+    "second": "-117.239750"
   },
   "descriptive": [
     "Must see"
