@@ -160,8 +160,4 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         }
     }
 
-    public void setTitle(String placeName) {
-        collapsingToolbarLayout.setTitle(placeName);
-    }
-
 }
