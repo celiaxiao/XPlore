@@ -27,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.navucsd.database.Location;
@@ -619,7 +618,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
                     try {
                         startActivity(browse);
                     } catch (ActivityNotFoundException e) {
-                        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
                     }
                 }
             });
