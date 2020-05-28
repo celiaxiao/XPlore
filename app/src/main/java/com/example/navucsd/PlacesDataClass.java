@@ -41,7 +41,7 @@ public class PlacesDataClass {
         //for now hard code the distances and avalability
         this.avalability="";
         //unit is meter?
-        this.distances=pair.second.toString()+"m";
+        this.distances=SearchBarActivity.distanceToString(pair.second);
         //hard code amenities to be 5
         this.amenities=new boolean[5];
         for(int j=0;j<pair.first.amenities.size();j++){

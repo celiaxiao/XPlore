@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,7 +39,7 @@ import java.util.HashMap;
  * public ArrayList<Location> filter(ArrayList<String> locations, ArrayList<String> amen)
  * public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double>  userLocation)
  * public String loadJSONFromAsset(Context context, String filename)
- *
+ * public ArrayList<Pair<Location, Double>> filterWithDistance(ArrayList<String> locations, ArrayList<String> amen, Pair<Double, Double>  userLocation)
  * */
 
 
@@ -120,6 +121,19 @@ public class SearchBarDB {
         }
     }
 
+    public Double getDistance(String locationName, Pair<Double, Double>  userLocation){
+        Location location = getByName(locationName);
+        if( location == null){
+            return -1.0;
+        }
+        String first = (String) location.coordinates.first;
+        String second = (String) location.coordinates.second;
+        Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
+        double dist = this.distant(userLocation, locationCoor);
+        return dist;
+    }
+
+
     /*
      * userLocation: coordinate of the user userLocation.first should be Latitude and
      *               userLocation.second should be Longitude
@@ -132,7 +146,10 @@ public class SearchBarDB {
     public ArrayList<Pair<Location, Double>> nearestLocations(Pair<Double, Double>  userLocation, int num){
         ArrayList<Pair<Location, Double>> nearestList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
-            double dist = this.distant(userLocation, this.list.get(i).coordinates);
+            String first = (String) this.list.get(i).coordinates.first;
+            String second = (String) this.list.get(i).coordinates.second;
+            Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
+            double dist = this.distant(userLocation, locationCoor);
             int origin = nearestList.size();
             for( int j = 0; j < nearestList.size(); j++ ){
                 if( dist >= nearestList.get(j).second ){
@@ -159,7 +176,10 @@ public class SearchBarDB {
     public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double>  userLocation){
         ArrayList<Pair<Location, Double>> distanceList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
-            double dist = this.distant(userLocation, this.list.get(i).coordinates);
+            String first = (String) this.list.get(i).coordinates.first;
+            String second = (String) this.list.get(i).coordinates.second;
+            Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
+            double dist = this.distant(userLocation, locationCoor);
             distanceList.add(new Pair<>(this.list.get(i), dist));
         }
         return distanceList;
@@ -181,7 +201,10 @@ public class SearchBarDB {
     public double distant(Pair<Double, Double>  p1, Pair<Double, Double>  p2){
         float[] results = new float[1];
         android.location.Location.distanceBetween(p1.first, p1.second, p2.first, p2.second, results);
-        return results[0];
+        DecimalFormat df = new DecimalFormat("###.###");
+        String resultInString = df.format(results[0]);
+        Double finalResult = Double.parseDouble(resultInString);
+        return finalResult;
     }
 
     /*
@@ -270,6 +293,63 @@ public class SearchBarDB {
         return outputList;
     }
 
+
+    public ArrayList<Pair<Location, Double>> filterWithDistance(ArrayList<String> locations, ArrayList<String> amen, Pair<Double, Double>  userLocation){
+        ArrayList<Pair<Location, Integer>> trackingList = new ArrayList<>();
+        ArrayList<Pair<Location, Double>> outputList = new ArrayList<>();
+        ArrayList<String> amenities = new ArrayList<>();
+        for( int i = 0; i < amen.size(); i++ ){
+            if(amen.get(i) != null){
+                amenities.add(amen.get(i));
+            }
+        }
+        if(amenities.size() == 0){
+            for( int i = 0; i < locations.size(); i++){
+                Location location = this.getByName(locations.get(i));
+                if(location != null){
+                    Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                    outputList.add(item);
+                }
+            }
+        }
+        else{
+            for( int i = 0; i < locations.size(); i++){
+                Location location = this.getByName(locations.get(i));
+                if( location != null ){
+                    int weight = 0;
+                    for( int z = 0; z < amenities.size(); z++ ){
+                        if( location.amenities.get(amenities.get(z)) == true ){
+                            weight = (weight*10) + 5 - z;
+                        }
+                    }
+                    if( weight > 0 ){
+                        if( outputList.isEmpty()){
+                            trackingList.add(new Pair<>(location, weight));
+                            Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                            outputList.add(item);
+                        }
+                        else{
+                            int origin = trackingList.size();
+                            for( int j = 0; j < trackingList.size(); j++ ){
+                                if( weight >= trackingList.get(j).second ){
+                                    trackingList.add(j, new Pair<>(location, weight));
+                                    Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                                    outputList.add(j, item);
+                                    break;
+                                }
+                            }
+                            if( origin == trackingList.size() ){
+                                trackingList.add( new Pair<>(location, weight) );
+                                Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                                outputList.add(item);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return outputList;
+    }
 
 
     /*

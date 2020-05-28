@@ -34,25 +34,17 @@ import java.util.Arrays;
 public class SearchBarActivity extends AppCompatActivity  {
     private SearchBarDB sbdatebase;
     private SearchView searchBar;
-    private ChipGroup chipGroup;
-
-    //TESTING
-    protected LocationManager locationManager;
-    protected LocationListener locationListener;
-    protected Context context;
-    String lat;
-    String provider;
-    protected String latitude, longitude;
-    protected boolean gps_enabled, network_enabled;
-
+    private android.location.Location currentLocation;
     //private LinearLayout amenityLinearLayout;
     private static final String[] amenFilter =
             new String[]{"restroom", "cafe", "restaurant",
                     "busstop", "parking"};
-    ArrayList<String> filteredList = new ArrayList<>( );
+    private ArrayList<String> filteredList = new ArrayList<>( );
 
     //dynamic location list from database
     private ArrayList<Location> locationList = new ArrayList<>( );
+    ArrayList<Pair<Location, Double>> distancePair;
+    ArrayList<String> amenList; //list of selected amenities
     //list of json file name
     private static String[] FILELIST = new String[]{
             /*Change them in the future*/
@@ -114,34 +106,34 @@ public class SearchBarActivity extends AppCompatActivity  {
         String[] distances = new String[FILELIST.length];
 
             //fixing hardcode
-
-            if(checkPermission()) {
-                //get the current location
-                android.location.Location currentLocation =
-                        GpsUtil.getInstance(SearchBarActivity.this).getLastLocation( );
-                Log.i("latitude",currentLocation.getLatitude());
-                ArrayList<Pair<Location, Double>> distancePair=
-                        sbdatebase.locationWithDistance(
-                                new Pair<>(currentLocation.getLatitude(),currentLocation.getLongitude()));
-                for (int i = 0; i < distancePair.size(); i++) {
-
-                    Location location = distancePair.get(i).first;
-                    locationList.add(location);
-                    //get amenity list from location
-                    placesName[i] = location.name;
-                    for (int j = 0; j < dbAmentityList[0].length; j++) {
-                        dbAmentityList[i][j] = locationList.get(i).amenities.get(amenFilter[j]);
-                    }
-                    //get the distance, current unit is meter
-                    distances[i]=Double.toString(distancePair.get(i).second)+"m";
-                    //temporarily hide the availability
-                    availability[i] = "";
-
-            }
-
-
-
+         currentLocation = null;
+        if(checkPermission()) {
+         //get the current location
+            currentLocation =
+                    GpsUtil.getInstance(SearchBarActivity.this).getLastLocation( );
         }
+        else {
+            //TODO:if no permission
+            //android.location.Location currentLocation =
+        }
+        distancePair=
+                sbdatebase.locationWithDistance(
+                        new Pair<>(currentLocation.getLatitude(),currentLocation.getLongitude()));
+
+
+        for(int i = 0; i < distancePair.size(); i++) {
+             Location location = distancePair.get(i).first;
+             locationList.add(location);
+             //get amenity list from location
+             placesName[i] = location.name;
+             for (int j = 0; j < dbAmentityList[0].length; j++) {
+                 dbAmentityList[i][j] = locationList.get(i).amenities.get(amenFilter[j]);
+             }
+             //get the distance, current unit is meter
+             distances[i] = distanceToString(distancePair.get(i).second);
+             //temporarily hide the availability
+             availability[i] = "";
+         }
 
         //initialize the main context of list
         SearchBarPlacesView placesAdaptor = new SearchBarPlacesView(this,
@@ -179,10 +171,10 @@ public class SearchBarActivity extends AppCompatActivity  {
             // when the user is typing search
             @Override
             public boolean onQueryTextChange(String s) {
-                /*if(s.isEmpty()){
+                if(s.isEmpty() && amenList.isEmpty()){
                     searchPlaces.setVisibility(View.GONE);
-                }*/
-                if (!s.isEmpty( )) searchPlaces.setVisibility(View.VISIBLE);
+                }
+                else searchPlaces.setVisibility(View.VISIBLE);
 
                 placesAdaptor.getFilter( ).filter(s);
 
@@ -216,11 +208,16 @@ public class SearchBarActivity extends AppCompatActivity  {
 
         //chipGroup's method can only apply to single selection mode
         //so this is a customize version for multi selection to get checked chips
-        ArrayList<String> amenList = new ArrayList<>( );
+        amenList = new ArrayList<>( );
         for (int i = 0; i < chipGroup.getChildCount( ); i++) {
             Chip ameChip = (Chip) chipGroup.getChildAt(i);
             int index = i;
             ameChip.setOnCheckedChangeListener(new Chip.OnCheckedChangeListener( ) {
+                /**
+                 * handle the amenity chip selection change and refilter the list
+                 * @param compoundButton
+                 * @param b
+                 */
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 //                    placesAdaptor.filtered = origin;
@@ -250,27 +247,13 @@ public class SearchBarActivity extends AppCompatActivity  {
                     }
                     Log.i("filter ", Arrays.toString(placesAdaptor.filtered.toArray( )));
 
-                    //TODO: pass in amenList and placesAdaptor.filtered for database filtering
-                    //extract arraylist of filtered places' name
-
-//                    while(!locationlist.isEmpty()){
-//                        locationlist.remove(0);
-//                    }
-//                    Log.i("Before list first", String.valueOf(locationlist.size()));
-//
-//                    for(int i=0;i<placesAdaptor.filtered.size();i++){
-//                        locationlist.add(placesAdaptor.filtered.get(i).toString());
-//                    }
-//                    Log.i("After list first", String.valueOf(locationlist.size()));
-
-
-                    ArrayList<Location> listOfLocations = sbdatebase.filter(locationlist, amenList);
+                    ArrayList<Pair<Location, Double>> listOfLocations = sbdatebase.filterWithDistance(
+                            locationlist, amenList,
+                            new Pair<>(currentLocation.getLatitude(),currentLocation.getLongitude()));
                     ArrayList<PlacesDataClass> filteredAmen = new ArrayList<PlacesDataClass>( );
-                    //TODO SOLVE THE CONFLICT
-                    //placesAdaptor.getFilter().filter(searchBar.getQuery());
 
                     for (int k = 0; k < listOfLocations.size( ); k++) {
-                        Log.i("list", listOfLocations.get(k).name);
+                        Log.i("list", listOfLocations.get(k).first.name);
                         filteredAmen.add(new PlacesDataClass(listOfLocations.get(k)));
                     }
 
@@ -288,7 +271,14 @@ public class SearchBarActivity extends AppCompatActivity  {
 
     }
 
-
+    static String distanceToString(Double distance){
+        //if less than 0.1 miles, unit is feet
+        if(distance.compareTo(new Double(160.934))<0){
+            return Math.round(distance*3.28084)+" ft";
+        }
+        //else convert to miles, round to one decimal value
+        return Math.round(distance*0.000621371*10)/10.0+" mi";
+    }
 
 
 }
