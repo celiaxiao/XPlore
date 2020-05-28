@@ -31,7 +31,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SearchBarActivity extends AppCompatActivity implements LocationListener {
+public class SearchBarActivity extends AppCompatActivity  {
     private SearchBarDB sbdatebase;
     private SearchView searchBar;
     private ChipGroup chipGroup;
@@ -74,6 +74,17 @@ public class SearchBarActivity extends AppCompatActivity implements LocationList
             "WarrenBear.json"
     };
 
+    private boolean checkPermission() {
+        if (Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            return false;
+        } else {
+            return true;// Permission has already been granted }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,20 +98,7 @@ public class SearchBarActivity extends AppCompatActivity implements LocationList
                 android.R.layout.simple_list_item_1,
                 getResources( ).getStringArray(R.array.placesName));
 
-        //TESTING
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        //TESTING END
+
         ColorDrawable divider = new ColorDrawable(this.getResources( ).getColor(R.color.divider));
         searchPlaces.setDivider(divider);
         searchPlaces.setDividerHeight(3);
@@ -114,21 +112,34 @@ public class SearchBarActivity extends AppCompatActivity implements LocationList
         String[] placesName = new String[FILELIST.length];
         String[] availability = new String[FILELIST.length];
         String[] distances = new String[FILELIST.length];
-        for (int i = 0; i < this.FILELIST.length; i++) {
-            String jsonString = sbdatebase.loadJSONFromAsset(this, this.FILELIST[i]);
-            Location location = gson.fromJson(jsonString, Location.class);
-            locationList.add(location);
-            //get amenity list from location
-            placesName[i] = location.name;
-            for (int j = 0; j < dbAmentityList[0].length; j++) {
-                dbAmentityList[i][j] = locationList.get(i).amenities.get(amenFilter[j]);
+
+            //fixing hardcode
+
+            if(checkPermission()) {
+                //get the current location
+                android.location.Location currentLocation =
+                        GpsUtil.getInstance(SearchBarActivity.this).getLastLocation( );
+                Log.i("latitude",currentLocation.getLatitude());
+                ArrayList<Pair<Location, Double>> distancePair=
+                        sbdatebase.locationWithDistance(
+                                new Pair<>(currentLocation.getLatitude(),currentLocation.getLongitude()));
+                for (int i = 0; i < distancePair.size(); i++) {
+
+                    Location location = distancePair.get(i).first;
+                    locationList.add(location);
+                    //get amenity list from location
+                    placesName[i] = location.name;
+                    for (int j = 0; j < dbAmentityList[0].length; j++) {
+                        dbAmentityList[i][j] = locationList.get(i).amenities.get(amenFilter[j]);
+                    }
+                    //get the distance, current unit is meter
+                    distances[i]=Double.toString(distancePair.get(i).second)+"m";
+                    //temporarily hide the availability
+                    availability[i] = "";
+
             }
-            //TODO:fix the hard code
-            //availability[i]=getResources( ).getStringArray(R.array.availability)[i];
-            //temporarily hide the availability
-            availability[i] = "";
-            //ArrayList<Pair<Location, Double>> distancePair=sbdatebase.locationWithDistance();
-            distances[i] = getResources( ).getStringArray(R.array.distances)[i];
+
+
 
         }
 
@@ -278,27 +289,6 @@ public class SearchBarActivity extends AppCompatActivity implements LocationList
     }
 
 
-    @Override
-    public void onLocationChanged(android.location.Location location) {
-        Log.d("Latitude", String.valueOf(location.getLatitude()));
-        Log.d("Longitude", String.valueOf(location.getLongitude()));
-        Pair<Double, Double>  userLocation=new Pair<>(location.getLatitude(),location.getLongitude());
-        ArrayList<Pair<Location, Double>> distanceList=sbdatebase.locationWithDistance(userLocation);
 
-    }
 
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-        Log.d("Latitude","status");
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-        Log.d("Latitude","enable");
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-        Log.d("Latitude","disable");
-    }
 }
