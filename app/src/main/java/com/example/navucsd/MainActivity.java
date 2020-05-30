@@ -52,27 +52,26 @@ public class MainActivity extends AppCompatActivity {
 
 		tabLayout.setupWithViewPager(mainPager);
 		for (int i = 0; i < TAB_ICONS.length; i++) {
-			tabLayout.getTabAt(i).setIcon(TAB_ICONS[i]);
+			if (i != MAIN_PAGE_TAB_INDEX) tabLayout.getTabAt(i).setIcon(TAB_ICONS[i]);
 		}
 		tabLayout.setTabIconTint(getResources().getColorStateList(R.color.bottom_tab_tint));
 
 		TabLayout.Tab mainPageTab = tabLayout.getTabAt(MAIN_PAGE_TAB_INDEX);
 		// XXX: What do the docs mean by "Components that add a listener should take care to remove
 		// it when finished?
-		mainPageTab.setCustomView(R.layout.custom_main_button);
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 			@Override
 			public void onTabSelected(TabLayout.Tab tab) {
 				if (tab.getPosition() != MAIN_PAGE_TAB_INDEX) return;
-				ImageView image_view = tab.getCustomView().findViewById(R.id.main_page_tab_icon);
-				image_view.setImageResource(R.drawable.main_page_tab_icon_active);
+				ImageView image_view = findViewById(R.id.main_page_tab_icon);
+				image_view.setBackgroundResource(R.drawable.main_page_tab_icon_active);
 			}
 
 			@Override
 			public void onTabUnselected(TabLayout.Tab tab) {
 				if (tab.getPosition() != MAIN_PAGE_TAB_INDEX) return;
-				ImageView image_view = tab.getCustomView().findViewById(R.id.main_page_tab_icon);
-				image_view.setImageResource(R.drawable.main_page_tab_icon_inactive);
+				ImageView image_view = findViewById(R.id.main_page_tab_icon);
+				image_view.setBackgroundResource(R.drawable.main_page_tab_icon_inactive);
 			}
 
 			@Override
@@ -81,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 		tabLayout.selectTab(mainPageTab);
+
+		ImageView image_view = findViewById(R.id.main_page_tab_icon);
+		image_view.setOnClickListener(view -> {
+			tabLayout.selectTab(tabLayout.getTabAt(MAIN_PAGE_TAB_INDEX));
+		});
 
 		// Check if user has explicitly disabled location permission in app
 		sharedPref = getPreferences(Context.MODE_PRIVATE);

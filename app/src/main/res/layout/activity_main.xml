@@ -13,6 +13,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/customBottomBar"/>
 
+    <ImageButton
+        android:id="@+id/main_page_tab_icon"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginBottom="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/main_page_tab_icon_active" />
+
     <com.example.navucsd.CurvedBottomNavigationViewTabLayout
         android:id="@+id/customBottomBar"
         style="@style/TabLayout"
