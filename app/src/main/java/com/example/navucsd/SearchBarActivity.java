@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationListener;
@@ -156,12 +157,14 @@ public class SearchBarActivity extends AppCompatActivity  {
                 // than filter the adapter
                 // using the filter method
                 // with the query as its argument
-                ArrayList<String> mustGoArrayList = new ArrayList<>(R.array.placesName);
-                if (mustGoArrayList.contains(query)) {
-                    placesAdaptor.getFilter( ).filter(query);
-                    //TODO: set to intent if needed
+                //placesAdaptor.getFilter( ).filter(query);
+                //TODO: set to intent if needed
+                Intent intent = new Intent(getApplicationContext(),LandmarkDetailsActivity.class);
 
-                }
+                intent.putExtra("placeName", "Geisel Library");
+                //hard code to geisel details page
+                startActivity(intent);
+
 
                 return false;
             }
@@ -194,6 +197,11 @@ public class SearchBarActivity extends AppCompatActivity  {
                         //hide the listview
 
                         //TODO: set to intent if needed
+                        //hard code to geisel details page
+                        Intent intent = new Intent(getApplicationContext(),LandmarkDetailsActivity.class);
+                        intent.putExtra("placeName", "Geisel Library");
+                        //hard code to geisel details page
+                        startActivity(intent);
                     }
                 });
 
