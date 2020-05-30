@@ -5,9 +5,10 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:id="@+id/main_page_tab_icon"
         android:layout_width="43dp"
         android:layout_height="37dp"
-        android:src="@drawable/mainpage"
+        android:src="@drawable/main_page_tab_icon_active"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
