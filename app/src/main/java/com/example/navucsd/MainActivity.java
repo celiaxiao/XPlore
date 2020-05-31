@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
 		});
 		tabLayout.selectTab(mainPageTab);
 
-		ImageView image_view = findViewById(R.id.main_page_tab_icon);
+		CircularClickableImageView image_view = findViewById(R.id.main_page_tab_icon);
+		image_view.setView(mainPager);
 		image_view.setOnClickListener(view -> {
 			tabLayout.selectTab(tabLayout.getTabAt(MAIN_PAGE_TAB_INDEX));
 		});

@@ -13,17 +13,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <ImageButton
+    <com.example.navucsd.CircularClickableImageView
         android:id="@+id/main_page_tab_icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/main_page_tab_icon_active"
         android:clickable="true"
         android:focusable="true"
         android:layout_marginBottom="9dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/main_page_tab_icon_active" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.example.navucsd.CurvedBottomNavigationViewTabLayout
         android:id="@+id/customBottomBar"
