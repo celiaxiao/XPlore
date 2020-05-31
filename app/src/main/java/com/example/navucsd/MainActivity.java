@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		CurvedBottomNavigationViewTabLayout tabLayout = findViewById(R.id.customBottomBar);
-		mainPager = findViewById(R.id.main_pager);
+		mainPager = findViewById(R.id.main_page_pager);
 		MainPagerAdapter pagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
 		mainPager.setAdapter(pagerAdapter);
 
