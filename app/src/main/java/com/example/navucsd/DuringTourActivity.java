@@ -21,6 +21,8 @@ import android.widget.TextView;
  * This activity is temporarily hard-coded with Geisel Library as the stop being viewed
  */
 public class DuringTourActivity extends AppCompatActivity {
+    private String stopName; // Name of this stop
+
     private ImageView imageViewDuringTour;
     private TextView tourNameTextView;
     private TextView tourOverViewTextView;
@@ -35,6 +37,7 @@ public class DuringTourActivity extends AppCompatActivity {
     private Button directionsButton;
     private TextView detailsTextViewDuringTour;
     private Button nextStopButton;
+
 
 
 
@@ -64,10 +67,11 @@ public class DuringTourActivity extends AppCompatActivity {
 
 
         // TODO: dynamically set up basic components in this activity
+        stopName = "Geisel Library";
         imageViewDuringTour.setImageDrawable(getDrawable(R.drawable.geisel_landmark)); // Set up the thumbnail image for this stop
         tourNameTextView.setText("UC San Diego Landmark Tour"); // Set up tour name
 
-        stopNameTextView.setText("1st Stop: Geisel Library"); // TODO: dynamically set the ranking of the stop; Set up the name for this stop
+        stopNameTextView.setText("1st" + " Stop: " + stopName); // TODO: dynamically set the ranking of the stop; Set up the name for this stop
 
         stopDescriptionTextView.setText("Geisel Library is the main library building of the University of California San Diego Library. " +
                 "The building's distinctive Brutalist architecture has resulted in its being featured in the " +
@@ -81,12 +85,12 @@ public class DuringTourActivity extends AppCompatActivity {
 
 
 
-
+        // tourOverviewTextView onClick go back to tourOverviewPage
         tourOverViewTextView.setOnClickListener(new View.OnClickListener() { // Go to TourOverViewPage
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TourOverviewPage.class);
-                startActivity(intent);
+                Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
+                startActivity(tourOverviewIntent);
             }
         });
 
@@ -99,11 +103,13 @@ public class DuringTourActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: detailsTextViewDuringTour onClick go to details page of this stop
+        // detailsTextViewDuringTour onClick go to details page of this stop
         detailsTextViewDuringTour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
+                detailsIntent.putExtra("placeName", stopName);
+                startActivity(detailsIntent);
             }
         });
 
