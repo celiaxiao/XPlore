@@ -21,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintHeight_percent="0.025"
-        app:layout_constraintDimensionRatio="18:1"
+        app:layout_constraintDimensionRatio="15:1"
         android:autoSizeTextType="uniform"
         app:layout_constraintTop_toBottomOf="@id/imageViewDuringTour"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintHeight_percent="0.025"
-        app:layout_constraintDimensionRatio="7.62:1"
+        app:layout_constraintDimensionRatio="5:1"
         android:autoSizeTextType="uniform"
         app:layout_constraintTop_toTopOf="@id/tourNameTextView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +93,118 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/stopDescriptionTextView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintWidth_percent="0.89"
+                app:layout_constraintHeight_percent="0.5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="26dp"
+                android:text="Stop Description"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                />
+
+            <ImageView
+                android:id="@+id/restroomIconDuringTourImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/directionsButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent="0.07"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="10dp"
+
+                android:src="@drawable/g1"
+                />
+
+            <ImageView
+                android:id="@+id/cafeIconDuringTourImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/restroomIconDuringTourImageView"
+                app:layout_constraintStart_toEndOf="@id/restroomIconDuringTourImageView"
+                app:layout_constraintWidth_percent="0.07"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_marginStart="5dp"
+
+                android:src="@drawable/g2"
+                />
+
+            <ImageView
+                android:id="@+id/restaurantIconDuringTourImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/restroomIconDuringTourImageView"
+                app:layout_constraintStart_toEndOf="@id/cafeIconDuringTourImageView"
+                app:layout_constraintWidth_percent="0.07"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_marginStart="5dp"
+
+                android:src="@drawable/g3"
+                />
+
+            <ImageView
+                android:id="@+id/busstopIconDuringTourImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/restroomIconDuringTourImageView"
+                app:layout_constraintStart_toEndOf="@id/restaurantIconDuringTourImageView"
+                app:layout_constraintWidth_percent="0.07"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_marginStart="5dp"
+
+                android:src="@drawable/g4"
+                />
+
+            <ImageView
+                android:id="@+id/parkinglotIconDuringTourImageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/restroomIconDuringTourImageView"
+                app:layout_constraintStart_toEndOf="@id/busstopIconDuringTourImageView"
+                app:layout_constraintWidth_percent="0.07"
+                app:layout_constraintDimensionRatio="1:1"
+                android:layout_marginStart="5dp"
+
+                android:src="@drawable/g5"
+                />
+
+            <Button
+                android:id="@+id/directionsButton"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintWidth_percent="0.32"
+                app:layout_constraintDimensionRatio="3:1"
+                android:background="@drawable/ic_round_corner_button"
+                android:text="Directions"
+                android:textAllCaps="false"
+                />
+
+            <TextView
+                android:id="@+id/detailsTextViewDuringTour"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintWidth_percent="0.143"
+                app:layout_constraintDimensionRatio="2.4:1"
+                app:layout_constraintBottom_toBottomOf="@id/directionsButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="26dp"
+                android:autoSizeTextType="uniform"
+                android:textColor="#FECE07"
+                android:text="Details"
+                android:clickable="true"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -111,11 +221,11 @@
         android:layout_marginStart="26dp"
         android:layout_marginBottom="26dp"
         app:layout_constraintWidth_percent="0.798"
-        app:layout_constraintDimensionRatio="5.96:1"
+        app:layout_constraintDimensionRatio="8:1"
         android:background="#027EB1"
         android:text="Next Stop"
         android:textAllCaps="false"
-        android:textSize="25dp"
+        android:textSize="22dp"
         android:textColor="@color/white"
         android:textStyle="bold"
         />
@@ -125,7 +235,7 @@
         android:id="@+id/yellowLineViewDuringTour"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.013"
+        app:layout_constraintWidth_percent="0.011"
         app:layout_constraintTop_toTopOf="@id/cardViewDuringTour"
         app:layout_constraintStart_toEndOf="@id/cardViewDuringTour"
         app:layout_constraintEnd_toEndOf="parent"
