@@ -3,15 +3,23 @@ package com.example.navucsd;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
-
+/**
+ * This is the DuringTourActivity which provides some descriptions about the
+ * stop being viewed, a directionsButton leading to Google Maps and show the
+ * walking directions to the stop being viewed and a "details" textView which
+ * when being clicked on leads to the stop's location detail page.
+ *
+ *
+ * This activity is temporarily hard-coded with Geisel Library as the stop being viewed
+ */
 public class DuringTourActivity extends AppCompatActivity {
     private ImageView imageViewDuringTour;
     private TextView tourNameTextView;
@@ -79,7 +87,6 @@ public class DuringTourActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TourOverviewPage.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -100,8 +107,26 @@ public class DuringTourActivity extends AppCompatActivity {
             }
         });
 
-        // TODO: directionsButton onClick go to map app
-        
+
+        // Click on directions button would lead to Google Maps app
+        directionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a Uri from an intent string. Use the result to create an Intent.
+                // TODO: dynamically pass in the location of this stop as an URL
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=Geisel+Library,+San+Diego+US&mode=w");
+
+                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                // Make the Intent explicit by setting the Google Maps package
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                    // Attempt to start an activity that can handle the Intent
+                    startActivity(mapIntent);
+                }
+            }
+        });
 
 
 
