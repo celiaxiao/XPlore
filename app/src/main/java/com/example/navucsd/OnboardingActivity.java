@@ -17,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * This is the OnboardingActivity shows up only when the app is opened by the
+ * user for the first time, and it provides some introduction to the app
+ */
 public class OnboardingActivity extends AppCompatActivity {
     private ViewPager mViewPagerOnboarding; // Store Gifs
     private LinearLayout mDotLayout; // linearLayout to display dot indicators
