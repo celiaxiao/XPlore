@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -75,12 +76,15 @@ public class DuringTourActivity extends AppCompatActivity {
 
         stopDescriptionTextView.setText("Geisel Library is the main library building of the University of California San Diego Library. " +
                 "The building's distinctive Brutalist architecture has resulted in its being featured in the " +
-                "UC San Diego logo and becoming the most recognizable building on campus"); // Set up the descriptions for this stop
+                "UC San Diego logo and becoming the most recognizable building on campus." +
+                "------------------------------------------------------------------------" +
+                "------------------------------------------------------------------------"); // Set up the descriptions for this stop
+        stopDescriptionTextView.setMovementMethod(new ScrollingMovementMethod()); // Making this textView scrollable
 
 
-        // TODO: dynamically set up the amenities icon: b1 - b5 are active icons, g1 - g5 are inactive icons
-        restroomIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.b1));
-        cafeIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.b2));
+        // TODO: dynamically set up the amenities icon: icon_<amenityName>_white is the activated state of the icons
+        restroomIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restroom_white));
+        cafeIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_cafe_white));
 
 
 
