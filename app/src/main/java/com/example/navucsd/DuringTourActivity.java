@@ -78,7 +78,7 @@ public class DuringTourActivity extends AppCompatActivity {
                 "The building's distinctive Brutalist architecture has resulted in its being featured in the " +
                 "UC San Diego logo and becoming the most recognizable building on campus." +
                 "------------------------------------------------------------------------" +
-                "------------------------------------------------------------------------"); // Set up the descriptions for this stop
+                "------------------------------------------------------------------------"); // TODO: Dynamically Set up the descriptions for this stop
         stopDescriptionTextView.setMovementMethod(new ScrollingMovementMethod()); // Making this textView scrollable
 
 
@@ -124,6 +124,7 @@ public class DuringTourActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Create a Uri from an intent string. Use the result to create an Intent.
                 // TODO: dynamically pass in the location of this stop as an URL
+                // TODO: details about how to open Google Maps: https://developers.google.com/maps/documentation/urls/android-intents#search_for_a_location
                 Uri gmmIntentUri = Uri.parse("google.navigation:q=Geisel+Library,+San+Diego+US&mode=w");
 
                 // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
