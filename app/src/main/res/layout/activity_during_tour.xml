@@ -28,7 +28,7 @@
         android:layout_marginStart="26dp"
         android:layout_marginTop="14dp"
         android:text="Tour Name"
-        android:textSize="14px"
+        android:textSize="14sp"
         android:textColor="@color/white"
         />
 
@@ -44,7 +44,7 @@
         android:layout_marginEnd="19dp"
         android:textColor="#FECE07"
         android:text="Tour Overview"
-        android:textSize="14px"
+        android:textSize="14sp"
         android:clickable="true"
         />
     
@@ -56,10 +56,11 @@
         app:layout_constraintTop_toBottomOf="@+id/tourNameTextView"
         android:layout_marginStart="26dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintHeight_percent="0.035"
+        app:layout_constraintHeight_percent="0.038"
         app:layout_constraintDimensionRatio="12:1"
+        android:textStyle="bold"
         android:autoSizeTextType="uniform"
-        android:textSize="24px"
+        android:textSize="24sp"
         android:textColor="@color/white"
         android:text="Stop Name"/>
 
@@ -71,8 +72,8 @@
         app:layout_constraintDimensionRatio="7:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cardViewDuringTour"
+        app:layout_constraintTop_toBottomOf="@id/stopNameTextView"
         android:layout_marginStart="26dp"
-        android:layout_marginBottom="12dp"
         android:text="Previous Stop"
         android:textColor="#FECE07"
         android:autoSizeTextType="uniform"
@@ -107,7 +108,7 @@
                 android:layout_marginTop="20dp"
                 android:text="Stop Description"
                 android:textColor="@color/white"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:scrollbars="vertical"
                 />
 
@@ -116,11 +117,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintTop_toBottomOf="@id/stopDescriptionTextView"
+                app:layout_constraintBottom_toTopOf="@id/directionsButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintWidth_percent="0.07"
                 app:layout_constraintDimensionRatio="1:1"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="10dp"
 
                 android:src="@drawable/g1"
                 />
@@ -189,6 +190,7 @@
                 app:layout_constraintDimensionRatio="3:1"
                 android:background="@drawable/ic_round_corner_button"
                 android:text="Directions"
+                android:textSize="15sp"
                 android:textAllCaps="false"
                 />
 
@@ -226,7 +228,7 @@
         android:background="#027EB1"
         android:text="Next Stop"
         android:textAllCaps="false"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:textColor="@color/white"
         android:textStyle="bold"
         />
