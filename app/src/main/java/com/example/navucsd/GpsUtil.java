@@ -15,8 +15,8 @@ import androidx.core.app.ActivityCompat;
 import java.util.List;
 
 /**
- * Usage: Call any of the following function in an activity to get the latest updated location:
- *        Location location = GpsUtil.getInstance(MainActivity.this).getLastLocation();
+ * Usage: Call the following function in your activity to get the latest updated location:
+ *        Location location = GpsUtil.getInstance(yourActivityName.this).getLastLocation();
  *
  *        Then, use the following functions to get latitude or longitude:
  *        double latitude = location.getLatitude();
