@@ -114,7 +114,7 @@ public class SearchBarActivity extends AppCompatActivity  {
                     GpsUtil.getInstance(SearchBarActivity.this).getLastLocation( );
         }
         else {
-            //TODO:if no permission
+            //TODO:if no permission, hide the distance
             //android.location.Location currentLocation =
         }
         distancePair=
@@ -165,7 +165,6 @@ public class SearchBarActivity extends AppCompatActivity  {
                 //hard code to geisel details page
                 startActivity(intent);
 
-
                 return false;
             }
 
@@ -188,29 +187,30 @@ public class SearchBarActivity extends AppCompatActivity  {
                 // --------------------------------------
                 // filteredList=placesAdapter.
                 //set up clike item functionality
-                searchPlaces.setOnItemClickListener(new ListView.OnItemClickListener( ) {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                        //if user clicks the suggestion, auto complete the search bar
-                        //searchBar.setQuery(placesAdaptor.getItem(i), true);
-                        //hide the listview
-
-                        //TODO: set to intent if needed
-                        //hard code to geisel details page
-                        Intent intent = new Intent(getApplicationContext(),LandmarkDetailsActivity.class);
-                        intent.putExtra("placeName", "Geisel Library");
-                        //hard code to geisel details page
-                        startActivity(intent);
-                    }
-                });
 
 
                 return false;
             }
         });
 
+        //set on listview clicked redirection to landmark details page
+        searchPlaces.setOnItemClickListener(new ListView.OnItemClickListener( ) {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                //if user clicks the suggestion, auto complete the search bar
+                //searchBar.setQuery(placesAdaptor.getItem(i), true);
+                //hide the listview
+
+                //TODO: set to intent if needed
+                //hard code to geisel details page
+                Intent intent = new Intent(getApplicationContext(),LandmarkDetailsActivity.class);
+                intent.putExtra("placeName", "Geisel Library");
+                //hard code to geisel details page
+                startActivity(intent);
+            }
+        });
         ChipGroup chipGroup = (ChipGroup) findViewById(R.id.place_tags);
 
 
