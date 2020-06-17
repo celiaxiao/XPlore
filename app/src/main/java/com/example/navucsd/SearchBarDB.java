@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,47 +30,19 @@ import java.util.HashMap;
  *
  * Case 2:
  * SearchBarDB database = new SearchBarDB(this, "whole");
- *
- * filter function:
- * This function required two parameter:
- * ArrayList<String> locations, which contain the names of the locations
- * ArrayList<String> amenities, which contain the amenities(String)
- *
- * Output:
- * ArrayList<Location> listOfLocations
- *
- * Example:
- * locations.add("name1"); // location name1 contain "parking", "busstop"
- * locations.add("name2"); // location name2 contain "parking", "cafe", "busstop"
- * locations.add("name3"); // location name3 contain nothing
- * locations.add("name4"); // location name4 contain "busstop"
- *
- * amenities.add("parking");
- * amenities.add("cafe");
- * amenities.add("busstop");
- *
- * SearchBarDB database = new SearchBarDB(this, "whole");
- * ArrayList<Location> listOfLocations = database.filter(locations, amenities);
- *
- * Log.i("FILTERoooooo", "After filtering: ");
- * for(int i = 0; i < locList.size(); i++){
- *		Log.i("FILTERoooooo", locList.get(i).name);
- * 	}
- *
- * Output:
- * After filtering:
- * name2
- * name1
- * name4
- *
- * getByName(String name):
- * Example:
- * Log.i("FILTERoooooo", database.getByName("name3").name);
- *
- * Output:
- * name3
- *
- *  */
+ */
+
+/* Functions we have:
+ * public Location getByName(String name)
+ * public ArrayList<Pair<Location, Double>> nearestLocations(Pair<Double, Double>  userLocation, int num)
+ * public double distant(Pair<Double, Double>  p1, Pair<Double, Double>  p2)
+ * public ArrayList<Location> filter(ArrayList<String> locations, ArrayList<String> amen)
+ * public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double>  userLocation)
+ * public String loadJSONFromAsset(Context context, String filename)
+ * public ArrayList<Pair<Location, Double>> filterWithDistance(ArrayList<String> locations, ArrayList<String> amen, Pair<Double, Double>  userLocation)
+ * */
+
+
 
 public class SearchBarDB {
 
@@ -118,6 +91,27 @@ public class SearchBarDB {
         }
     }
 
+
+    /*
+     * getByName(String name):
+     * Example:
+     * locations.add("name1"); // location name1 contain "parking", "busstop"
+     * locations.add("name2"); // location name2 contain "parking", "cafe", "busstop"
+     * locations.add("name3"); // location name3 contain nothing
+     * locations.add("name4"); // location name4 contain "busstop"
+     *
+     * amenities.add("parking");
+     * amenities.add("cafe");
+     * amenities.add("busstop");
+     *
+     * SearchBarDB database = new SearchBarDB(this, "whole");
+     * ArrayList<Location> listOfLocations = database.filter(locations, amenities);
+     * Log.i("FILTERoooooo", database.getByName("name3").name);
+     *
+     * Output:
+     * name3
+     *
+     *  */
     public Location getByName(String name){
         if( name == null ){
             return null;
@@ -127,10 +121,35 @@ public class SearchBarDB {
         }
     }
 
+    public Double getDistance(String locationName, Pair<Double, Double>  userLocation){
+        Location location = getByName(locationName);
+        if( location == null){
+            return -1.0;
+        }
+        String first = (String) location.coordinates.first;
+        String second = (String) location.coordinates.second;
+        Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
+        double dist = this.distant(userLocation, locationCoor);
+        return dist;
+    }
+
+
+    /*
+     * userLocation: coordinate of the user userLocation.first should be Latitude and
+     *               userLocation.second should be Longitude
+     *
+     * num: the number of n nearest Locations to the user.
+     *
+     * output: the ArrayList of Pair<Location, Double>, Pair.first are Location object and
+     *         Pair.second are the distance between user and the locations.
+     * */
     public ArrayList<Pair<Location, Double>> nearestLocations(Pair<Double, Double>  userLocation, int num){
         ArrayList<Pair<Location, Double>> nearestList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
-            double dist = this.distant(userLocation, this.list.get(i).coordinates);
+            String first = (String) this.list.get(i).coordinates.first;
+            String second = (String) this.list.get(i).coordinates.second;
+            Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
+            double dist = this.distant(userLocation, locationCoor);
             int origin = nearestList.size();
             for( int j = 0; j < nearestList.size(); j++ ){
                 if( dist >= nearestList.get(j).second ){
@@ -147,20 +166,80 @@ public class SearchBarDB {
         return nearestList;
     }
 
-
+    /*
+     * userLocation: coordinate of the user userLocation.first should be Latitude and
+     *               userLocation.second should be Longitude
+     *
+     * output: the ArrayList of Pair<Location, Double>, which contains all the locations. Pair.first
+     *         are Location object and Pair.second are the distance between user and the locations.
+     */
     public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double>  userLocation){
         ArrayList<Pair<Location, Double>> distanceList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
-            double dist = this.distant(userLocation, this.list.get(i).coordinates);
+            String first = (String) this.list.get(i).coordinates.first;
+            String second = (String) this.list.get(i).coordinates.second;
+            Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
+            double dist = this.distant(userLocation, locationCoor);
             distanceList.add(new Pair<>(this.list.get(i), dist));
         }
         return distanceList;
     }
 
+
+    /*
+     * p1 and p2 represent the Location coordinates both of them are Pair<Double, Double> Object and
+     * should in the format as: Pair<Latitude, Longitude> which means the in Pair, first should be
+     * Latitude and second should be Longitude
+     *
+     * public static void distanceBetween (
+     *              double startLatitude,
+     *              double startLongitude,
+     *              double endLatitude,
+     *              double endLongitude,
+     *              float[] results)
+     */
     public double distant(Pair<Double, Double>  p1, Pair<Double, Double>  p2){
-        return Math.sqrt(Math.abs(p1.first-p2.first) + Math.abs(p1.second-p2.second));
+        float[] results = new float[1];
+        android.location.Location.distanceBetween(p1.first, p1.second, p2.first, p2.second, results);
+        DecimalFormat df = new DecimalFormat("###.###");
+        String resultInString = df.format(results[0]);
+        Double finalResult = Double.parseDouble(resultInString);
+        return finalResult;
     }
 
+    /*
+     * filter function:
+     * This function required two parameter:
+     * ArrayList<String> locations, which contain the names of the locations
+     * ArrayList<String> amenities, which contain the amenities(String)
+     *
+     * Output:
+     * ArrayList<Location> listOfLocations
+     *
+     * Example:
+     * locations.add("name1"); // location name1 contain "parking", "busstop"
+     * locations.add("name2"); // location name2 contain "parking", "cafe", "busstop"
+     * locations.add("name3"); // location name3 contain nothing
+     * locations.add("name4"); // location name4 contain "busstop"
+     *
+     * amenities.add("parking");
+     * amenities.add("cafe");
+     * amenities.add("busstop");
+     *
+     * SearchBarDB database = new SearchBarDB(this, "whole");
+     * ArrayList<Location> listOfLocations = database.filter(locations, amenities);
+     *
+     * Log.i("FILTERoooooo", "After filtering: ");
+     * for(int i = 0; i < locList.size(); i++){
+     *		Log.i("FILTERoooooo", locList.get(i).name);
+     * 	}
+     *
+     * Output:
+     * After filtering:
+     * name2
+     * name1
+     * name4
+     */
     public ArrayList<Location> filter(ArrayList<String> locations, ArrayList<String> amen){
         ArrayList<Pair<Location, Integer>> trackingList = new ArrayList<>();
         ArrayList<Location> outputList = new ArrayList<>();
@@ -214,6 +293,63 @@ public class SearchBarDB {
         return outputList;
     }
 
+
+    public ArrayList<Pair<Location, Double>> filterWithDistance(ArrayList<String> locations, ArrayList<String> amen, Pair<Double, Double>  userLocation){
+        ArrayList<Pair<Location, Integer>> trackingList = new ArrayList<>();
+        ArrayList<Pair<Location, Double>> outputList = new ArrayList<>();
+        ArrayList<String> amenities = new ArrayList<>();
+        for( int i = 0; i < amen.size(); i++ ){
+            if(amen.get(i) != null){
+                amenities.add(amen.get(i));
+            }
+        }
+        if(amenities.size() == 0){
+            for( int i = 0; i < locations.size(); i++){
+                Location location = this.getByName(locations.get(i));
+                if(location != null){
+                    Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                    outputList.add(item);
+                }
+            }
+        }
+        else{
+            for( int i = 0; i < locations.size(); i++){
+                Location location = this.getByName(locations.get(i));
+                if( location != null ){
+                    int weight = 0;
+                    for( int z = 0; z < amenities.size(); z++ ){
+                        if( location.amenities.get(amenities.get(z)) == true ){
+                            weight = (weight*10) + 5 - z;
+                        }
+                    }
+                    if( weight > 0 ){
+                        if( outputList.isEmpty()){
+                            trackingList.add(new Pair<>(location, weight));
+                            Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                            outputList.add(item);
+                        }
+                        else{
+                            int origin = trackingList.size();
+                            for( int j = 0; j < trackingList.size(); j++ ){
+                                if( weight >= trackingList.get(j).second ){
+                                    trackingList.add(j, new Pair<>(location, weight));
+                                    Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                                    outputList.add(j, item);
+                                    break;
+                                }
+                            }
+                            if( origin == trackingList.size() ){
+                                trackingList.add( new Pair<>(location, weight) );
+                                Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                                outputList.add(item);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return outputList;
+    }
 
 
     /*
