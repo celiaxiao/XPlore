@@ -11,6 +11,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +98,10 @@ public class SearchBarPlacesView extends ArrayAdapter {
                 String name=filtered.get(position).getPlacesName();
                 SearchBarDB sbdatebase=new SearchBarDB(getContext(), "one by one");
                 Location clickedLocation=sbdatebase.getByName(name);
-                //clickedLocation.coordinates
+                Log.i("name", name);
+                //this is name of the location: name
+                //this is the coordinates pair (latitude, longitude) for the clicked location:
+                // clickedLocation.getCoordinates();
             }
         });
         return rowView;
