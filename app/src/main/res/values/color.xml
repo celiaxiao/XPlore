@@ -28,4 +28,6 @@
     <color name="directionButton">#006A96</color>
     <color name="main_page_subtitle">#3c3c3c</color>
 
+    <color name="search_amenity_text">#162B49</color>
+
 </resources>
