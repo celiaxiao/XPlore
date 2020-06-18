@@ -374,8 +374,15 @@
             android:orientation="horizontal"
             android:overScrollMode="never"
             android:paddingBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_page_campus_life_card_view" />
+            app:layout_constraintTop_toBottomOf="@id/main_page_campus_life_card_view"
+            app:layout_constraintBottom_toTopOf="@id/main_page_auto_bottom_navigation_space_holder_guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/main_page_auto_bottom_navigation_space_holder_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="50dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

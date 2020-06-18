@@ -2,6 +2,7 @@ package com.example.navucsd;
 
 import com.example.navucsd.PlacesDataClass;
 import com.example.navucsd.R;
+import com.example.navucsd.database.Location;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,12 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -85,6 +88,22 @@ public class SearchBarPlacesView extends ArrayAdapter {
         if(amen[2]) resturantIcon.setImageResource(R.drawable.b3);
         if(amen[3]) busStationIcon.setImageResource(R.drawable.b4);
         if(amen[4]) parkingIcon.setImageResource(R.drawable.b5);
+
+        //setup direction button onclick lisener
+        //TODO: set up behavior when users click the button
+        Button directBtn=rowView.findViewById(R.id.directionButton);
+        directBtn.setOnClickListener(new View.OnClickListener( ) {
+            @Override
+            public void onClick(View view) {
+                String name=filtered.get(position).getPlacesName();
+                SearchBarDB sbdatebase=new SearchBarDB(getContext(), "one by one");
+                Location clickedLocation=sbdatebase.getByName(name);
+                Log.i("name", name);
+                //this is name of the location: name
+                //this is the coordinates pair (latitude, longitude) for the clicked location:
+                // clickedLocation.getCoordinates();
+            }
+        });
         return rowView;
     };
 
