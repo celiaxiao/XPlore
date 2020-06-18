@@ -18,11 +18,24 @@ public class ToursPageFragment extends Fragment {
 
     ListViewForScrollView v;
     ScrollView sv;
+    ToursAdapter a;
 
-    private String[] nameSet = {"UCSD's Landmark Tour", "Most Popular Restaurants at UCSD", "Intro to Brutalism - \nArchitecture of UCSD", "60 Years by the Beach - \nHistorical Sites at UCSD", "Let's Get Punky - \nHidden Artworks on Campus", "Revelle College"};
-    private int[] timeSet = {90, 30, 40, 50, 60, 70};
-    private int[] stopsSet = {5, 3, 2, 3, 4, 5};
-    private int[] pictures = {R.drawable.tours_landmark, R.drawable.tours_restaurants, R.drawable.tours_brutalism, R.drawable.tours_historical_sites, R.drawable.tours_hidden_artworks, R.drawable.tours_revelle};
+    private String[] nameSetToursForEveryone = {"UCSD's Landmark Tour", "Intro to Brutalism - Architectures at UCSD", "Art Student Tour"};
+    private String[] nameSetJourneyThruArt = {"The Stuart Collection Tour"};
+    private String[] nameSetAlumniTours = {"Things That Changed Since 2000"};
+    private String[] nameSetCollegeTours = {"Revelle College Tour", "Marshall College Tour", "Muir College Tour", "Eleanor Roosevelt College Tour", "Warren College Tour", "Sixth College Tour"};
+    private String[] timeSetToursForEveryone = {"1 Hour 30 Mins", "50 Mins", "40Mins"};
+    private String[] timeSetJourneyThruArt = {"2 Hours"};
+    private String[] timeSetAlumniTours = {"1 Hour 20 Mins"};
+    private String[] timeSetCollegeTours = {"1 Hour", "45 Mins", "50 Mins", "45 Mins", "40 Mins", "45 Mins"};
+    private int[] stopsSetToursForEveryone = {7, 6, 7};
+    private int[] stopsSetJourneyThruArt = {20};
+    private int[] stopsSetAlumniTours = {10};
+    private int[] stopsSetCollegeTours = {6, 5, 7, 6, 5, 6};
+    private int[] picturesToursForEveryone = {R.drawable.tour_landmark, R.drawable.tour_brutalism, R.drawable.tour_art};
+    private int[] picturesJourneyThruArt = {R.drawable.tour_stuart};
+    private int[] picturesAlumniTours = {R.drawable.tour_alumni};
+    private int[] picturesCollegeTours = {R.drawable.tour_revelle, R.drawable.tour_marshall, R.drawable.tour_muir, R.drawable.tour_erc, R.drawable.tour_warren, R.drawable.tour_sixth};
 
     /**
      * If this page has been clicked, used to prevent multiple clicks.
@@ -53,8 +66,17 @@ public class ToursPageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        v = (ListViewForScrollView) getView().findViewById(R.id.tours_lv);
-        ToursAdapter a = new ToursAdapter(this.getActivity(), nameSet, timeSet, stopsSet, pictures);
+        v = (ListViewForScrollView) getView().findViewById(R.id.toursForEveryone_lv);
+        a = new ToursAdapter(this.getActivity(), nameSetToursForEveryone, timeSetToursForEveryone, stopsSetToursForEveryone, picturesToursForEveryone);
+        v.setAdapter(a);
+        v = (ListViewForScrollView) getView().findViewById(R.id.journeyThruArt_lv);
+        a = new ToursAdapter(this.getActivity(), nameSetJourneyThruArt, timeSetJourneyThruArt, stopsSetJourneyThruArt, picturesJourneyThruArt);
+        v.setAdapter(a);
+        v = (ListViewForScrollView) getView().findViewById(R.id.alumniTours_lv);
+        a = new ToursAdapter(this.getActivity(), nameSetAlumniTours, timeSetAlumniTours, stopsSetAlumniTours, picturesAlumniTours);
+        v.setAdapter(a);
+        v = (ListViewForScrollView) getView().findViewById(R.id.collegeTours_lv);
+        a = new ToursAdapter(this.getActivity(), nameSetCollegeTours, timeSetCollegeTours, stopsSetCollegeTours, picturesCollegeTours);
         v.setAdapter(a);
 
         // Adjustment for ListViewForScrollView
@@ -64,6 +86,9 @@ public class ToursPageFragment extends Fragment {
         getView()
             .findViewById(R.id.cardViewCustomizeTour)
             .setOnClickListener(getOnClickListener(TourOverviewPage.class));
+        getView()
+                .findViewById(R.id.start_button)
+                .setOnClickListener(getOnClickListener(TourOverviewPage.class));
     }
 
     /**
