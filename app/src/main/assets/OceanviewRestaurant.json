@@ -9,7 +9,7 @@
     "restroom": true
   },
   "links": [
-    "https://hdh-web.ucsd.edu/dining/apps/diningservices/Restaurants/MenuItem/05"
+    "Oceanview Menu: https://hdh-web.ucsd.edu/dining/apps/diningservices/Restaurants/MenuItem/05"
   ],
   "thumbnailPhoto": "https://www.randalllamb.com/wp-content/uploads/2017/10/ucsd-ocean-view-terrace-exterior-3-1.jpg",
   "otherPhotos": [
@@ -20,7 +20,6 @@
   ],
   "relatedPlaces": [
     "Price Center",
-    "RIMAC Gym",
     "64 Degrees",
     "Canyon Vista"
   ],
