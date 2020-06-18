@@ -11,7 +11,7 @@
         android:id="@+id/LogoImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.39444"
+        app:layout_constraintWidth_percent="0.5"
         app:layout_constraintDimensionRatio="1:1"
         android:src="@drawable/logo_2nd_version"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
         android:autoSizeTextType="uniform"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="6.17:1"
-        app:layout_constraintWidth_percent="0.395"
+        app:layout_constraintWidth_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LogoImageView"
          />
@@ -50,7 +50,7 @@
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.6917"
+        app:layout_constraintWidth_percent="0.9"
         app:layout_constraintDimensionRatio="15.56:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AppNameTextView" />

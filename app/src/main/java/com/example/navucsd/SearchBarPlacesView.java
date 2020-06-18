@@ -11,6 +11,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,7 +63,7 @@ public class SearchBarPlacesView extends ArrayAdapter {
         this.amentities=amentities;
     }
 
-    //set up the list overall view with title, avalibility, and distances
+    //set up the list overall view with title, availability, and distances
     public View getView(int position, View view, ViewGroup parent) {
 
         //get the xml layout file as an item for the list
@@ -81,7 +83,7 @@ public class SearchBarPlacesView extends ArrayAdapter {
         nameText.setText(filtered.get(position).getPlacesName());
         avaiText.setText(filtered.get(position).getAvalability());
         distanceText.setText(filtered.get(position).getDistances());
-        //initialize amentities
+        //initialize amenities
         boolean[] amen=filtered.get(position).getAmenities();
         if(amen[0]) bathroomIcon.setImageResource(R.drawable.b1);
         if(amen[1]) cafeIcon.setImageResource(R.drawable.b2);
@@ -89,7 +91,7 @@ public class SearchBarPlacesView extends ArrayAdapter {
         if(amen[3]) busStationIcon.setImageResource(R.drawable.b4);
         if(amen[4]) parkingIcon.setImageResource(R.drawable.b5);
 
-        //setup direction button onclick lisener
+        //setup direction button onclick listener
         //TODO: set up behavior when users click the button
         Button directBtn=rowView.findViewById(R.id.directionButton);
         directBtn.setOnClickListener(new View.OnClickListener( ) {
@@ -101,7 +103,21 @@ public class SearchBarPlacesView extends ArrayAdapter {
                 Log.i("name", name);
                 //this is name of the location: name
                 //this is the coordinates pair (latitude, longitude) for the clicked location:
-                // clickedLocation.getCoordinates();
+                String latitude = (String) clickedLocation.getCoordinates().first;
+                String longitude = (String) clickedLocation.getCoordinates().second;
+
+                // Use the coordinates to set up directions in Google Maps with (default mode=walking)
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + latitude + ", " + longitude + "&mode=w");
+
+                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                // Make the Intent explicit by setting the Google Maps package
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                if (mapIntent.resolveActivity(getContext().getPackageManager()) != null) {
+                    // Attempt to start an activity that can handle the Intent
+                    getContext().startActivity(mapIntent);
+                }
             }
         });
         return rowView;
