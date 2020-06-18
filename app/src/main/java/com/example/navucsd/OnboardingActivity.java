@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -16,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * This is the OnboardingActivity shows up only when the app is opened by the
+ * user for the first time, and it provides some introduction to the app
+ */
 public class OnboardingActivity extends AppCompatActivity {
     private ViewPager mViewPagerOnboarding; // Store Gifs
     private LinearLayout mDotLayout; // linearLayout to display dot indicators
@@ -28,16 +33,6 @@ public class OnboardingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onboarding);
-
-
-        // Record that this page has been played to mark the app has been opened
-        // before
-        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("Onboarding finished", true);
-        editor.commit();
-
-
 
         mViewPagerOnboarding = (ViewPager) findViewById(R.id.viewPagerOnboarding);
         mDotLayout = (LinearLayout) findViewById(R.id.linearLayoutOnboarding);

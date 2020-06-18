@@ -28,6 +28,11 @@ import java.util.Arrays;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
+/**
+ * This is the TourOverviewPage activity which provides an overview for a tour;
+ * the overview contains a startButton leading to starting the tour and
+ * cardViews for different stops in the tour.
+ */
 public class TourOverviewPage extends AppCompatActivity {
     private ArrayList<String> items; // ArrayList that provide items for the RecyclerView
     private RecyclerView mRecyclerView;
