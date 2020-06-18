@@ -228,7 +228,7 @@
         android:background="#027EB1"
         android:text="Next Stop"
         android:textAllCaps="false"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:textStyle="bold"
         />
