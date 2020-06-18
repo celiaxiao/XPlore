@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -339,7 +340,10 @@ public final class PlacesPageFragment extends Fragment {
 		// TODO make this a constant too somehow
 		final double ASPECT_RATIO = 5.0 / 4;
 		// TODO make all these constants in dimen
-		final int LABEL_HEIGHT_DP = 30, SIDE_MARGIN_DP = 5, CORNER_RADIUS_DP = 5;
+		final int LABEL_HEIGHT_DP = 49;
+		final int LABEL_SIDE_MARGIN_DP = 5;
+		final int SIDE_MARGIN_DP = 5;
+		final int CORNER_RADIUS_DP = 5;
 		final int TEXT_SIZE_SP = 15;
 
 		TableRow row = new TableRow(context);
@@ -370,6 +374,8 @@ public final class PlacesPageFragment extends Fragment {
 			dpToXp(LABEL_HEIGHT_DP)
 		);
 		label_layout.gravity = Gravity.BOTTOM;
+		label_layout.leftMargin = dpToXp(LABEL_SIDE_MARGIN_DP);
+		label_layout.rightMargin = dpToXp(LABEL_SIDE_MARGIN_DP);
 
 		CardView card;
 		TextView label;
@@ -386,6 +392,8 @@ public final class PlacesPageFragment extends Fragment {
 		// this avoids font weight and looks similar enough
 		label.setTypeface(Typeface.DEFAULT_BOLD);
 		label.setGravity(Gravity.CENTER);
+		label.setMaxLines(2);
+		label.setEllipsize(TextUtils.TruncateAt.END);
 		label.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
 
 		card.addView(new SmartImageView(
@@ -410,6 +418,8 @@ public final class PlacesPageFragment extends Fragment {
 			// this avoids font weight and looks similar enough
 			label.setTypeface(Typeface.DEFAULT_BOLD);
 			label.setGravity(Gravity.CENTER);
+			label.setMaxLines(2);
+			label.setEllipsize(TextUtils.TruncateAt.END);
 			label.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
 
 			card.addView(new SmartImageView(
