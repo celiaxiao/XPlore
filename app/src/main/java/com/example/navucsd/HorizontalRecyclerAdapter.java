@@ -59,14 +59,14 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 	@Override
 	public void onBindViewHolder(MyViewHolder holder, int position) {
 		DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-		adjustLayoutParam(holder.textView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize) * metrics.density)) / 2,
-				(int) (49 * metrics.density));
+		adjustLayoutParam(holder.textView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
+				(int) (50 * metrics.density));
 		holder.textView.setText(names[position]);
-		adjustLayoutParam(holder.imageView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize) * metrics.density)) / 2,
-				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize) * metrics.density)) / 2 - (int) (49 * metrics.density));
+		adjustLayoutParam(holder.imageView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
+				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2 - (int) (50 * metrics.density));
 		holder.imageView.setImageResource(images[position]);
-		adjustLayoutParam(holder.cardView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize) * metrics.density)) / 2,
-				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize) * metrics.density)) / 2);
+		adjustLayoutParam(holder.cardView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
+				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2);
 	}
 
 	private void adjustLayoutParam(View v, int width, int height) {
