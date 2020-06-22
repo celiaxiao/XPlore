@@ -10,20 +10,21 @@ import android.widget.TextView;
 
 public class ToursAdapter extends BaseAdapter {
 
-    private static int PLACE_NUMBER = 6;
+    private int PLACE_NUMBER;
 
     private String[] nameSet;
-    private int[] timeSet;
+    private String[] timeSet;
     private int[] stopsSet;
     private int[] pictures;
 
     private LayoutInflater mInflater;
 
-    public ToursAdapter(Context c, String[] n, int[] t, int[] s, int[] p){
+    public ToursAdapter(Context c, String[] n, String[] t, int[] s, int[] p){
         nameSet = n;
         timeSet = t;
         stopsSet = s;
         pictures = p;
+        PLACE_NUMBER = n.length;
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -52,7 +53,7 @@ public class ToursAdapter extends BaseAdapter {
         ImageView photoIV = (ImageView) v.findViewById(R.id.main_place_photo);
 
         String name = nameSet[i];
-        String time = timeSet[i] + "min";
+        String time = timeSet[i];
         String stops = stopsSet[i] + " Stops";
         int photo = pictures[i];
 
