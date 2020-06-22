@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.navucsd.database.Location;
+import com.example.navucsd.utils.DownloadImageTask;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
 
@@ -84,38 +85,6 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(landmarkPager);
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... imageUrl) {
-            URL url = null;
-            Bitmap bmp = null;
-            try {
-                if (imageUrl[0].startsWith("http:")) {
-                    imageUrl[0] = imageUrl[0].replace("http:", "https:");
-                }
-                url = new URL(imageUrl[0]);
-                try {
-                    bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            return bmp;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
-
     private class LandmarkAdapter extends FragmentStatePagerAdapter {
 
         private final String[] TAB_TITLES = {"Overview", "History"};
@@ -137,7 +106,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 1;
         }
 
         @Nullable

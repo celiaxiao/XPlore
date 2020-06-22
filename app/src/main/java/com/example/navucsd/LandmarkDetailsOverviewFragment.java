@@ -6,6 +6,18 @@ import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.PowerManager;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,21 +28,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
-import android.os.PowerManager;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.VideoView;
-
 import com.example.navucsd.database.Location;
 import com.example.navucsd.utils.ClickTracker;
+import com.example.navucsd.utils.DownloadImageTask;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -137,7 +137,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_landmark_detail_overview, container, false);
+        return inflater.inflate(R.layout.fragment_landmark_detail_overview_fv, container, false);
     }
 
     @Override
@@ -235,30 +235,47 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedVideosRecycler.addItemDecoration(dividerItemDecorationRelatedVideos);
         relatedVideosRecycler.setLayoutManager(layoutManager);
         relatedVideosAdapter = new RelatedVideosAdapter();
+        relatedVideosAdapter.setLinks(currLocation.getVideos());
         relatedVideosRecycler.setAdapter(relatedVideosAdapter);
 
-        // Set up related stories
-        relatedStoriesRecycler = view.findViewById(R.id.related_stories_recycler);
-        relatedStoriesRecycler.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        DividerItemDecoration dividerItemDecorationRelatedStories = new DividerItemDecoration(relatedStoriesRecycler.getContext(),
-                LinearLayoutManager.VERTICAL) {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                int position = parent.getChildAdapterPosition(view);
-                // hide the divider for the last child
-                if (position == state.getItemCount() - 1) {
-                    outRect.set(0, 0, 0, 0);
-                } else {
-                    super.getItemOffsets(outRect, view, parent, state);
-                }
-            }
-        };
-        dividerItemDecorationRelatedStories.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_16dp));
-        relatedStoriesRecycler.addItemDecoration(dividerItemDecorationRelatedStories);
-        relatedStoriesRecycler.setLayoutManager(layoutManager);
-        relatedStoriesAdapter = new RelatedStoriesAdapter();
-        relatedStoriesRecycler.setAdapter(relatedStoriesAdapter);
+//        // Set up related stories
+//        relatedStoriesRecycler = view.findViewById(R.id.related_stories_recycler);
+//        relatedStoriesRecycler.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+//        DividerItemDecoration dividerItemDecorationRelatedStories = new DividerItemDecoration(relatedStoriesRecycler.getContext(),
+//                LinearLayoutManager.VERTICAL) {
+//            @Override
+//            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+//                int position = parent.getChildAdapterPosition(view);
+//                // hide the divider for the last child
+//                if (position == state.getItemCount() - 1) {
+//                    outRect.set(0, 0, 0, 0);
+//                } else {
+//                    super.getItemOffsets(outRect, view, parent, state);
+//                }
+//            }
+//        };
+//        dividerItemDecorationRelatedStories.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_16dp));
+//        relatedStoriesRecycler.addItemDecoration(dividerItemDecorationRelatedStories);
+//        relatedStoriesRecycler.setLayoutManager(layoutManager);
+//        relatedStoriesAdapter = new RelatedStoriesAdapter();
+//        relatedStoriesRecycler.setAdapter(relatedStoriesAdapter);
+//
+//        moreStoriesBtn = view.findViewById(R.id.story_view_more);
+//        moreStoriesBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!isExpanded) {
+//                    moreStoriesBtn.setText("Collapse");
+//                    relatedStoriesAdapter.setExpand(true);
+//                }
+//                else {
+//                    moreStoriesBtn.setText("View More(13)");
+//                    relatedStoriesAdapter.setExpand(false);
+//                }
+//                isExpanded = !isExpanded;
+//            }
+//        });
 
         // Set up related links
         relatedLinksRecycler = view.findViewById(R.id.related_links_recycler);
@@ -268,22 +285,6 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedLinksAdapter = new RelatedLinksAdapter();
         relatedLinksAdapter.setLinks(currLocation.getLinks());
         relatedLinksRecycler.setAdapter(relatedLinksAdapter);
-
-        moreStoriesBtn = view.findViewById(R.id.story_view_more);
-        moreStoriesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isExpanded) {
-                    moreStoriesBtn.setText("Collapse");
-                    relatedStoriesAdapter.setExpand(true);
-                }
-                else {
-                    moreStoriesBtn.setText("View More(13)");
-                    relatedStoriesAdapter.setExpand(false);
-                }
-                isExpanded = !isExpanded;
-            }
-        });
 
         // Set up the related places
         relatedPlacesRecycler = view.findViewById(R.id.related_places_recycler);
@@ -311,28 +312,28 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedPlacesAdapter = new HorizontalRecyclerAdapter(clickTracker, names, images, MARGIN_RELATED_PLACES, 20);
         relatedPlacesRecycler.setAdapter(relatedPlacesAdapter);
 
-        // Set up related tours
-        relatedToursRecycler = view.findViewById(R.id.related_tours_recycler);
-        relatedToursRecycler.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        DividerItemDecoration dividerItemDecorationRelatedTours = new DividerItemDecoration(relatedToursRecycler.getContext(),
-                LinearLayoutManager.VERTICAL) {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                int position = parent.getChildAdapterPosition(view);
-                // hide the divider for the last child
-                if (position == state.getItemCount() - 1) {
-                    outRect.set(0, 0, 0, 0);
-                } else {
-                    super.getItemOffsets(outRect, view, parent, state);
-                }
-            }
-        };
-        dividerItemDecorationRelatedTours.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_16dp));
-        relatedToursRecycler.addItemDecoration(dividerItemDecorationRelatedTours);
-        relatedToursRecycler.setLayoutManager(layoutManager);
-        relatedToursAdapter = new RelatedToursAdapter();
-        relatedToursRecycler.setAdapter(relatedToursAdapter);
+//        // Set up related tours
+//        relatedToursRecycler = view.findViewById(R.id.related_tours_recycler);
+//        relatedToursRecycler.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+//        DividerItemDecoration dividerItemDecorationRelatedTours = new DividerItemDecoration(relatedToursRecycler.getContext(),
+//                LinearLayoutManager.VERTICAL) {
+//            @Override
+//            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+//                int position = parent.getChildAdapterPosition(view);
+//                // hide the divider for the last child
+//                if (position == state.getItemCount() - 1) {
+//                    outRect.set(0, 0, 0, 0);
+//                } else {
+//                    super.getItemOffsets(outRect, view, parent, state);
+//                }
+//            }
+//        };
+//        dividerItemDecorationRelatedTours.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_16dp));
+//        relatedToursRecycler.addItemDecoration(dividerItemDecorationRelatedTours);
+//        relatedToursRecycler.setLayoutManager(layoutManager);
+//        relatedToursAdapter = new RelatedToursAdapter();
+//        relatedToursRecycler.setAdapter(relatedToursAdapter);
     }
 
     /**
@@ -460,10 +461,14 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
 
     private class RelatedVideosAdapter extends RecyclerView.Adapter<RelatedVideosAdapter.MyViewHolder> {
 
-        private String[] titleSet = {"Geisel Library: An Intro to Brutalism", "Wait...What’s On Geisel Library Roof!?"};
-//        private String[] videoFiles = {};
+        private ArrayList<String> links = new ArrayList<>();
 
         public RelatedVideosAdapter() {
+        }
+
+        public void setLinks(ArrayList<String> links) {
+            this.links = links;
+            notifyDataSetChanged();
         }
 
         // Create new views (invoked by the layout manager)
@@ -483,35 +488,34 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         public void onBindViewHolder(MyViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            holder.textViewVideoTitle.setText(titleSet[position]);
-            holder.textViewTime.setText("3:03");
-//            holder.videoView.setVideoPath(videoFiles[position]);
-
+            String link = links.get(position);
+            String videoID = link.substring(link.lastIndexOf("v=") + 2);
+            String thumbnailUrl = "https://img.youtube.com/vi/" + videoID + "/sddefault.jpg";
+            Log.d("Video Link", thumbnailUrl);
+            new DownloadImageTask(holder.imageView).execute(thumbnailUrl);
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoID)));
+                }
+            });
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return titleSet.length;
+            return links.size();
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
-            public TextView textViewVideoTitle, textViewTime;
-            public VideoView videoView;
+            public ImageView imageView;
+            public CardView cardView;
 
             public MyViewHolder(CardView v) {
                 super(v);
-                textViewVideoTitle = v.findViewById(R.id.overview_video_name);
-                textViewTime = v.findViewById(R.id.overview_video_time);
-                videoView = v.findViewById(R.id.overview_video_view);
-                v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        Intent intent = new Intent(v.getContext(), LandmarkDetailsActivity.class);
-//                        v.getContext().startActivity(intent);
-                    }
-                });
+                imageView = v.findViewById(R.id.overview_video_image);
+                cardView = v;
             }
         }
     }
