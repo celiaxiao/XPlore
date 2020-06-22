@@ -1,7 +1,12 @@
 package com.example.navucsd;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,18 +14,26 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.navucsd.utils.ClickTracker;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MainPageFragment extends Fragment {
 
+	private SearchBarDB database;
+	private FusedLocationProviderClient fusedLocationClient;
 	private RecyclerView recyclerViewSig;
 	private LinearLayoutManager layoutManager;
 	private HorizontalRecyclerAdapter sigAdapter;
@@ -63,30 +76,30 @@ public class MainPageFragment extends Fragment {
 	 * @param images the images id of the cards
 	 */
 	private void setupRecyclerView(
-		RecyclerView view,
-		ClickTracker tracker,
-		String[] names,
-		int[] images
+			RecyclerView view,
+			ClickTracker tracker,
+			String[] names,
+			int[] images
 	) {
 		layoutManager = new LinearLayoutManager(
-			getContext(),
-			LinearLayoutManager.HORIZONTAL,
-			false
+				getContext(),
+				LinearLayoutManager.HORIZONTAL,
+				false
 		);
 		DividerItemDecoration dividerItemDecorationSig = new DividerItemDecoration(view.getContext(),
 				LinearLayoutManager.HORIZONTAL) {
 			@Override
 			public void getItemOffsets(
-				Rect outRect,
-				View view,
-				RecyclerView parent,
-				RecyclerView.State state
+					Rect outRect,
+					View view,
+					RecyclerView parent,
+					RecyclerView.State state
 			) {
 				int position = parent.getChildAdapterPosition(view);
 				int px_16 = Math.round(TypedValue.applyDimension(
-					TypedValue.COMPLEX_UNIT_DIP,
-					16,
-					getResources().getDisplayMetrics()
+						TypedValue.COMPLEX_UNIT_DIP,
+						16,
+						getResources().getDisplayMetrics()
 				));
 				// hide the divider for the last child
 				if (position == state.getItemCount() - 1) {
@@ -97,7 +110,7 @@ public class MainPageFragment extends Fragment {
 			}
 		};
 		dividerItemDecorationSig.setDrawable(getResources().getDrawable(
-			R.drawable.vertical_divider_20dp)
+				R.drawable.vertical_divider_20dp)
 		);
 		view.addItemDecoration(dividerItemDecorationSig);
 
@@ -114,11 +127,39 @@ public class MainPageFragment extends Fragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+
 		// set up auto slide viewpager
 		autoSlideViewPager = view.findViewById(R.id.auto_slider);
 		autoSlideViewPagerAdapter = new AutoSlideViewPagerAdapter(getContext());
 		autoSlideViewPager.setAdapter(autoSlideViewPagerAdapter);
 		autoSlideViewPager.setAutoPlay(true);
+
+		database = new SearchBarDB(getContext(), "one by one");
+		fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+		if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+			// TODO: Consider calling
+			//    ActivityCompat#requestPermissions
+			// here to request the missing permissions, and then overriding
+			//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+			//                                          int[] grantResults)
+			// to handle the case where the user grants the permission. See the documentation
+			// for ActivityCompat#requestPermissions for more details.
+			return;
+		}
+		else {
+			fusedLocationClient.getLastLocation()
+					.addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+						@Override
+						public void onSuccess(Location location) {
+							// Got last known location. In some rare situations this can be null.
+							if (location != null) {
+								ArrayList<Pair<com.example.navucsd.database.Location, Double>> arrayList = database.nearestLocations(new Pair<>(location.getLatitude(), location.getLongitude()),3);
+								Log.d("Near", arrayList.size() + "");
+								autoSlideViewPagerAdapter.setContent(arrayList);
+							}
+						}
+					});
+		}
 
 		setupRecyclerView(
 			view.findViewById(R.id.main_page_must_see_landmarks_recycler_view),

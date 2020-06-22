@@ -2,20 +2,25 @@ package com.example.navucsd;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.navucsd.database.Location;
+import com.example.navucsd.utils.DownloadImageTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Adapter for ViewPager in HomeActivity
@@ -25,14 +30,18 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
 
     private Context context;
     // Duplicate the first and the last images for recyclable scrolling
-    private Integer[] images = {R.drawable.fallen_star,     // jump to images[3]
-            R.drawable.geisel, R.drawable.price_center_east, R.drawable.fallen_star,
-            R.drawable.geisel};    // jump to images[1]
     private String[] nameSet = {"Fallen Star", "Geisel Library", "Price Center", "Fallen Star", "Geisel Library"};
     private String[] distanceSet = {"350m", "<100m", "300m", "350m", "<100m"};
+    private String[] imageUrl = {"https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-3.jpg",
+            "https://live.staticflickr.com/7177/13535412304_8571d152b8_b.jpg",
+            "https://www.cannondesign.com/assets/Price1-e1515003216991.jpg",
+            "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-3.jpg",
+            "https://live.staticflickr.com/7177/13535412304_8571d152b8_b.jpg"};
+    private ArrayList<HashMap<String, Boolean>> amenitiesList;
     private ImageView imageView;
     private TextView textName;
     private TextView textDistance;
+    private String[] nameMap = {"restroom","cafe","restaurant","busstop","parking"};
 
     public AutoSlideViewPagerAdapter(Context context) {
         this.context = context;
@@ -40,7 +49,7 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return images.length;
+        return nameSet.length;
     }
 
     @Override
@@ -54,19 +63,32 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
         // create a new view
         CardView view = (CardView) LayoutInflater.from(container.getContext())
                 .inflate(R.layout.main_page_places_item, container, false);
-        imageView = view.findViewById(R.id.tours_photo);
-        imageView.setImageResource(images[position]);
+        imageView = view.findViewById(R.id.main_place_photo);
+        new DownloadImageTask(imageView).execute(imageUrl[position]);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        textName = view.findViewById(R.id.tours_name);
+        textName = view.findViewById(R.id.main_place_name);
         textName.setText(nameSet[position]);
-        textDistance = view.findViewById(R.id.place_distance);
+        textDistance = view.findViewById(R.id.main_place_distance);
         textDistance.setText(distanceSet[position]);
+        LinearLayout amenitiesIcons = view.findViewById(R.id.main_place_amenities);
+        if (amenitiesList!= null && amenitiesList.get(position) != null) {
+            for (int i = nameMap.length - 1; i >= 0; i--) {
+                if (amenitiesList.get(position).get(nameMap[i])) {
+                    ((ImageView)amenitiesIcons.getChildAt(i)).setColorFilter(context.getColor(R.color.black));
+                }
+                else {
+                    ((ImageView)amenitiesIcons.getChildAt(i)).setColorFilter(context.getColor(R.color.amenityChip));
+                }
+            }
+        }
 
         // add onClickListener for each card
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, LandmarkDetailsActivity.class));
+                Intent intent = new Intent(context, LandmarkDetailsActivity.class);
+                intent.putExtra("placeName", nameSet[position]);
+                context.startActivity(intent);
             }
         });
 
@@ -86,13 +108,30 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
     }
 
     public void setContent(ArrayList<Pair<Location, Double>> places) {
-        nameSet[1] = nameSet[4] = places.get(0).first.name;
-        nameSet[0] = nameSet[3] = places.get(2).first.name;
-        nameSet[2] = places.get(1).first.name;
-        distanceSet[1] = distanceSet[4] = places.get(0).second + "km";
-        distanceSet[0] = distanceSet[3] = places.get(2).second + "km";
-        distanceSet[2] = places.get(1).second + "km";
+        nameSet[1] = nameSet[4] = places.get(0).first.getName();
+        nameSet[0] = nameSet[3] = places.get(2).first.getName();
+        nameSet[2] = places.get(1).first.getName();
+        imageUrl[1] = imageUrl[4] = places.get(0).first.getThumbnailPhoto();
+        imageUrl[0] = imageUrl[3] = places.get(2).first.getThumbnailPhoto();
+        imageUrl[2] = places.get(1).first.getThumbnailPhoto();
+        distanceSet[1] = distanceSet[4] = places.get(0).second + "m";
+        distanceSet[0] = distanceSet[3] = places.get(2).second + "m";
+        distanceSet[2] = places.get(1).second + "m";
+        amenitiesList = new ArrayList<HashMap<String, Boolean>>() {
+            {
+                add(places.get(2).first.getAmenities());
+                add(places.get(0).first.getAmenities());
+                add(places.get(1).first.getAmenities());
+                add(places.get(2).first.getAmenities());
+                add(places.get(0).first.getAmenities());
+            }
+        };
+        Log.d("NearContent", nameSet[0]);
         notifyDataSetChanged();
     }
 
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
+    }
 }
