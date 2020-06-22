@@ -27,7 +27,8 @@ public class PlacesDataClass {
         this.placesName=location.name;
         //for now hard code the distances and avalability
         this.avalability="";
-        this.distances="200m";
+        //hide the distances
+        this.distances="";
         //hard code amenities to be 5
         this.amenities=new boolean[5];
         for(int j=0;j<location.amenities.size();j++){

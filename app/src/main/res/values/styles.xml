@@ -59,11 +59,9 @@
         <item name="chipCornerRadius">4dp</item>
         <item name="android:minHeight">20dp</item>
         <item name="chipBackgroundColor">@color/bg_chip_state_list</item>
-        <item name="iconEndPadding">2dp</item>
-        <item name="iconStartPadding">4dp</item>
-        <item name="textStartPadding">0dp</item>
+        <item name="textStartPadding">10dp</item>
         <item name="chipIconEnabled">true</item>
-        <item name="textEndPadding">0dp</item>
+        <item name="textEndPadding">10dp</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="chipIconTint">@color/bg_chip_state_list</item>
         <item name="chipStrokeColor">@color/bg_chip_state_list</item>
