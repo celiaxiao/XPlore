@@ -50,7 +50,7 @@
                 android:layout_height="20dp"
                 android:layout_marginVertical="11dp"
                 android:layout_marginEnd="7dp"
-                android:layout_marginStart="11dp"
+                android:layout_marginStart="7dp"
                 android:src="@drawable/filter_icon" />
             <TextView
                 android:id="@+id/chipBadge"
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/amennityCardView"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="17dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="94dp"
         android:layout_toEndOf="@+id/amennityCardView"
         android:layout_above="@id/placesCardView"
@@ -156,8 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Bus Stop"
-                    app:checkedIconVisible="false"
-                     />
+                    app:checkedIconVisible="false" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -166,7 +165,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/busCard"
-                android:layout_marginEnd="21dp"
+                android:layout_marginEnd="15dp"
                 app:cardElevation="5dp">
                 <com.google.android.material.chip.Chip
                     android:id="@+id/parking"
@@ -177,6 +176,7 @@
                     app:checkedIconVisible="false"
                      />
             </androidx.cardview.widget.CardView>
+
 
         </RelativeLayout>
     </HorizontalScrollView>
