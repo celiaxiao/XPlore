@@ -47,10 +47,10 @@ public class ToursAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         View v = mInflater.inflate(R.layout.tours_item, null);
-        TextView nameTV = (TextView) v.findViewById(R.id.main_place_name);
+        TextView nameTV = (TextView) v.findViewById(R.id.tours_name);
         TextView timeTV = (TextView) v.findViewById(R.id.tours_time);
         TextView stopsTV = (TextView) v.findViewById(R.id.tours_stops);
-        ImageView photoIV = (ImageView) v.findViewById(R.id.main_place_photo);
+        ImageView photoIV = (ImageView) v.findViewById(R.id.tours_photo);
 
         String name = nameSet[i];
         String time = timeSet[i];
