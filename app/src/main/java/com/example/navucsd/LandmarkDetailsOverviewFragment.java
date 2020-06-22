@@ -3,6 +3,7 @@ package com.example.navucsd;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -490,10 +491,16 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
             // - replace the contents of the view with that element
             String link = links.get(position);
             String videoID = link.substring(link.lastIndexOf("v=") + 2);
-            String thumbnailUrl = "https://img.youtube.com/vi/" + videoID + "/sddefault.jpg";
+            String thumbnailUrl = "https://img.youtube.com/vi/" + videoID + "/hqdefault.jpg";
             Log.d("Video Link", thumbnailUrl);
             new DownloadImageTask(holder.imageView).execute(thumbnailUrl);
             holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoID)));
+                }
+            });
+            holder.imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoID)));
@@ -511,10 +518,12 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
             // each data item is just a string in this case
             public ImageView imageView;
             public CardView cardView;
+            public ImageButton imageButton;
 
             public MyViewHolder(CardView v) {
                 super(v);
                 imageView = v.findViewById(R.id.overview_video_image);
+                imageButton = v.findViewById(R.id.overview_video_play_button);
                 cardView = v;
             }
         }

@@ -73,7 +73,7 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/place_tags"
+                android:id="@+id/main_place_tags"
                 android:layout_width="242dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="19dp"
