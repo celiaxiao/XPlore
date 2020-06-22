@@ -14,8 +14,14 @@ import com.bumptech.glide.Glide;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+/**
+ * This is the SplashPageActivity which would show up for a constant time
+ * each time the app starts
+ */
 public class SplashPageActivity extends AppCompatActivity {
     public static final int SPLASH_TIME_OUT = 1500;
+    public static final String APP_FIRST_RUN = "App first run";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +41,12 @@ public class SplashPageActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-
-                // TODO: Debug? SharedPreference does not work as expected,
-                //  onboarding page doesn't start
                 SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-                if (sharedPreferences.getBoolean("Onboarding finished", false)) {
+                if (sharedPreferences.getBoolean(APP_FIRST_RUN, true)) {
                     Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
                     startActivity(intent);
                     finish(); // Close onboarding
+                    sharedPreferences.edit().putBoolean(APP_FIRST_RUN, false).commit(); // Tell the app it has already finished its first run
                 } else {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("Splash", true);
