@@ -2,114 +2,98 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="200dp"
     app:cardCornerRadius="5dp">
-
-    <ImageView
-        android:id="@+id/tours_photo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ucsd" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/shade">
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/main_place_photo"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ucsd" />
 
         <TextView
-            android:id="@+id/place_distance"
+            android:id="@+id/main_place_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="6dp"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/tours_name"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/tours_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="6dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="9dp"
             android:text="Geisel Library"
-            android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/place_tags"
+            app:layout_constraintTop_toBottomOf="@id/main_place_photo"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/place_tags"
+        <TextView
+            android:id="@+id/main_place_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.chip.Chip
-                style="@style/ThinnerChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Library"
-                android:textColor="@color/place_tag_text"
-                android:textStyle="bold"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinTouchTargetSize="0dp" />
-
-            <com.google.android.material.chip.Chip
-                style="@style/ThinnerChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Must-See"
-                android:textColor="@color/place_tag_text"
-                android:textStyle="bold"
-                app:chipBackgroundColor="@color/white"
-                app:chipMinTouchTargetSize="0dp" />
-
-        </com.google.android.material.chip.ChipGroup>
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="9dp"
+            android:text="&lt;100m"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/main_place_photo"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <LinearLayout
+            android:id="@+id/main_place_amenities"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/main_card_icon_size"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginBottom="14dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@id/place_tags"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/place_tags">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:layout_width="@dimen/main_card_icon_size"
                 android:layout_height="@dimen/main_card_icon_size"
+                android:tint="@color/amenityChip"
                 android:src="@drawable/ic_wc_24dp" />
 
             <ImageView
                 android:layout_width="@dimen/main_card_icon_size"
                 android:layout_height="@dimen/main_card_icon_size"
+                android:tint="@color/amenityChip"
                 android:src="@drawable/ic_breakfast_24dp" />
 
             <ImageView
                 android:layout_width="@dimen/main_card_icon_size"
                 android:layout_height="@dimen/main_card_icon_size"
+                android:tint="@color/amenityChip"
                 android:src="@drawable/ic_restaurant_24dp" />
 
             <ImageView
                 android:layout_width="@dimen/main_card_icon_size"
                 android:layout_height="@dimen/main_card_icon_size"
+                android:tint="@color/amenityChip"
                 android:src="@drawable/ic_bus_24dp" />
 
             <ImageView
                 android:layout_width="@dimen/main_card_icon_size"
                 android:layout_height="@dimen/main_card_icon_size"
+                android:tint="@color/amenityChip"
                 android:src="@drawable/ic_local_parking_24dp" />
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/history_description"
+            android:text="Open"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="14dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

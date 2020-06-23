@@ -198,56 +198,56 @@
                 android:background="@color/divider"
                 app:layout_constraintTop_toBottomOf="@id/related_videos_content_layout" />
 
-            <TextView
-                android:id="@+id/stories_title"
-                style="@style/SectionTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:text="Stories at Geisel Library"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/videos_divider" />
+<!--            <TextView-->
+<!--                android:id="@+id/stories_title"-->
+<!--                style="@style/SectionTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="Stories at Geisel Library"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/videos_divider" />-->
 
-            <RelativeLayout
-                android:id="@+id/related_stories_content_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintTop_toBottomOf="@id/stories_title">
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/related_stories_content_layout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/stories_title">-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/related_stories_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:paddingBottom="16dp"
-                    android:overScrollMode="never" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/related_stories_recycler"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:clipToPadding="false"-->
+<!--                    android:paddingBottom="16dp"-->
+<!--                    android:overScrollMode="never" />-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/story_view_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="View More(13)"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/related_stories_content_layout" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/story_view_more"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:backgroundTint="@color/colorPrimary"-->
+<!--                android:text="View More(13)"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="12sp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/related_stories_content_layout" />-->
 
-            <View
-                android:id="@+id/story_divider"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="24dp"
-                android:background="@color/divider"
-                app:layout_constraintTop_toBottomOf="@id/story_view_more" />
+<!--            <View-->
+<!--                android:id="@+id/story_divider"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:background="@color/divider"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/story_view_more" />-->
 
             <TextView
                 android:id="@+id/more_info_title"
@@ -258,7 +258,7 @@
                 android:layout_marginTop="16dp"
                 android:text="More Information"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/story_divider" />
+                app:layout_constraintTop_toBottomOf="@id/videos_divider" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/info_card"
@@ -312,47 +312,47 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:clipToPadding="false"
-                android:paddingBottom="24dp"
+                android:paddingBottom="32dp"
                 android:orientation="horizontal"
                 android:overScrollMode="never"
                 app:layout_constraintTop_toBottomOf="@id/related_places_title"/>
 
-            <View
-                android:id="@+id/related_places_divider"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/divider"
-                app:layout_constraintTop_toBottomOf="@id/related_places_recycler" />
+<!--            <View-->
+<!--                android:id="@+id/related_places_divider"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:background="@color/divider"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/related_places_recycler" />-->
 
-            <TextView
-                android:id="@+id/related_tours_title"
-                style="@style/SectionTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:text="Tours with Geisel Library As a Stop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/related_places_divider" />
+<!--            <TextView-->
+<!--                android:id="@+id/related_tours_title"-->
+<!--                style="@style/SectionTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="Tours with Geisel Library As a Stop"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/related_places_divider" />-->
 
-            <RelativeLayout
-                android:id="@+id/related_tours_content_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintTop_toBottomOf="@id/related_tours_title">
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/related_tours_content_layout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/related_tours_title">-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/related_tours_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:paddingBottom="32dp"
-                    android:overScrollMode="never" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/related_tours_recycler"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:clipToPadding="false"-->
+<!--                    android:paddingBottom="32dp"-->
+<!--                    android:overScrollMode="never" />-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -14,6 +14,11 @@ import com.bumptech.glide.Glide;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+/**
+ * This is the SplashPageActivity which would show up for a constant time
+ * each time the app starts
+ */
 public class SplashPageActivity extends AppCompatActivity {
     public static final int SPLASH_TIME_OUT = 1500;
     public static final String APP_FIRST_RUN = "App first run";

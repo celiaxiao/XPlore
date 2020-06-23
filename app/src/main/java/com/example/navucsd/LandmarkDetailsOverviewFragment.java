@@ -1,8 +1,24 @@
 package com.example.navucsd;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Rect;
+import android.media.Image;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.PowerManager;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,25 +29,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
-import android.os.PowerManager;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.VideoView;
-
+import com.example.navucsd.database.Location;
 import com.example.navucsd.utils.ClickTracker;
+import com.example.navucsd.utils.DownloadImageTask;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,14 +45,9 @@ import java.util.concurrent.TimeUnit;
  * create an instance of this fragment.
  */
 public class LandmarkDetailsOverviewFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private SearchBarDB searchBarDB;
+    private Location currLocation;
 
     // Audio playing related fields
     private MediaPlayer mediaPlayer;
@@ -58,9 +59,12 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     private Runnable seekBarRunnable;
     private final int UPDATE_INTERVAL = 50;
 
+    // Description
+    private TextView description;
+
     // Amenities
     private RecyclerView amenitiesRecycler;
-    private AmentitiesAdapter amenitiesAdapter;
+    private AmenitiesAdapter amenitiesAdapter;
     private final int AMENITIES_NUM_COL = 2;
 
     // Related Videos
@@ -72,6 +76,10 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     private RelatedStoriesAdapter relatedStoriesAdapter;
     private MaterialButton moreStoriesBtn;
     private boolean isExpanded = false;
+
+    // Related Links
+    private RecyclerView relatedLinksRecycler;
+    private RelatedLinksAdapter relatedLinksAdapter;
 
     // Related Places
     private RecyclerView relatedPlacesRecycler;
@@ -100,27 +108,28 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param currLocation Location Object that represents the Location of interest.
      * @return A new instance of fragment LandmarkDetailsOverviewFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static LandmarkDetailsOverviewFragment newInstance(String param1, String param2) {
+    public static LandmarkDetailsOverviewFragment newInstance(Location currLocation, SearchBarDB database) {
         LandmarkDetailsOverviewFragment fragment = new LandmarkDetailsOverviewFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.setSearchBarDB(database);
+        fragment.setLocation(currLocation);
         return fragment;
+    }
+
+    private void setLocation(Location currLocation) {
+        this.currLocation = currLocation;
+    }
+
+    private void setSearchBarDB(SearchBarDB searchBarDB) {
+        this.searchBarDB = searchBarDB;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.troll_song);
         mediaPlayer.setWakeMode(getContext(), PowerManager.PARTIAL_WAKE_LOCK);
     }
@@ -129,12 +138,15 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_landmark_detail_overview, container, false);
+        return inflater.inflate(R.layout.fragment_landmark_detail_overview_fv, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        description = view.findViewById(R.id.overview_description);
+        description.setText(currLocation.getAbout());
 
         // Set up Seekbar
         int duration = mediaPlayer.getDuration();
@@ -186,27 +198,16 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
 
         // Set up amenities table
         amenitiesRecycler = view.findViewById(R.id.amenities_content_recycler);
-        amenitiesAdapter = new AmentitiesAdapter();
+        amenitiesAdapter = new AmenitiesAdapter();
+        amenitiesAdapter.setAmenities(currLocation.getAmenities());
         DividerItemDecoration dividerItemDecorationAmenities = new DividerItemDecoration(getContext(),
-                LinearLayoutManager.VERTICAL) {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                int position = parent.getChildAdapterPosition(view);
-                int px_16 = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, getResources().getDisplayMetrics()));
-                // hide the divider for the last child
-                if (position == state.getItemCount() - 1) {
-                    outRect.set(0, 0, px_16, 0);
-                } else {
-                    super.getItemOffsets(outRect, view, parent, state);
-                }
-            }
-        };
+                LinearLayoutManager.VERTICAL);
         dividerItemDecorationAmenities.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_12dp));
         amenitiesRecycler.addItemDecoration(dividerItemDecorationAmenities);
         amenitiesRecycler.setLayoutManager(new GridLayoutManager(getContext(), AMENITIES_NUM_COL));
         amenitiesRecycler.setAdapter(amenitiesAdapter);
         amenitiesRecycler.setNestedScrollingEnabled(false);
-        
+
         navButton = view.findViewById(R.id.overview_nav_button);
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,46 +236,56 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedVideosRecycler.addItemDecoration(dividerItemDecorationRelatedVideos);
         relatedVideosRecycler.setLayoutManager(layoutManager);
         relatedVideosAdapter = new RelatedVideosAdapter();
+        relatedVideosAdapter.setLinks(currLocation.getVideos());
         relatedVideosRecycler.setAdapter(relatedVideosAdapter);
 
-        // Set up related stories
-        relatedStoriesRecycler = view.findViewById(R.id.related_stories_recycler);
-        relatedStoriesRecycler.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        DividerItemDecoration dividerItemDecorationRelatedStories = new DividerItemDecoration(relatedStoriesRecycler.getContext(),
-                LinearLayoutManager.VERTICAL) {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                int position = parent.getChildAdapterPosition(view);
-                // hide the divider for the last child
-                if (position == state.getItemCount() - 1) {
-                    outRect.set(0, 0, 0, 0);
-                } else {
-                    super.getItemOffsets(outRect, view, parent, state);
-                }
-            }
-        };
-        dividerItemDecorationRelatedStories.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_16dp));
-        relatedStoriesRecycler.addItemDecoration(dividerItemDecorationRelatedStories);
-        relatedStoriesRecycler.setLayoutManager(layoutManager);
-        relatedStoriesAdapter = new RelatedStoriesAdapter();
-        relatedStoriesRecycler.setAdapter(relatedStoriesAdapter);
+//        // Set up related stories
+//        relatedStoriesRecycler = view.findViewById(R.id.related_stories_recycler);
+//        relatedStoriesRecycler.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+//        DividerItemDecoration dividerItemDecorationRelatedStories = new DividerItemDecoration(relatedStoriesRecycler.getContext(),
+//                LinearLayoutManager.VERTICAL) {
+//            @Override
+//            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+//                int position = parent.getChildAdapterPosition(view);
+//                // hide the divider for the last child
+//                if (position == state.getItemCount() - 1) {
+//                    outRect.set(0, 0, 0, 0);
+//                } else {
+//                    super.getItemOffsets(outRect, view, parent, state);
+//                }
+//            }
+//        };
+//        dividerItemDecorationRelatedStories.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_16dp));
+//        relatedStoriesRecycler.addItemDecoration(dividerItemDecorationRelatedStories);
+//        relatedStoriesRecycler.setLayoutManager(layoutManager);
+//        relatedStoriesAdapter = new RelatedStoriesAdapter();
+//        relatedStoriesRecycler.setAdapter(relatedStoriesAdapter);
+//
+//        moreStoriesBtn = view.findViewById(R.id.story_view_more);
+//        moreStoriesBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!isExpanded) {
+//                    moreStoriesBtn.setText("Collapse");
+//                    relatedStoriesAdapter.setExpand(true);
+//                }
+//                else {
+//                    moreStoriesBtn.setText("View More(13)");
+//                    relatedStoriesAdapter.setExpand(false);
+//                }
+//                isExpanded = !isExpanded;
+//            }
+//        });
 
-        moreStoriesBtn = view.findViewById(R.id.story_view_more);
-        moreStoriesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isExpanded) {
-                    moreStoriesBtn.setText("Collapse");
-                    relatedStoriesAdapter.setExpand(true);
-                }
-                else {
-                    moreStoriesBtn.setText("View More(13)");
-                    relatedStoriesAdapter.setExpand(false);
-                }
-                isExpanded = !isExpanded;
-            }
-        });
+        // Set up related links
+        relatedLinksRecycler = view.findViewById(R.id.related_links_recycler);
+        relatedLinksRecycler.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        relatedLinksRecycler.setLayoutManager(layoutManager);
+        relatedLinksAdapter = new RelatedLinksAdapter();
+        relatedLinksAdapter.setLinks(currLocation.getLinks());
+        relatedLinksRecycler.setAdapter(relatedLinksAdapter);
 
         // Set up the related places
         relatedPlacesRecycler = view.findViewById(R.id.related_places_recycler);
@@ -302,28 +313,28 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedPlacesAdapter = new HorizontalRecyclerAdapter(clickTracker, names, images, MARGIN_RELATED_PLACES, 20);
         relatedPlacesRecycler.setAdapter(relatedPlacesAdapter);
 
-        // Set up related tours
-        relatedToursRecycler = view.findViewById(R.id.related_tours_recycler);
-        relatedToursRecycler.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        DividerItemDecoration dividerItemDecorationRelatedTours = new DividerItemDecoration(relatedToursRecycler.getContext(),
-                LinearLayoutManager.VERTICAL) {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                int position = parent.getChildAdapterPosition(view);
-                // hide the divider for the last child
-                if (position == state.getItemCount() - 1) {
-                    outRect.set(0, 0, 0, 0);
-                } else {
-                    super.getItemOffsets(outRect, view, parent, state);
-                }
-            }
-        };
-        dividerItemDecorationRelatedTours.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_16dp));
-        relatedToursRecycler.addItemDecoration(dividerItemDecorationRelatedTours);
-        relatedToursRecycler.setLayoutManager(layoutManager);
-        relatedToursAdapter = new RelatedToursAdapter();
-        relatedToursRecycler.setAdapter(relatedToursAdapter);
+//        // Set up related tours
+//        relatedToursRecycler = view.findViewById(R.id.related_tours_recycler);
+//        relatedToursRecycler.setHasFixedSize(true);
+//        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+//        DividerItemDecoration dividerItemDecorationRelatedTours = new DividerItemDecoration(relatedToursRecycler.getContext(),
+//                LinearLayoutManager.VERTICAL) {
+//            @Override
+//            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+//                int position = parent.getChildAdapterPosition(view);
+//                // hide the divider for the last child
+//                if (position == state.getItemCount() - 1) {
+//                    outRect.set(0, 0, 0, 0);
+//                } else {
+//                    super.getItemOffsets(outRect, view, parent, state);
+//                }
+//            }
+//        };
+//        dividerItemDecorationRelatedTours.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_16dp));
+//        relatedToursRecycler.addItemDecoration(dividerItemDecorationRelatedTours);
+//        relatedToursRecycler.setLayoutManager(layoutManager);
+//        relatedToursAdapter = new RelatedToursAdapter();
+//        relatedToursRecycler.setAdapter(relatedToursAdapter);
     }
 
     /**
@@ -382,10 +393,37 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
 //                TimeUnit.MILLISECONDS.toSeconds(currTime) % TimeUnit.MINUTES.toSeconds(1));
     }
 
-    private class AmentitiesAdapter extends RecyclerView.Adapter<AmentitiesAdapter.MyViewHolder> {
+    private class AmenitiesAdapter extends RecyclerView.Adapter<AmenitiesAdapter.MyViewHolder> {
 
-        private int[] icons = {R.drawable.ic_wc_24dp, R.drawable.ic_bus_24dp, R.drawable.ic_local_parking_24dp, R.drawable.ic_restaurant_24dp, R.drawable.ic_breakfast_24dp};
-        private String[] names = {"Restroom", "Bus Stop", "Parking", "Restaurant", "Cafe"};
+        private ArrayList<Integer> icons = new ArrayList<Integer>() {
+            {
+                add(R.drawable.ic_wc_24dp);
+                add(R.drawable.ic_bus_24dp);
+                add(R.drawable.ic_local_parking_24dp);
+                add(R.drawable.ic_restaurant_24dp);
+                add(R.drawable.ic_breakfast_24dp);
+            }
+        };
+        private ArrayList<String> names = new ArrayList<String>() {
+            {
+                add("Restroom");
+                add("Bus Stop");
+                add("Parking");
+                add("Restaurant");
+                add("Cafe");
+            }
+        };
+        private String[] nameMap = {"restroom","busstop","parking","restaurant","cafe"};
+
+        public void setAmenities(HashMap<String, Boolean> amenities) {
+            for (int i = nameMap.length - 1; i >= 0; i--) {
+                if (!amenities.get(nameMap[i])) {
+                    icons.remove(i);
+                    names.remove(i);
+                }
+            }
+            notifyDataSetChanged();
+        }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
@@ -401,8 +439,8 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         }
 
         @Override
-        public AmentitiesAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                         int viewType) {
+        public AmenitiesAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                int viewType) {
             LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.overview_amenities_item, parent, false);
             MyViewHolder vh = new MyViewHolder(v);
@@ -411,29 +449,33 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            holder.icon.setImageResource(icons[position]);
-            holder.textView.setText(names[position]);
+            holder.icon.setImageResource(icons.get(position));
+            holder.textView.setText(names.get(position));
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return icons.length;
+            return icons.size();
         }
     }
 
     private class RelatedVideosAdapter extends RecyclerView.Adapter<RelatedVideosAdapter.MyViewHolder> {
 
-        private String[] titleSet = {"Geisel Library: An Intro to Brutalism", "Wait...What’s On Geisel Library Roof!?"};
-//        private String[] videoFiles = {};
+        private ArrayList<String> links = new ArrayList<>();
 
         public RelatedVideosAdapter() {
+        }
+
+        public void setLinks(ArrayList<String> links) {
+            this.links = links;
+            notifyDataSetChanged();
         }
 
         // Create new views (invoked by the layout manager)
         @Override
         public RelatedVideosAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                                   int viewType) {
+                                                                    int viewType) {
             // create a new view
             CardView v = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.overview_videos_item, parent, false);
@@ -447,35 +489,42 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         public void onBindViewHolder(MyViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            holder.textViewVideoTitle.setText(titleSet[position]);
-            holder.textViewTime.setText("3:03");
-//            holder.videoView.setVideoPath(videoFiles[position]);
-
+            String link = links.get(position);
+            String videoID = link.substring(link.lastIndexOf("v=") + 2);
+            String thumbnailUrl = "https://img.youtube.com/vi/" + videoID + "/hqdefault.jpg";
+            Log.d("Video Link", thumbnailUrl);
+            new DownloadImageTask(holder.imageView).execute(thumbnailUrl);
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoID)));
+                }
+            });
+            holder.imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoID)));
+                }
+            });
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return titleSet.length;
+            return links.size();
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
-            public TextView textViewVideoTitle, textViewTime;
-            public VideoView videoView;
+            public ImageView imageView;
+            public CardView cardView;
+            public ImageButton imageButton;
 
             public MyViewHolder(CardView v) {
                 super(v);
-                textViewVideoTitle = v.findViewById(R.id.overview_video_name);
-                textViewTime = v.findViewById(R.id.overview_video_time);
-                videoView = v.findViewById(R.id.overview_video_view);
-                v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        Intent intent = new Intent(v.getContext(), LandmarkDetailsActivity.class);
-//                        v.getContext().startActivity(intent);
-                    }
-                });
+                imageView = v.findViewById(R.id.overview_video_image);
+                imageButton = v.findViewById(R.id.overview_video_play_button);
+                cardView = v;
             }
         }
     }
@@ -494,7 +543,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         // Create new views (invoked by the layout manager)
         @Override
         public RelatedStoriesAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                                    int viewType) {
+                                                                     int viewType) {
             // create a new view
             CardView v = (CardView) LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.overview_stories_item, parent, false);
@@ -547,6 +596,68 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         }
     }
 
+    private class RelatedLinksAdapter extends RecyclerView.Adapter<RelatedLinksAdapter.MyViewHolder> {
+
+        private ArrayList<String> Links = new ArrayList<>();
+
+        public void setLinks(ArrayList<String> links) {
+            Links = links;
+            notifyDataSetChanged();
+        }
+
+        // Create new views (invoked by the layout manager)
+        @Override
+        public RelatedLinksAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                     int viewType) {
+            // create a new view
+            TextView v = (TextView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.overview_links_item, parent, false);
+
+            MyViewHolder vh = new MyViewHolder(v);
+            return vh;
+        }
+
+        // Replace the contents of a view (invoked by the layout manager)
+        @Override
+        public void onBindViewHolder(MyViewHolder holder, int position) {
+            String link = Links.get(position);
+            String[] split;
+            if (!link.startsWith("http")) {
+                split = link.split(":", 2);
+            }
+            else {
+                split = new String[]{"Link", link};
+            }
+            holder.linkText.setText(split[0]);
+            holder.linkText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browse = new Intent(Intent.ACTION_VIEW , Uri.parse(split[1].replace(" ","")));
+                    try {
+                        startActivity(browse);
+                    } catch (ActivityNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
+        // Return the size of your dataset (invoked by the layout manager)
+        @Override
+        public int getItemCount() {
+            return Links.size();
+        }
+
+        public class MyViewHolder extends RecyclerView.ViewHolder {
+            // each data item is just a string in this case
+            public TextView linkText;
+
+            public MyViewHolder(TextView v) {
+                super(v);
+                linkText = v;
+            }
+        }
+    }
 
     private class RelatedToursAdapter extends RecyclerView.Adapter<RelatedToursAdapter.MyViewHolder> {
 
