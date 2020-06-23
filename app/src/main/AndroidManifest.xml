@@ -23,7 +23,9 @@
             android:theme="@style/AppTheme.Material" />
         <activity
             android:name=".SearchBarActivity"
-            android:theme="@style/ChipTheme" />
+            android:theme="@style/AppTheme.Material"
+            android:exported="true"/>
+
         <activity
             android:name=".SplashPageActivity"
             android:exported="true">
