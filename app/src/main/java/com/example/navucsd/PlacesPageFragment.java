@@ -240,11 +240,22 @@ public final class PlacesPageFragment extends Fragment {
 			.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
 
 		int[] res_ids = {
+				R.drawable.oceanview,
+				R.drawable.price_center_east,
+				R.drawable.rady,
+				R.drawable.__64degrees,
 			R.drawable.geisel,
+				R.drawable.atkinsonhall,
 			R.drawable.peterson,
-			R.drawable.mayer,
-			R.drawable.price_center_east,
-			R.drawable.rady,
+			R.drawable.mayerhall,
+				R.drawable.cpmc,
+				R.drawable.galbraith,
+				R.drawable.warrenbear,
+				R.drawable.canyonvista,
+				R.drawable.sungod,
+				R.drawable.canyonviewaquaticcenter,
+				R.drawable.biomedical_library,
+				R.drawable.fallen_star
 		};
 
 		ArrayList<LandmarkInfo> landmarks = new ArrayList<>(locations.size());
