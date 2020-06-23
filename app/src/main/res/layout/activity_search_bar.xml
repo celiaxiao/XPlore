@@ -211,6 +211,7 @@
                 android:text="Results"
                 android:textColor="#182B49"
                 android:textSize="16sp"
+                android:textStyle="bold"
                  />
 
         </LinearLayout>
@@ -220,6 +221,17 @@
             android:layout_height="1dp"
             android:layout_marginTop="50dp"
             android:background="@color/divider" />
+
+        <TextView
+            android:id="@+id/noResultFoundText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="66dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textColor="@color/search_amenity_text"
+            android:text="No results found" />
 
         <ListView
             android:id="@+id/searchHintList"

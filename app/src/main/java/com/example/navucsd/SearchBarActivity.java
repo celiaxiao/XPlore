@@ -35,12 +35,14 @@ import java.util.Arrays;
 public class SearchBarActivity extends AppCompatActivity  {
     private SearchBarDB sbdatebase;
     private SearchView searchBar;
+    private CardView searchResultsCard;
     private android.location.Location currentLocation;
     //private LinearLayout amenityLinearLayout;
     private static final String[] amenFilter =
             new String[]{"restroom", "cafe", "restaurant",
                     "busstop", "parking"};
     private TextView chipBadge;
+    private TextView noResultsFoundText;
     //dynamic location list from database
     private ArrayList<Location> locationList = new ArrayList<>( );
     ArrayList<Pair<Location, Double>> distancePair;
@@ -82,15 +84,14 @@ public class SearchBarActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_bar);
         searchBar = (SearchView) findViewById(R.id.actual_search_bar);
-        CardView cardplaces = (CardView) findViewById(R.id.placesCardView);
-        CardView cardSearch = (CardView) findViewById(R.id.searchBarCardView);
+        searchResultsCard = (CardView) findViewById(R.id.placesCardView);
         chipBadge=(TextView)findViewById(R.id.chipBadge);
+        noResultsFoundText=(TextView)findViewById(R.id.noResultFoundText);
         //first hide the badge, since no selection has been made
         chipBadge.setVisibility(View.GONE);
+        //also hide the no results text, as no input has been made
+        noResultsFoundText.setVisibility(View.GONE);
         ListView searchPlaces = (ListView) findViewById(R.id.searchHintList);
-        ArrayAdapter<String> placesAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                getResources( ).getStringArray(R.array.placesName));
         ColorDrawable divider = new ColorDrawable(this.getResources( ).getColor(R.color.divider));
         searchPlaces.setDivider(divider);
         searchPlaces.setDividerHeight(3);
@@ -105,10 +106,9 @@ public class SearchBarActivity extends AppCompatActivity  {
         String[] availability = new String[FILELIST.length];
         String[] distances = new String[FILELIST.length];
 
-        boolean hasPermission=checkPermission();
-            //fixing hardcode
+        //check location permission, if no, hide the distances
          currentLocation = null;
-        if(hasPermission) {
+        if(checkPermission()) {
             //get the current location
             currentLocation =
                     GpsUtil.getInstance(SearchBarActivity.this).getLastLocation( );
@@ -158,7 +158,7 @@ public class SearchBarActivity extends AppCompatActivity  {
 
 
         //first hide the suggestion listview
-        searchPlaces.setVisibility(View.GONE);
+        searchResultsCard.setVisibility(View.GONE);
 
 
         ArrayList<String> locationlist = new ArrayList<String>( );
@@ -189,21 +189,38 @@ public class SearchBarActivity extends AppCompatActivity  {
             @Override
             public boolean onQueryTextChange(String s) {
                 if(s.isEmpty() && amenList.isEmpty()){
-                    searchPlaces.setVisibility(View.GONE);
+                    searchResultsCard.setVisibility(View.GONE);
+                }else {
+                    searchResultsCard.setVisibility(View.VISIBLE);
                 }
-                else searchPlaces.setVisibility(View.VISIBLE);
-
                 placesAdaptor.getFilter( ).filter(s);
-
+                //if no results available, hide the result card
+                //self-checking if there is any results, as filter results only available after
+                //this method ends
+                boolean noResult=true;
+                ArrayList<PlacesDataClass> tempFilter=placesAdaptor.getFiltered( );
+                if(tempFilter.isEmpty()) {
+                    ArrayList<String> temp_filter=new ArrayList<String>(Arrays.asList(placesName));
+                    for(String a:temp_filter){
+                        if(a.toLowerCase().contains(s.toLowerCase())){
+                            noResult=false;
+                        }
+                    }
+                }else {
+                    for (PlacesDataClass object : tempFilter) {
+                        // the filtering itself:
+                        if (object.toString( ).toLowerCase( ).contains(s.toLowerCase( )))
+                            noResult=false;
+                    }
+                }//if no results available then display the no results text
+                if (noResult) {
+                    noResultsFoundText.setVisibility(View.VISIBLE);
+                } else noResultsFoundText.setVisibility(View.GONE);
+                Log.i("results number", "query: "+s+"; no result: "+noResult);
                 // ---------------Change-----------------
                 while (!origin.isEmpty( )) {
                     origin.remove(0);
                 }
-                // --------------------------------------
-                // filteredList=placesAdapter.
-                //set up clike item functionality
-
-
 
                 return false;
             }
@@ -274,7 +291,7 @@ public class SearchBarActivity extends AppCompatActivity  {
                     Log.i("filter ", Arrays.toString(placesAdaptor.filtered.toArray( )));
 
                     ArrayList<PlacesDataClass> filteredAmen;
-                    if (hasPermission && currentLocation!=null) {
+                    if (checkPermission() && currentLocation!=null) {
                         ArrayList<Pair<Location, Double>> listOfLocations = sbdatebase.filterWithDistance(
                                 locationlist, amenList,
                                 new Pair<>(currentLocation.getLatitude( ), currentLocation.getLongitude( )));
@@ -298,9 +315,9 @@ public class SearchBarActivity extends AppCompatActivity  {
                     placesAdaptor.notifyDataSetChanged( );
                     //if no input or selection made to the chips, then hide the results
                     if (!amenList.isEmpty( )) {
-                        searchPlaces.setVisibility(View.VISIBLE);
+                        searchResultsCard.setVisibility(View.VISIBLE);
                     } else if (amenList.isEmpty( ) && searchBar.getQuery( ).length( ) == 0) {
-                        searchPlaces.setVisibility(View.GONE);
+                        searchResultsCard.setVisibility(View.GONE);
                     }
 
                     //if no chip is selected, hide the badge

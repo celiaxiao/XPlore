@@ -133,10 +133,14 @@ public class SearchBarPlacesView extends ArrayAdapter {
         return filtered.get(position);
     }
 
+    public ArrayList<PlacesDataClass> getFiltered() {
+        return filtered;
+    }
+
     @Override
     public Filter getFilter() {
         if (filter == null)
-            filter = new AppFilter<PlacesDataClass>(places);
+            filter = new AppFilter<PlacesDataClass>(filtered);
         return filter;
     }
 
@@ -165,7 +169,7 @@ public class SearchBarPlacesView extends ArrayAdapter {
             FilterResults result = new FilterResults();
             if (filterSeq != null && filterSeq.length() > 0) {
                 ArrayList<T> filter = new ArrayList<T>();
-
+                filter.clear();
                 for (T object : sourceObjects) {
                     // the filtering itself:
                     if (object.toString().toLowerCase().contains(filterSeq))
@@ -176,8 +180,9 @@ public class SearchBarPlacesView extends ArrayAdapter {
             } else {
                 // add all objects
                 synchronized (this) {
-                    result.values = sourceObjects;
-                    result.count = sourceObjects.size();
+                    ArrayList<T> list=new ArrayList<>(sourceObjects);
+                    result.values = list;
+                    result.count = list.size();
                 }
             }
             return result;
@@ -189,8 +194,9 @@ public class SearchBarPlacesView extends ArrayAdapter {
                                       FilterResults results) {
             // NOTE: this function is *always* called from the UI thread.
             filtered = (ArrayList<PlacesDataClass>) results.values;
+            Log.i("filter number", Arrays.toString(filtered.toArray()));
             notifyDataSetChanged( );
-
+            Log.i("filter number after", Arrays.toString(filtered.toArray()));
         }
     }
 
