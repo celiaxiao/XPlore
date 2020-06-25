@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+/**
+ * This is the temporary Feature coming soon page that is the place holder to
+ * all the unfinished feature pages in app
+ */
 public class FeatureComingSoonActivity extends AppCompatActivity {
 
     private ImageView gifImageViewComingSoonPage;
