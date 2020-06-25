@@ -34,7 +34,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
  * the overview contains a startButton leading to starting the tour and
  * cardViews for different stops in the tour.
  */
-public class TourOverviewPage extends AppCompatActivity {
+public class TourOverviewPage extends AppCompatActivity  implements RecyclerViewAdapterTourOverviewPage.RecyclerViewOnItemClickListener {
     private ArrayList<String> items; // ArrayList that provide items for the RecyclerView
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -86,7 +86,7 @@ public class TourOverviewPage extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_tour_overview_page);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mAdapter = new RecyclerViewAdapterTourOverviewPage(this, items);
+        mAdapter = new RecyclerViewAdapterTourOverviewPage(this, items, this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(mRecyclerView); // Link the itemTouchHelper to the recyclerView to implement swipe function
         mRecyclerView.setAdapter(mAdapter);
@@ -141,5 +141,11 @@ public class TourOverviewPage extends AppCompatActivity {
     };
 
 
-
+    // Override the customized OnItemClick method in the customized RecyclerViewOnItemClickListener interface (which is defined in the corresponding adapter java file)
+    @Override
+    public void OnItemClick(int position) {
+        String item = items.get(position); // A reference to the clicked item just in case we need it
+        Intent intent = new Intent(getApplicationContext(), FeatureComingSoonActivity.class);
+        startActivity(intent);
+    }
 }
