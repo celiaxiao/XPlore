@@ -11,10 +11,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 
 /*
  * Initialization of the database:
@@ -129,7 +127,7 @@ public class SearchBarDB {
         String first = (String) location.coordinates.first;
         String second = (String) location.coordinates.second;
         Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
-        double dist = this.distant(userLocation, locationCoor);
+        double dist = this.distanceBetween(userLocation, locationCoor);
         return dist;
     }
 
@@ -149,7 +147,7 @@ public class SearchBarDB {
             String first = (String) this.list.get(i).coordinates.first;
             String second = (String) this.list.get(i).coordinates.second;
             Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
-            double dist = this.distant(userLocation, locationCoor);
+            double dist = this.distanceBetween(userLocation, locationCoor);
             int origin = nearestList.size();
             for( int j = 0; j < nearestList.size(); j++ ){
                 if( dist >= nearestList.get(j).second ){
@@ -179,32 +177,29 @@ public class SearchBarDB {
             String first = (String) this.list.get(i).coordinates.first;
             String second = (String) this.list.get(i).coordinates.second;
             Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
-            double dist = this.distant(userLocation, locationCoor);
+            double dist = this.distanceBetween(userLocation, locationCoor);
             distanceList.add(new Pair<>(this.list.get(i), dist));
         }
         return distanceList;
     }
 
-
-    /*
-     * p1 and p2 represent the Location coordinates both of them are Pair<Double, Double> Object and
-     * should in the format as: Pair<Latitude, Longitude> which means the in Pair, first should be
-     * Latitude and second should be Longitude
+    /**
+     * Calculates the distance between two points in meters.
      *
-     * public static void distanceBetween (
-     *              double startLatitude,
-     *              double startLongitude,
-     *              double endLatitude,
-     *              double endLongitude,
-     *              float[] results)
+     * @param p1 the coordinates of the first point in (latitude, longitude) format
+     * @param p2 the coordinates of the second point in (latitude, longitude) format
+     * @return distance between the two points in meters
      */
-    public double distant(Pair<Double, Double>  p1, Pair<Double, Double>  p2){
-        float[] results = new float[1];
-        android.location.Location.distanceBetween(p1.first, p1.second, p2.first, p2.second, results);
-        DecimalFormat df = new DecimalFormat("###.###");
-        String resultInString = df.format(results[0]);
-        Double finalResult = Double.parseDouble(resultInString);
-        return finalResult;
+    public double distanceBetween(Pair<Double, Double> p1, Pair<Double, Double> p2) {
+        float[] result = new float[1];
+        android.location.Location.distanceBetween(
+            p1.first,
+            p1.second,
+            p2.first,
+            p2.second,
+            result
+        );
+        return result[0];
     }
 
     /*
