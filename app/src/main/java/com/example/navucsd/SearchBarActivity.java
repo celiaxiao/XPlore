@@ -14,7 +14,6 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 
 import com.example.navucsd.database.Location;
 import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
