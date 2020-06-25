@@ -12,9 +12,9 @@
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.776"
+        app:layout_constraintWidth_percent="0.81"
         app:layout_constraintDimensionRatio="4:1"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="16dp"
         app:cardElevation="1dp"
         app:cardMaxElevation="1dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
                 android:textSize="20sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="10dp"
                 android:text="Place Name"
                 />
@@ -51,7 +51,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintWidth_percent="0.06"
                 app:layout_constraintDimensionRatio="1:1"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginBottom="10dp"
 
                 android:src="@drawable/g1"
@@ -125,7 +125,7 @@
         app:layout_constraintDimensionRatio="1:25"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/cardView"
-        android:layout_marginStart="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
         android:background="#FECE07"
         />
 

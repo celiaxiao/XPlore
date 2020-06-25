@@ -17,22 +17,21 @@
         android:foreground="@drawable/trending_gradient_shape"
         />
 
-    
+
     <TextView
         android:id="@+id/tourNameTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.025"
-        app:layout_constraintDimensionRatio="15:1"
-        android:autoSizeTextType="uniform"
-        app:layout_constraintTop_toBottomOf="@id/imageViewDuringTour"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
+        android:autoSizeTextType="uniform"
         android:text="Tour Name"
-        android:textSize="14sp"
         android:textColor="@color/white"
-        />
+        android:textSize="14sp"
+        app:layout_constraintDimensionRatio="15:1"
+        app:layout_constraintHeight_percent="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewDuringTour" />
 
     <TextView
         android:id="@+id/tourOverviewTextView"
@@ -49,49 +48,48 @@
         android:textSize="14sp"
         android:clickable="true"
         />
-    
+
     <TextView
         android:id="@+id/stopNameTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tourNameTextView"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintHeight_percent="0.038"
-        app:layout_constraintDimensionRatio="12:1"
-        android:textStyle="bold"
         android:autoSizeTextType="uniform"
-        android:textSize="24sp"
+        android:text="Stop Name"
         android:textColor="@color/white"
-        android:text="Stop Name"/>
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintDimensionRatio="12:1"
+        app:layout_constraintHeight_percent="0.038"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tourNameTextView" />
 
     <TextView
         android:id="@+id/previousStopTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.025"
-        app:layout_constraintDimensionRatio="7:1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cardViewDuringTour"
-        app:layout_constraintTop_toBottomOf="@id/stopNameTextView"
-        android:layout_marginStart="26dp"
-        android:text="Previous Stop"
-        android:textColor="#FECE07"
+        android:layout_marginStart="16dp"
         android:autoSizeTextType="uniform"
         android:clickable="true"
-        />
+        android:text="Previous Stop"
+        android:textColor="#FECE07"
+        app:layout_constraintBottom_toTopOf="@id/cardViewDuringTour"
+        app:layout_constraintDimensionRatio="7:1"
+        app:layout_constraintHeight_percent="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stopNameTextView" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewDuringTour"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.798"
+        app:layout_constraintWidth_percent="0.81"
         app:layout_constraintHeight_percent="0.357"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/nextStopButton"
         android:layout_marginBottom="15dp"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="16dp"
         android:backgroundTint="#2B4266" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -221,19 +219,18 @@
         android:id="@+id/nextStopButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="20dp"
-        app:layout_constraintWidth_percent="0.798"
-        app:layout_constraintDimensionRatio="8:1"
         android:background="#027EB1"
         android:text="Next Stop"
         android:textAllCaps="false"
-        android:textSize="20sp"
         android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="8:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.81" />
 
 
     <View

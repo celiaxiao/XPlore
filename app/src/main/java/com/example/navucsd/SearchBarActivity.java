@@ -20,6 +20,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.navucsd.database.Location;
+import com.example.navucsd.utils.Geography;
 import com.google.android.material.chip.Chip;
 import com.google.gson.Gson;
 
@@ -86,82 +87,82 @@ public class SearchBarActivity extends AppCompatActivity  {
         //also hide the no results text, as no input has been made
         noResultsFoundText.setVisibility(View.GONE);
         ListView searchPlaces = (ListView) findViewById(R.id.searchHintList);
-        ColorDrawable divider = new ColorDrawable(this.getResources( ).getColor(R.color.divider));
+        ColorDrawable divider = new ColorDrawable(this.getResources().getColor(R.color.divider));
         searchPlaces.setDivider(divider);
         searchPlaces.setDividerHeight(3);
         searchBar.setIconifiedByDefault(false);
         searchBar.requestFocus();
-        int placesNumber = getResources( ).getStringArray(R.array.placesName).length;
+        int placesNumber = getResources().getStringArray(R.array.placesName).length;
 
         sbdatebase = new SearchBarDB(this, "one by one");
 
         //get main context from json file
-        Gson gson = new Gson( );
+        Gson gson = new Gson();
         boolean[][] dbAmentityList = new boolean[FILELIST.length][5];
         String[] placesName = new String[FILELIST.length];
         String[] availability = new String[FILELIST.length];
         String[] distances = new String[FILELIST.length];
 
-        //check location permission, if no, hide the distances
-         currentLocation = null;
-        if(checkPermission()) {
-            //get the current location
-            currentLocation =
-                    GpsUtil.getInstance(SearchBarActivity.this).getLastLocation( );
 
+        // check location permission, if no, hide the distances
+        currentLocation = null;
+        if (checkPermission()) {
+            // get the current location
+            currentLocation = GpsUtil.getInstance(SearchBarActivity.this).getLastLocation();
         }
-        if(currentLocation!=null){
-            distancePair=
-                    sbdatebase.locationWithDistance(
-                            new Pair<>(currentLocation.getLatitude(),currentLocation.getLongitude()));
-            for(int i = 0; i < distancePair.size(); i++) {
+        if (currentLocation != null) {
+            distancePair = sbdatebase.locationWithDistance(
+                new Pair<>(currentLocation.getLatitude(), currentLocation.getLongitude())
+            );
+            for (int i = 0; i < distancePair.size(); i++) {
+
                 Location location = distancePair.get(i).first;
                 locationList.add(location);
-                //get amenity list from location
+                // get amenity list from location
                 placesName[i] = location.name;
                 for (int j = 0; j < dbAmentityList[0].length; j++) {
                     dbAmentityList[i][j] = locationList.get(i).amenities.get(amenFilter[j]);
                 }
-                //get the distance, current unit is meter
-                distances[i] = distanceToString(distancePair.get(i).second);
-                //temporarily hide the availability
+                // get the distance, current unit is meter
+                distances[i] = Geography.displayDistance(distancePair.get(i).second);
+                // temporarily hide the availability
                 availability[i] = "";
             }
-        }
-        else {
-            //TODO:if no permission, hide the distance
+        } else {
+            // TODO: if no permission, hide the distance
             for (int i = 0; i < this.FILELIST.length; i++) {
                 String jsonString = sbdatebase.loadJSONFromAsset(this, this.FILELIST[i]);
                 Location location = gson.fromJson(jsonString, Location.class);
                 locationList.add(location);
-                //get amenity list from location
+                // get amenity list from location
                 placesName[i] = location.name;
                 for (int j = 0; j < dbAmentityList[0].length; j++) {
                     dbAmentityList[i][j] = locationList.get(i).amenities.get(amenFilter[j]);
                 }
-                //hide the distance
+                // hide the distance
                 distances[i] = "";
-                //temporarily hide the availability
+                // temporarily hide the availability
                 availability[i] = "";
             }
         }
 
-
-
-        //initialize the main context of list
-        SearchBarPlacesView placesAdaptor = new SearchBarPlacesView(this,
-                placesName, availability, distances, dbAmentityList);
+        // initialize the main context of list
+        SearchBarPlacesView placesAdaptor = new SearchBarPlacesView(
+            this,
+            placesName,
+            availability,
+            distances,
+            dbAmentityList
+        );
         searchPlaces.setAdapter(placesAdaptor);
 
-
-        //first hide the suggestion listview
+        // first hide the suggestion listview
         searchResultsCard.setVisibility(View.GONE);
 
+        ArrayList<String> locationlist = new ArrayList<>();
+        ArrayList<String> origin = new ArrayList<>();
 
-        ArrayList<String> locationlist = new ArrayList<String>( );
-        ArrayList<String> origin = new ArrayList<String>( );
-
-        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener( ) {
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             // Override onQueryTextSubmit method which is call when submitquery is searched
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -319,27 +320,13 @@ public class SearchBarActivity extends AppCompatActivity  {
                     }
 
                     //if no chip is selected, hide the badge
-                    if(amenList.isEmpty()) chipBadge.setVisibility(View.GONE);
+                    if (amenList.isEmpty()) chipBadge.setVisibility(View.GONE);
                     else {
                         chipBadge.setText(""+amenList.size());
                         chipBadge.setVisibility(View.VISIBLE);
                     }
                 }
-
             });
         }
-
-
     }
-
-    static String distanceToString(Double distance){
-        //if less than 0.1 miles, unit is feet
-        if(distance.compareTo(new Double(160.934))<0){
-            return Math.round(distance*3.28084)+" ft";
-        }
-        //else convert to miles, round to one decimal value
-        return Math.round(distance*0.000621371*10)/10.0+" mi";
-    }
-
-
 }
