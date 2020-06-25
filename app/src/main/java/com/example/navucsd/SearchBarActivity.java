@@ -46,13 +46,13 @@ public class SearchBarActivity extends AppCompatActivity  {
             /*Change them in the future*/
             "64Degrees.json",
             "AtkinsonHall.json",
-            "JSOE.json",
-            "Geisel.json",
             "BiomedicalLibrary.json",
             "CanyonViewAquaticCenter.json",
             "CanyonVista.json",
             "ConradPrebysMusicCenter.json",
             "GalbraithHall.json",
+            "Geisel.json",
+            "JSOE.json",
             "MayerHall.json",
             "OceanviewRestaurant.json",
             "PetersonHall.json",
@@ -109,7 +109,8 @@ public class SearchBarActivity extends AppCompatActivity  {
             currentLocation =
                     GpsUtil.getInstance(SearchBarActivity.this).getLastLocation( );
 
-        }if(currentLocation!=null){
+        }
+        if(currentLocation!=null){
             distancePair=
                     sbdatebase.locationWithDistance(
                             new Pair<>(currentLocation.getLatitude(),currentLocation.getLongitude()));
