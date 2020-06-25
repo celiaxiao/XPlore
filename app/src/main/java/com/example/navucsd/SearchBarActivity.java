@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.navucsd.database.Location;
 import com.google.android.material.chip.Chip;
@@ -90,6 +91,8 @@ public class SearchBarActivity extends AppCompatActivity  {
         ColorDrawable divider = new ColorDrawable(this.getResources( ).getColor(R.color.divider));
         searchPlaces.setDivider(divider);
         searchPlaces.setDividerHeight(3);
+        searchBar.setIconifiedByDefault(false);
+        searchBar.requestFocus();
         int placesNumber = getResources( ).getStringArray(R.array.placesName).length;
 
         sbdatebase = new SearchBarDB(this, "one by one");
