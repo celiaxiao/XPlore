@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.navucsd.database.Location;
 import com.example.navucsd.utils.DownloadImageTask;
+import com.example.navucsd.utils.Geography;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -114,9 +115,9 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
         imageUrl[1] = imageUrl[4] = places.get(0).first.getThumbnailPhoto();
         imageUrl[0] = imageUrl[3] = places.get(2).first.getThumbnailPhoto();
         imageUrl[2] = places.get(1).first.getThumbnailPhoto();
-        distanceSet[1] = distanceSet[4] = places.get(0).second + "m";
-        distanceSet[0] = distanceSet[3] = places.get(2).second + "m";
-        distanceSet[2] = places.get(1).second + "m";
+        distanceSet[1] = distanceSet[4] = Geography.displayDistance(places.get(0).second);
+        distanceSet[0] = distanceSet[3] = Geography.displayDistance(places.get(2).second);
+        distanceSet[2] = Geography.displayDistance(places.get(1).second);
         amenitiesList = new ArrayList<HashMap<String, Boolean>>() {
             {
                 add(places.get(2).first.getAmenities());
