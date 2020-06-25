@@ -170,11 +170,11 @@ public class SearchBarActivity extends AppCompatActivity  {
                 // with the query as its argument
                 //placesAdaptor.getFilter( ).filter(query);
                 //TODO: set to intent if needed
-                Intent intent = new Intent(getApplicationContext(),LandmarkDetailsActivity.class);
+                /*Intent intent = new Intent(getApplicationContext(),LandmarkDetailsActivity.class);
 
                 intent.putExtra("placeName", "Geisel Library");
                 //hard code to geisel details page
-                startActivity(intent);
+                startActivity(intent);*/
 
                 return false;
             }
@@ -230,11 +230,12 @@ public class SearchBarActivity extends AppCompatActivity  {
                 //if user clicks the suggestion, auto complete the search bar
                 //searchBar.setQuery(placesAdaptor.getItem(i), true);
                 //hide the listview
-                Log.i("click","item clicked");
+                Log.i("click",""+placesAdaptor.getItem(i).toString());
                 //TODO: set intent if needed
                 //hard code to geisel details page
+
                 Intent intent = new Intent(getApplicationContext(),LandmarkDetailsActivity.class);
-                intent.putExtra("placeName", "Geisel Library");
+                intent.putExtra("placeName", ""+placesAdaptor.getItem(i).toString());
                 //hard code to geisel details page
                 startActivity(intent);
             }
