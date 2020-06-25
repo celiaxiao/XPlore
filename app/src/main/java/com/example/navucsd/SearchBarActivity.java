@@ -89,6 +89,8 @@ public class SearchBarActivity extends AppCompatActivity  {
         ColorDrawable divider = new ColorDrawable(this.getResources( ).getColor(R.color.divider));
         searchPlaces.setDivider(divider);
         searchPlaces.setDividerHeight(3);
+        searchBar.setIconifiedByDefault(false);
+        searchBar.requestFocus();
         int placesNumber = getResources( ).getStringArray(R.array.placesName).length;
 
         sbdatebase = new SearchBarDB(this, "one by one");
