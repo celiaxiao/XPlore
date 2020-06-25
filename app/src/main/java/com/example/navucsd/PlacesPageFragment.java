@@ -362,20 +362,12 @@ public final class PlacesPageFragment extends Fragment {
 		TableRow.LayoutParams layout_start, layout_end;
 		CardView.LayoutParams label_layout;
 
-		layout_start = new TableRow.LayoutParams(
-			TableRow.LayoutParams.WRAP_CONTENT,
-			TableRow.LayoutParams.WRAP_CONTENT,
-			1
-		);
+		layout_start = new TableRow.LayoutParams(0, 0, 1);
 		layout_start.bottomMargin = bottomMargin;
 		layout_start.setMarginStart(dpToXp(SIDE_MARGIN_DP));
 		layout_start.setMarginEnd(gap / 2);
 
-		layout_end = new TableRow.LayoutParams(
-			TableRow.LayoutParams.WRAP_CONTENT,
-			TableRow.LayoutParams.WRAP_CONTENT,
-			1
-		);
+		layout_end = new TableRow.LayoutParams(0, 0, 1);
 		layout_end.bottomMargin = bottomMargin;
 		layout_end.setMarginStart(gap / 2);
 		layout_end.setMarginEnd(dpToXp(SIDE_MARGIN_DP));
