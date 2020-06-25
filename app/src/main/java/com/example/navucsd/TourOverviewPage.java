@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class TourOverviewPage extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private Button startButtonTourOverviewPage;
     private String[] places = {"Geisel Library", "Price Center", "Fallen Star",
             "Bear", "Biomedical Library", "Galbraith Hall"}; // Array of places
 
@@ -60,6 +62,7 @@ public class TourOverviewPage extends AppCompatActivity {
         TextView tourDescriptionTextView = (TextView) findViewById(R.id.tourDescriptionTextView);
         TextView tourTimeTextView = (TextView) findViewById(R.id.tourTimeTextView);
         TextView tourPlaceNumberTextView = (TextView) findViewById(R.id.tourPlaceNumberTextView);
+        startButtonTourOverviewPage = (Button) findViewById(R.id.startButtonTourOverviewPage);
 
 
 
@@ -69,6 +72,13 @@ public class TourOverviewPage extends AppCompatActivity {
         tourDescriptionTextView.setText(tourDescription);
         tourTimeTextView.setText(tourTime);
         tourPlaceNumberTextView.setText(tourPlaceNumber);
+        startButtonTourOverviewPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), FeatureComingSoonActivity.class);
+                startActivity(intent);
+            }
+        });
         // --------------------------------
 
 
