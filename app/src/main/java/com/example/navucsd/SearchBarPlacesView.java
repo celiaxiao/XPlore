@@ -1,7 +1,5 @@
 package com.example.navucsd;
 
-import com.example.navucsd.PlacesDataClass;
-import com.example.navucsd.R;
 import com.example.navucsd.database.Location;
 
 import java.util.ArrayList;
@@ -10,7 +8,6 @@ import java.util.List;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -23,13 +20,7 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class SearchBarPlacesView extends ArrayAdapter {
     private final String[] placesName;
@@ -81,7 +72,7 @@ public class SearchBarPlacesView extends ArrayAdapter {
 
         //initialize places information
         nameText.setText(filtered.get(position).getPlacesName());
-        avaiText.setText(filtered.get(position).getAvalability());
+        avaiText.setText(filtered.get(position).getAvailability());
         distanceText.setText(filtered.get(position).getDistances());
         //initialize amenities
         boolean[] amen=filtered.get(position).getAmenities();

@@ -5,6 +5,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 
 import com.example.navucsd.database.Location;
+import com.example.navucsd.utils.Geography;
 
 public class PlacesDataClass {
     private String placesName;
@@ -37,21 +38,20 @@ public class PlacesDataClass {
             }
         }
     }
-    public PlacesDataClass(Pair<Location, Double> pair){
-        this.placesName=pair.first.name;
-        //for now hard code the distances and avalability
-        this.avalability="";
-        //unit is meter?
-        this.distances=SearchBarActivity.distanceToString(pair.second);
-        //hard code amenities to be 5
-        this.amenities=new boolean[5];
-        for(int j=0;j<pair.first.amenities.size();j++){
-            if(pair.first.amenities != null) {
+
+    public PlacesDataClass(Pair<Location, Double> pair) {
+        placesName = pair.first.name;
+        // for now hard code the distances and availability
+        avalability = "";
+        distances = Geography.displayDistance(pair.second);
+        // hard code amenities to be 5
+        amenities = new boolean[5];
+        for (int j = 0; j < pair.first.amenities.size(); j++) {
+            if (pair.first.amenities != null) {
                 this.amenities[j] = pair.first.amenities.get(amenFilter[j]);
             }
         }
     }
-
 
     @NonNull
     @Override
@@ -59,10 +59,9 @@ public class PlacesDataClass {
         return getPlacesName();
     }
 
-    public String getAvalability() {
+    public String getAvailability() {
         return avalability;
     }
-
 
     public String getDistances() {
         return distances;
@@ -75,8 +74,6 @@ public class PlacesDataClass {
     public boolean[] getAmenities() {
         return amenities;
     }
-
-
 
     public void setPlacesName(String placesName) {
         this.placesName = placesName;
