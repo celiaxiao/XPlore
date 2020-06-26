@@ -132,6 +132,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
 
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.troll_song);
         mediaPlayer.setWakeMode(getContext(), PowerManager.PARTIAL_WAKE_LOCK);
+        
     }
 
     @Override

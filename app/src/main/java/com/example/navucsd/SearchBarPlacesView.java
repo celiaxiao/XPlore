@@ -107,7 +107,6 @@ public class SearchBarPlacesView extends ArrayAdapter {
                 String longitude = (String) clickedLocation.getCoordinates().second;
 
                 // Use the coordinates to set up directions in Google Maps with (default mode=walking)
-//                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + latitude + ", " + longitude + "&mode=w");
                 Uri gmmIntentUri = Uri.parse("geo:" + latitude + ", " + longitude + "?q=" + latitude + ", " + longitude + "(" + name + ")");
 
                 // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
