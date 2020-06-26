@@ -17,7 +17,7 @@ public class Geography {
 		double n;
 		// use feet when less than 0.1 miles
 		if (distance < 160.9344) {
-			n = distance * 0.3048;
+			n = distance / 0.3048;
 			unit = "ft";
 		} else {
 			n = distance / 1609.344;
