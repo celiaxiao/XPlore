@@ -104,13 +104,9 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 			cardView = rootView;
 			textView = rootView.findViewById(R.id.sig_text);
 			imageView = rootView.findViewById(R.id.sig_image);
-			cardView.setOnClickListener(v -> {
-				if (clickTracker.isClicked()) return;
-				clickTracker.click();
-				Intent intent = new Intent(v.getContext(), LandmarkDetailsActivity.class);
-				v.getContext().startActivity(intent);
-			});
+			cardView.setOnClickListener(clickTracker.getOnClickListener(
+				LandmarkDetailsActivity.class
+			));
 		}
 	}
-
 }

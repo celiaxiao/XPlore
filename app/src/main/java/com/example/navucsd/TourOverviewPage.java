@@ -34,7 +34,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
  * the overview contains a startButton leading to starting the tour and
  * cardViews for different stops in the tour.
  */
-public class TourOverviewPage extends AppCompatActivity  implements RecyclerViewAdapterTourOverviewPage.RecyclerViewOnItemClickListener {
+public class TourOverviewPage extends AppCompatActivity implements RecyclerViewAdapterTourOverviewPage.RecyclerViewOnItemClickListener {
     private ArrayList<String> items; // ArrayList that provide items for the RecyclerView
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -42,7 +42,6 @@ public class TourOverviewPage extends AppCompatActivity  implements RecyclerView
     private Button startButtonTourOverviewPage;
     private String[] places = {"Geisel Library", "Price Center", "Fallen Star",
             "Bear", "Biomedical Library", "Galbraith Hall"}; // Array of places
-
     private String tourName = "UC San Diego’s Landmark Tour";
     private String tourDescription = "A tour that highlights all must-see landmarks in UC San Diego";
     private String tourTime = "90 Min";
