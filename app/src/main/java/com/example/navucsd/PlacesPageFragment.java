@@ -1,7 +1,6 @@
 package com.example.navucsd;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -11,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -30,15 +28,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.navucsd.database.Location;
 import com.example.navucsd.database.LocationDatabase;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.example.navucsd.utils.ClickTracker;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * This is the Places page which contains some places and a grid of landmarks.
@@ -46,9 +39,9 @@ import java.util.HashMap;
 public final class PlacesPageFragment extends Fragment {
 
 	/**
-	 * If the landmark list has been clicked, used to prevent multiple clicks.
+	 * Tracks if this page has been clicked; used to prevent multiple clicks.
 	 */
-	private boolean clicked;
+	private ClickTracker clickTracker;
 
 	/**
 	 * A landmark block, consisting of an image resource and a name.
@@ -173,7 +166,7 @@ public final class PlacesPageFragment extends Fragment {
 		ViewGroup container,
 		Bundle savedInstanceState
 	) {
-
+		clickTracker = new ClickTracker();
 		return inflater.inflate(R.layout.fragment_places_page, container, false);
 	}
 
@@ -189,7 +182,7 @@ public final class PlacesPageFragment extends Fragment {
 
 		view
 			.findViewById(R.id.placesSearchBarMask)
-			.setOnClickListener(getOnClickListener(SearchBarActivity.class));
+			.setOnClickListener(clickTracker.getOnClickListener(SearchBarActivity.class));
 
 		SearchView searchView = view.findViewById(R.id.placesSearchView);
 		searchView.setInputType(InputType.TYPE_NULL);
@@ -234,10 +227,10 @@ public final class PlacesPageFragment extends Fragment {
 
 		view
 			.findViewById(R.id.cardViewPlaceOfTheDay)
-			.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+			.setOnClickListener(clickTracker.getOnClickListener(LandmarkDetailsActivity.class));
 		view
 			.findViewById(R.id.cardViewPlaceOfTheDayDescription)
-			.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+			.setOnClickListener(clickTracker.getOnClickListener(LandmarkDetailsActivity.class));
 
 		int[] res_ids = {
 				R.drawable.oceanview,
@@ -270,12 +263,12 @@ public final class PlacesPageFragment extends Fragment {
 	}
 
 	/**
-	 * Called on resume of this fragment and resets the {@code clicked} attribute
+	 * Called on resume of this fragment and resets the {@code clickTracker}.
 	 */
 	@Override
 	public void onResume() {
 		super.onResume();
-		clicked = false;
+		clickTracker.reset();
 	}
 
 	/**
@@ -384,7 +377,7 @@ public final class PlacesPageFragment extends Fragment {
 		TextView label;
 
 		card = new CardView(context);
-		card.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+		card.setOnClickListener(clickTracker.getOnClickListener(LandmarkDetailsActivity.class));
 		card.setRadius(dpToXp(CORNER_RADIUS_DP));
 
 		label = new TextView(context);
@@ -397,7 +390,7 @@ public final class PlacesPageFragment extends Fragment {
 		label.setGravity(Gravity.CENTER);
 		label.setMaxLines(2);
 		label.setEllipsize(TextUtils.TruncateAt.END);
-		label.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+		label.setOnClickListener(clickTracker.getOnClickListener(LandmarkDetailsActivity.class));
 
 		card.addView(new SmartImageView(
 			context,
@@ -410,7 +403,7 @@ public final class PlacesPageFragment extends Fragment {
 
 		card = new CardView(context);
 		if (landmarks.length >= 2) {
-			card.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+			card.setOnClickListener(clickTracker.getOnClickListener(LandmarkDetailsActivity.class));
 			card.setRadius(dpToXp(CORNER_RADIUS_DP));
 
 			label = new TextView(context);
@@ -423,7 +416,9 @@ public final class PlacesPageFragment extends Fragment {
 			label.setGravity(Gravity.CENTER);
 			label.setMaxLines(2);
 			label.setEllipsize(TextUtils.TruncateAt.END);
-			label.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+			label.setOnClickListener(clickTracker.getOnClickListener(
+				LandmarkDetailsActivity.class
+			));
 
 			card.addView(new SmartImageView(
 				context,
@@ -444,21 +439,6 @@ public final class PlacesPageFragment extends Fragment {
 		);
 
 		return row;
-	}
-
-	/**
-	 * Get a {@code OnClickListener} that starts a specified activity.
-	 *
-	 * @param target the activity to be started
-	 * @return a {@code OnClickListener} that starts {@code target}
-	 */
-	private View.OnClickListener getOnClickListener(Class<?> target) {
-		return view -> {
-			if (!clicked) {
-				clicked = true;
-				startActivity(new Intent(getActivity(), target));
-			}
-		};
 	}
 
 	/**

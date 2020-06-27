@@ -21,14 +21,16 @@ import java.util.ArrayList;
 public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<RecyclerViewAdapterTourOverviewPage.ViewHolder> {
     private ArrayList<String> items;
     private Context context;
+    private RecyclerViewOnItemClickListener recyclerViewOnItemClickListener; // A customized OnItemClick Listener to support onItemClick function in RecyclerView
 
-    public RecyclerViewAdapterTourOverviewPage(Context context, ArrayList<String> items) {
+    public RecyclerViewAdapterTourOverviewPage(Context context, ArrayList<String> items, RecyclerViewOnItemClickListener recyclerViewOnItemClickListener) {
         this.context = context;
         this.items = items;
+        this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
     }
 
     // ViewHolder Class
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView placeNameTextView;
         ImageView restroomIconTourOverview;
         ImageView cafeIconTourOverview;
@@ -36,9 +38,16 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
         ImageView busstopIconTourOverview;
         ImageView parkinglotIconTourOverview;
 
-        public ViewHolder(@NonNull View itemView) {
+        RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
+
+        public ViewHolder(@NonNull View itemView, RecyclerViewOnItemClickListener recyclerViewOnItemClickListener) {
             super(itemView);
             placeNameTextView = (TextView) itemView.findViewById(R.id.placeNameTextView);
+            this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener; // Set the instance variable OnItemClickListener to the passed in argument OnItemClickListener
+
+
+            itemView.setOnClickListener(this); // Set this ViewHolder as the onClickListener since the ViewHolder Class implements the View.OnClickListener interface
+
 
             // Amenities ImageViews,
             // drawable b1.png ---> b5.png are activated version of amenities icons,
@@ -50,6 +59,11 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
             busstopIconTourOverview = (ImageView) itemView.findViewById(R.id.busstopIconTourOverview);
             parkinglotIconTourOverview = (ImageView) itemView.findViewById(R.id.parkinglotIconTourOverview);
         }
+
+        @Override
+        public void onClick(View view) {
+            recyclerViewOnItemClickListener.OnItemClick(getAdapterPosition()); // Call the customized OnItemClick function in RecyclerViewOnItemClickListener
+        }
     }
 
 
@@ -57,7 +71,7 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tour_overview_page_detail, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, recyclerViewOnItemClickListener);
         return viewHolder;
     }
 
@@ -73,4 +87,7 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
     }
 
 
+    public interface RecyclerViewOnItemClickListener {
+        void OnItemClick(int position);
+    }
 }

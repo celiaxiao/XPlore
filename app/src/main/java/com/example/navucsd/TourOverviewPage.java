@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -33,14 +34,14 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
  * the overview contains a startButton leading to starting the tour and
  * cardViews for different stops in the tour.
  */
-public class TourOverviewPage extends AppCompatActivity {
+public class TourOverviewPage extends AppCompatActivity implements RecyclerViewAdapterTourOverviewPage.RecyclerViewOnItemClickListener {
     private ArrayList<String> items; // ArrayList that provide items for the RecyclerView
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private Button startButtonTourOverviewPage;
     private String[] places = {"Geisel Library", "Price Center", "Fallen Star",
             "Bear", "Biomedical Library", "Galbraith Hall"}; // Array of places
-
     private String tourName = "UC San Diego’s Landmark Tour";
     private String tourDescription = "A tour that highlights all must-see landmarks in UC San Diego";
     private String tourTime = "90 Min";
@@ -60,6 +61,7 @@ public class TourOverviewPage extends AppCompatActivity {
         TextView tourDescriptionTextView = (TextView) findViewById(R.id.tourDescriptionTextView);
         TextView tourTimeTextView = (TextView) findViewById(R.id.tourTimeTextView);
         TextView tourPlaceNumberTextView = (TextView) findViewById(R.id.tourPlaceNumberTextView);
+        startButtonTourOverviewPage = (Button) findViewById(R.id.startButtonTourOverviewPage);
 
 
 
@@ -69,6 +71,13 @@ public class TourOverviewPage extends AppCompatActivity {
         tourDescriptionTextView.setText(tourDescription);
         tourTimeTextView.setText(tourTime);
         tourPlaceNumberTextView.setText(tourPlaceNumber);
+        startButtonTourOverviewPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), FeatureComingSoonActivity.class);
+                startActivity(intent);
+            }
+        });
         // --------------------------------
 
 
@@ -76,7 +85,7 @@ public class TourOverviewPage extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_tour_overview_page);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mAdapter = new RecyclerViewAdapterTourOverviewPage(this, items);
+        mAdapter = new RecyclerViewAdapterTourOverviewPage(this, items, this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(mRecyclerView); // Link the itemTouchHelper to the recyclerView to implement swipe function
         mRecyclerView.setAdapter(mAdapter);
@@ -131,5 +140,11 @@ public class TourOverviewPage extends AppCompatActivity {
     };
 
 
-
+    // Override the customized OnItemClick method in the customized RecyclerViewOnItemClickListener interface (which is defined in the corresponding adapter java file)
+    @Override
+    public void OnItemClick(int position) {
+        String item = items.get(position); // A reference to the clicked item just in case we need it
+        Intent intent = new Intent(getApplicationContext(), FeatureComingSoonActivity.class);
+        startActivity(intent);
+    }
 }

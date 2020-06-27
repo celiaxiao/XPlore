@@ -132,13 +132,15 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
 
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.troll_song);
         mediaPlayer.setWakeMode(getContext(), PowerManager.PARTIAL_WAKE_LOCK);
+        
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_landmark_detail_overview_fv, container, false);
+        View view = inflater.inflate(R.layout.fragment_landmark_detail_overview_fv, container, false);
+        return view;
     }
 
     @Override
@@ -208,10 +210,28 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         amenitiesRecycler.setAdapter(amenitiesAdapter);
         amenitiesRecycler.setNestedScrollingEnabled(false);
 
+
+        // Nav button redirects to Google Maps to provide directions from user's location to currLocation
         navButton = view.findViewById(R.id.overview_nav_button);
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = currLocation.getName(); // Should be the name of the location
+                String latitude = (String) currLocation.getCoordinates().first; // Should be the latitude of the location
+                String longitude = (String) currLocation.getCoordinates().second; // Should be the longitude of the location
+
+                // Use the coordinates to set up directions in Google Maps with (default mode=walking)
+                Uri gmmIntentUri = Uri.parse("geo:" + latitude + ", " + longitude + "?q=" + latitude + ", " + longitude + "(" + name + ")");
+
+                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                // Make the Intent explicit by setting the Google Maps package
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                if (mapIntent.resolveActivity(getContext().getPackageManager()) != null) {
+                    // Attempt to start an activity that can handle the Intent
+                    getContext().startActivity(mapIntent);
+                }
             }
         });
 
