@@ -131,7 +131,7 @@
 						android:tint="#949292" />
 
 					<ImageView
-						android:id="@+id/POTD_busstop"
+						android:id="@+id/POTD_bus_stop"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:src="@drawable/ic_directions_bus"
