@@ -200,38 +200,39 @@ public final class PlacesPageFragment extends Fragment {
 		if (locations == null) return;
 		Location place = locations.get(hashDate(locations.size()));
 
-		ImageView iv_restroom = (ImageView) getView().findViewById(R.id.POTD_restroom);
-		ImageView iv_cafe = (ImageView) getView().findViewById(R.id.POTD_cafe);
-		ImageView iv_restaurant = (ImageView) getView().findViewById(R.id.POTD_restaurant);
-		ImageView iv_busstop = (ImageView) getView().findViewById(R.id.POTD_busstop);
-		ImageView iv_parking = (ImageView) getView().findViewById(R.id.POTD_parking);
-		TextView tv_name = (TextView) getView().findViewById(R.id.POTD_name);
-		TextView tv_about = (TextView) getView().findViewById(R.id.POTD_about);
+		ImageView iv_restroom = view.findViewById(R.id.POTD_restroom);
+		ImageView iv_cafe = view.findViewById(R.id.POTD_cafe);
+		ImageView iv_restaurant = view.findViewById(R.id.POTD_restaurant);
+		ImageView iv_bus_stop = view.findViewById(R.id.POTD_bus_stop);
+		ImageView iv_parking = view.findViewById(R.id.POTD_parking);
+		TextView tv_name = view.findViewById(R.id.POTD_name);
+		TextView tv_about = view.findViewById(R.id.POTD_about);
 
-		if (place.amenities.get("restroom")){
-			iv_restroom.setColorFilter(Color.WHITE);
-		}
-		if (place.amenities.get("cafe")){
-			iv_cafe.setColorFilter(Color.WHITE);
-		}
-		if (place.amenities.get("restaurant")){
-			iv_restaurant.setColorFilter(Color.WHITE);
-		}
-		if (place.amenities.get("busstop")){
-			iv_busstop.setColorFilter(Color.WHITE);
-		}
-		if (place.amenities.get("parking")){
-			iv_parking.setColorFilter(Color.WHITE);
-		}
+		if (place.amenities.get("restroom")) iv_restroom.setColorFilter(Color.WHITE);
+		if (place.amenities.get("cafe")) iv_cafe.setColorFilter(Color.WHITE);
+		if (place.amenities.get("restaurant")) iv_restaurant.setColorFilter(Color.WHITE);
+		if (place.amenities.get("busstop")) iv_bus_stop.setColorFilter(Color.WHITE);
+		if (place.amenities.get("parking")) iv_parking.setColorFilter(Color.WHITE);
+
 		tv_name.setText(place.name);
 		tv_about.setText(place.about);
 
+		View.OnClickListener listener = v -> {
+			if (!clickTracker.isClicked()) {
+				clickTracker.click();
+				Context view_context = v.getContext();
+				Intent intent = new Intent(view_context, LandmarkDetailsActivity.class);
+				intent.putExtra("placeName", place.name);
+				view_context.startActivity(intent);
+			}
+		};
+
 		view
 			.findViewById(R.id.cardViewPlaceOfTheDay)
-			.setOnClickListener(clickTracker.getOnClickListener(LandmarkDetailsActivity.class));
+			.setOnClickListener(listener);
 		view
 			.findViewById(R.id.cardViewPlaceOfTheDayDescription)
-			.setOnClickListener(clickTracker.getOnClickListener(LandmarkDetailsActivity.class));
+			.setOnClickListener(listener);
 
 		int[] res_ids = {
 				R.drawable.oceanview,
