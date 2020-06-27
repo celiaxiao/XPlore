@@ -1,8 +1,11 @@
 package com.example.navucsd;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.util.Pair;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.navucsd.database.Location;
 import com.google.gson.Gson;
@@ -12,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /*
@@ -47,7 +51,7 @@ public class SearchBarDB {
     private ArrayList<Location> list = new ArrayList<>();
     private HashMap<String, Location> map = new HashMap<>();
 
-    private  static String[] FILELIST = new String[]{
+    private static String[] FILELIST = new String[] {
             /*Change them in the future*/
             "64Degrees.json",
             "AtkinsonHall.json",
@@ -150,8 +154,11 @@ public class SearchBarDB {
             double dist = this.distanceBetween(userLocation, locationCoor);
             int origin = nearestList.size();
             for( int j = 0; j < nearestList.size(); j++ ){
-                if( dist >= nearestList.get(j).second ){
+                if( dist < nearestList.get(j).second ){
                     nearestList.add(j, new Pair<>(this.list.get(i), dist));
+                    if(nearestList.size() > num){
+                        nearestList.remove(num);
+                    }
                     break;
                 }
             }
@@ -171,14 +178,24 @@ public class SearchBarDB {
      * output: the ArrayList of Pair<Location, Double>, which contains all the locations. Pair.first
      *         are Location object and Pair.second are the distance between user and the locations.
      */
-    public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double>  userLocation){
+    public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double> userLocation) {
         ArrayList<Pair<Location, Double>> distanceList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
             String first = (String) this.list.get(i).coordinates.first;
             String second = (String) this.list.get(i).coordinates.second;
-            Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
+            Pair<Double, Double> locationCoor = new Pair<>(
+                Double.parseDouble(first),
+                Double.parseDouble(second)
+            );
             double dist = this.distanceBetween(userLocation, locationCoor);
             distanceList.add(new Pair<>(this.list.get(i), dist));
+        }
+        for( int i = 0; i < distanceList.size()-1; i++ ){
+            for( int j = i+1; j < distanceList.size(); j++ ){
+                if(distanceList.get(i).second > distanceList.get(j).second){
+                    Collections.swap(distanceList, i, j);
+                }
+            }
         }
         return distanceList;
     }
@@ -190,15 +207,9 @@ public class SearchBarDB {
      * @param p2 the coordinates of the second point in (latitude, longitude) format
      * @return distance between the two points in meters
      */
-    public double distanceBetween(Pair<Double, Double> p1, Pair<Double, Double> p2) {
+    public static double distanceBetween(Pair<Double, Double> p1, Pair<Double, Double> p2) {
         float[] result = new float[1];
-        android.location.Location.distanceBetween(
-            p1.first,
-            p1.second,
-            p2.first,
-            p2.second,
-            result
-        );
+        android.location.Location.distanceBetween(p1.first, p1.second, p2.first, p2.second, result);
         return result[0];
     }
 
@@ -289,10 +300,18 @@ public class SearchBarDB {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public ArrayList<Pair<Location, Double>> filterWithDistance(ArrayList<String> locations, ArrayList<String> amen, Pair<Double, Double>  userLocation){
         ArrayList<Pair<Location, Integer>> trackingList = new ArrayList<>();
         ArrayList<Pair<Location, Double>> outputList = new ArrayList<>();
         ArrayList<String> amenities = new ArrayList<>();
+        for( int i = 0; i < locations.size()-1; i++ ){
+            for( int j = i+1; j < locations.size(); j++ ){
+                if(getDistance(locations.get(i), userLocation) > getDistance(locations.get(j), userLocation)){
+                    Collections.swap(locations, i, j);
+                }
+            }
+        }
         for( int i = 0; i < amen.size(); i++ ){
             if(amen.get(i) != null){
                 amenities.add(amen.get(i));
@@ -314,7 +333,8 @@ public class SearchBarDB {
                     int weight = 0;
                     for( int z = 0; z < amenities.size(); z++ ){
                         if( location.amenities.get(amenities.get(z)) == true ){
-                            weight = (weight*10) + 5 - z;
+//                            weight = (weight*10) + 5 - z;
+                            weight += 1;
                         }
                     }
                     if( weight > 0 ){
@@ -326,7 +346,7 @@ public class SearchBarDB {
                         else{
                             int origin = trackingList.size();
                             for( int j = 0; j < trackingList.size(); j++ ){
-                                if( weight >= trackingList.get(j).second ){
+                                if( weight == amenities.size() && weight > trackingList.get(j).second ){
                                     trackingList.add(j, new Pair<>(location, weight));
                                     Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
                                     outputList.add(j, item);
@@ -370,5 +390,4 @@ public class SearchBarDB {
         }
         return json;
     }
-
 }

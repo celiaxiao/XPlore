@@ -1,6 +1,7 @@
 package com.example.navucsd;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -183,5 +184,19 @@ public class MainPageFragment extends Fragment {
 			new String[] {"Price Center", "Main Gym", "64 Degrees"},
 			new int[] {R.drawable.price_center, R.drawable.main_gym, R.drawable._64_degrees}
 		);
+
+		View.OnClickListener comingSoon = clickTracker.getOnClickListener(
+			FeatureComingSoonActivity.class
+		);
+
+		view
+			.findViewById(R.id.main_page_ucsd_landmark_tour_card_view)
+			.setOnClickListener(comingSoon);
+		view
+			.findViewById(R.id.main_page_academic_highlights_tour_card_view)
+			.setOnClickListener(comingSoon);
+		view
+			.findViewById(R.id.main_page_one_day_as_student_tour_card_view)
+			.setOnClickListener(comingSoon);
 	}
 }
