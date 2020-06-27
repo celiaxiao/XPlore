@@ -83,6 +83,7 @@ public class SearchBarPlacesView extends ArrayAdapter {
         if(amen[4]) parkingIcon.setImageResource(R.drawable.b5);
 
         //setup direction button onclick listener
+        // TODO: change this to use ClickTracker to prevent double click problem
         Button directBtn=rowView.findViewById(R.id.directionButton);
         directBtn.setOnClickListener(new View.OnClickListener( ) {
             @Override
