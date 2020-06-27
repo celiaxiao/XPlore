@@ -1,5 +1,6 @@
 package com.example.navucsd;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
@@ -104,9 +105,15 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 			cardView = rootView;
 			textView = rootView.findViewById(R.id.sig_text);
 			imageView = rootView.findViewById(R.id.sig_image);
-			cardView.setOnClickListener(clickTracker.getOnClickListener(
-				LandmarkDetailsActivity.class
-			));
+			cardView.setOnClickListener(view -> {
+				if (!clickTracker.isClicked()) {
+					clickTracker.click();
+					Context context = view.getContext();
+					Intent intent = new Intent(context, LandmarkDetailsActivity.class);
+					intent.putExtra("placeName", textView.getText());
+					context.startActivity(intent);
+				}
+			});
 		}
 	}
 }
