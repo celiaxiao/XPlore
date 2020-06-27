@@ -47,13 +47,13 @@ public class SearchBarActivity extends AppCompatActivity  {
             /*Change them in the future*/
             "64Degrees.json",
             "AtkinsonHall.json",
-            "JSOE.json",
-            "Geisel.json",
             "BiomedicalLibrary.json",
             "CanyonViewAquaticCenter.json",
             "CanyonVista.json",
             "ConradPrebysMusicCenter.json",
             "GalbraithHall.json",
+            "Geisel.json",
+            "JSOE.json",
             "MayerHall.json",
             "OceanviewRestaurant.json",
             "PetersonHall.json",
@@ -103,6 +103,7 @@ public class SearchBarActivity extends AppCompatActivity  {
         String[] availability = new String[FILELIST.length];
         String[] distances = new String[FILELIST.length];
 
+
         // check location permission, if no, hide the distances
         currentLocation = null;
         if (checkPermission()) {
@@ -114,6 +115,7 @@ public class SearchBarActivity extends AppCompatActivity  {
                 new Pair<>(currentLocation.getLatitude(), currentLocation.getLongitude())
             );
             for (int i = 0; i < distancePair.size(); i++) {
+
                 Location location = distancePair.get(i).first;
                 locationList.add(location);
                 // get amenity list from location
