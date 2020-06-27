@@ -14,12 +14,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-
 
 /*
  * Initialization of the database:
@@ -54,7 +51,7 @@ public class SearchBarDB {
     private ArrayList<Location> list = new ArrayList<>();
     private HashMap<String, Location> map = new HashMap<>();
 
-    private  static String[] FILELIST = new String[]{
+    private static String[] FILELIST = new String[] {
             /*Change them in the future*/
             "64Degrees.json",
             "AtkinsonHall.json",
@@ -134,7 +131,7 @@ public class SearchBarDB {
         String first = (String) location.coordinates.first;
         String second = (String) location.coordinates.second;
         Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
-        double dist = this.distant(userLocation, locationCoor);
+        double dist = this.distanceBetween(userLocation, locationCoor);
         return dist;
     }
 
@@ -154,7 +151,7 @@ public class SearchBarDB {
             String first = (String) this.list.get(i).coordinates.first;
             String second = (String) this.list.get(i).coordinates.second;
             Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
-            double dist = this.distant(userLocation, locationCoor);
+            double dist = this.distanceBetween(userLocation, locationCoor);
             int origin = nearestList.size();
             for( int j = 0; j < nearestList.size(); j++ ){
                 if( dist < nearestList.get(j).second ){
@@ -181,13 +178,16 @@ public class SearchBarDB {
      * output: the ArrayList of Pair<Location, Double>, which contains all the locations. Pair.first
      *         are Location object and Pair.second are the distance between user and the locations.
      */
-    public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double>  userLocation){
+    public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double> userLocation) {
         ArrayList<Pair<Location, Double>> distanceList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
             String first = (String) this.list.get(i).coordinates.first;
             String second = (String) this.list.get(i).coordinates.second;
-            Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
-            double dist = this.distant(userLocation, locationCoor);
+            Pair<Double, Double> locationCoor = new Pair<>(
+                Double.parseDouble(first),
+                Double.parseDouble(second)
+            );
+            double dist = this.distanceBetween(userLocation, locationCoor);
             distanceList.add(new Pair<>(this.list.get(i), dist));
         }
         for( int i = 0; i < distanceList.size()-1; i++ ){
@@ -200,26 +200,17 @@ public class SearchBarDB {
         return distanceList;
     }
 
-
-    /*
-     * p1 and p2 represent the Location coordinates both of them are Pair<Double, Double> Object and
-     * should in the format as: Pair<Latitude, Longitude> which means the in Pair, first should be
-     * Latitude and second should be Longitude
+    /**
+     * Calculates the distance between two points in meters.
      *
-     * public static void distanceBetween (
-     *              double startLatitude,
-     *              double startLongitude,
-     *              double endLatitude,
-     *              double endLongitude,
-     *              float[] results)
+     * @param p1 the coordinates of the first point in (latitude, longitude) format
+     * @param p2 the coordinates of the second point in (latitude, longitude) format
+     * @return distance between the two points in meters
      */
-    public static double distant(Pair<Double, Double>  p1, Pair<Double, Double>  p2){
-        float[] results = new float[1];
-        android.location.Location.distanceBetween(p1.first, p1.second, p2.first, p2.second, results);
-        DecimalFormat df = new DecimalFormat("###.###");
-        String resultInString = df.format(results[0]);
-        Double finalResult = Double.parseDouble(resultInString);
-        return finalResult;
+    public static double distanceBetween(Pair<Double, Double> p1, Pair<Double, Double> p2) {
+        float[] result = new float[1];
+        android.location.Location.distanceBetween(p1.first, p1.second, p2.first, p2.second, result);
+        return result[0];
     }
 
     /*
@@ -399,5 +390,4 @@ public class SearchBarDB {
         }
         return json;
     }
-
 }
