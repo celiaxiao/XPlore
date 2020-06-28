@@ -11,7 +11,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -30,15 +29,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.navucsd.database.Location;
 import com.example.navucsd.database.LocationDatabase;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.example.navucsd.utils.ClickTracker;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * This is the Places page which contains some places and a grid of landmarks.
@@ -46,9 +40,9 @@ import java.util.HashMap;
 public final class PlacesPageFragment extends Fragment {
 
 	/**
-	 * If the landmark list has been clicked, used to prevent multiple clicks.
+	 * Tracks if this page has been clicked; used to prevent multiple clicks.
 	 */
-	private boolean clicked;
+	private ClickTracker clickTracker;
 
 	/**
 	 * A landmark block, consisting of an image resource and a name.
@@ -173,7 +167,7 @@ public final class PlacesPageFragment extends Fragment {
 		ViewGroup container,
 		Bundle savedInstanceState
 	) {
-
+		clickTracker = new ClickTracker();
 		return inflater.inflate(R.layout.fragment_places_page, container, false);
 	}
 
@@ -189,7 +183,7 @@ public final class PlacesPageFragment extends Fragment {
 
 		view
 			.findViewById(R.id.placesSearchBarMask)
-			.setOnClickListener(getOnClickListener(SearchBarActivity.class));
+			.setOnClickListener(clickTracker.getOnClickListener(SearchBarActivity.class));
 
 		SearchView searchView = view.findViewById(R.id.placesSearchView);
 		searchView.setInputType(InputType.TYPE_NULL);
@@ -206,45 +200,57 @@ public final class PlacesPageFragment extends Fragment {
 		if (locations == null) return;
 		Location place = locations.get(hashDate(locations.size()));
 
-		ImageView iv_restroom = (ImageView) getView().findViewById(R.id.POTD_restroom);
-		ImageView iv_cafe = (ImageView) getView().findViewById(R.id.POTD_cafe);
-		ImageView iv_restaurant = (ImageView) getView().findViewById(R.id.POTD_restaurant);
-		ImageView iv_busstop = (ImageView) getView().findViewById(R.id.POTD_busstop);
-		ImageView iv_parking = (ImageView) getView().findViewById(R.id.POTD_parking);
-		TextView tv_name = (TextView) getView().findViewById(R.id.POTD_name);
-		TextView tv_about = (TextView) getView().findViewById(R.id.POTD_about);
+		ImageView iv_restroom = view.findViewById(R.id.POTD_restroom);
+		ImageView iv_cafe = view.findViewById(R.id.POTD_cafe);
+		ImageView iv_restaurant = view.findViewById(R.id.POTD_restaurant);
+		ImageView iv_bus_stop = view.findViewById(R.id.POTD_bus_stop);
+		ImageView iv_parking = view.findViewById(R.id.POTD_parking);
+		TextView tv_name = view.findViewById(R.id.POTD_name);
+		TextView tv_about = view.findViewById(R.id.POTD_about);
 
-		if (place.amenities.get("restroom")){
-			iv_restroom.setColorFilter(Color.WHITE);
-		}
-		if (place.amenities.get("cafe")){
-			iv_cafe.setColorFilter(Color.WHITE);
-		}
-		if (place.amenities.get("restaurant")){
-			iv_restaurant.setColorFilter(Color.WHITE);
-		}
-		if (place.amenities.get("busstop")){
-			iv_busstop.setColorFilter(Color.WHITE);
-		}
-		if (place.amenities.get("parking")){
-			iv_parking.setColorFilter(Color.WHITE);
-		}
+		if (place.amenities.get("restroom")) iv_restroom.setColorFilter(Color.WHITE);
+		if (place.amenities.get("cafe")) iv_cafe.setColorFilter(Color.WHITE);
+		if (place.amenities.get("restaurant")) iv_restaurant.setColorFilter(Color.WHITE);
+		if (place.amenities.get("busstop")) iv_bus_stop.setColorFilter(Color.WHITE);
+		if (place.amenities.get("parking")) iv_parking.setColorFilter(Color.WHITE);
+
 		tv_name.setText(place.name);
 		tv_about.setText(place.about);
 
+		View.OnClickListener listener = v -> {
+			if (!clickTracker.isClicked()) {
+				clickTracker.click();
+				Context view_context = v.getContext();
+				Intent intent = new Intent(view_context, LandmarkDetailsActivity.class);
+				intent.putExtra("placeName", place.name);
+				view_context.startActivity(intent);
+			}
+		};
+
 		view
 			.findViewById(R.id.cardViewPlaceOfTheDay)
-			.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+			.setOnClickListener(listener);
 		view
 			.findViewById(R.id.cardViewPlaceOfTheDayDescription)
-			.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+			.setOnClickListener(listener);
 
 		int[] res_ids = {
-			R.drawable.geisel,
-			R.drawable.peterson,
-			R.drawable.mayer,
-			R.drawable.price_center_east,
-			R.drawable.rady,
+				R.drawable.oceanview,
+				R.drawable.price_center_east,
+				R.drawable.rady,
+				R.drawable.__64degrees,
+				R.drawable.geisel,
+				R.drawable.atkinsonhall,
+				R.drawable.peterson,
+				R.drawable.mayerhall,
+				R.drawable.cpmc,
+				R.drawable.galbraith,
+				R.drawable.warrenbear,
+				R.drawable.canyonvista,
+				R.drawable.sungod,
+				R.drawable.canyonviewaquaticcenter,
+				R.drawable.biomedical_library,
+				R.drawable.fallen_star
 		};
 
 		ArrayList<LandmarkInfo> landmarks = new ArrayList<>(locations.size());
@@ -259,12 +265,12 @@ public final class PlacesPageFragment extends Fragment {
 	}
 
 	/**
-	 * Called on resume of this fragment and resets the {@code clicked} attribute
+	 * Called on resume of this fragment and resets the {@code clickTracker}.
 	 */
 	@Override
 	public void onResume() {
 		super.onResume();
-		clicked = false;
+		clickTracker.reset();
 	}
 
 	/**
@@ -345,26 +351,19 @@ public final class PlacesPageFragment extends Fragment {
 		final int SIDE_MARGIN_DP = 5;
 		final int CORNER_RADIUS_DP = 5;
 		final int TEXT_SIZE_SP = 15;
+		final int LABEL_ID = 1;
 
 		TableRow row = new TableRow(context);
 
 		TableRow.LayoutParams layout_start, layout_end;
 		CardView.LayoutParams label_layout;
 
-		layout_start = new TableRow.LayoutParams(
-			TableRow.LayoutParams.WRAP_CONTENT,
-			TableRow.LayoutParams.WRAP_CONTENT,
-			1
-		);
+		layout_start = new TableRow.LayoutParams(0, 0, 1);
 		layout_start.bottomMargin = bottomMargin;
 		layout_start.setMarginStart(dpToXp(SIDE_MARGIN_DP));
 		layout_start.setMarginEnd(gap / 2);
 
-		layout_end = new TableRow.LayoutParams(
-			TableRow.LayoutParams.WRAP_CONTENT,
-			TableRow.LayoutParams.WRAP_CONTENT,
-			1
-		);
+		layout_end = new TableRow.LayoutParams(0, 0, 1);
 		layout_end.bottomMargin = bottomMargin;
 		layout_end.setMarginStart(gap / 2);
 		layout_end.setMarginEnd(dpToXp(SIDE_MARGIN_DP));
@@ -380,11 +379,22 @@ public final class PlacesPageFragment extends Fragment {
 		CardView card;
 		TextView label;
 
+		View.OnClickListener listener = view -> {
+			if (!clickTracker.isClicked()) {
+				clickTracker.click();
+				Context view_context = view.getContext();
+				Intent intent = new Intent(view_context, LandmarkDetailsActivity.class);
+				intent.putExtra("placeName", ((TextView) view.findViewById(LABEL_ID)).getText());
+				view_context.startActivity(intent);
+			}
+		};
+
 		card = new CardView(context);
-		card.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+		card.setOnClickListener(listener);
 		card.setRadius(dpToXp(CORNER_RADIUS_DP));
 
 		label = new TextView(context);
+		label.setId(LABEL_ID);
 		label.setBackgroundColor(0xFFFFFFFF);
 		label.setText(landmarks[0].name);
 		label.setTextColor(0xFF162B46);
@@ -394,7 +404,6 @@ public final class PlacesPageFragment extends Fragment {
 		label.setGravity(Gravity.CENTER);
 		label.setMaxLines(2);
 		label.setEllipsize(TextUtils.TruncateAt.END);
-		label.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
 
 		card.addView(new SmartImageView(
 			context,
@@ -407,10 +416,11 @@ public final class PlacesPageFragment extends Fragment {
 
 		card = new CardView(context);
 		if (landmarks.length >= 2) {
-			card.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
+			card.setOnClickListener(listener);
 			card.setRadius(dpToXp(CORNER_RADIUS_DP));
 
 			label = new TextView(context);
+			label.setId(LABEL_ID);
 			label.setBackgroundColor(0xFFFFFFFF);
 			label.setText(landmarks[1].name);
 			label.setTextColor(0xFF162B46);
@@ -420,7 +430,6 @@ public final class PlacesPageFragment extends Fragment {
 			label.setGravity(Gravity.CENTER);
 			label.setMaxLines(2);
 			label.setEllipsize(TextUtils.TruncateAt.END);
-			label.setOnClickListener(getOnClickListener(LandmarkDetailsActivity.class));
 
 			card.addView(new SmartImageView(
 				context,
@@ -441,21 +450,6 @@ public final class PlacesPageFragment extends Fragment {
 		);
 
 		return row;
-	}
-
-	/**
-	 * Get a {@code OnClickListener} that starts a specified activity.
-	 *
-	 * @param target the activity to be started
-	 * @return a {@code OnClickListener} that starts {@code target}
-	 */
-	private View.OnClickListener getOnClickListener(Class<?> target) {
-		return view -> {
-			if (!clicked) {
-				clicked = true;
-				startActivity(new Intent(getActivity(), target));
-			}
-		};
 	}
 
 	/**

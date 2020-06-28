@@ -14,19 +14,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".FeatureComingSoonActivity"></activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.Material">
-        </activity> <!-- Other pages -->
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Material" />
         <activity
             android:name=".LandmarkDetailsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Material" />
         <activity
             android:name=".SearchBarActivity"
-            android:theme="@style/ChipTheme" />
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Material" />
         <activity
             android:name=".SplashPageActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,15 +40,16 @@
         </activity>
         <activity
             android:name=".OnboardingActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TourOverviewPage"
-            android:exported="true">
-        </activity>
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DuringTourActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"
+            android:screenOrientation="portrait" />
     </application>
+
 </manifest>

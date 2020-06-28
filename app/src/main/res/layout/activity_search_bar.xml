@@ -11,9 +11,9 @@
         android:id="@+id/searchBarCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginRight="16dp"
         android:layout_alignParentTop="true"
         app:cardElevation="8dp">
 
@@ -34,154 +34,185 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/amennityCardView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="96dp"
-        android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
-
         android:layout_alignParentTop="true"
         app:cardElevation="8dp">
-
-        <LinearLayout
-            android:id="@+id/amenityLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="2dp"
-            android:orientation="horizontal">
-
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/amentityIcon"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="13dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="14dp"
+                android:layout_marginVertical="11dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginStart="7dp"
                 android:src="@drawable/filter_icon" />
-
             <TextView
+                android:id="@+id/chipBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
+                android:layout_toEndOf="@id/amentityIcon"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="10dp"
+                android:paddingHorizontal="5dp"
+                android:background="@drawable/textview_rounded_corner"
+                android:textColor="@color/white"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
-                android:text="Amenities"
-                android:textColor="#000000"
-                android:textSize="15dp"
-                android:textStyle="bold" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/main_place_tags"
-                android:layout_width="242dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="13dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="10dp"
-                app:chipSpacingHorizontal="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:singleLine="false">
+    <HorizontalScrollView
+        android:id="@+id/horiScroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/amennityCardView"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="94dp"
+        android:layout_toEndOf="@+id/amennityCardView"
+        android:layout_above="@id/placesCardView"
+        android:scrollbars="none"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="2dp"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bathroomCard"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="21dp"
+                app:cardElevation="8dp">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/bathroom"
                     style="@style/AmenityChip"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    app:checkedIconVisible="false"
-                    app:chipIcon="@drawable/g1"
-                    app:chipIconEnabled="true"
-                    app:chipIconSize="13dp"
-                    app:chipMinTouchTargetSize="0dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Restroom"
+                    app:checkedIconVisible="false" />
+            </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cafeCard"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/bathroomCard"
+                android:layout_marginEnd="21dp"
+                app:cardElevation="5dp">
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/cafe"
                     style="@style/AmenityChip"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Café"
                     app:checkedIconVisible="false"
-                    app:chipIcon="@drawable/g2"
+                    />
+            </androidx.cardview.widget.CardView>
 
-                    app:chipIconEnabled="true"
-                    app:chipIconSize="14dp" />
-
+            <androidx.cardview.widget.CardView
+                android:id="@+id/resturantCard"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/cafeCard"
+                android:layout_marginEnd="21dp"
+                app:cardElevation="5dp">
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/resturant"
                     style="@style/AmenityChip"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Restaurant"
                     app:checkedIconVisible="false"
-                    app:chipIcon="@drawable/g3"
-                    app:chipIconEnabled="true"
-                    app:chipIconSize="13dp" />
+                     />
+            </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/busCard"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/resturantCard"
+                android:layout_marginEnd="21dp"
+                app:cardElevation="5dp">
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/bus"
                     style="@style/AmenityChip"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    app:checkedIconVisible="false"
-                    app:chipIcon="@drawable/g4"
-                    app:chipIconEnabled="true"
-                    app:chipIconSize="13dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Bus Stop"
+                    app:checkedIconVisible="false" />
+            </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/parkingCard"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/busCard"
+                android:layout_marginEnd="15dp"
+                app:cardElevation="5dp">
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/parking"
                     style="@style/AmenityChip"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Parking"
                     app:checkedIconVisible="false"
-                    app:chipIcon="@drawable/g5"
-                    app:chipIconEnabled="true"
-                    app:chipIconSize="13dp" />
+                     />
+            </androidx.cardview.widget.CardView>
 
 
-            </com.google.android.material.chip.ChipGroup>
-
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+        </RelativeLayout>
+    </HorizontalScrollView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/placesCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_alignParentRight="true"
-
         android:layout_marginBottom="26dp"
-
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="190dp"
         android:paddingBottom="26dp"
         app:cardCornerRadius="3dp"
         android:layout_alignParentTop="true"
-        app:cardElevation="4dp">
+        app:cardElevation="4dp"
+        android:descendantFocusability="blocksDescendants">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/title_places"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginStart="17dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="15dp"
-                android:src="@drawable/places_icon" />
 
             <TextView
+                android:layout_marginStart="21dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-
-                android:text="Search Results"
-                android:textColor="#000000"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+                android:text="Results"
+                android:textColor="#182B49"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                 />
 
         </LinearLayout>
 
@@ -190,6 +221,17 @@
             android:layout_height="1dp"
             android:layout_marginTop="50dp"
             android:background="@color/divider" />
+
+        <TextView
+            android:id="@+id/noResultFoundText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="66dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:textColor="@color/search_amenity_text"
+            android:text="No results found" />
 
         <ListView
             android:id="@+id/searchHintList"

@@ -90,11 +90,14 @@ public class OnboardingActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) { }
         });
 
+
+
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+                finish(); // Close this onboarding activity after launching MainActivity
             }
         });
 

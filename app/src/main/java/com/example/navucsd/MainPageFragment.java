@@ -1,9 +1,9 @@
 package com.example.navucsd;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -20,10 +20,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.navucsd.database.Location;
 import com.example.navucsd.utils.ClickTracker;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 
@@ -145,20 +145,19 @@ public class MainPageFragment extends Fragment {
 			// to handle the case where the user grants the permission. See the documentation
 			// for ActivityCompat#requestPermissions for more details.
 			return;
-		}
-		else {
-			fusedLocationClient.getLastLocation()
-					.addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-						@Override
-						public void onSuccess(Location location) {
-							// Got last known location. In some rare situations this can be null.
-							if (location != null) {
-								ArrayList<Pair<com.example.navucsd.database.Location, Double>> arrayList = database.nearestLocations(new Pair<>(location.getLatitude(), location.getLongitude()),3);
-								Log.d("Near", arrayList.size() + "");
-								autoSlideViewPagerAdapter.setContent(arrayList);
-							}
-						}
-					});
+		} else {
+			fusedLocationClient
+				.getLastLocation()
+				.addOnSuccessListener(getActivity(), location -> {
+					// Got last known location. In some rare situations this can be null.
+					if (location != null) {
+						ArrayList<Pair<Location, Double>> arrayList = database.nearestLocations(
+							new Pair<>(location.getLatitude(), location.getLongitude()), 3
+						);
+						Log.d("Near", arrayList.size() + "");
+						autoSlideViewPagerAdapter.setContent(arrayList);
+					}
+				});
 		}
 
 		setupRecyclerView(
@@ -185,5 +184,19 @@ public class MainPageFragment extends Fragment {
 			new String[] {"Price Center", "Main Gym", "64 Degrees"},
 			new int[] {R.drawable.price_center, R.drawable.main_gym, R.drawable._64_degrees}
 		);
+
+		View.OnClickListener comingSoon = clickTracker.getOnClickListener(
+			FeatureComingSoonActivity.class
+		);
+
+		view
+			.findViewById(R.id.main_page_ucsd_landmark_tour_card_view)
+			.setOnClickListener(comingSoon);
+		view
+			.findViewById(R.id.main_page_academic_highlights_tour_card_view)
+			.setOnClickListener(comingSoon);
+		view
+			.findViewById(R.id.main_page_one_day_as_student_tour_card_view)
+			.setOnClickListener(comingSoon);
 	}
 }
