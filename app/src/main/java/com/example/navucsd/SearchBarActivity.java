@@ -60,7 +60,9 @@ public class SearchBarActivity extends AppCompatActivity  {
             "PriceCenter.json",
             "RadySchoolOfManagement.json",
             "SunGod.json",
-            "WarrenBear.json"
+            "WarrenBear.json",
+            "DrSeussStatue.json",
+            "MainGym.json"
     };
 
     private boolean checkPermission() {
