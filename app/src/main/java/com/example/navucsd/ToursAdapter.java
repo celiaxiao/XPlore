@@ -1,6 +1,7 @@
 package com.example.navucsd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,13 +62,13 @@ public class ToursAdapter extends BaseAdapter {
         timeTV.setText(time);
         stopsTV.setText(stops);
         photoIV.setImageResource(photo);
-//        v.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(v.getContext(), LandmarkDetailsActivity.class);
-//                v.getContext().startActivity(intent);
-//            }
-//        });
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FeatureComingSoonActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         return v;
     }
