@@ -2,6 +2,7 @@ package com.example.navucsd;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.media.Image;
 import android.media.MediaPlayer;
@@ -31,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.navucsd.database.Location;
 import com.example.navucsd.utils.ClickTracker;
+import com.example.navucsd.utils.DownloadImageSaveTask;
 import com.example.navucsd.utils.DownloadImageTask;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -463,6 +465,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     private class RelatedVideosAdapter extends RecyclerView.Adapter<RelatedVideosAdapter.MyViewHolder> {
 
         private ArrayList<String> links = new ArrayList<>();
+        private HashMap<String, Bitmap> images = new HashMap<>();
 
         public RelatedVideosAdapter() {
         }
@@ -493,7 +496,12 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
             String videoID = link.substring(link.lastIndexOf("v=") + 2);
             String thumbnailUrl = "https://img.youtube.com/vi/" + videoID + "/hqdefault.jpg";
             Log.d("Video Link", thumbnailUrl);
-            new DownloadImageTask(holder.imageView).execute(thumbnailUrl);
+            if (images.containsKey(thumbnailUrl)) {
+                holder.imageView.setImageBitmap(images.get(thumbnailUrl));
+            }
+            else {
+                new DownloadImageSaveTask(holder.imageView, images).execute(thumbnailUrl);
+            }
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

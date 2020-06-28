@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.navucsd.database.Location;
+import com.example.navucsd.utils.DownloadImageSaveTask;
 import com.example.navucsd.utils.DownloadImageTask;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -26,6 +27,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 /**
  * This activity temporary hardcodes the landmark details page.
@@ -34,6 +36,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
 
     private ViewPager landmarkPager;
     private ImageView landmarkThumbnail;
+    private HashMap<String, Bitmap> images = new HashMap<>();
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
     private SearchBarDB database;
@@ -76,7 +79,12 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
 
         landmarkThumbnail = findViewById(R.id.landmark_title_image);
 
-        new DownloadImageTask(landmarkThumbnail).execute(currLocation.getThumbnailPhoto());
+        if (images.containsKey(currLocation.getThumbnailPhoto())) {
+            landmarkThumbnail.setImageBitmap(images.get(currLocation.getThumbnailPhoto()));
+        }
+        else {
+            new DownloadImageSaveTask(landmarkThumbnail, images).execute(currLocation.getThumbnailPhoto());
+        }
 
         TabLayout tabLayout = findViewById(R.id.landmark_tablayout);
         landmarkPager = findViewById(R.id.landmark_viewpager);

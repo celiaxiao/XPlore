@@ -2,6 +2,7 @@ package com.example.navucsd;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -17,9 +18,11 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.navucsd.database.Location;
+import com.example.navucsd.utils.DownloadImageSaveTask;
 import com.example.navucsd.utils.DownloadImageTask;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 
 /**
@@ -42,6 +45,7 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
     private TextView textName;
     private TextView textDistance;
     private String[] nameMap = {"restroom","cafe","restaurant","busstop","parking"};
+    private HashMap<String, Bitmap> images = new HashMap<>();
 
     public AutoSlideViewPagerAdapter(Context context) {
         this.context = context;
@@ -64,7 +68,12 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
         CardView view = (CardView) LayoutInflater.from(container.getContext())
                 .inflate(R.layout.main_page_places_item, container, false);
         imageView = view.findViewById(R.id.main_place_photo);
-        new DownloadImageTask(imageView).execute(imageUrl[position]);
+        if (images.containsKey(imageUrl[position])) {
+            imageView.setImageBitmap(images.get(imageUrl[position]));
+        }
+        else {
+            new DownloadImageSaveTask(imageView, images).execute(imageUrl[position]);
+        }
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         textName = view.findViewById(R.id.main_place_name);
         textName.setText(nameSet[position]);
