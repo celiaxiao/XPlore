@@ -30,9 +30,11 @@ import androidx.fragment.app.Fragment;
 import com.example.navucsd.database.Location;
 import com.example.navucsd.database.LocationDatabase;
 import com.example.navucsd.utils.ClickTracker;
+import com.example.navucsd.utils.DownloadImageSaveTask;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * This is the Places page which contains some places and a grid of landmarks.
@@ -205,6 +207,7 @@ public final class PlacesPageFragment extends Fragment {
 		ImageView iv_restaurant = view.findViewById(R.id.POTD_restaurant);
 		ImageView iv_bus_stop = view.findViewById(R.id.POTD_bus_stop);
 		ImageView iv_parking = view.findViewById(R.id.POTD_parking);
+		ImageView iv_thumbnail = view.findViewById(R.id.POTD_photo);
 		TextView tv_name = view.findViewById(R.id.POTD_name);
 		TextView tv_about = view.findViewById(R.id.POTD_about);
 
@@ -213,6 +216,8 @@ public final class PlacesPageFragment extends Fragment {
 		if (place.amenities.get("restaurant")) iv_restaurant.setColorFilter(Color.WHITE);
 		if (place.amenities.get("busstop")) iv_bus_stop.setColorFilter(Color.WHITE);
 		if (place.amenities.get("parking")) iv_parking.setColorFilter(Color.WHITE);
+		HashMap<String, Bitmap> images = new HashMap<>();
+		new DownloadImageSaveTask(iv_thumbnail, images).execute(place.getThumbnailPhoto());
 
 		tv_name.setText(place.name);
 		tv_about.setText(place.about);
