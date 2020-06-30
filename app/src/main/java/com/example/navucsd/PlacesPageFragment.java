@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -56,7 +57,7 @@ public final class PlacesPageFragment extends Fragment {
 		/**
 		 * The resource ID of the image of this landmark.
 		 */
-		private int resId;
+		private String photoPath;
 
 		/**
 		 * The name of this landmark.
@@ -66,12 +67,12 @@ public final class PlacesPageFragment extends Fragment {
 		/**
 		 * A convenient constructor.
 		 *
-		 * @param resId the resource id of the image
+		 * @param photoPath the path to the image
 		 * @param name the name of this landmark
 		 */
 		@SuppressWarnings("WeakerAccess")
-		public LandmarkInfo(int resId, String name) {
-			this.resId = resId;
+		public LandmarkInfo(String photoPath, String name) {
+			this.photoPath = photoPath;
 			this.name = name;
 		}
 	}
@@ -91,14 +92,12 @@ public final class PlacesPageFragment extends Fragment {
 		 * also resizes the parent to the height of this image view plus the height of the label.
 		 *
 		 * @param context the context used to create this instance
-		 * @param resId the resouce id of the image, if {@code null} the background is not set
+		 * @param photoPath the path of the image, if {@code null} the background is not set
 		 * @param aspectRatio the desired aspect ratio (width / height)
 		 * @param labelHeight the height of the label, in dp
 		 */
-		public SmartImageView(Context context, int resId, double aspectRatio, int labelHeight) {
+		public SmartImageView(Context context, String photoPath, double aspectRatio, int labelHeight) {
 			super(context);
-
-			setBackgroundResource(resId);
 
 			this.getViewTreeObserver().addOnPreDrawListener(() -> {
 				int new_width = getWidth();
@@ -108,7 +107,16 @@ public final class PlacesPageFragment extends Fragment {
 
 					layout.height = (int) (new_width / aspectRatio);
 					width = new_width;
-					setBackground(resize(resId, width, layout.height));
+
+					InputStream ims = null;
+					try {
+						ims = context.getAssets().open(photoPath);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Bitmap src = BitmapFactory.decodeStream(ims);
+
+					setBackground(resize(src, width, layout.height));
 
 					View parent = (View) getParent();
 					ViewGroup.LayoutParams params = parent.getLayoutParams();
@@ -125,15 +133,13 @@ public final class PlacesPageFragment extends Fragment {
 		/**
 		 * Get a resized image.
 		 *
-		 * @param resId the resource id of the image
+		 * @param src the source of the bitmap
 		 * @param width the target width of the image
 		 * @param height the target height of the image
 		 * @return the resized image
 		 */
-		private Drawable resize(int resId, int width, int height) {
-			return new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(
-					((BitmapDrawable) getResources().getDrawable(resId)).getBitmap(), width, height,
-					true));
+		private Drawable resize(Bitmap src, int width, int height) {
+			return new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(src, width, height, true));
 		}
 	}
 
@@ -249,31 +255,10 @@ public final class PlacesPageFragment extends Fragment {
 			.findViewById(R.id.cardViewPlaceOfTheDayDescription)
 			.setOnClickListener(listener);
 
-		int[] res_ids = {
-				R.drawable.oceanview,
-				R.drawable.price_center_east,
-				R.drawable.rady,
-				R.drawable.__64degrees,
-				R.drawable.geisel,
-				R.drawable.atkinsonhall,
-				R.drawable.peterson,
-				R.drawable.mayerhall,
-				R.drawable.cpmc,
-				R.drawable.galbraith,
-				R.drawable.warrenbear,
-				R.drawable.canyonvista,
-				R.drawable.sungod,
-				R.drawable.canyonviewaquaticcenter,
-				R.drawable.biomedical_library,
-				R.drawable.fallen_star
-		};
-
 		ArrayList<LandmarkInfo> landmarks = new ArrayList<>(locations.size());
 
-		int count = 0;
 		for (Location loc : locations) {
-			 landmarks.add(new LandmarkInfo(res_ids[count], loc.name));
-			 count = (count + 1) % res_ids.length;
+			 landmarks.add(new LandmarkInfo(loc.thumbnailPhoto, loc.name));
 		}
 
 		addLandmarks(getContext(), view, landmarks.toArray(new LandmarkInfo[0]));
@@ -422,7 +407,7 @@ public final class PlacesPageFragment extends Fragment {
 
 		card.addView(new SmartImageView(
 			context,
-			landmarks[0].resId,
+			landmarks[0].photoPath,
 			ASPECT_RATIO,
 			LABEL_HEIGHT_DP
 		));
@@ -448,7 +433,7 @@ public final class PlacesPageFragment extends Fragment {
 
 			card.addView(new SmartImageView(
 				context,
-				landmarks[1].resId,
+				landmarks[1].photoPath,
 				ASPECT_RATIO,
 				LABEL_HEIGHT_DP
 			));
