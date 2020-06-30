@@ -1,7 +1,6 @@
 package com.example.navucsd;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -121,7 +120,7 @@ public class MainPageFragment extends Fragment {
 		// use a linear layout manager
 		view.setLayoutManager(layoutManager);
 
-		view.setAdapter(new HorizontalRecyclerAdapter(tracker, names, images, 16, 20));
+		view.setAdapter(new HorizontalRecyclerAdapter(tracker, names, 16, 20, getContext()));
 	}
 
 	@Override

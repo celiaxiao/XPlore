@@ -29,13 +29,13 @@
   ],
   "relatedPlaces": [
     "Price Center",
-    "Biomedical Library",
+    "Biomedical Library"
   ],
   "relatedTours": [
     "the best tour",
     "the other best tour"
   ],
-  "thumbnailPhoto": "./photos/Geisel.jpg",
+  "thumbnailPhoto": "photos/Geisel.jpg",
   "videos": [
     "https://www.youtube.com/watch?v=EgJo8gW9jy0"
   ]

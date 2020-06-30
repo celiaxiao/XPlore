@@ -3,6 +3,7 @@ package com.example.navucsd;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,35 +16,38 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.navucsd.utils.ClickTracker;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRecyclerAdapter.MyViewHolder> {
 
 	private ClickTracker clickTracker;
 	private String[] names;
-	private int[] images;
+	private String[] urls;
+	private Context context;
 	private int marginSize;
 	private int dividerSize;
 
 	/**
 	 * The constructor.
-	 *
 	 * @param clickTracker the {@link ClickTracker} used
 	 * @param names the names to display
-	 * @param images the images to display
 	 * @param marginSize the size of the margins
 	 * @param dividerSize the size of the divider
+	 * @param context
 	 */
 	public HorizontalRecyclerAdapter(
-		ClickTracker clickTracker,
-		String[] names,
-		int[] images,
-		int marginSize,
-		int dividerSize
-	) {
+			ClickTracker clickTracker,
+			String[] names,
+			int marginSize,
+			int dividerSize,
+			Context context)
+	{
 		this.clickTracker = clickTracker;
 		this.names = names;
-		this.images = images;
 		this.marginSize = marginSize;
 		this.dividerSize = dividerSize;
+		this.context = context;
 	}
 
 	// Create new views (invoked by the layout manager)
@@ -59,13 +63,27 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 
 	@Override
 	public void onBindViewHolder(MyViewHolder holder, int position) {
+		holder.textView.setText(names[position]);
 		DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
 		adjustLayoutParam(holder.textView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
 				(int) (50 * metrics.density));
 		holder.textView.setText(names[position]);
 		adjustLayoutParam(holder.imageView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
 				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2 - (int) (50 * metrics.density));
-		holder.imageView.setImageResource(images[position]);
+		if (urls != null) {
+			// load image
+			try {
+				// get input stream
+				InputStream ims = context.getAssets().open(urls[position]);
+				// load image as Drawable
+				Drawable d = Drawable.createFromStream(ims, null);
+				// set image to ImageView
+				holder.imageView.setImageDrawable(d);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+//		holder.imageView.setImageResource(images[position]);
 		adjustLayoutParam(holder.cardView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
 				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2);
 	}
@@ -90,8 +108,9 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 		return names.length;
 	}
 
-	public void setContent() {
-
+	public void setContent(String[] names, String[] urls) {
+		this.names = names;
+		this.urls = urls;
 	}
 
 	public static class MyViewHolder extends RecyclerView.ViewHolder {
