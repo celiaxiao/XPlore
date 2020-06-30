@@ -1,0 +1,42 @@
+{
+  "name": "Conrad Prebys Music Center",
+  "about": "The Music Center houses the university's music department, and is anchored by the 400-seat Concert Hall, in addition to the 170-seat Recital Hall and an Experimental Theatre with variable digital acoustics system.",
+  "amenities": {
+    "parking": true,
+    "cafe": true,
+    "busstop": true,
+    "restaurant": true,
+    "restroom": true
+  },
+  "links": [
+    "Wikipedia: https://en.wikipedia.org/wiki/Conrad_Prebys_Music_Center"
+  ],
+  "thumbnailPhoto": "./photos/CPMC.jpg",
+  "otherPhotos": [
+    "https://ucpa.ucsd.edu/images/image_library/conrad-prebys-music-center-interior-empty.jpg",
+    "https://lmnarchitects.com/wp-content/uploads/2015/04/main1.jpg",
+    "https://www.auerbachconsultants.com/wp-content/uploads/uc_san_diego_conrad_prebys_center1.jpg",
+    "https://lmnarchitects.com/wp-content/uploads/2019/03/3ed10406-fa88-40d6-813c-a10efdfe0e41.jpg",
+    "https://mapio.net/images-p/86301351.jpg"
+  ],
+  "relatedPlaces": [
+    "Price Center",
+    "Biomedical Library",
+    "Geisel Library"
+  ],
+  "videos": [
+    "https://www.youtube.com/watch?v=9Zcogkbr6Bc"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "32.878030",
+    "second": "-117.234728"
+  },
+  "descriptive": [
+    "Must see"
+  ]
+}

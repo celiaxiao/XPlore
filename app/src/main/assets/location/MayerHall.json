@@ -1,0 +1,39 @@
+{
+  "name": "Mayer Hall",
+  "about": "Mayer Hall is a five story research building in Revelle College. The facility has an assignable area of 58,447 square feet, primarily serving the department of physics. First occupied in 1963, the building was later renamed to honor former UC San Diego professors Maria and Joseph Mayer. ",
+  "amenities": {
+    "parking": true,
+    "cafe": true,
+    "busstop": true,
+    "restaurant": true,
+    "restroom": true
+  },
+  "links": [
+    "Offical UCSD website for Mayer Hall: The facility has an assignable area of 58,447 square feet, primarily serving the department of physics. First occupied in 1963, the building was later renamed to honor former UC San Diego professors Maria and Joseph Mayer."
+  ],
+  "thumbnailPhoto": "./photos/MayerHall.jpg",
+  "otherPhotos": [
+    "https://www.p2sinc.com/uploads/uc-san-diego-mayer-hall-addition-and-renovation-wh1.jpg",
+    "https://library.ucsd.edu/dc/object/bb34824128/_3.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/8/83/Mayer_Hall%2C_UCSD.JPG"
+  ],
+  "relatedPlaces": [
+    "64 Degrees",
+    "Galbraith Hall",
+    "Biomedical Library",
+  ],
+  "videos": [
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "32.875988",
+    "second": " -117.239862"
+  },
+  "descriptive": [
+    "Must see"
+  ]
+}
