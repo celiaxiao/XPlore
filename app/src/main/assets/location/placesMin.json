@@ -16,7 +16,7 @@
       "Must see"
     ],
     "name": "64 Degrees",
-    "thumbnailPhoto": "dir/dir2/file.png"
+    "thumbnailPhoto": "http://rmp-public.ucsd.edu/fdc/FeaturedProjectPhotos/64%20Degrees%20-%20Revelle%20College%20Cafe%20Renovation.jpg"
   },
   "canyonVista": {
     "about": "Canyon Vista Marketplace is the largest halal-certified residential dining facility in the nation. Their menu features healthy, sustainable menu offerings and groceries. Stations include Fusion Grill, Fresh, Three-Sixty and Earl's Coffee House.",
@@ -35,7 +35,7 @@
       "Must see"
     ],
     "name": "Canyon Vista",
-    "thumbnailPhoto": "dir/dir2/file.png"
+    "thumbnailPhoto": "https://ucsdnews.ucsd.edu/news_uploads/canyon-vista-marketplace.jpg"
   },
   "BiomedicalLibrary": {
     "about": "A Library of UC San Diego specified in biomedical area, the second largest library of UCSD.",
