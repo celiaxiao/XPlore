@@ -21,7 +21,7 @@ public final class LocationDatabase {
 	/**
 	 * The file name of the JSON file containing all the locations.
 	 */
-	private static String LOCATIONS_JSON = "placesMin.json";
+	private static String LOCATIONS_JSON = "location/placesMin.json";
 
 	/**
 	 * The tag used in log messages.

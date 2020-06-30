@@ -1,0 +1,41 @@
+{
+  "name": "Oceanview Restaurant",
+  "about": "Oceanview is one of the biggest dining halls on campus, and people can enjoy the best view when dining: Ocean! Oceanview is also the first dining hall that offers 24/7 services.",
+  "amenities": {
+    "parking": false,
+    "cafe": true,
+    "busstop": false,
+    "restaurant": true,
+    "restroom": true
+  },
+  "links": [
+    "Oceanview Menu: https://hdh-web.ucsd.edu/dining/apps/diningservices/Restaurants/MenuItem/05"
+  ],
+  "thumbnailPhoto": "./photos/OVT.jpg",
+  "otherPhotos": [
+    "https://lh3.googleusercontent.com/proxy/sI-e_Zf3t-0npAG2XSL_iWTJOuVX9Su3HqljuuWgP3uTzGbccZ0pHByBvkyuPSFiR4Tk42R8V7RHtEuoT2wS3IBOR4TaySLwppIzw2WdbjedkHgE_QKonNt-P7_S6LJbl0oiw8A",
+    "https://static.wixstatic.com/media/45d647_fe27ec68b19843e5b250ef63b2347d1c~mv2.jpg/v1/fill/w_544,h_800,al_b,q_85,usm_0.66_1.00_0.01/45d647_fe27ec68b19843e5b250ef63b2347d1c~mv2.webp",
+    "https://cdn.winsightmedia.com/platform/files/public/fsd/600x450/ucsd-oceanview-seating-introslide_0.jpg",
+    "https://hdh-web.ucsd.edu/images/Dining/oceanview/facility-OceanView.jpg"
+  ],
+  "relatedPlaces": [
+    "Price Center",
+    "64 Degrees",
+    "Canyon Vista"
+  ],
+  "videos": [
+    "https://www.youtube.com/watch?v=UX6qz8NrP7I"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "32.883284",
+    "second": "-117.242788"
+  },
+  "descriptive": [
+    "Must see"
+  ]
+}

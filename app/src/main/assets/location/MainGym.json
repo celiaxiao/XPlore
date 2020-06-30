@@ -1,0 +1,38 @@
+{
+  "name": "Main Gym",
+  "about": "The Main Gym is one of the many gyms on campus for students and faculty to use. The facility provides for activities such as volleyball, basketball, martial arts, dance, as well as many other activities. It has even been used to host final exams before! The Main Gym was previously the home court for the UCSD NCAA Men’s and Women’s Volleyball, Basketball, and Fencing teams. Additionally, numerous concert and lecture events, summer camps, and non-University events — such as the workouts for the 1992 Olympic Dream Team — have been hosted in this complex.",
+  "amenities": {
+    "parking": true,
+    "cafe": false,
+    "busstop": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "links": [
+    "Official Page: https://recreation.ucsd.edu/facilities/main-gym/",
+    "Hours: https://recreation.ucsd.edu/facilities/"
+  ],
+  "thumbnailPhoto": "./photos/MainGym.jpg",
+  "otherPhotos": [
+  ],
+  "relatedPlaces": [
+    "Warren Bear",
+    "JSOE (Fallen Star)",
+    "Canyon Vista"
+  ],
+  "videos": [
+
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "32.881423",
+    "second": "-117.237537"
+  },
+  "descriptive": [
+    "Must see"
+  ]
+}

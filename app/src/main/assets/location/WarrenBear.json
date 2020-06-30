@@ -1,0 +1,43 @@
+{
+  "about": "Warren Bear is a statue created by Tim Hawkinson, and it is part of the Stuart Collection of UC San Diego",
+  "amenities": {
+    "parking": true,
+    "cafe": false,
+    "busstop": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "32.882189",
+    "second": "-117.234193"
+  },
+  "descriptive": [
+    "Must see"
+  ],
+  "links": [
+    "UCSD official Website for Warren Bear: https://stuartcollection.ucsd.edu/artist/hawkinson.html",
+    "Wikipedia for Stutart Collection: https://en.wikipedia.org/wiki/Stuart_Collection"
+  ],
+  "name": "Warren Bear",
+  "otherPhotos": [
+    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/Main_hawkinson-02.jpg",
+    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-03.jpg",
+    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-01.jpg",
+    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-06.jpg",
+    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-10.jpg"
+  ],
+  "relatedPlaces": [
+    "JSOE (Fallen Star)",
+    "Sun God"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "thumbnailPhoto": "./photos/WarrenBear.jpg",
+  "videos": [
+    "https://www.youtube.com/watch?v=hwnQAmprwM8",
+    "https://www.youtube.com/watch?v=ZDT1sPrhEO0"
+  ]
+}
