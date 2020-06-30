@@ -53,22 +53,24 @@ public class SearchBarDB {
 
     private static String[] FILELIST = new String[] {
             /*Change them in the future*/
-            "64Degrees.json",
-            "AtkinsonHall.json",
-            "JSOE.json",
-            "Geisel.json",
-            "BiomedicalLibrary.json",
-            "CanyonViewAquaticCenter.json",
-            "CanyonVista.json",
-            "ConradPrebysMusicCenter.json",
-            "GalbraithHall.json",
-            "MayerHall.json",
-            "OceanviewRestaurant.json",
-            "PetersonHall.json",
-            "PriceCenter.json",
-            "RadySchoolOfManagement.json",
-            "SunGod.json",
-            "WarrenBear.json"
+            "location/64Degrees.json",
+            "location/AtkinsonHall.json",
+            "location/JSOE.json",
+            "location/Geisel.json",
+            "location/BiomedicalLibrary.json",
+            "location/CanyonViewAquaticCenter.json",
+            "location/CanyonVista.json",
+            "location/ConradPrebysMusicCenter.json",
+            "location/GalbraithHall.json",
+            "location/MayerHall.json",
+            "location/OceanviewRestaurant.json",
+            "location/PetersonHall.json",
+            "location/PriceCenter.json",
+            "location/RadySchoolOfManagement.json",
+            "location/SunGod.json",
+            "location/WarrenBear.json",
+            "location/DrSeussStatue.json",
+            "location/MainGym.json"
     };
 
     SearchBarDB(Context context, String order){
@@ -84,7 +86,7 @@ public class SearchBarDB {
         else if(order.equals("whole")){
             Gson gson = new Gson();
             //"test.json" should be changed in future.
-            String jsonString = loadJSONFromAsset(context, "test.json");
+            String jsonString = loadJSONFromAsset(context, "location/test.json");
             Type arraylistType = new TypeToken<ArrayList<Location>>(){}.getType();
             this.list = gson.fromJson(jsonString, arraylistType);
             for(int i = 0; i < this.list.size(); i++){

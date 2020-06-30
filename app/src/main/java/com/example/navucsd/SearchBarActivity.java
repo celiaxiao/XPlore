@@ -45,22 +45,24 @@ public class SearchBarActivity extends AppCompatActivity  {
     //list of json file name
     private static String[] FILELIST = new String[]{
             /*Change them in the future*/
-            "64Degrees.json",
-            "AtkinsonHall.json",
-            "BiomedicalLibrary.json",
-            "CanyonViewAquaticCenter.json",
-            "CanyonVista.json",
-            "ConradPrebysMusicCenter.json",
-            "GalbraithHall.json",
-            "Geisel.json",
-            "JSOE.json",
-            "MayerHall.json",
-            "OceanviewRestaurant.json",
-            "PetersonHall.json",
-            "PriceCenter.json",
-            "RadySchoolOfManagement.json",
-            "SunGod.json",
-            "WarrenBear.json"
+            "location/64Degrees.json",
+            "location/AtkinsonHall.json",
+            "location/BiomedicalLibrary.json",
+            "location/CanyonViewAquaticCenter.json",
+            "location/CanyonVista.json",
+            "location/ConradPrebysMusicCenter.json",
+            "location/GalbraithHall.json",
+            "location/Geisel.json",
+            "location/JSOE.json",
+            "location/MayerHall.json",
+            "location/OceanviewRestaurant.json",
+            "location/PetersonHall.json",
+            "location/PriceCenter.json",
+            "location/RadySchoolOfManagement.json",
+            "location/SunGod.json",
+            "location/WarrenBear.json",
+            "location/DrSeussStatue.json",
+            "location/MainGym.json"
     };
 
     private boolean checkPermission() {

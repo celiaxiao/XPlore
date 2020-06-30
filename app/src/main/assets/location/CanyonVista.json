@@ -1,0 +1,43 @@
+{
+  "name": "Canyon Vista",
+  "about": "Canyon Vista Marketplace is the largest halal-certified residential dining facility in the nation. Their menu features healthy, sustainable menu offerings and groceries. Stations include Fusion Grill, Fresh, Three-Sixty and Earl's Coffee House.",
+  "amenities": {
+    "parking": true,
+    "cafe": true,
+    "busstop": false,
+    "restaurant": true,
+    "restroom": true
+  },
+  "links": [
+    "Official Website: https://hdh-web.ucsd.edu/dining/apps/diningservices/Restaurants/MenuItem/24",
+    "UCSD Dining Services Website: https://hdh-web.ucsd.edu/dining/apps/diningservices/"
+  ],
+  "thumbnailPhoto": "photos/CanyonVista.jpg",
+  "otherPhotos": [
+    "https://ucsdnews.ucsd.edu/news_uploads/canyon-vista-marketplace-2.jpg",
+    "https://triton.news/wp-content/uploads/2018/06/god-bless-rohan-scaled.jpg",
+    "https://live.staticflickr.com/4447/26468003279_3d214c4ee8_b.jpg"
+  ],
+  "relatedPlaces": [
+    "Warren Bear",
+    "Oceanview Restaurant",
+    "Price Center",
+    "JSOE (Fallen Star)"
+  ],
+  "videos": [
+    "https://www.youtube.com/watch?v=qBWJg9fVssU",
+    "https://www.youtube.com/watch?v=WNMoHPv5txQ"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "32.884078",
+    "second": "-117.233301"
+  },
+  "descriptive": [
+    "Must see"
+  ]
+}

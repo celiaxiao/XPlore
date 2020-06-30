@@ -1,0 +1,38 @@
+{
+  "name": "Canyonview Aquatic Center",
+  "about": "Located on the eastern end of campus between Eleanor Roosevelt College and Warren College, the Canyonview Aquatic Center features two outdoor, Olympic-sized pools, each of which can be divided into eight lanes of 50 meters in length, or 19 lanes of 25 yards in length. The aquatic center also features a state-of-the-art weight room. Canyonview is home to the UCSD men's and women's water polo teams, as well as the men's and women's swimming and diving programs.",
+  "amenities": {
+    "parking": true,
+    "cafe": true,
+    "busstop": false,
+    "restaurant": true,
+    "restroom": true
+  },
+  "links": [
+    "UCSD News: https://ucsdtritons.com/news/2010/8/8/220885.aspx",
+    "Wikipedia: https://en.wikipedia.org/wiki/Canyonview_Aquatic_Center"
+  ],
+  "thumbnailPhoto": "photos/CanyonviewPool.jpg",
+  "otherPhotos": [
+    "https://ucsdtritons.com/images/2020/1/17/WWP_Huddle.jpg",
+    "https://recreation.ucsd.edu/wp-content/uploads/2018/03/Canyonview.jpg"
+  ],
+  "relatedPlaces": [
+    "JSOE (Fallen Star)",
+    "Warren Bear"
+  ],
+  "videos": [
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "32.880751",
+    "second": "-117.231873"
+  },
+  "descriptive": [
+    "Must see"
+  ]
+}

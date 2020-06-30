@@ -2,6 +2,7 @@ package com.example.navucsd;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -20,14 +21,17 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.navucsd.database.Location;
+import com.example.navucsd.utils.DownloadImageSaveTask;
 import com.example.navucsd.utils.DownloadImageTask;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 /**
  * This activity temporary hardcodes the landmark details page.
@@ -77,9 +81,18 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
 
         landmarkThumbnail = findViewById(R.id.landmark_title_image);
-
-        new DownloadImageTask(landmarkThumbnail).execute(currLocation.getThumbnailPhoto());
-
+        // load image
+        try {
+            // get input stream
+            InputStream ims = getAssets().open(currLocation.getThumbnailPhoto());
+            // load image as Drawable
+            Drawable d = Drawable.createFromStream(ims, null);
+            // set image to ImageView
+            landmarkThumbnail.setImageDrawable(d);
+        }
+        catch(IOException ex) {
+            ex.printStackTrace();
+        }
         TabLayout tabLayout = findViewById(R.id.landmark_tablayout);
         landmarkPager = findViewById(R.id.landmark_viewpager);
         LandmarkAdapter pagerAdapter = new LandmarkAdapter(getSupportFragmentManager());

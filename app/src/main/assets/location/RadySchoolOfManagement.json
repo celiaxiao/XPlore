@@ -1,0 +1,40 @@
+{
+  "name": "Rady School of Management",
+  "about": "The Rady School of Management was created due to a need expressed to the school's founders by the San Diego business community. Experiential learning is at the core of all programs, providing students the opportunity to graduate with both an education and applied experience.",
+  "amenities": {
+    "parking": true,
+    "cafe": true,
+    "busstop": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "links": [
+    "Official website: https://rady.ucsd.edu/",
+    "U.S.News Ranking: https://www.usnews.com/best-graduate-schools/top-business-schools/university-of-california-san-diego-01608"
+  ],
+  "thumbnailPhoto": "photos/RadySchool.jpg",
+  "otherPhotos": [
+    "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ikjLCBMgZixU/v1/1000x-1.jpg",
+    "https://timesofsandiego.com/wp-content/uploads/2014/11/Rady-School-of-Management-1280x720.jpg",
+    "https://pbs.twimg.com/media/Dr6ayGkVAAE-e0U.jpg"
+  ],
+  "relatedPlaces": [
+    "Oceanview Restaurant"
+  ],
+  "videos": [
+    "https://www.youtube.com/watch?v=whd9Dc9Kynw",
+    "https://www.youtube.com/watch?v=bIYiddip-9Q"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "32.886803",
+    "second": "-117.241215"
+  },
+  "descriptive": [
+    "Must see"
+  ]
+}

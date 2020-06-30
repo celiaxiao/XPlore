@@ -1,0 +1,38 @@
+{
+  "name": "Dr. Seuss Statue",
+  "about": "The whimsical statue of Dr. Seuss and his iconic Cat in the Hat is located on Geisel Library and it was created in 2004 on the 100th anniversary of the birth of Dr. Seuss. The statue itself features Dr. Seuss seated comfortably in a chair with the Cat in the Hat standing over his shoulder while holding an umbrella.",
+  "amenities": {
+    "parking": false,
+    "cafe": false,
+    "busstop": false,
+    "restaurant": false,
+    "restroom": false
+  },
+  "links": [
+    "More about the statue: https://coolsandiegosights.com/2018/12/10/dr-seuss-and-cat-in-the-hat-sculpture-at-ucsd/",
+    "UCSD Page: https://libraries.ucsd.edu/research-and-collections/collections/special-collections-and-archives/collections/the-dr-seuss-collection.html"
+  ],
+  "thumbnailPhoto": "photos/DrSeussStatue.jpg",
+  "otherPhotos": [
+  ],
+  "relatedPlaces": [
+    "Warren Bear",
+    "JSOE (Fallen Star)",
+    "Canyon Vista"
+  ],
+  "videos": [
+
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "32.881423",
+    "second": "-117.237537"
+  },
+  "descriptive": [
+    "Must see"
+  ]
+}
