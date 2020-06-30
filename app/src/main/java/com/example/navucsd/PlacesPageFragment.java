@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,6 +33,8 @@ import com.example.navucsd.database.LocationDatabase;
 import com.example.navucsd.utils.ClickTracker;
 import com.example.navucsd.utils.DownloadImageSaveTask;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -216,8 +219,15 @@ public final class PlacesPageFragment extends Fragment {
 		if (place.amenities.get("restaurant")) iv_restaurant.setColorFilter(Color.WHITE);
 		if (place.amenities.get("busstop")) iv_bus_stop.setColorFilter(Color.WHITE);
 		if (place.amenities.get("parking")) iv_parking.setColorFilter(Color.WHITE);
-		HashMap<String, Bitmap> images = new HashMap<>();
-		new DownloadImageSaveTask(iv_thumbnail, images).execute(place.getThumbnailPhoto());
+
+		try {
+			InputStream ims = getContext().getAssets().open(place.thumbnailPhoto);
+			Drawable d = Drawable.createFromStream(ims, null);
+			iv_thumbnail.setImageDrawable(d);
+		}
+		catch(IOException ex) {
+			ex.printStackTrace();
+		}
 
 		tv_name.setText(place.name);
 		tv_about.setText(place.about);
