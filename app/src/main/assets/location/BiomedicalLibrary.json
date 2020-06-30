@@ -12,7 +12,7 @@
     "Open time: https://library.ucsd.edu/hours/?v=month&l=biomedical-library-building",
     "UCSD Library Home Page: https://library.ucsd.edu/"
   ],
-  "thumbnailPhoto": "./photos/BiomedLibrary.jpg",
+  "thumbnailPhoto": "photos/BiomedLibrary.jpg",
   "otherPhotos": [
     "https://library.ucsd.edu/news-events/wp-content/uploads/2019/01/biomed.jpg",
     "https://libraries.ucsd.edu/bmcl/building/photos/done/done_05.jpg",

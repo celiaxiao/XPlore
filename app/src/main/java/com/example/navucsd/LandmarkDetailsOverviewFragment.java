@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,7 +32,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.navucsd.database.Location;
 import com.example.navucsd.utils.ClickTracker;
 import com.example.navucsd.utils.DownloadImageSaveTask;
-import com.example.navucsd.utils.DownloadImageTask;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -331,8 +329,14 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedPlacesRecycler.addItemDecoration(dividerItemDecorationRelatedPlaces);
         relatedPlacesRecycler.setLayoutManager(layoutManager);
         String[] names = {"Fallen Star", "Sun God", "Geisel", "Vice and Virtues", "Stone Bear", "Biomedical Library"};
-        int[] images = {R.drawable.fallen_star, R.drawable.sun_god, R.drawable.geisel, R.drawable.vice_and_virtues, R.drawable.stone_bear, R.drawable.biomed_lib};
-        relatedPlacesAdapter = new HorizontalRecyclerAdapter(clickTracker, names, images, MARGIN_RELATED_PLACES, 20);
+        relatedPlacesAdapter = new HorizontalRecyclerAdapter(clickTracker, names, MARGIN_RELATED_PLACES, 20, getContext());
+        ArrayList<String> relatedPlace = currLocation.getRelatedPlaces();
+        String[] relatedPlacesArr = relatedPlace.toArray(new String[relatedPlace.size()]);
+        String[] urls = new String[relatedPlacesArr.length];
+        for (int i = 0; i < relatedPlacesArr.length; i++) {
+            urls[i] = searchBarDB.getByName(relatedPlacesArr[i]).getThumbnailPhoto();
+        }
+        relatedPlacesAdapter.setContent(relatedPlacesArr, urls);
         relatedPlacesRecycler.setAdapter(relatedPlacesAdapter);
 
 //        // Set up related tours

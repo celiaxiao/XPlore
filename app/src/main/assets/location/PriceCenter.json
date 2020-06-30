@@ -26,13 +26,13 @@
     "https://www.cannondesign.com/assets/Price5-e1515003196457.jpg"
   ],
   "relatedPlaces": [
-    "Geisel Library",
+    "Geisel Library"
   ],
   "relatedTours": [
     "the best tour",
     "the other best tour"
   ],
-  "thumbnailPhoto": "./photos/PriceCenter.jpg",
+  "thumbnailPhoto": "photos/PriceCenter.jpg",
   "videos": [
     "https://www.youtube.com/watch?v=_XoSNlIsgy8"
   ]

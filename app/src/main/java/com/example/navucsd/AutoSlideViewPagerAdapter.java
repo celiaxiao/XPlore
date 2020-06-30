@@ -3,6 +3,7 @@ package com.example.navucsd;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -22,6 +23,8 @@ import com.example.navucsd.utils.DownloadImageSaveTask;
 import com.example.navucsd.utils.DownloadImageTask;
 import com.example.navucsd.utils.Geography;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
@@ -46,7 +49,6 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
     private TextView textName;
     private TextView textDistance;
     private String[] nameMap = {"restroom","cafe","restaurant","busstop","parking"};
-    private HashMap<String, Bitmap> images = new HashMap<>();
 
     public AutoSlideViewPagerAdapter(Context context) {
         this.context = context;
@@ -69,11 +71,17 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
         CardView view = (CardView) LayoutInflater.from(container.getContext())
                 .inflate(R.layout.main_page_places_item, container, false);
         imageView = view.findViewById(R.id.main_place_photo);
-        if (images.containsKey(imageUrl[position])) {
-            imageView.setImageBitmap(images.get(imageUrl[position]));
+        // load image
+        try {
+            // get input stream
+            InputStream ims = context.getAssets().open(imageUrl[position]);
+            // load image as Drawable
+            Drawable d = Drawable.createFromStream(ims, null);
+            // set image to ImageView
+            imageView.setImageDrawable(d);
         }
-        else {
-            new DownloadImageSaveTask(imageView, images).execute(imageUrl[position]);
+        catch(IOException ex) {
+            ex.printStackTrace();
         }
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         textName = view.findViewById(R.id.main_place_name);
