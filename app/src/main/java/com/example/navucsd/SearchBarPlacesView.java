@@ -83,14 +83,14 @@ public class SearchBarPlacesView extends ArrayAdapter {
         if(amen[4]) parkingIcon.setImageResource(R.drawable.b5);
 
         //setup direction button onclick listener
-        //TODO: set up behavior when users click the button
+        // TODO: change this to use ClickTracker to prevent double click problem
         Button directBtn=rowView.findViewById(R.id.directionButton);
         directBtn.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                String name=filtered.get(position).getPlacesName();
-                SearchBarDB sbdatebase=new SearchBarDB(getContext(), "one by one");
-                Location clickedLocation=sbdatebase.getByName(name);
+                String name = filtered.get(position).getPlacesName();
+                SearchBarDB sbdatebase = new SearchBarDB(getContext(), "one by one");
+                Location clickedLocation = sbdatebase.getByName(name);
                 Log.i("name", name);
                 //this is name of the location: name
                 //this is the coordinates pair (latitude, longitude) for the clicked location:

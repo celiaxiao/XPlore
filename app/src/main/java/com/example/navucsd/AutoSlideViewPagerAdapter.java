@@ -19,6 +19,8 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.navucsd.database.Location;
+import com.example.navucsd.utils.ClickTracker;
+import com.example.navucsd.utils.ClickTrackerUsingIntent;
 import com.example.navucsd.utils.DownloadImageSaveTask;
 import com.example.navucsd.utils.DownloadImageTask;
 import com.example.navucsd.utils.Geography;
@@ -49,6 +51,7 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
     private TextView textName;
     private TextView textDistance;
     private String[] nameMap = {"restroom","cafe","restaurant","busstop","parking"};
+
 
     public AutoSlideViewPagerAdapter(Context context) {
         this.context = context;
@@ -101,6 +104,11 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
         }
 
         // add onClickListener for each card
+//        clickTracker.reset();
+//        Intent landmarkDetailsIntent = new Intent(context, LandmarkDetailsActivity.class);
+//        landmarkDetailsIntent.putExtra("placeName", nameSet[position]);
+//        view.setOnClickListener(clickTracker.getOnClickListener(landmarkDetailsIntent));
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

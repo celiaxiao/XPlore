@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.navucsd.utils.ClickTracker;
+import com.example.navucsd.utils.ClickTrackerUsingIntent;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,10 +40,8 @@ public class ToursPageFragment extends Fragment {
     private int[] picturesAlumniTours = {R.drawable.tour_alumni};
     private int[] picturesCollegeTours = {R.drawable.tour_revelle, R.drawable.tour_marshall, R.drawable.tour_muir, R.drawable.tour_erc, R.drawable.tour_warren, R.drawable.tour_sixth};
 
-    /**
-     * Tracks if this page has been clicked; used to prevent multiple clicks.
-     */
-    private ClickTracker clickTracker;
+    // Tracks if this page has been clicked; used to prevent multiple clicks.
+    private ClickTrackerUsingIntent clickTracker;
 
     /**
      * Required empty public constructor.
@@ -54,7 +53,7 @@ public class ToursPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        clickTracker = new ClickTracker();
+        clickTracker = new ClickTrackerUsingIntent();
         return inflater.inflate(R.layout.fragment_tours_page, container, false);
     }
 
@@ -88,11 +87,12 @@ public class ToursPageFragment extends Fragment {
         sv = (ScrollView) getView().findViewById(R.id.tours_sv);
         sv.smoothScrollTo(0, 0);
 
+        Intent tourOverviewPageIntent = new Intent(getContext(), TourOverviewPage.class);
         getView()
             .findViewById(R.id.cardViewCustomizeTour)
-            .setOnClickListener(clickTracker.getOnClickListener(TourOverviewPage.class));
+            .setOnClickListener(clickTracker.getOnClickListener(tourOverviewPageIntent));
         getView()
             .findViewById(R.id.start_button)
-            .setOnClickListener(clickTracker.getOnClickListener(TourOverviewPage.class));
+            .setOnClickListener(clickTracker.getOnClickListener(tourOverviewPageIntent));
     }
 }
