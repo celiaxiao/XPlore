@@ -92,6 +92,7 @@ public class OnboardingActivity extends AppCompatActivity {
 
 
 
+
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +102,12 @@ public class OnboardingActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 

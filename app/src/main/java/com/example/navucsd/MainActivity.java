@@ -25,6 +25,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.navucsd.utils.ClickTracker;
+import com.example.navucsd.utils.ClickTrackerUsingIntent;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 		mainPager = findViewById(R.id.main_page_pager);
 		MainPagerAdapter pagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
 		mainPager.setAdapter(pagerAdapter);
+
 
 		tabLayout.setupWithViewPager(mainPager);
 		for (int i = 0; i < TAB_ICONS.length; i++) {

@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.navucsd.utils.ClickTrackerUsingIntent;
+
 
 /**
  * This is the DuringTourActivity which provides some descriptions about the
@@ -39,6 +41,8 @@ public class DuringTourActivity extends AppCompatActivity {
     private TextView detailsTextViewDuringTour;
     private Button nextStopButton;
 
+    // A simple ClickTracker to prevent the problem of double click would open activity twice
+    private ClickTrackerUsingIntent clickTrackerUsingIntent;
 
 
 
@@ -87,19 +91,22 @@ public class DuringTourActivity extends AppCompatActivity {
         cafeIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_cafe_white));
 
 
-
-
         // tourOverviewTextView onClick go back to tourOverviewPage
-        tourOverViewTextView.setOnClickListener(new View.OnClickListener() { // Go to TourOverViewPage
-            @Override
-            public void onClick(View view) {
-                Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
-                startActivity(tourOverviewIntent);
-            }
-        });
+        clickTrackerUsingIntent = new ClickTrackerUsingIntent();
+        Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
+        tourOverViewTextView.setOnClickListener(clickTrackerUsingIntent.getOnClickListener(tourOverviewIntent));
+
+//        tourOverViewTextView.setOnClickListener(new View.OnClickListener() { // Go to TourOverViewPage
+//            @Override
+//            public void onClick(View view) {
+//                Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
+//                startActivity(tourOverviewIntent);
+//            }
+//        });
 
 
         // TODO: previousStopTextView onClick go to previous stop
+        // TODO: change this onclicklistener to clicktracker
         previousStopTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,39 +114,75 @@ public class DuringTourActivity extends AppCompatActivity {
             }
         });
 
-        // detailsTextViewDuringTour onClick go to details page of this stop
-        detailsTextViewDuringTour.setOnClickListener(new View.OnClickListener() {
+        // TODO: nextStopButton onClick go to next stop
+        // TODO: change this onclicklistener to clicktracker
+        nextStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
-                detailsIntent.putExtra("placeName", stopName);
-                startActivity(detailsIntent);
+
             }
         });
 
+
+        // detailsTextViewDuringTour onClick go to details page of this stop
+        Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
+        detailsIntent.putExtra("placeName", stopName);
+        detailsTextViewDuringTour.setOnClickListener(clickTrackerUsingIntent.getOnClickListener(detailsIntent));
+
+//        detailsTextViewDuringTour.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
+//                detailsIntent.putExtra("placeName", stopName);
+//                startActivity(detailsIntent);
+//            }
+//        });
+
+
+
+        // Create a Uri from an intent string. Use the result to create an Intent.
+        // TODO: dynamically pass in the location of this stop as an URL
+        // TODO: details about how to open Google Maps: https://developers.google.com/maps/documentation/urls/android-intents#search_for_a_location
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=Geisel+Library,+San+Diego+US&mode=w");
+
+        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        // Make the Intent explicit by setting the Google Maps package
+        mapIntent.setPackage("com.google.android.apps.maps");
 
         // Click on directions button would lead to Google Maps app
-        directionsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create a Uri from an intent string. Use the result to create an Intent.
-                // TODO: dynamically pass in the location of this stop as an URL
-                // TODO: details about how to open Google Maps: https://developers.google.com/maps/documentation/urls/android-intents#search_for_a_location
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=Geisel+Library,+San+Diego+US&mode=w");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            // Attempt to start an activity that can handle the Intent
+            directionsButton.setOnClickListener(clickTrackerUsingIntent.getOnClickListener(mapIntent));
+        }
 
-                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                // Make the Intent explicit by setting the Google Maps package
-                mapIntent.setPackage("com.google.android.apps.maps");
+//        directionsButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Create a Uri from an intent string. Use the result to create an Intent.
+//                Uri gmmIntentUri = Uri.parse("google.navigation:q=Geisel+Library,+San+Diego+US&mode=w");
+//
+//                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+//                // Make the Intent explicit by setting the Google Maps package
+//                mapIntent.setPackage("com.google.android.apps.maps");
+//
+//                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+//                    // Attempt to start an activity that can handle the Intent
+//                    startActivity(mapIntent);
+//                }
+//            }
+//        });
 
-                if (mapIntent.resolveActivity(getPackageManager()) != null) {
-                    // Attempt to start an activity that can handle the Intent
-                    startActivity(mapIntent);
-                }
-            }
-        });
 
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Reset the status of the clickTracker
+        clickTrackerUsingIntent.reset();
     }
 }
