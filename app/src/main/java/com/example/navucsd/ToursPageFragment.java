@@ -87,12 +87,12 @@ public class ToursPageFragment extends Fragment {
         sv = (ScrollView) getView().findViewById(R.id.tours_sv);
         sv.smoothScrollTo(0, 0);
 
-        Intent tourOverviewPageIntent = new Intent(getContext(), TourOverviewPage.class);
+        Intent featureComingSoonIntent = new Intent(getContext(), FeatureComingSoonActivity.class);
         getView()
             .findViewById(R.id.cardViewCustomizeTour)
-            .setOnClickListener(clickTracker.getOnClickListener(tourOverviewPageIntent));
+            .setOnClickListener(clickTracker.getOnClickListener(featureComingSoonIntent));
         getView()
             .findViewById(R.id.start_button)
-            .setOnClickListener(clickTracker.getOnClickListener(tourOverviewPageIntent));
+            .setOnClickListener(clickTracker.getOnClickListener(featureComingSoonIntent));
     }
 }
