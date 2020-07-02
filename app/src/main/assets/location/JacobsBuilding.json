@@ -1,0 +1,39 @@
+{
+  "name": "Jacobs Building",
+  "about": "Officially known as the Irwin and Joan Jacobs School of Engineering, it is the undergraduate and graduate engineer school of UCSD and it has six distinct engineering departments, offering eighteen undergraduate majors and sixteen master's degrees. Its departments are as follows: Bioengineering, Computer Science and Engineering, Electrical and Computer Engineering, mechanical and Aerospace Engineering, NanoEngineering, and Structural Engineering.",
+  "amenities": {
+    "parking": true,
+    "cafe": false,
+    "busstop": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "links": [
+    "Official Page: http://jacobsschool.ucsd.edu/",
+    "Parking Information: https://jacobsschool.ucsd.edu/about/map.sfe/",
+    "Wikipedia Page: https://en.wikipedia.org/wiki/Jacobs_School_of_Engineering"
+  ],
+  "thumbnailPhoto": "photos/JacobsBuilding.jpg",
+  "otherPhotos": [
+  ],
+  "relatedPlaces": [
+    "Warren Bear",
+    "JSOE (Fallen Star)",
+    "Canyon Vista"
+  ],
+  "videos": [
+
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "somedirectory/somefile",
+  "coordinates": {
+    "first": "32.882562",
+    "second": "-117.235634"
+  },
+  "descriptive": [
+    "Must see"
+  ]
+}

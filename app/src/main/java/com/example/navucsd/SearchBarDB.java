@@ -70,7 +70,8 @@ public class SearchBarDB {
             "location/SunGod.json",
             "location/WarrenBear.json",
             "location/DrSeussStatue.json",
-            "location/MainGym.json"
+            "location/MainGym.json",
+            "location/JacobsBuilding.json"
     };
 
     SearchBarDB(Context context, String order){
