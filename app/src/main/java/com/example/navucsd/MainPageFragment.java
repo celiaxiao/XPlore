@@ -10,9 +10,11 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -25,6 +27,8 @@ import com.example.navucsd.utils.Utils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -34,11 +38,10 @@ public class MainPageFragment extends Fragment {
 
 	private SearchBarDB database;
 	private FusedLocationProviderClient fusedLocationClient;
-	private RecyclerView recyclerViewSig;
 	private LinearLayoutManager layoutManager;
-	private HorizontalRecyclerAdapter sigAdapter;
 	private AutoSlideViewPager autoSlideViewPager;
 	private AutoSlideViewPagerAdapter autoSlideViewPagerAdapter;
+	private TextView placesNearText;
 	/**
 	 * The click tracker used in this fragment.
 	 */
@@ -65,6 +68,7 @@ public class MainPageFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		clickTracker.reset();
+		displayPlacesNearYou();
 	}
 
 	/**
@@ -134,37 +138,13 @@ public class MainPageFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
+		placesNearText = view.findViewById(R.id.text_view_main);
+
 		// set up auto slide viewpager
 		autoSlideViewPager = view.findViewById(R.id.auto_slider);
-		autoSlideViewPagerAdapter = new AutoSlideViewPagerAdapter(getContext());
-		autoSlideViewPager.setAdapter(autoSlideViewPagerAdapter);
-		autoSlideViewPager.setAutoPlay(true);
 
 		database = new SearchBarDB(getContext(), "one by one");
 		fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
-		if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-			// TODO: Consider calling
-			//    ActivityCompat#requestPermissions
-			// here to request the missing permissions, and then overriding
-			//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-			//                                          int[] grantResults)
-			// to handle the case where the user grants the permission. See the documentation
-			// for ActivityCompat#requestPermissions for more details.
-			return;
-		} else {
-			fusedLocationClient
-				.getLastLocation()
-				.addOnSuccessListener(getActivity(), location -> {
-					// Got last known location. In some rare situations this can be null.
-					if (location != null) {
-						ArrayList<Pair<Location, Double>> arrayList = database.nearestLocations(
-							new Pair<>(location.getLatitude(), location.getLongitude()), 3
-						);
-						Log.d("Near", arrayList.size() + "");
-						autoSlideViewPagerAdapter.setContent(arrayList);
-					}
-				});
-		}
 
 		String[] must_see_landmarks = new String[] {"Fallen Star", "Sun God", "Dr. Seuss Statue"};
 		String[] academic_spots = new String[] {
@@ -208,5 +188,37 @@ public class MainPageFragment extends Fragment {
 		view
 			.findViewById(R.id.main_page_one_day_as_student_tour_card_view)
 			.setOnClickListener(comingSoon);
+	}
+
+	private void displayPlacesNearYou() {
+		if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+			// TODO: Consider calling
+			//    ActivityCompat#requestPermissions
+			// here to request the missing permissions, and then overriding
+			//   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+			//                                          int[] grantResults)
+			// to handle the case where the user grants the permission. See the documentation
+			// for ActivityCompat#requestPermissions for more details.
+			placesNearText.setVisibility(View.GONE);
+			autoSlideViewPager.setVisibility(View.GONE);
+		} else {
+			placesNearText.setVisibility(View.VISIBLE);
+			autoSlideViewPager.setVisibility(View.VISIBLE);
+			autoSlideViewPagerAdapter = new AutoSlideViewPagerAdapter(getContext());
+			autoSlideViewPager.setAdapter(autoSlideViewPagerAdapter);
+			autoSlideViewPager.setAutoPlay(true);
+			fusedLocationClient
+				.getLastLocation()
+				.addOnSuccessListener(getActivity(), location -> {
+					// Got last known location. In some rare situations this can be null.
+					if (location != null) {
+						ArrayList<Pair<Location, Double>> arrayList = database.nearestLocations(
+							new Pair<>(location.getLatitude(), location.getLongitude()), 3
+						);
+						Log.d("Near", arrayList.size() + "");
+						autoSlideViewPagerAdapter.setContent(arrayList);
+					}
+				});
+		}
 	}
 }
