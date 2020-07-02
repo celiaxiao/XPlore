@@ -27,7 +27,7 @@ public class ToursPageFragment extends Fragment {
     private String[] nameSetJourneyThruArt = {"The Stuart Collection Tour"};
     private String[] nameSetAlumniTours = {"Things That Changed Since 2000"};
     private String[] nameSetCollegeTours = {"Revelle College Tour", "Marshall College Tour", "Muir College Tour", "Eleanor Roosevelt College Tour", "Warren College Tour", "Sixth College Tour"};
-    private String[] timeSetToursForEveryone = {"1 Hour 30 Mins", "50 Mins", "40Mins"};
+    private String[] timeSetToursForEveryone = {"1 Hour 30 Mins", "50 Mins", "40 Mins"};
     private String[] timeSetJourneyThruArt = {"2 Hours"};
     private String[] timeSetAlumniTours = {"1 Hour 20 Mins"};
     private String[] timeSetCollegeTours = {"1 Hour", "45 Mins", "50 Mins", "45 Mins", "40 Mins", "45 Mins"};
