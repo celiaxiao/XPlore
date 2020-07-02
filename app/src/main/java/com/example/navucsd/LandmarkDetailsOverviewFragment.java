@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.navucsd.database.Location;
 import com.example.navucsd.utils.ClickTracker;
 import com.example.navucsd.utils.DownloadImageSaveTask;
+import com.example.navucsd.utils.Utils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -328,15 +329,11 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         dividerItemDecorationRelatedPlaces.setDrawable(getResources().getDrawable(R.drawable.vertical_divider_20dp));
         relatedPlacesRecycler.addItemDecoration(dividerItemDecorationRelatedPlaces);
         relatedPlacesRecycler.setLayoutManager(layoutManager);
-        String[] names = {"Fallen Star", "Sun God", "Geisel", "Vice and Virtues", "Stone Bear", "Biomedical Library"};
-        relatedPlacesAdapter = new HorizontalRecyclerAdapter(clickTracker, names, MARGIN_RELATED_PLACES, 20, getContext());
+        relatedPlacesAdapter = new HorizontalRecyclerAdapter(clickTracker, MARGIN_RELATED_PLACES, 20, getContext());
         ArrayList<String> relatedPlace = currLocation.getRelatedPlaces();
-        String[] relatedPlacesArr = relatedPlace.toArray(new String[relatedPlace.size()]);
-        String[] urls = new String[relatedPlacesArr.length];
-        for (int i = 0; i < relatedPlacesArr.length; i++) {
-            urls[i] = searchBarDB.getByName(relatedPlacesArr[i]).getThumbnailPhoto();
-        }
-        relatedPlacesAdapter.setContent(relatedPlacesArr, urls);
+        String[] related_places = relatedPlace.toArray(new String[relatedPlace.size()]);
+        String[] urls = Utils.nameToUrl(searchBarDB, related_places);
+        relatedPlacesAdapter.setContent(related_places, urls);
         relatedPlacesRecycler.setAdapter(relatedPlacesAdapter);
 
 //        // Set up related tours
