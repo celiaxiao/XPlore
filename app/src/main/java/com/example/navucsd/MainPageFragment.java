@@ -142,7 +142,10 @@ public class MainPageFragment extends Fragment {
 
 		// set up auto slide viewpager
 		autoSlideViewPager = view.findViewById(R.id.auto_slider);
-
+		autoSlideViewPagerAdapter = new AutoSlideViewPagerAdapter(getContext());
+		autoSlideViewPager.setAdapter(autoSlideViewPagerAdapter);
+		autoSlideViewPager.setAutoPlay(true);
+		
 		database = new SearchBarDB(getContext(), "one by one");
 		fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
@@ -191,6 +194,8 @@ public class MainPageFragment extends Fragment {
 	}
 
 	private void displayPlacesNearYou() {
+		placesNearText.setVisibility(View.GONE);
+		autoSlideViewPager.setVisibility(View.GONE);
 		if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 			// TODO: Consider calling
 			//    ActivityCompat#requestPermissions
@@ -199,19 +204,14 @@ public class MainPageFragment extends Fragment {
 			//                                          int[] grantResults)
 			// to handle the case where the user grants the permission. See the documentation
 			// for ActivityCompat#requestPermissions for more details.
-			placesNearText.setVisibility(View.GONE);
-			autoSlideViewPager.setVisibility(View.GONE);
 		} else {
-			placesNearText.setVisibility(View.VISIBLE);
-			autoSlideViewPager.setVisibility(View.VISIBLE);
-			autoSlideViewPagerAdapter = new AutoSlideViewPagerAdapter(getContext());
-			autoSlideViewPager.setAdapter(autoSlideViewPagerAdapter);
-			autoSlideViewPager.setAutoPlay(true);
 			fusedLocationClient
 				.getLastLocation()
 				.addOnSuccessListener(getActivity(), location -> {
 					// Got last known location. In some rare situations this can be null.
 					if (location != null) {
+						placesNearText.setVisibility(View.VISIBLE);
+						autoSlideViewPager.setVisibility(View.VISIBLE);
 						ArrayList<Pair<Location, Double>> arrayList = database.nearestLocations(
 							new Pair<>(location.getLatitude(), location.getLongitude()), 3
 						);
