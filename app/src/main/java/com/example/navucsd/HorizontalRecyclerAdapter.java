@@ -12,12 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.navucsd.utils.ClickTracker;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRecyclerAdapter.MyViewHolder> {
 
@@ -73,13 +77,14 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 
 	@Override
 	public void onBindViewHolder(MyViewHolder holder, int position) {
-		holder.textView.setText(names[position]);
 		DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-		adjustLayoutParam(holder.textView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
-				(int) (50 * metrics.density));
+		int item_size = (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2;
+		int text_height = (int) (50 * metrics.density);
+		int image_height = item_size - text_height;
+		int text_width = item_size - (int) (18 * metrics.density);
+		adjustLayoutParam(holder.textView, text_width, text_height);
 		holder.textView.setText(names[position]);
-		adjustLayoutParam(holder.imageView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
-				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2 - (int) (50 * metrics.density));
+		adjustLayoutParam(holder.imageView, item_size, image_height);
 		if (urls != null) {
 			// load image
 			try {
@@ -94,8 +99,7 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 			}
 		}
 //		holder.imageView.setImageResource(images[position]);
-		adjustLayoutParam(holder.cardView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
-				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2);
+		adjustLayoutParam(holder.cardView, item_size, item_size);
 	}
 
 	private void adjustLayoutParam(View v, int width, int height) {
