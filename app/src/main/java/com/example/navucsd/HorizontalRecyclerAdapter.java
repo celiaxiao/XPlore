@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.navucsd.utils.ClickTracker;
@@ -77,10 +78,9 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 	@Override
 	public void onBindViewHolder(MyViewHolder holder, int position) {
 		DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-		adjustLayoutParam(holder.textView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
+		adjustLayoutParam(holder.textView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16 + 18) * metrics.density)) / 2,
 				(int) (50 * metrics.density));
 		holder.textView.setText(names[position]);
-		holder.textView.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT,WRAP_CONTENT));
 		adjustLayoutParam(holder.imageView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
 				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2 - (int) (50 * metrics.density));
 		if (urls != null) {
