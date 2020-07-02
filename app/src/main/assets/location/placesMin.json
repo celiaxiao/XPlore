@@ -167,7 +167,7 @@
     "descriptive": [
       "Must see"
     ],
-    "name": "JSOE (Fallen Star)",
+    "name": "Fallen Star",
     "thumbnailPhoto": "photos/JSOE.jpg"
   },
   "MayerHall": {
@@ -340,6 +340,44 @@
     ],
     "name": "Main Gym",
     "thumbnailPhoto": "photos/MainGym.jpg"
+  },
+  "JacobsBuilding": {
+    "about": "Officially known as the Irwin and Joan Jacobs School of Engineering, it is the undergraduate and graduate engineer school of UCSD and it has six distinct engineering departments, offering eighteen undergraduate majors and sixteen master's degrees. Its departments are as follows: Bioengineering, Computer Science and Engineering, Electrical and Computer Engineering, mechanical and Aerospace Engineering, NanoEngineering, and Structural Engineering.",
+    "amenities": {
+      "parking": true,
+      "cafe": false,
+      "busstop": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "32.882562",
+      "second": "-117.235634"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Jacobs Building",
+    "thumbnailPhoto": "photos/JacobsBuilding.jpg"
+  },
+  "DrSeussStatue": {
+    "about": "The whimsical statue of Dr. Seuss and his iconic Cat in the Hat is located on Geisel Library and it was created in 2004 on the 100th anniversary of the birth of Dr. Seuss. The statue itself features Dr. Seuss seated comfortably in a chair with the Cat in the Hat standing over his shoulder while holding an umbrella.",
+    "amenities": {
+      "parking": false,
+      "cafe": false,
+      "busstop": false,
+      "restaurant": false,
+      "restroom": false
+    },
+    "coordinates": {
+      "first": "32.881423",
+      "second": "-117.237537"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Dr. Seuss Statue",
+    "thumbnailPhoto": "photos/DrSeussStatue.jpg"
   }
 }
 
