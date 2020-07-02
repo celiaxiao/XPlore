@@ -29,25 +29,35 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 	private int dividerSize;
 
 	/**
-	 * The constructor.
+	 * Constructs this object with empty/no content.  To set the content, call {@code setContent()}.
 	 * @param clickTracker the {@link ClickTracker} used
-	 * @param names the names to display
 	 * @param marginSize the size of the margins
 	 * @param dividerSize the size of the divider
-	 * @param context
+	 * @param context the context to use
 	 */
 	public HorizontalRecyclerAdapter(
-			ClickTracker clickTracker,
-			String[] names,
-			int marginSize,
-			int dividerSize,
-			Context context)
+		ClickTracker clickTracker,
+		int marginSize,
+		int dividerSize,
+		Context context)
 	{
 		this.clickTracker = clickTracker;
-		this.names = names;
 		this.marginSize = marginSize;
 		this.dividerSize = dividerSize;
 		this.context = context;
+		this.names = new String[0];
+		this.urls = new String[0];
+	}
+
+	/**
+	 * Set the contents of this horizontal recycler.
+	 *
+	 * @param names the names to be displayed
+	 * @param urls the URLs of the image to be displayed
+	 */
+	public void setContent(String[] names, String[] urls) {
+		this.names = names;
+		this.urls = urls;
 	}
 
 	// Create new views (invoked by the layout manager)
@@ -106,11 +116,6 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 	@Override
 	public int getItemCount() {
 		return names.length;
-	}
-
-	public void setContent(String[] names, String[] urls) {
-		this.names = names;
-		this.urls = urls;
 	}
 
 	public static class MyViewHolder extends RecyclerView.ViewHolder {
