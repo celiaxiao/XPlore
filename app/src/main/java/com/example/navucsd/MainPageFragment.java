@@ -1,6 +1,7 @@
 package com.example.navucsd;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -125,10 +126,10 @@ public class MainPageFragment extends Fragment {
 		// use a linear layout manager
 		view.setLayoutManager(layoutManager);
 		HorizontalRecyclerAdapter adapter = new HorizontalRecyclerAdapter(
-			tracker,
-			16,
-			20,
-			getContext()
+				tracker,
+				16,
+				20,
+				getContext()
 		);
 		adapter.setContent(names, urls);
 		view.setAdapter(adapter);
@@ -145,52 +146,52 @@ public class MainPageFragment extends Fragment {
 		autoSlideViewPagerAdapter = new AutoSlideViewPagerAdapter(getContext());
 		autoSlideViewPager.setAdapter(autoSlideViewPagerAdapter);
 		autoSlideViewPager.setAutoPlay(true);
-		
+
 		database = new SearchBarDB(getContext(), "one by one");
 		fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
-		String[] must_see_landmarks = new String[] {"Fallen Star", "Sun God", "Dr. Seuss Statue"};
-		String[] academic_spots = new String[] {
-			"Biomedical Library",
-			"Jacobs Building",
-			"Peterson Hall"
+		String[] must_see_landmarks = new String[]{"Fallen Star", "Sun God", "Dr. Seuss Statue"};
+		String[] academic_spots = new String[]{
+				"Biomedical Library",
+				"Jacobs Building",
+				"Peterson Hall"
 		};
-		String[] one_day_as_student = new String[] {"Price Center", "Main Gym", "64 Degrees"};
+		String[] one_day_as_student = new String[]{"Price Center", "Main Gym", "64 Degrees"};
 
 		setupRecyclerView(
-			view.findViewById(R.id.main_page_must_see_landmarks_recycler_view),
-			clickTracker,
-			must_see_landmarks,
-			Utils.nameToUrl(database, must_see_landmarks)
+				view.findViewById(R.id.main_page_must_see_landmarks_recycler_view),
+				clickTracker,
+				must_see_landmarks,
+				Utils.nameToUrl(database, must_see_landmarks)
 		);
 
 
 		setupRecyclerView(
-			view.findViewById(R.id.main_page_academic_spots_recycler_view),
-			clickTracker,
-			academic_spots,
-			Utils.nameToUrl(database, academic_spots)
+				view.findViewById(R.id.main_page_academic_spots_recycler_view),
+				clickTracker,
+				academic_spots,
+				Utils.nameToUrl(database, academic_spots)
 		);
 		setupRecyclerView(
-			view.findViewById(R.id.main_page_campus_life_recycler_view),
-			clickTracker,
-			one_day_as_student,
-			Utils.nameToUrl(database, one_day_as_student)
+				view.findViewById(R.id.main_page_campus_life_recycler_view),
+				clickTracker,
+				one_day_as_student,
+				Utils.nameToUrl(database, one_day_as_student)
 		);
 
 		View.OnClickListener comingSoon = clickTracker.getOnClickListener(
-			FeatureComingSoonActivity.class
+				FeatureComingSoonActivity.class
 		);
 
 		view
-			.findViewById(R.id.main_page_ucsd_landmark_tour_card_view)
-			.setOnClickListener(comingSoon);
+				.findViewById(R.id.main_page_ucsd_landmark_tour_card_view)
+				.setOnClickListener(comingSoon);
 		view
-			.findViewById(R.id.main_page_academic_highlights_tour_card_view)
-			.setOnClickListener(comingSoon);
+				.findViewById(R.id.main_page_academic_highlights_tour_card_view)
+				.setOnClickListener(comingSoon);
 		view
-			.findViewById(R.id.main_page_one_day_as_student_tour_card_view)
-			.setOnClickListener(comingSoon);
+				.findViewById(R.id.main_page_one_day_as_student_tour_card_view)
+				.setOnClickListener(comingSoon);
 	}
 
 	private void displayPlacesNearYou() {
@@ -206,19 +207,19 @@ public class MainPageFragment extends Fragment {
 			// for ActivityCompat#requestPermissions for more details.
 		} else {
 			fusedLocationClient
-				.getLastLocation()
-				.addOnSuccessListener(getActivity(), location -> {
-					// Got last known location. In some rare situations this can be null.
-					if (location != null) {
-						placesNearText.setVisibility(View.VISIBLE);
-						autoSlideViewPager.setVisibility(View.VISIBLE);
-						ArrayList<Pair<Location, Double>> arrayList = database.nearestLocations(
-							new Pair<>(location.getLatitude(), location.getLongitude()), 3
-						);
-						Log.d("Near", arrayList.size() + "");
-						autoSlideViewPagerAdapter.setContent(arrayList);
-					}
-				});
+					.getLastLocation()
+					.addOnSuccessListener(getActivity(), location -> {
+						// Got last known location. In some rare situations this can be null.
+						if (location != null) {
+							placesNearText.setVisibility(View.VISIBLE);
+							autoSlideViewPager.setVisibility(View.VISIBLE);
+							ArrayList<Pair<Location, Double>> arrayList = database.nearestLocations(
+									new Pair<>(location.getLatitude(), location.getLongitude()), 3
+							);
+							Log.d("Near", arrayList.size() + "");
+							autoSlideViewPagerAdapter.setContent(arrayList);
+						}
+					});
 		}
 	}
 }
