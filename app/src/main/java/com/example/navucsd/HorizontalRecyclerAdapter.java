@@ -19,6 +19,8 @@ import com.example.navucsd.utils.ClickTracker;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRecyclerAdapter.MyViewHolder> {
 
 	private ClickTracker clickTracker;
@@ -73,11 +75,11 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 
 	@Override
 	public void onBindViewHolder(MyViewHolder holder, int position) {
-		holder.textView.setText(names[position]);
 		DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
 		adjustLayoutParam(holder.textView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
 				(int) (50 * metrics.density));
 		holder.textView.setText(names[position]);
+		holder.textView.setWidth(MATCH_PARENT);
 		adjustLayoutParam(holder.imageView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
 				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2 - (int) (50 * metrics.density));
 		if (urls != null) {
