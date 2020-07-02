@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRecyclerAdapter.MyViewHolder> {
 
@@ -79,7 +80,7 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 		adjustLayoutParam(holder.textView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
 				(int) (50 * metrics.density));
 		holder.textView.setText(names[position]);
-		holder.textView.setWidth(MATCH_PARENT);
+		holder.textView.setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT,WRAP_CONTENT));
 		adjustLayoutParam(holder.imageView, (metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2,
 				(metrics.widthPixels - (int) ((2 * marginSize + dividerSize + 16) * metrics.density)) / 2 - (int) (50 * metrics.density));
 		if (urls != null) {
