@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.navucsd.database.Location;
 import com.example.navucsd.utils.ClickTracker;
+import com.example.navucsd.utils.Utils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -72,13 +73,13 @@ public class MainPageFragment extends Fragment {
 	 * @param view the recycler view to setup
 	 * @param tracker the click tracker used
 	 * @param names the names of the cards
-	 * @param images the images id of the cards
+	 * @param urls the URLs of the cards' images
 	 */
 	private void setupRecyclerView(
 			RecyclerView view,
 			ClickTracker tracker,
 			String[] names,
-			int[] images
+			String[] urls
 	) {
 		layoutManager = new LinearLayoutManager(
 				getContext(),
@@ -119,8 +120,14 @@ public class MainPageFragment extends Fragment {
 
 		// use a linear layout manager
 		view.setLayoutManager(layoutManager);
-
-		view.setAdapter(new HorizontalRecyclerAdapter(tracker, names, 16, 20, getContext()));
+		HorizontalRecyclerAdapter adapter = new HorizontalRecyclerAdapter(
+			tracker,
+			16,
+			20,
+			getContext()
+		);
+		adapter.setContent(names, urls);
+		view.setAdapter(adapter);
 	}
 
 	@Override
@@ -159,29 +166,33 @@ public class MainPageFragment extends Fragment {
 				});
 		}
 
+		String[] must_see_landmarks = new String[] {"Fallen Star", "Sun God", "Dr. Seuss Statue"};
+		String[] academic_spots = new String[] {
+			"Biomedical Library",
+			"Jacobs Building",
+			"Peterson Hall"
+		};
+		String[] one_day_as_student = new String[] {"Price Center", "Main Gym", "64 Degrees"};
+
 		setupRecyclerView(
 			view.findViewById(R.id.main_page_must_see_landmarks_recycler_view),
 			clickTracker,
-			new String[] {"Fallen Star", "Sun God", "Dr. Seuss Statue"},
-			new int[] {R.drawable.fallen_star, R.drawable.sun_god, R.drawable.dr_seuss_statue}
+			must_see_landmarks,
+			Utils.nameToUrl(database, must_see_landmarks)
 		);
+
 
 		setupRecyclerView(
 			view.findViewById(R.id.main_page_academic_spots_recycler_view),
 			clickTracker,
-			new String[] {"Biomedical Library", "Jacobs Building", "Peterson Hall"},
-			new int[] {
-				R.drawable.biomedical_library,
-				R.drawable.jacobs_building,
-				R.drawable.peterson_hall,
-			}
+			academic_spots,
+			Utils.nameToUrl(database, academic_spots)
 		);
-
 		setupRecyclerView(
 			view.findViewById(R.id.main_page_campus_life_recycler_view),
 			clickTracker,
-			new String[] {"Price Center", "Main Gym", "64 Degrees"},
-			new int[] {R.drawable.price_center, R.drawable.main_gym, R.drawable._64_degrees}
+			one_day_as_student,
+			Utils.nameToUrl(database, one_day_as_student)
 		);
 
 		View.OnClickListener comingSoon = clickTracker.getOnClickListener(
