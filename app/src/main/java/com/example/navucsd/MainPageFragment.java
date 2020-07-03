@@ -21,12 +21,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.navucsd.database.Location;
 import com.example.navucsd.utils.ClickTracker;
 import com.example.navucsd.utils.Utils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
 
 import org.w3c.dom.Text;
 
@@ -43,6 +45,7 @@ public class MainPageFragment extends Fragment {
 	private AutoSlideViewPager autoSlideViewPager;
 	private AutoSlideViewPagerAdapter autoSlideViewPagerAdapter;
 	private TextView placesNearText;
+	private SwipeRefreshLayout swipeContainer;
 	/**
 	 * The click tracker used in this fragment.
 	 */
@@ -147,6 +150,13 @@ public class MainPageFragment extends Fragment {
 		autoSlideViewPager.setAdapter(autoSlideViewPagerAdapter);
 		autoSlideViewPager.setAutoPlay(true);
 
+		swipeContainer = view.findViewById(R.id.swipeContainer);
+		swipeContainer.setOnRefreshListener(() -> {
+			displayPlacesNearYou();
+			swipeContainer.setRefreshing(false);
+		});
+		swipeContainer.setColorSchemeResources(R.color.colorSecondary);
+
 		database = new SearchBarDB(getContext(), "one by one");
 		fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
@@ -195,8 +205,6 @@ public class MainPageFragment extends Fragment {
 	}
 
 	private void displayPlacesNearYou() {
-		placesNearText.setVisibility(View.GONE);
-		autoSlideViewPager.setVisibility(View.GONE);
 		if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 			// TODO: Consider calling
 			//    ActivityCompat#requestPermissions
@@ -205,6 +213,8 @@ public class MainPageFragment extends Fragment {
 			//                                          int[] grantResults)
 			// to handle the case where the user grants the permission. See the documentation
 			// for ActivityCompat#requestPermissions for more details.
+			placesNearText.setVisibility(View.GONE);
+			autoSlideViewPager.setVisibility(View.GONE);
 		} else {
 			fusedLocationClient
 					.getLastLocation()
@@ -218,6 +228,10 @@ public class MainPageFragment extends Fragment {
 							);
 							Log.d("Near", arrayList.size() + "");
 							autoSlideViewPagerAdapter.setContent(arrayList);
+						}
+						else {
+							placesNearText.setVisibility(View.GONE);
+							autoSlideViewPager.setVisibility(View.GONE);
 						}
 					});
 		}
