@@ -2,7 +2,6 @@ package com.example.navucsd;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.util.Pair;
@@ -19,16 +18,11 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.navucsd.database.Location;
-import com.example.navucsd.utils.ClickTracker;
-import com.example.navucsd.utils.ClickTrackerUsingIntent;
-import com.example.navucsd.utils.DownloadImageSaveTask;
-import com.example.navucsd.utils.DownloadImageTask;
 import com.example.navucsd.utils.Geography;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.HashMap;
 
 /**
