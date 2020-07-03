@@ -11,8 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.navucsd.utils.ClickTrackerUsingIntent;
-
+import com.example.navucsd.utils.ClickTracker;
 
 /**
  * This is the DuringTourActivity which provides some descriptions about the
@@ -41,18 +40,15 @@ public class DuringTourActivity extends AppCompatActivity {
     private TextView detailsTextViewDuringTour;
     private Button nextStopButton;
 
-    // A simple ClickTracker to prevent the problem of double click would open activity twice
-    private ClickTrackerUsingIntent clickTrackerUsingIntent;
-
-
-
-
+    /**
+     * Prevents the problem of double clicks opening activity twice.
+     */
+    private ClickTracker clickTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_during_tour);
-
 
         imageViewDuringTour = (ImageView) findViewById(R.id.imageViewDuringTour);
         tourNameTextView = (TextView) findViewById(R.id.tourNameTextView);
@@ -69,8 +65,6 @@ public class DuringTourActivity extends AppCompatActivity {
         detailsTextViewDuringTour = (TextView) findViewById(R.id.detailsTextViewDuringTour);
         nextStopButton = (Button) findViewById(R.id.nextStopButton);
 
-
-
         // TODO: dynamically set up basic components in this activity
         stopName = "Geisel Library";
         imageViewDuringTour.setImageDrawable(getDrawable(R.drawable.geisel_landmark)); // Set up the thumbnail image for this stop
@@ -85,25 +79,14 @@ public class DuringTourActivity extends AppCompatActivity {
                 "------------------------------------------------------------------------"); // TODO: Dynamically Set up the descriptions for this stop
         stopDescriptionTextView.setMovementMethod(new ScrollingMovementMethod()); // Making this textView scrollable
 
-
         // TODO: dynamically set up the amenities icon: icon_<amenityName>_white is the activated state of the icons
         restroomIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restroom_white));
         cafeIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_cafe_white));
 
-
         // tourOverviewTextView onClick go back to tourOverviewPage
-        clickTrackerUsingIntent = new ClickTrackerUsingIntent();
+        clickTracker = new ClickTracker();
         Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
-        tourOverViewTextView.setOnClickListener(clickTrackerUsingIntent.getOnClickListener(tourOverviewIntent));
-
-//        tourOverViewTextView.setOnClickListener(new View.OnClickListener() { // Go to TourOverViewPage
-//            @Override
-//            public void onClick(View view) {
-//                Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
-//                startActivity(tourOverviewIntent);
-//            }
-//        });
-
+        tourOverViewTextView.setOnClickListener(clickTracker.getOnClickListener(tourOverviewIntent));
 
         // TODO: previousStopTextView onClick go to previous stop
         // TODO: change this onclicklistener to clicktracker
@@ -123,22 +106,10 @@ public class DuringTourActivity extends AppCompatActivity {
             }
         });
 
-
         // detailsTextViewDuringTour onClick go to details page of this stop
         Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
         detailsIntent.putExtra("placeName", stopName);
-        detailsTextViewDuringTour.setOnClickListener(clickTrackerUsingIntent.getOnClickListener(detailsIntent));
-
-//        detailsTextViewDuringTour.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
-//                detailsIntent.putExtra("placeName", stopName);
-//                startActivity(detailsIntent);
-//            }
-//        });
-
-
+        detailsTextViewDuringTour.setOnClickListener(clickTracker.getOnClickListener(detailsIntent));
 
         // Create a Uri from an intent string. Use the result to create an Intent.
         // TODO: dynamically pass in the location of this stop as an URL
@@ -153,29 +124,8 @@ public class DuringTourActivity extends AppCompatActivity {
         // Click on directions button would lead to Google Maps app
         if (mapIntent.resolveActivity(getPackageManager()) != null) {
             // Attempt to start an activity that can handle the Intent
-            directionsButton.setOnClickListener(clickTrackerUsingIntent.getOnClickListener(mapIntent));
+            directionsButton.setOnClickListener(clickTracker.getOnClickListener(mapIntent));
         }
-
-//        directionsButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Create a Uri from an intent string. Use the result to create an Intent.
-//                Uri gmmIntentUri = Uri.parse("google.navigation:q=Geisel+Library,+San+Diego+US&mode=w");
-//
-//                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-//                // Make the Intent explicit by setting the Google Maps package
-//                mapIntent.setPackage("com.google.android.apps.maps");
-//
-//                if (mapIntent.resolveActivity(getPackageManager()) != null) {
-//                    // Attempt to start an activity that can handle the Intent
-//                    startActivity(mapIntent);
-//                }
-//            }
-//        });
-
-
-
     }
 
     @Override
@@ -183,6 +133,6 @@ public class DuringTourActivity extends AppCompatActivity {
         super.onResume();
 
         // Reset the status of the clickTracker
-        clickTrackerUsingIntent.reset();
+        clickTracker.reset();
     }
 }
