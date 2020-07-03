@@ -18,12 +18,7 @@ public final class Utils {
 		String[] urls = new String[names.length];
 		for (int i = 0; i < names.length; ++i) {
 			Location location = database.getByName(names[i]);
-			// FIXME remove this hack when photos are filled in
-			if (location != null) {
-				urls[i] = location.getThumbnailPhoto();
-			} else {
-				urls[i] = "photos/Geisel.jpg";
-			}
+			urls[i] = location.getThumbnailPhoto();
 		}
 		return urls;
 	}
