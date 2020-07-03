@@ -51,4 +51,22 @@ public final class ClickTracker {
 			}
 		};
 	}
+
+	/**
+	 * Get a {@code OnClickListener} that starts a specified activity if this is the first click.
+	 * Note that this creates the intent eagerly.  For large amounts of different intents, use lazy
+	 * loading if possible (define your own lambda).
+	 *
+	 * @param intent the intent to start new activity
+	 * @return a {@code OnClickListener} that uses the passed-in intent to start new activity
+	 */
+	public View.OnClickListener getOnClickListener(Intent intent) {
+		return view -> {
+			if (!clicked) {
+				clicked = true;
+				Context context = view.getContext();
+				context.startActivity(intent);
+			}
+		};
+	}
 }
