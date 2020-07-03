@@ -1,6 +1,7 @@
 package com.example.navucsd;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -10,20 +11,26 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.navucsd.database.Location;
 import com.example.navucsd.utils.ClickTracker;
 import com.example.navucsd.utils.Utils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -34,11 +41,11 @@ public class MainPageFragment extends Fragment {
 
 	private SearchBarDB database;
 	private FusedLocationProviderClient fusedLocationClient;
-	private RecyclerView recyclerViewSig;
 	private LinearLayoutManager layoutManager;
-	private HorizontalRecyclerAdapter sigAdapter;
 	private AutoSlideViewPager autoSlideViewPager;
 	private AutoSlideViewPagerAdapter autoSlideViewPagerAdapter;
+	private TextView placesNearText;
+	private SwipeRefreshLayout swipeContainer;
 	/**
 	 * The click tracker used in this fragment.
 	 */
@@ -65,6 +72,7 @@ public class MainPageFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		clickTracker.reset();
+		displayPlacesNearYou();
 	}
 
 	/**
@@ -121,10 +129,10 @@ public class MainPageFragment extends Fragment {
 		// use a linear layout manager
 		view.setLayoutManager(layoutManager);
 		HorizontalRecyclerAdapter adapter = new HorizontalRecyclerAdapter(
-			tracker,
-			16,
-			20,
-			getContext()
+				tracker,
+				16,
+				20,
+				getContext()
 		);
 		adapter.setContent(names, urls);
 		view.setAdapter(adapter);
@@ -134,14 +142,69 @@ public class MainPageFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
+		placesNearText = view.findViewById(R.id.text_view_main);
+
 		// set up auto slide viewpager
 		autoSlideViewPager = view.findViewById(R.id.auto_slider);
 		autoSlideViewPagerAdapter = new AutoSlideViewPagerAdapter(getContext());
 		autoSlideViewPager.setAdapter(autoSlideViewPagerAdapter);
 		autoSlideViewPager.setAutoPlay(true);
 
+		swipeContainer = view.findViewById(R.id.swipeContainer);
+		swipeContainer.setOnRefreshListener(() -> {
+			displayPlacesNearYou();
+			swipeContainer.setRefreshing(false);
+		});
+		swipeContainer.setColorSchemeResources(R.color.colorSecondary);
+
 		database = new SearchBarDB(getContext(), "one by one");
 		fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+
+		String[] must_see_landmarks = new String[]{"Fallen Star", "Sun God", "Dr. Seuss Statue"};
+		String[] academic_spots = new String[]{
+				"Biomedical Library",
+				"Jacobs Building",
+				"Peterson Hall"
+		};
+		String[] one_day_as_student = new String[]{"Price Center", "Main Gym", "64 Degrees"};
+
+		setupRecyclerView(
+				view.findViewById(R.id.main_page_must_see_landmarks_recycler_view),
+				clickTracker,
+				must_see_landmarks,
+				Utils.nameToUrl(database, must_see_landmarks)
+		);
+
+
+		setupRecyclerView(
+				view.findViewById(R.id.main_page_academic_spots_recycler_view),
+				clickTracker,
+				academic_spots,
+				Utils.nameToUrl(database, academic_spots)
+		);
+		setupRecyclerView(
+				view.findViewById(R.id.main_page_campus_life_recycler_view),
+				clickTracker,
+				one_day_as_student,
+				Utils.nameToUrl(database, one_day_as_student)
+		);
+
+		View.OnClickListener comingSoon = clickTracker.getOnClickListener(
+				FeatureComingSoonActivity.class
+		);
+
+		view
+				.findViewById(R.id.main_page_ucsd_landmark_tour_card_view)
+				.setOnClickListener(comingSoon);
+		view
+				.findViewById(R.id.main_page_academic_highlights_tour_card_view)
+				.setOnClickListener(comingSoon);
+		view
+				.findViewById(R.id.main_page_one_day_as_student_tour_card_view)
+				.setOnClickListener(comingSoon);
+	}
+
+	private void displayPlacesNearYou() {
 		if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 			// TODO: Consider calling
 			//    ActivityCompat#requestPermissions
@@ -150,63 +213,27 @@ public class MainPageFragment extends Fragment {
 			//                                          int[] grantResults)
 			// to handle the case where the user grants the permission. See the documentation
 			// for ActivityCompat#requestPermissions for more details.
-			return;
+			placesNearText.setVisibility(View.GONE);
+			autoSlideViewPager.setVisibility(View.GONE);
 		} else {
 			fusedLocationClient
-				.getLastLocation()
-				.addOnSuccessListener(getActivity(), location -> {
-					// Got last known location. In some rare situations this can be null.
-					if (location != null) {
-						ArrayList<Pair<Location, Double>> arrayList = database.nearestLocations(
-							new Pair<>(location.getLatitude(), location.getLongitude()), 3
-						);
-						Log.d("Near", arrayList.size() + "");
-						autoSlideViewPagerAdapter.setContent(arrayList);
-					}
-				});
+					.getLastLocation()
+					.addOnSuccessListener(getActivity(), location -> {
+						// Got last known location. In some rare situations this can be null.
+						if (location != null) {
+							placesNearText.setVisibility(View.VISIBLE);
+							autoSlideViewPager.setVisibility(View.VISIBLE);
+							ArrayList<Pair<Location, Double>> arrayList = database.nearestLocations(
+									new Pair<>(location.getLatitude(), location.getLongitude()), 3
+							);
+							Log.d("Near", arrayList.size() + "");
+							autoSlideViewPagerAdapter.setContent(arrayList);
+						}
+						else {
+							placesNearText.setVisibility(View.GONE);
+							autoSlideViewPager.setVisibility(View.GONE);
+						}
+					});
 		}
-
-		String[] must_see_landmarks = new String[] {"Fallen Star", "Sun God", "Dr. Seuss Statue"};
-		String[] academic_spots = new String[] {
-			"Biomedical Library",
-			"Jacobs Building",
-			"Peterson Hall"
-		};
-		String[] one_day_as_student = new String[] {"Price Center", "Main Gym", "64 Degrees"};
-
-		setupRecyclerView(
-			view.findViewById(R.id.main_page_must_see_landmarks_recycler_view),
-			clickTracker,
-			must_see_landmarks,
-			Utils.nameToUrl(database, must_see_landmarks)
-		);
-
-
-		setupRecyclerView(
-			view.findViewById(R.id.main_page_academic_spots_recycler_view),
-			clickTracker,
-			academic_spots,
-			Utils.nameToUrl(database, academic_spots)
-		);
-		setupRecyclerView(
-			view.findViewById(R.id.main_page_campus_life_recycler_view),
-			clickTracker,
-			one_day_as_student,
-			Utils.nameToUrl(database, one_day_as_student)
-		);
-
-		View.OnClickListener comingSoon = clickTracker.getOnClickListener(
-			FeatureComingSoonActivity.class
-		);
-
-		view
-			.findViewById(R.id.main_page_ucsd_landmark_tour_card_view)
-			.setOnClickListener(comingSoon);
-		view
-			.findViewById(R.id.main_page_academic_highlights_tour_card_view)
-			.setOnClickListener(comingSoon);
-		view
-			.findViewById(R.id.main_page_one_day_as_student_tour_card_view)
-			.setOnClickListener(comingSoon);
 	}
 }
