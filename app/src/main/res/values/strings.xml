@@ -2,8 +2,8 @@
     <string name="app_name">XploreUCSD</string>
     <string name="landmark_description_demo">© 2017 the Board of Regents of the University of California\n\nThe Geisel Library is the main library building on the University of California, San Diego campus.\n\nThe building is named in honor of Audrey and Theodor Seuss Geisel (better known as Dr. Seuss) for the generous contributions they have made to the library and their devotion to improving literacy.\n\nThe building is featured in the UCSD logo and is the most recognizable building on campus. It is located in the center of the campus with the library walk to its south, Thurgood Marshall College to its West and Earl Warren College to its East.\n\nThe library was simply called the "Central Library" until a renovation was completed in 1993. The library was rededicated as the University Library Building. It was renamed the Geisel Library Building in 1995.</string>
     <string name="access_token">pk.eyJ1IjoiamFzb255dXlqYyIsImEiOiJjazdmOTRzcTMwMGg0M2dtazhmMWx1MTc4In0.A6Lq7IZw91jLnkDgKXNfsg</string>
-    <string name="user_location_permission_explanation">This app needs landmark permissions to show its functionality.</string>
-    <string name="user_location_permission_not_granted">You didn\'t grant landmark permissions.</string>
+    <string name="user_location_permission_explanation">This app needs location permissions to show its functionality.</string>
+    <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
     <string-array name="list_of_must_go">
         <item>Geisel Library</item>
         <item>Peterson Hall</item>
