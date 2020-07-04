@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.navucsd">
+    package="com.UCSDTripleC.XPloreUCSD">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -14,22 +14,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FeatureComingSoonActivity"></activity>
+        <activity android:name="com.UCSDTripleC.XPloreUCSD.FeatureComingSoonActivity"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.UCSDTripleC.XPloreUCSD.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Material" />
         <activity
-            android:name=".LandmarkDetailsActivity"
+            android:name="com.UCSDTripleC.XPloreUCSD.LandmarkDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Material" />
         <activity
-            android:name=".SearchBarActivity"
+            android:name="com.UCSDTripleC.XPloreUCSD.SearchBarActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Material" />
         <activity
-            android:name=".SplashPageActivity"
+            android:name="com.UCSDTripleC.XPloreUCSD.SplashPageActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -39,15 +39,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OnboardingActivity"
+            android:name="com.UCSDTripleC.XPloreUCSD.OnboardingActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TourOverviewPage"
+            android:name="com.UCSDTripleC.XPloreUCSD.TourOverviewPage"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DuringTourActivity"
+            android:name="com.UCSDTripleC.XPloreUCSD.DuringTourActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
     </application>

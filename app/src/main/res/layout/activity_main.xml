@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.example.navucsd.NonSwipePager
+    <com.UCSDTripleC.XPloreUCSD.NonSwipePager
         android:id="@+id/main_page_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <com.example.navucsd.CircularClickableImageView
+    <com.UCSDTripleC.XPloreUCSD.CircularClickableImageView
         android:id="@+id/main_page_tab_icon"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.example.navucsd.CurvedBottomNavigationViewTabLayout
+    <com.UCSDTripleC.XPloreUCSD.CurvedBottomNavigationViewTabLayout
         android:id="@+id/customBottomBar"
         style="@style/TabLayout"
         android:layout_width="match_parent"
