@@ -2,6 +2,7 @@ package com.example.navucsd;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
@@ -37,6 +38,7 @@ import com.example.navucsd.utils.Utils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -56,7 +58,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     private ImageButton audioButton;
     private SeekBar audioSeek;
     private boolean isAudioPlaying = false;
-    private TextView audioProgressText;
+    private TextView audioProgressText, audioTitle;
     private Handler seekBarUpdateHandler;
     private Runnable seekBarRunnable;
     private final int UPDATE_INTERVAL = 50;
@@ -129,15 +131,6 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mediaPlayer = MediaPlayer.create(getContext(), R.raw.troll_song);
-        mediaPlayer.setWakeMode(getContext(), PowerManager.PARTIAL_WAKE_LOCK);
-        
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -151,6 +144,19 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
 
         description = view.findViewById(R.id.overview_description);
         description.setText(currLandmark.getAbout());
+
+        // Set up audio
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setWakeMode(getContext(), PowerManager.PARTIAL_WAKE_LOCK);
+        try {
+            AssetFileDescriptor afd = getContext().getAssets().openFd(currLandmark.getAudio());
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            mediaPlayer.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        audioTitle = view.findViewById(R.id.overview_listen_title);
+        audioTitle.setText("Introduction to " + currLandmark.getName());
 
         // Set up Seekbar
         int duration = mediaPlayer.getDuration();
