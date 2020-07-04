@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 	private boolean isDisabled;
 	private double longitude;
 	private double latitude;
-	private final String title_1 = "Landmark Not Enabled";
+	private final String title_1 = "Location Not Enabled";
 	private final String msg_1 = "Please turn on location services.";
-	private final String title_2 = "No Landmark Permission";
+	private final String title_2 = "No Location Permission";
 	private final String msg_2 = "Please turn on location services.";
 	private final String posBtnMsg = "SETTINGS";
 	private final String negBtnMsg = "CANCEL";
