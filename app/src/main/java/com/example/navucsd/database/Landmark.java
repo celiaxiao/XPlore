@@ -11,7 +11,7 @@ import java.util.HashMap;
 /*
     beautiful location database
  */
-public class Location {
+public class Landmark {
     public  String name;
     public Pair coordinates;
     public String about;
@@ -20,7 +20,7 @@ public class Location {
     public ArrayList<String> otherPhotos;
     public HashMap<String, Boolean> amenities;
     public ArrayList<String> descriptive;
-    //maybe should be Location
+    //maybe should be Landmark
     public ArrayList<String> relatedPlaces;
     public ArrayList<String> relatedTours;
     //This is a file name
@@ -28,7 +28,7 @@ public class Location {
     public ArrayList<String> videos;
     public ArrayList<String> links;
 
-    public Location(String name, Pair coordinates, String about, String thumbnailPhoto,
+    public Landmark(String name, Pair coordinates, String about, String thumbnailPhoto,
                     ArrayList<String> otherPhotos, HashMap<String,Boolean> amenities,
                     ArrayList<String> descriptive, ArrayList<String> relatedPlaces,
                     ArrayList<String> relatedTours, String audio, ArrayList<String> links,

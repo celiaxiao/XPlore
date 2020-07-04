@@ -1,4 +1,4 @@
-package com.example.navucsd;
+package com.example.navucsd.database;
 
 import android.content.Context;
 import android.os.Build;
@@ -7,20 +7,23 @@ import android.util.Pair;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.navucsd.database.Location;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
 /*
  * Initialization of the database:
- * SearchBarDB(Context context, String order)
+ * LandmarkDatabase(Context context, String order)
  * Order:
  * Case 1: order is "one by one", the constructor will load the location files  one by one
  * Case 2: order is "whole", which means constructor will load the location files which contain
@@ -28,28 +31,34 @@ import java.util.HashMap;
  * Example(in onCreate function of SearchBarActivity):
  *
  * Case 1:
- * SearchBarDB database = new SearchBarDB(this, "one by one");
+ * LandmarkDatabase database = new LandmarkDatabase(this, "one by one");
  *
  * Case 2:
- * SearchBarDB database = new SearchBarDB(this, "whole");
+ * LandmarkDatabase database = new LandmarkDatabase(this, "whole");
  */
 
 /* Functions we have:
- * public Location getByName(String name)
- * public ArrayList<Pair<Location, Double>> nearestLocations(Pair<Double, Double>  userLocation, int num)
+ * public Landmark getByName(String name)
+ * public ArrayList<Pair<Landmark, Double>> nearestLocations(Pair<Double, Double>  userLocation, int num)
  * public double distant(Pair<Double, Double>  p1, Pair<Double, Double>  p2)
- * public ArrayList<Location> filter(ArrayList<String> locations, ArrayList<String> amen)
- * public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double>  userLocation)
+ * public ArrayList<Landmark> filter(ArrayList<String> locations, ArrayList<String> amen)
+ * public ArrayList<Pair<Landmark, Double>> locationWithDistance(Pair<Double, Double>  userLocation)
  * public String loadJSONFromAsset(Context context, String filename)
- * public ArrayList<Pair<Location, Double>> filterWithDistance(ArrayList<String> locations, ArrayList<String> amen, Pair<Double, Double>  userLocation)
+ * public ArrayList<Pair<Landmark, Double>> filterWithDistance(ArrayList<String> locations, ArrayList<String> amen, Pair<Double, Double>  userLocation)
  * */
 
 
 
-public class SearchBarDB {
+public class LandmarkDatabase {
 
-    private ArrayList<Location> list = new ArrayList<>();
-    private HashMap<String, Location> map = new HashMap<>();
+    private static String LOCATIONS_JSON = "location/placesMin.json";
+    private ArrayList<Landmark> list = new ArrayList<>();
+    private HashMap<String, Landmark> map = new HashMap<>();
+
+    /**
+     * The tag used in log messages.
+     */
+    private static String TAG = LandmarkDatabase.class.getName();
 
     private static String[] FILELIST = new String[] {
             /*Change them in the future*/
@@ -74,21 +83,21 @@ public class SearchBarDB {
             "location/JacobsBuilding.json"
     };
 
-    SearchBarDB(Context context, String order){
+    public LandmarkDatabase(Context context, String order){
         if(order.equals("one by one")){
             Gson gson = new Gson();
             for(int i = 0; i < this.FILELIST.length; i++){
                 String jsonString = loadJSONFromAsset(context, this.FILELIST[i]);
-                Location location = gson.fromJson(jsonString, Location.class);
-                this.list.add(location);
-                this.map.put(location.name, location);
+                Landmark landmark = gson.fromJson(jsonString, Landmark.class);
+                this.list.add(landmark);
+                this.map.put(landmark.name, landmark);
             }
         }
         else if(order.equals("whole")){
             Gson gson = new Gson();
             //"test.json" should be changed in future.
             String jsonString = loadJSONFromAsset(context, "location/test.json");
-            Type arraylistType = new TypeToken<ArrayList<Location>>(){}.getType();
+            Type arraylistType = new TypeToken<ArrayList<Landmark>>(){}.getType();
             this.list = gson.fromJson(jsonString, arraylistType);
             for(int i = 0; i < this.list.size(); i++){
                 this.map.put(this.list.get(i).name, this.list.get(i));
@@ -109,15 +118,15 @@ public class SearchBarDB {
      * amenities.add("cafe");
      * amenities.add("busstop");
      *
-     * SearchBarDB database = new SearchBarDB(this, "whole");
-     * ArrayList<Location> listOfLocations = database.filter(locations, amenities);
+     * LandmarkDatabase database = new LandmarkDatabase(this, "whole");
+     * ArrayList<Landmark> listOfLocations = database.filter(locations, amenities);
      * Log.i("FILTERoooooo", database.getByName("name3").name);
      *
      * Output:
      * name3
      *
      *  */
-    public Location getByName(String name){
+    public Landmark getByName(String name){
         if( name == null ){
             return null;
         }
@@ -127,17 +136,59 @@ public class SearchBarDB {
     }
 
     public Double getDistance(String locationName, Pair<Double, Double>  userLocation){
-        Location location = getByName(locationName);
-        if( location == null){
+        Landmark landmark = getByName(locationName);
+        if( landmark == null){
             return -1.0;
         }
-        String first = (String) location.coordinates.first;
-        String second = (String) location.coordinates.second;
+        String first = (String) landmark.coordinates.first;
+        String second = (String) landmark.coordinates.second;
         Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
         double dist = this.distanceBetween(userLocation, locationCoor);
         return dist;
     }
 
+    /**
+     * Loads locations from assets.
+     *
+     * @param context the context used to get assets
+     * @return a list of {@link Landmark}s, or {@code null} on error
+     */
+    public static ArrayList<Landmark> getLocations(Context context) {
+        try (BufferedReader reader = newBufferedReaderFromAsset(context, LOCATIONS_JSON)) {
+            if (reader == null) return null;
+            HashMap<String, Landmark> location_map = new Gson().fromJson(
+                    reader,
+                    new TypeToken<HashMap<String, Landmark>>(){}.getType()
+            );
+            return new ArrayList<Landmark>(location_map.values());
+        } catch (JsonSyntaxException | IOException e) {
+            // TODO proper error reporting
+            // FIXME What's up with the Timber lint?
+            Log.e(TAG, "failed to parse JSON file: \"" + LOCATIONS_JSON + "\"", e);
+            return null;
+        }
+    }
+
+    /**
+     * Returns a {@link BufferedReader} of a file in the assets folder.
+     *
+     * @param context the context used to get assets
+     * @param fileName the name of the file to load
+     * @return a {@link BufferedReader} to the file, or {@code null} on error
+     */
+    private static BufferedReader newBufferedReaderFromAsset(Context context, String fileName) {
+        try {
+            return new BufferedReader(new InputStreamReader(
+                    context.getAssets().open(fileName),
+                    StandardCharsets.UTF_8
+            ));
+        } catch (IOException e) {
+            // TODO proper error reporting
+            // FIXME What's up with the Timber lint?
+            Log.e(TAG, "failed to read file: \"" + fileName + "\"", e);
+            return null;
+        }
+    }
 
     /*
      * userLocation: coordinate of the user userLocation.first should be Latitude and
@@ -145,11 +196,11 @@ public class SearchBarDB {
      *
      * num: the number of n nearest Locations to the user.
      *
-     * output: the ArrayList of Pair<Location, Double>, Pair.first are Location object and
+     * output: the ArrayList of Pair<Landmark, Double>, Pair.first are Landmark object and
      *         Pair.second are the distance between user and the locations.
      * */
-    public ArrayList<Pair<Location, Double>> nearestLocations(Pair<Double, Double>  userLocation, int num){
-        ArrayList<Pair<Location, Double>> nearestList = new ArrayList<>();
+    public ArrayList<Pair<Landmark, Double>> nearestLocations(Pair<Double, Double>  userLocation, int num){
+        ArrayList<Pair<Landmark, Double>> nearestList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
             String first = (String) this.list.get(i).coordinates.first;
             String second = (String) this.list.get(i).coordinates.second;
@@ -178,11 +229,11 @@ public class SearchBarDB {
      * userLocation: coordinate of the user userLocation.first should be Latitude and
      *               userLocation.second should be Longitude
      *
-     * output: the ArrayList of Pair<Location, Double>, which contains all the locations. Pair.first
-     *         are Location object and Pair.second are the distance between user and the locations.
+     * output: the ArrayList of Pair<Landmark, Double>, which contains all the locations. Pair.first
+     *         are Landmark object and Pair.second are the distance between user and the locations.
      */
-    public ArrayList<Pair<Location, Double>> locationWithDistance(Pair<Double, Double> userLocation) {
-        ArrayList<Pair<Location, Double>> distanceList = new ArrayList<>();
+    public ArrayList<Pair<Landmark, Double>> locationWithDistance(Pair<Double, Double> userLocation) {
+        ArrayList<Pair<Landmark, Double>> distanceList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
             String first = (String) this.list.get(i).coordinates.first;
             String second = (String) this.list.get(i).coordinates.second;
@@ -223,7 +274,7 @@ public class SearchBarDB {
      * ArrayList<String> amenities, which contain the amenities(String)
      *
      * Output:
-     * ArrayList<Location> listOfLocations
+     * ArrayList<Landmark> listOfLocations
      *
      * Example:
      * locations.add("name1"); // location name1 contain "parking", "busstop"
@@ -235,8 +286,8 @@ public class SearchBarDB {
      * amenities.add("cafe");
      * amenities.add("busstop");
      *
-     * SearchBarDB database = new SearchBarDB(this, "whole");
-     * ArrayList<Location> listOfLocations = database.filter(locations, amenities);
+     * LandmarkDatabase database = new LandmarkDatabase(this, "whole");
+     * ArrayList<Landmark> listOfLocations = database.filter(locations, amenities);
      *
      * Log.i("FILTERoooooo", "After filtering: ");
      * for(int i = 0; i < locList.size(); i++){
@@ -249,9 +300,9 @@ public class SearchBarDB {
      * name1
      * name4
      */
-    public ArrayList<Location> filter(ArrayList<String> locations, ArrayList<String> amen){
-        ArrayList<Pair<Location, Integer>> trackingList = new ArrayList<>();
-        ArrayList<Location> outputList = new ArrayList<>();
+    public ArrayList<Landmark> filter(ArrayList<String> locations, ArrayList<String> amen){
+        ArrayList<Pair<Landmark, Integer>> trackingList = new ArrayList<>();
+        ArrayList<Landmark> outputList = new ArrayList<>();
         ArrayList<String> amenities = new ArrayList<>();
         for( int i = 0; i < amen.size(); i++ ){
             if(amen.get(i) != null){
@@ -260,39 +311,39 @@ public class SearchBarDB {
         }
         if(amenities.size() == 0){
             for( int i = 0; i < locations.size(); i++){
-                Location location = this.getByName(locations.get(i));
-                if(location != null){
-                    outputList.add(location);
+                Landmark landmark = this.getByName(locations.get(i));
+                if(landmark != null){
+                    outputList.add(landmark);
                 }
             }
         }
         else{
             for( int i = 0; i < locations.size(); i++){
-                Location location = this.getByName(locations.get(i));
-                if( location != null ){
+                Landmark landmark = this.getByName(locations.get(i));
+                if( landmark != null ){
                     int weight = 0;
                     for( int z = 0; z < amenities.size(); z++ ){
-                        if( location.amenities.get(amenities.get(z)) == true ){
+                        if( landmark.amenities.get(amenities.get(z)) == true ){
                             weight = (weight*10) + 5 - z;
                         }
                     }
                     if( weight > 0 ){
                         if( outputList.isEmpty()){
-                            trackingList.add(new Pair<>(location, weight));
-                            outputList.add(location);
+                            trackingList.add(new Pair<>(landmark, weight));
+                            outputList.add(landmark);
                         }
                         else{
                             int origin = trackingList.size();
                             for( int j = 0; j < trackingList.size(); j++ ){
                                 if( weight >= trackingList.get(j).second ){
-                                    trackingList.add(j, new Pair<>(location, weight));
-                                    outputList.add(j, location);
+                                    trackingList.add(j, new Pair<>(landmark, weight));
+                                    outputList.add(j, landmark);
                                     break;
                                 }
                             }
                             if( origin == trackingList.size() ){
-                                trackingList.add( new Pair<>(location, weight) );
-                                outputList.add( location );
+                                trackingList.add( new Pair<>(landmark, weight) );
+                                outputList.add(landmark);
                             }
                         }
                     }
@@ -304,9 +355,9 @@ public class SearchBarDB {
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public ArrayList<Pair<Location, Double>> filterWithDistance(ArrayList<String> locations, ArrayList<String> amen, Pair<Double, Double>  userLocation){
-        ArrayList<Pair<Location, Integer>> trackingList = new ArrayList<>();
-        ArrayList<Pair<Location, Double>> outputList = new ArrayList<>();
+    public ArrayList<Pair<Landmark, Double>> filterWithDistance(ArrayList<String> locations, ArrayList<String> amen, Pair<Double, Double>  userLocation){
+        ArrayList<Pair<Landmark, Integer>> trackingList = new ArrayList<>();
+        ArrayList<Pair<Landmark, Double>> outputList = new ArrayList<>();
         ArrayList<String> amenities = new ArrayList<>();
         for( int i = 0; i < locations.size()-1; i++ ){
             for( int j = i+1; j < locations.size(); j++ ){
@@ -322,43 +373,43 @@ public class SearchBarDB {
         }
         if(amenities.size() == 0){
             for( int i = 0; i < locations.size(); i++){
-                Location location = this.getByName(locations.get(i));
-                if(location != null){
-                    Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                Landmark landmark = this.getByName(locations.get(i));
+                if(landmark != null){
+                    Pair<Landmark, Double> item = new Pair<>(landmark, getDistance(locations.get(i), userLocation));
                     outputList.add(item);
                 }
             }
         }
         else{
             for( int i = 0; i < locations.size(); i++){
-                Location location = this.getByName(locations.get(i));
-                if( location != null ){
+                Landmark landmark = this.getByName(locations.get(i));
+                if( landmark != null ){
                     int weight = 0;
                     for( int z = 0; z < amenities.size(); z++ ){
-                        if( location.amenities.get(amenities.get(z)) == true ){
+                        if( landmark.amenities.get(amenities.get(z)) == true ){
 //                            weight = (weight*10) + 5 - z;
                             weight += 1;
                         }
                     }
                     if( weight > 0 ){
                         if( outputList.isEmpty()){
-                            trackingList.add(new Pair<>(location, weight));
-                            Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                            trackingList.add(new Pair<>(landmark, weight));
+                            Pair<Landmark, Double> item = new Pair<>(landmark, getDistance(locations.get(i), userLocation));
                             outputList.add(item);
                         }
                         else{
                             int origin = trackingList.size();
                             for( int j = 0; j < trackingList.size(); j++ ){
                                 if( weight == amenities.size() && weight > trackingList.get(j).second ){
-                                    trackingList.add(j, new Pair<>(location, weight));
-                                    Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                                    trackingList.add(j, new Pair<>(landmark, weight));
+                                    Pair<Landmark, Double> item = new Pair<>(landmark, getDistance(locations.get(i), userLocation));
                                     outputList.add(j, item);
                                     break;
                                 }
                             }
                             if( origin == trackingList.size() ){
-                                trackingList.add( new Pair<>(location, weight) );
-                                Pair<Location, Double> item = new Pair<>(location, getDistance(locations.get(i), userLocation));
+                                trackingList.add( new Pair<>(landmark, weight) );
+                                Pair<Landmark, Double> item = new Pair<>(landmark, getDistance(locations.get(i), userLocation));
                                 outputList.add(item);
                             }
                         }

@@ -1,7 +1,7 @@
 package com.example.navucsd.utils;
 
-import com.example.navucsd.SearchBarDB;
-import com.example.navucsd.database.Location;
+import com.example.navucsd.database.Landmark;
+import com.example.navucsd.database.LandmarkDatabase;
 
 /**
  * Various general utilities.
@@ -14,11 +14,11 @@ public final class Utils {
 	 * @param names the names to be converted
 	 * @return their corresponding URLs
 	 */
-	public static String[] nameToUrl(SearchBarDB database, String[] names) {
+	public static String[] nameToUrl(LandmarkDatabase database, String[] names) {
 		String[] urls = new String[names.length];
 		for (int i = 0; i < names.length; ++i) {
-			Location location = database.getByName(names[i]);
-			urls[i] = location.getThumbnailPhoto();
+			Landmark landmark = database.getByName(names[i]);
+			urls[i] = landmark.getThumbnailPhoto();
 		}
 		return urls;
 	}

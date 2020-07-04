@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,16 +28,14 @@ import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.example.navucsd.database.Location;
-import com.example.navucsd.database.LocationDatabase;
+import com.example.navucsd.database.LandmarkDatabase;
+import com.example.navucsd.database.Landmark;
 import com.example.navucsd.utils.ClickTracker;
-import com.example.navucsd.utils.DownloadImageSaveTask;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * This is the Places page which contains some places and a grid of landmarks.
@@ -207,9 +204,9 @@ public final class PlacesPageFragment extends Fragment {
 		search_view_parent.removeView(search_mag_icon);
 		search_view_parent.addView(search_mag_icon);
 
-		ArrayList<Location> locations = LocationDatabase.getLocations(getContext());
+		ArrayList<Landmark> locations = LandmarkDatabase.getLocations(getContext());
 		if (locations == null) return;
-		Location place = locations.get(hashDate(locations.size()));
+		Landmark place = locations.get(hashDate(locations.size()));
 
 		ImageView iv_restroom = view.findViewById(R.id.POTD_restroom);
 		ImageView iv_cafe = view.findViewById(R.id.POTD_cafe);
@@ -257,7 +254,7 @@ public final class PlacesPageFragment extends Fragment {
 
 		ArrayList<LandmarkInfo> landmarks = new ArrayList<>(locations.size());
 
-		for (Location loc : locations) {
+		for (Landmark loc : locations) {
 			 landmarks.add(new LandmarkInfo(loc.thumbnailPhoto, loc.name));
 		}
 

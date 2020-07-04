@@ -1,7 +1,6 @@
 package com.example.navucsd;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -23,14 +21,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.navucsd.database.Location;
+import com.example.navucsd.database.Landmark;
+import com.example.navucsd.database.LandmarkDatabase;
 import com.example.navucsd.utils.ClickTracker;
 import com.example.navucsd.utils.Utils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnFailureListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -39,7 +35,7 @@ import java.util.ArrayList;
  */
 public class MainPageFragment extends Fragment {
 
-	private SearchBarDB database;
+	private LandmarkDatabase database;
 	private FusedLocationProviderClient fusedLocationClient;
 	private LinearLayoutManager layoutManager;
 	private AutoSlideViewPager autoSlideViewPager;
@@ -157,7 +153,7 @@ public class MainPageFragment extends Fragment {
 		});
 		swipeContainer.setColorSchemeResources(R.color.colorSecondary);
 
-		database = new SearchBarDB(getContext(), "one by one");
+		database = new LandmarkDatabase(getContext(), "one by one");
 		fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
 		String[] must_see_landmarks = new String[]{"Fallen Star", "Sun God", "Dr. Seuss Statue"};
@@ -223,7 +219,7 @@ public class MainPageFragment extends Fragment {
 						if (location != null) {
 							placesNearText.setVisibility(View.VISIBLE);
 							autoSlideViewPager.setVisibility(View.VISIBLE);
-							ArrayList<Pair<Location, Double>> arrayList = database.nearestLocations(
+							ArrayList<Pair<Landmark, Double>> arrayList = database.nearestLocations(
 									new Pair<>(location.getLatitude(), location.getLongitude()), 3
 							);
 							Log.d("Near", arrayList.size() + "");

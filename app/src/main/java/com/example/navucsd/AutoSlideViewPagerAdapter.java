@@ -17,7 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.navucsd.database.Location;
+import com.example.navucsd.database.Landmark;
 import com.example.navucsd.utils.Geography;
 
 import java.io.IOException;
@@ -127,7 +127,7 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
 
     }
 
-    public void setContent(ArrayList<Pair<Location, Double>> places) {
+    public void setContent(ArrayList<Pair<Landmark, Double>> places) {
         nameSet[1] = nameSet[4] = places.get(0).first.getName();
         nameSet[0] = nameSet[3] = places.get(2).first.getName();
         nameSet[2] = places.get(1).first.getName();

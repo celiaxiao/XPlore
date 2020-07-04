@@ -29,7 +29,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.navucsd.database.Location;
+import com.example.navucsd.database.LandmarkDatabase;
+import com.example.navucsd.database.Landmark;
 import com.example.navucsd.utils.ClickTracker;
 import com.example.navucsd.utils.DownloadImageSaveTask;
 import com.example.navucsd.utils.Utils;
@@ -47,8 +48,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class LandmarkDetailsOverviewFragment extends Fragment {
 
-    private SearchBarDB searchBarDB;
-    private Location currLocation;
+    private LandmarkDatabase landmarkDatabase;
+    private Landmark currLandmark;
 
     // Audio playing related fields
     private MediaPlayer mediaPlayer;
@@ -109,22 +110,22 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param currLocation Location Object that represents the Location of interest.
+     * @param currLandmark Landmark Object that represents the Landmark of interest.
      * @return A new instance of fragment LandmarkDetailsOverviewFragment.
      */
-    public static LandmarkDetailsOverviewFragment newInstance(Location currLocation, SearchBarDB database) {
+    public static LandmarkDetailsOverviewFragment newInstance(Landmark currLandmark, LandmarkDatabase database) {
         LandmarkDetailsOverviewFragment fragment = new LandmarkDetailsOverviewFragment();
-        fragment.setSearchBarDB(database);
-        fragment.setLocation(currLocation);
+        fragment.setLandmarkDatabase(database);
+        fragment.setLocation(currLandmark);
         return fragment;
     }
 
-    private void setLocation(Location currLocation) {
-        this.currLocation = currLocation;
+    private void setLocation(Landmark currLandmark) {
+        this.currLandmark = currLandmark;
     }
 
-    private void setSearchBarDB(SearchBarDB searchBarDB) {
-        this.searchBarDB = searchBarDB;
+    private void setLandmarkDatabase(LandmarkDatabase landmarkDatabase) {
+        this.landmarkDatabase = landmarkDatabase;
     }
 
     @Override
@@ -149,7 +150,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         description = view.findViewById(R.id.overview_description);
-        description.setText(currLocation.getAbout());
+        description.setText(currLandmark.getAbout());
 
         // Set up Seekbar
         int duration = mediaPlayer.getDuration();
@@ -202,7 +203,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         // Set up amenities table
         amenitiesRecycler = view.findViewById(R.id.amenities_content_recycler);
         amenitiesAdapter = new AmenitiesAdapter();
-        amenitiesAdapter.setAmenities(currLocation.getAmenities());
+        amenitiesAdapter.setAmenities(currLandmark.getAmenities());
         DividerItemDecoration dividerItemDecorationAmenities = new DividerItemDecoration(getContext(),
                 LinearLayoutManager.VERTICAL);
         dividerItemDecorationAmenities.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_12dp));
@@ -212,14 +213,14 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         amenitiesRecycler.setNestedScrollingEnabled(false);
 
 
-        // Nav button redirects to Google Maps to provide directions from user's location to currLocation
+        // Nav button redirects to Google Maps to provide directions from user's location to currLandmark
         navButton = view.findViewById(R.id.overview_nav_button);
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = currLocation.getName(); // Should be the name of the location
-                String latitude = (String) currLocation.getCoordinates().first; // Should be the latitude of the location
-                String longitude = (String) currLocation.getCoordinates().second; // Should be the longitude of the location
+                String name = currLandmark.getName(); // Should be the name of the location
+                String latitude = (String) currLandmark.getCoordinates().first; // Should be the latitude of the location
+                String longitude = (String) currLandmark.getCoordinates().second; // Should be the longitude of the location
 
                 // Use the coordinates to set up directions in Google Maps with (default mode=walking)
                 Uri gmmIntentUri = Uri.parse("geo:" + latitude + ", " + longitude + "?q=" + latitude + ", " + longitude + "(" + name + ")");
@@ -257,7 +258,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedVideosRecycler.addItemDecoration(dividerItemDecorationRelatedVideos);
         relatedVideosRecycler.setLayoutManager(layoutManager);
         relatedVideosAdapter = new RelatedVideosAdapter();
-        relatedVideosAdapter.setLinks(currLocation.getVideos());
+        relatedVideosAdapter.setLinks(currLandmark.getVideos());
         relatedVideosRecycler.setAdapter(relatedVideosAdapter);
 
 //        // Set up related stories
@@ -305,7 +306,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         relatedLinksRecycler.setLayoutManager(layoutManager);
         relatedLinksAdapter = new RelatedLinksAdapter();
-        relatedLinksAdapter.setLinks(currLocation.getLinks());
+        relatedLinksAdapter.setLinks(currLandmark.getLinks());
         relatedLinksRecycler.setAdapter(relatedLinksAdapter);
 
         // Set up the related places
@@ -330,9 +331,9 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedPlacesRecycler.addItemDecoration(dividerItemDecorationRelatedPlaces);
         relatedPlacesRecycler.setLayoutManager(layoutManager);
         relatedPlacesAdapter = new HorizontalRecyclerAdapter(clickTracker, MARGIN_RELATED_PLACES, 20, getContext());
-        ArrayList<String> relatedPlace = currLocation.getRelatedPlaces();
+        ArrayList<String> relatedPlace = currLandmark.getRelatedPlaces();
         String[] related_places = relatedPlace.toArray(new String[relatedPlace.size()]);
-        String[] urls = Utils.nameToUrl(searchBarDB, related_places);
+        String[] urls = Utils.nameToUrl(landmarkDatabase, related_places);
         relatedPlacesAdapter.setContent(related_places, urls);
         relatedPlacesRecycler.setAdapter(relatedPlacesAdapter);
 

@@ -19,7 +19,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.example.navucsd.database.Location;
+import com.example.navucsd.database.Landmark;
+import com.example.navucsd.database.LandmarkDatabase;
 import com.example.navucsd.utils.Geography;
 import com.google.android.material.chip.Chip;
 import com.google.gson.Gson;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SearchBarActivity extends AppCompatActivity  {
-    private SearchBarDB sbdatebase;
+    private LandmarkDatabase sbdatebase;
     private SearchView searchBar;
     private CardView searchResultsCard;
     private android.location.Location currentLocation;
@@ -39,8 +40,8 @@ public class SearchBarActivity extends AppCompatActivity  {
     private TextView chipBadge;
     private TextView noResultsFoundText;
     //dynamic location list from database
-    private ArrayList<Location> locationList = new ArrayList<>( );
-    ArrayList<Pair<Location, Double>> distancePair;
+    private ArrayList<Landmark> landmarkList = new ArrayList<>( );
+    ArrayList<Pair<Landmark, Double>> distancePair;
     ArrayList<String> amenList; //list of selected amenities
     //list of json file name
     private static String[] FILELIST = new String[]{
@@ -97,7 +98,7 @@ public class SearchBarActivity extends AppCompatActivity  {
         searchBar.requestFocus();
         int placesNumber = getResources().getStringArray(R.array.placesName).length;
 
-        sbdatebase = new SearchBarDB(this, "one by one");
+        sbdatebase = new LandmarkDatabase(this, "one by one");
 
         //get main context from json file
         Gson gson = new Gson();
@@ -119,12 +120,12 @@ public class SearchBarActivity extends AppCompatActivity  {
             );
             for (int i = 0; i < distancePair.size(); i++) {
 
-                Location location = distancePair.get(i).first;
-                locationList.add(location);
-                // get amenity list from location
-                placesName[i] = location.name;
+                Landmark landmark = distancePair.get(i).first;
+                landmarkList.add(landmark);
+                // get amenity list from landmark
+                placesName[i] = landmark.name;
                 for (int j = 0; j < dbAmentityList[0].length; j++) {
-                    dbAmentityList[i][j] = locationList.get(i).amenities.get(amenFilter[j]);
+                    dbAmentityList[i][j] = landmarkList.get(i).amenities.get(amenFilter[j]);
                 }
                 // get the distance, current unit is meter
                 distances[i] = Geography.displayDistance(distancePair.get(i).second);
@@ -135,12 +136,12 @@ public class SearchBarActivity extends AppCompatActivity  {
             // TODO: if no permission, hide the distance
             for (int i = 0; i < this.FILELIST.length; i++) {
                 String jsonString = sbdatebase.loadJSONFromAsset(this, this.FILELIST[i]);
-                Location location = gson.fromJson(jsonString, Location.class);
-                locationList.add(location);
-                // get amenity list from location
-                placesName[i] = location.name;
+                Landmark landmark = gson.fromJson(jsonString, Landmark.class);
+                landmarkList.add(landmark);
+                // get amenity list from landmark
+                placesName[i] = landmark.name;
                 for (int j = 0; j < dbAmentityList[0].length; j++) {
-                    dbAmentityList[i][j] = locationList.get(i).amenities.get(amenFilter[j]);
+                    dbAmentityList[i][j] = landmarkList.get(i).amenities.get(amenFilter[j]);
                 }
                 // hide the distance
                 distances[i] = "";
@@ -294,7 +295,7 @@ public class SearchBarActivity extends AppCompatActivity  {
 
                     ArrayList<PlacesDataClass> filteredAmen;
                     if (checkPermission() && currentLocation!=null) {
-                        ArrayList<Pair<Location, Double>> listOfLocations = sbdatebase.filterWithDistance(
+                        ArrayList<Pair<Landmark, Double>> listOfLocations = sbdatebase.filterWithDistance(
                                 locationlist, amenList,
                                 new Pair<>(currentLocation.getLatitude( ), currentLocation.getLongitude( )));
 
@@ -306,11 +307,11 @@ public class SearchBarActivity extends AppCompatActivity  {
                         }
                     }
                     else{
-                        ArrayList<Location> listOfLocations=sbdatebase.filter(locationlist, amenList);
+                        ArrayList<Landmark> listOfLandmarks =sbdatebase.filter(locationlist, amenList);
                         filteredAmen = new ArrayList<PlacesDataClass>( );
 
-                        for (int k = 0; k < listOfLocations.size( ); k++) {
-                            filteredAmen.add(new PlacesDataClass(listOfLocations.get(k)));
+                        for (int k = 0; k < listOfLandmarks.size( ); k++) {
+                            filteredAmen.add(new PlacesDataClass(listOfLandmarks.get(k)));
                         }
                     }
                     placesAdaptor.filtered = filteredAmen;

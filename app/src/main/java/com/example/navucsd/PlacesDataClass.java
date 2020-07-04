@@ -4,7 +4,7 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
-import com.example.navucsd.database.Location;
+import com.example.navucsd.database.Landmark;
 import com.example.navucsd.utils.Geography;
 
 public class PlacesDataClass {
@@ -23,8 +23,8 @@ public class PlacesDataClass {
         this.amenities = amenities;
     }
 
-    public PlacesDataClass(Location location){
-        this.placesName=location.name;
+    public PlacesDataClass(Landmark landmark){
+        this.placesName= landmark.name;
         //for now hard code the distances and availability
         this.availability = "";
         //hide the distances
@@ -32,14 +32,14 @@ public class PlacesDataClass {
         //hard code amenities to be 5
         this.amenities=new boolean[5];
         // FIXME meaningless if and potential NullPointerException
-        for(int j=0;j<location.amenities.size();j++){
-            if(location.amenities != null) {
-                this.amenities[j] = location.amenities.get(amenFilter[j]);
+        for(int j = 0; j< landmark.amenities.size(); j++){
+            if(landmark.amenities != null) {
+                this.amenities[j] = landmark.amenities.get(amenFilter[j]);
             }
         }
     }
 
-    public PlacesDataClass(Pair<Location, Double> pair) {
+    public PlacesDataClass(Pair<Landmark, Double> pair) {
         placesName = pair.first.name;
         // for now hard code the distances and availability
         availability = "";

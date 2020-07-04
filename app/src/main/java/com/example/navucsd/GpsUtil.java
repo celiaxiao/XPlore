@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * Usage: Call the following function in your activity to get the latest updated location:
- *        Location location = GpsUtil.getInstance(yourActivityName.this).getLastLocation();
+ *        Landmark location = GpsUtil.getInstance(yourActivityName.this).getLastLocation();
  *
  *        Then, use the following functions to get latitude or longitude:
  *        double latitude = location.getLatitude();
@@ -101,7 +101,7 @@ public class GpsUtil {
     }
 
     /**
-     * Location Listener
+     * Landmark Listener
      */
     LocationListener locationListener = new LocationListener() {
         @Override
