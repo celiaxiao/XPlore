@@ -7,7 +7,7 @@
     "restaurant": false,
     "restroom": true
   },
-  "audio": "somedirectory/somefile",
+  "audio": "recordings/Geisel_Library.mp3",
   "coordinates": {
     "first": "32.881423",
     "second": "-117.237537"

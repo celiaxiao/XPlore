@@ -7,7 +7,7 @@
     "restaurant": true,
     "restroom": true
   },
-  "audio": "somedirectory/somefile",
+  "audio": "recordings/Price_Center.mp3",
   "coordinates": {
     "first": "32.879928",
     "second": "-117.236195"

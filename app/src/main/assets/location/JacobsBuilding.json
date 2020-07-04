@@ -28,7 +28,7 @@
     "the best tour",
     "the other best tour"
   ],
-  "audio": "somedirectory/somefile",
+  "audio": "recordings/no_recording.mp3",
   "coordinates": {
     "first": "32.882562",
     "second": "-117.235634"

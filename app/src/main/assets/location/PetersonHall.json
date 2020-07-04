@@ -7,7 +7,7 @@
     "restaurant": false,
     "restroom": true
   },
-  "audio": "somedirectory/somefile",
+  "audio": "recordings/Peterson_Hall.mp3",
   "coordinates": {
     "first": "32.880234",
     "second": "-117.240222"

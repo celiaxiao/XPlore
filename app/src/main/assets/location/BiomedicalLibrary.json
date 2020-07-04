@@ -28,7 +28,7 @@
     "the best tour",
     "the other best tour"
   ],
-  "audio": "somedirectory/somefile",
+  "audio": "recordings/Biomedical_Library.mp3",
   "coordinates": { 
     "first": "32.875477",
     "second": "-117.236983"

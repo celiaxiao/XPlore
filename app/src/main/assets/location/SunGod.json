@@ -7,7 +7,7 @@
     "restaurant": false,
     "restroom": false
   },
-  "audio": "somedirectory/somefile",
+  "audio": "recordings/Sun_God_Statue.mp3",
   "coordinates": {
     "first": "32.878741",
     "second": "-117.239750"

@@ -8,7 +8,7 @@
     "restaurant": true,
     "restroom": true
   },
-  "audio": "somedirectory/somefile",
+  "audio": "recordings/64_Degrees.mp3",
   "coordinates": {
     "first": "32.874971",
     "second": "-117.241959"

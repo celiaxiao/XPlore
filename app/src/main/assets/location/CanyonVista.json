@@ -32,7 +32,7 @@
     "the best tour",
     "the other best tour"
   ],
-  "audio": "somedirectory/somefile",
+  "audio": "recordings/Canyon_Vista.mp3",
   "coordinates": {
     "first": "32.884078",
     "second": "-117.233301"

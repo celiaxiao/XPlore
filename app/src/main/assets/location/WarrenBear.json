@@ -7,7 +7,7 @@
     "restaurant": false,
     "restroom": true
   },
-  "audio": "somedirectory/somefile",
+  "audio": "recordings/Warren_Bear.mp3",
   "coordinates": {
     "first": "32.882189",
     "second": "-117.234193"
