@@ -3,15 +3,26 @@ package com.UCSDTripleC.XPloreUCSD;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.UCSDTripleC.XPloreUCSD.database.Landmark;
+import com.UCSDTripleC.XPloreUCSD.database.LandmarkDatabase;
 import com.UCSDTripleC.XPloreUCSD.utils.ClickTracker;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import static com.UCSDTripleC.XPloreUCSD.R.id.busstopIconDuringTourImageView;
 
 /**
  * This is the DuringTourActivity which provides some descriptions about the
@@ -23,8 +34,62 @@ import com.UCSDTripleC.XPloreUCSD.utils.ClickTracker;
  * This activity is temporarily hard-coded with Geisel Library as the stop being viewed
  */
 public class DuringTourActivity extends AppCompatActivity {
-    private String stopName; // Name of this stop
+    public static class TourArray{
+        public class DoubleLink{
+            public DoubleLink prev = null;
+            public DoubleLink next = null;
+            public Pair<String, Integer> value;
+            DoubleLink(String name, Integer index){
+                this.value = new Pair<>(name, index);
+                this.prev = this;
+                this.next = this;
+            }
+        }
+        public DoubleLink current;
+        public DoubleLink first;
+        public int size = 0;
+        TourArray(ArrayList<String> items){
+            this.first = new DoubleLink(items.get(0), 1);
+            System.out.println("The place" + 1 + " is "+items.get(0));
+            this.current = first;
+            this.size++;
+            for(int i = 1; i < items.size(); i++){
+                DoubleLink newNode = new DoubleLink(items.get(i), (i+1));
+                System.out.println("The place" + (i+1) + " is "+items.get(i));
+                this.current.next = newNode;
+                newNode.prev = this.current;
+                newNode.next = this.first;
+                this.first.prev = newNode;
+                this.current = this.current.next;
+                this.size++;
+            }
+            this.current = this.first;
+        }
 
+        public DoubleLink current(){
+            DoubleLink node = this.current;
+            return node;
+        }
+
+        public DoubleLink next(){
+            DoubleLink node = this.current.next;
+            this.current = this.current.next;
+            return node;
+        }
+
+        public DoubleLink prev(){
+            DoubleLink node = this.current.prev;
+            this.current = this.current.prev;
+            return node;
+        }
+    }
+    public static TourArray tourArray;
+
+    private LandmarkDatabase database;
+
+
+    private String stopName; // Name of this stop
+    private int indexOfStop = 1;
     private ImageView imageViewDuringTour;
     private TextView tourNameTextView;
     private TextView tourOverViewTextView;
@@ -50,6 +115,9 @@ public class DuringTourActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_during_tour);
 
+        database = new LandmarkDatabase(this, "one by one");
+
+
         imageViewDuringTour = (ImageView) findViewById(R.id.imageViewDuringTour);
         tourNameTextView = (TextView) findViewById(R.id.tourNameTextView);
         tourOverViewTextView = (TextView) findViewById(R.id.tourOverviewTextView);
@@ -65,23 +133,17 @@ public class DuringTourActivity extends AppCompatActivity {
         detailsTextViewDuringTour = (TextView) findViewById(R.id.detailsTextViewDuringTour);
         nextStopButton = (Button) findViewById(R.id.nextStopButton);
 
-        // TODO: dynamically set up basic components in this activity
-        stopName = "Geisel Library";
-        imageViewDuringTour.setImageDrawable(getDrawable(R.drawable.geisel_landmark)); // Set up the thumbnail image for this stop
-        tourNameTextView.setText("UC San Diego Landmark Tour"); // Set up tour name
-
-        stopNameTextView.setText("1st" + " Stop: " + stopName); // TODO: dynamically set the ranking of the stop; Set up the name for this stop
-
-        stopDescriptionTextView.setText("Geisel Library is the main library building of the University of California San Diego Library. " +
-                "The building's distinctive Brutalist architecture has resulted in its being featured in the " +
-                "UC San Diego logo and becoming the most recognizable building on campus." +
-                "------------------------------------------------------------------------" +
-                "------------------------------------------------------------------------"); // TODO: Dynamically Set up the descriptions for this stop
-        stopDescriptionTextView.setMovementMethod(new ScrollingMovementMethod()); // Making this textView scrollable
-
-        // TODO: dynamically set up the amenities icon: icon_<amenityName>_white is the activated state of the icons
-        restroomIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restroom_white));
-        cafeIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_cafe_white));
+        try {
+            Pair<String, Integer> pair = tourArray.current().value;
+            if(pair != null){
+                System.out.println("This place is "+pair.first);
+                Landmark landmark = database.getByName(pair.first);
+                int index = pair.second;
+                setView(landmark, index);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // tourOverviewTextView onClick go back to tourOverviewPage
         clickTracker = new ClickTracker();
@@ -93,7 +155,18 @@ public class DuringTourActivity extends AppCompatActivity {
         previousStopTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                try {
+                    Pair<String, Integer> pair = tourArray.prev().value;
+                    System.out.println("This place is "+pair.first);
+                    if(pair != null && indexOfStop != 1){
+                        Landmark landmark = database.getByName(pair.first);
+                        int index = pair.second;
+                        indexOfStop = index;
+                        setView(landmark, index);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -102,7 +175,18 @@ public class DuringTourActivity extends AppCompatActivity {
         nextStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                try {
+                    Pair<String, Integer> pair = tourArray.next().value;
+                    System.out.println("This place is "+pair.first);
+                    if(pair != null && indexOfStop != tourArray.size){
+                        Landmark landmark = database.getByName(pair.first);
+                        int index = pair.second;
+                        indexOfStop = index;
+                        setView(landmark, index);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -110,6 +194,10 @@ public class DuringTourActivity extends AppCompatActivity {
         Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
         detailsIntent.putExtra("placeName", stopName);
         detailsTextViewDuringTour.setOnClickListener(clickTracker.getOnClickListener(detailsIntent));
+
+
+
+
 
         // Create a Uri from an intent string. Use the result to create an Intent.
         // TODO: dynamically pass in the location of this stop as an URL
@@ -131,8 +219,71 @@ public class DuringTourActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         // Reset the status of the clickTracker
         clickTracker.reset();
+    }
+
+    protected void setView(Landmark landmark, int index) throws IOException {
+
+        // TODO: dynamically set up basic components in this activity
+        stopName = landmark.getName();
+
+        Drawable drawable = Drawable.createFromStream(getAssets().open(landmark.getThumbnailPhoto()), null);
+
+        imageViewDuringTour.setImageDrawable(drawable);
+        tourNameTextView.setText("UC San Diego Landmark Tour"); // Set up tour name
+
+        if(index == 1){
+            stopNameTextView.setText("1st" + " Stop: " + stopName); // TODO: dynamically set the ranking of the stop; Set up the name for this stop
+        }
+        else if(index == 2){
+            stopNameTextView.setText("2nd" + " Stop: " + stopName); // TODO: dynamically set the ranking of the stop; Set up the name for this stop
+        }
+        else{
+            stopNameTextView.setText(index + "th" + " Stop: " + stopName); // TODO: dynamically set the ranking of the stop; Set up the name for this stop
+        }
+
+
+        stopDescriptionTextView.setText(landmark.getAbout()); // TODO: Dynamically Set up the descriptions for this stop
+        stopDescriptionTextView.setMovementMethod(new ScrollingMovementMethod()); // Making this textView scrollable
+
+        String[] strArray = {"parking", "cafe", "busstop", "restaurant", "restroom"};
+        HashMap<String,Boolean> hashMap = landmark.getAmenities();
+
+        if(hashMap.get(strArray[0])){
+            parkinglotIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restroom_white));
+            parkinglotIconDuringTourImageView.setColorFilter(Color.WHITE);
+        }
+        else {
+            parkinglotIconDuringTourImageView.setColorFilter(Color.GRAY);
+        }
+        if(hashMap.get(strArray[1])){
+            cafeIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_cafe_white));
+            cafeIconDuringTourImageView.setColorFilter(Color.WHITE);
+        }
+        else{
+            cafeIconDuringTourImageView.setColorFilter(Color.GRAY);
+        }
+        if(hashMap.get(strArray[2])){
+            busstopIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_busstop_white));
+            busstopIconDuringTourImageView.setColorFilter(Color.WHITE);
+        }
+        else{
+            busstopIconDuringTourImageView.setColorFilter(Color.GRAY);
+        }
+        if(hashMap.get(strArray[3])){
+            restaurantIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restaurant_white));
+            restaurantIconDuringTourImageView.setColorFilter(Color.WHITE);
+        }
+        else{
+            restaurantIconDuringTourImageView.setColorFilter(Color.GRAY);
+        }
+        if(hashMap.get(strArray[4])){
+            restroomIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restroom_white));
+            restroomIconDuringTourImageView.setColorFilter(Color.WHITE);
+        }
+        else{
+            restroomIconDuringTourImageView.setColorFilter(Color.GRAY);
+        }
     }
 }
