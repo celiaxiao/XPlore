@@ -21,17 +21,20 @@ public class SliderAdapterOnboarding extends PagerAdapter {
     int[] sliderGifs = {
             R.drawable.splash_1_2,
             R.drawable.splash_2_2,
+            R.drawable.splash_3_2,
             R.drawable.splash_3_2};
 
     String[] sliderTitles = {
             "Nearby Adventures",
             "Customized Tours",
-            "Quality Contents"};
+            "Quality Contents",
+            "Welcome to the first-ever touring app for UC San Diego"};
 
     String[] sliderDescriptions = {
             "Start exploring nearby landmarks, tours, and amenities from anywhere on campus.",
             "Choose from our preset tours or create your own tour that suits your interests.",
-            "Learn more about the campus with informative, multimedia contents carefully curated by student insiders."
+            "Learn more about the campus with informative, multimedia contents carefully curated by student insiders.",
+            ""
     };
 
     public SliderAdapterOnboarding(Context context) {
@@ -58,7 +61,6 @@ public class SliderAdapterOnboarding extends PagerAdapter {
         ImageView gifImageView = (ImageView) view.findViewById(R.id.gifImageView);
         TextView gifNameTextView = (TextView) view.findViewById(R.id.gifNameTextView);
         TextView descriptionTextView = (TextView) view.findViewById(R.id.descriptionTextView);
-
         //not gif image
         // Glide.with(this.context).load(sliderGifs[position]).into(gifImageView);
         gifImageView.setImageResource(sliderGifs[position]);
