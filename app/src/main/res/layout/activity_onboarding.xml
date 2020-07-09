@@ -41,7 +41,7 @@
         app:layout_constraintWidth_percent="0.836"
         android:background="#FECE07"
         android:fontFamily="@font/myriad_pro"
-        android:text="Get Started"
+        android:text="Start Exploring"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
