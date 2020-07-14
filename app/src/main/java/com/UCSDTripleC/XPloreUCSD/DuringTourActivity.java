@@ -163,6 +163,17 @@ public class DuringTourActivity extends AppCompatActivity {
                         int index = pair.second;
                         indexOfStop = index;
                         setView(landmark, index);
+                        if((tourArray.size - index) == 1 ){
+                            Pair<String, Integer> next = tourArray.next().value;
+                            nextStopButton.setText("Last stop: " + next.first);
+                            next = tourArray.prev().value;
+                        }
+                        else if((tourArray.size - index) == 0 ){
+                            nextStopButton.setText("Finish the tour");
+                        }
+                        else{
+                            nextStopButton.setText("Next Stop");
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -176,13 +187,29 @@ public class DuringTourActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    Pair<String, Integer> pair = tourArray.next().value;
-                    System.out.println("This place is "+pair.first);
-                    if(pair != null && indexOfStop != tourArray.size){
-                        Landmark landmark = database.getByName(pair.first);
-                        int index = pair.second;
-                        indexOfStop = index;
-                        setView(landmark, index);
+                    if(tourArray.current().value.second == tourArray.size){
+
+                    }
+                    else{
+                        Pair<String, Integer> pair = tourArray.next().value;
+                        System.out.println("This place is "+pair.first);
+                        if(pair != null && indexOfStop != tourArray.size){
+                            Landmark landmark = database.getByName(pair.first);
+                            int index = pair.second;
+                            indexOfStop = index;
+                            setView(landmark, index);
+                            if((tourArray.size - index) == 1 ){
+                                Pair<String, Integer> next = tourArray.next().value;
+                                nextStopButton.setText("Last stop: " + next.first);
+                                next = tourArray.prev().value;
+                            }
+                            else if((tourArray.size - index) == 0 ){
+                                nextStopButton.setText("Finish the tour");
+                            }
+                            else{
+                                nextStopButton.setText("Next Stop");
+                            }
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
