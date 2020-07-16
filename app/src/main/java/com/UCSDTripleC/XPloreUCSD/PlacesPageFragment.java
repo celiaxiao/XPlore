@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -26,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.UCSDTripleC.XPloreUCSD.database.LandmarkDatabase;
@@ -93,7 +93,12 @@ public final class PlacesPageFragment extends Fragment {
 		 * @param aspectRatio the desired aspect ratio (width / height)
 		 * @param labelHeight the height of the label, in dp
 		 */
-		public SmartImageView(Context context, String photoPath, double aspectRatio, int labelHeight) {
+		public SmartImageView(
+			Context context,
+			String photoPath,
+			double aspectRatio,
+			int labelHeight
+		) {
 			super(context);
 
 			this.getViewTreeObserver().addOnPreDrawListener(() -> {
@@ -208,28 +213,29 @@ public final class PlacesPageFragment extends Fragment {
 		if (locations == null) return;
 		Landmark place = locations.get(hashDate(locations.size()));
 
-		ImageView iv_restroom = view.findViewById(R.id.POTD_restroom);
-		ImageView iv_cafe = view.findViewById(R.id.POTD_cafe);
-		ImageView iv_restaurant = view.findViewById(R.id.POTD_restaurant);
-		ImageView iv_bus_stop = view.findViewById(R.id.POTD_bus_stop);
-		ImageView iv_parking = view.findViewById(R.id.POTD_parking);
-		ImageView iv_thumbnail = view.findViewById(R.id.POTD_photo);
-		TextView tv_name = view.findViewById(R.id.POTD_name);
-		TextView tv_about = view.findViewById(R.id.POTD_about);
+		ImageView iv_restroom = view.findViewById(R.id.places_page_place_of_the_day_restroom);
+		ImageView iv_cafe = view.findViewById(R.id.places_page_place_of_the_day_cafe);
+		ImageView iv_restaurant = view.findViewById(R.id.places_page_place_of_the_day_restaurant);
+		ImageView iv_bus_stop = view.findViewById(R.id.places_page_place_of_the_day_bus_stop);
+		ImageView iv_parking = view.findViewById(R.id.places_page_place_of_the_day_parking);
+		ImageView iv_thumbnail = view.findViewById(R.id.places_page_place_of_the_day_thumbnail);
+		TextView tv_name = view.findViewById(R.id.places_page_place_of_the_day_name);
+		TextView tv_about = view.findViewById(R.id.places_page_place_of_the_day_about);
 
-		if (place.amenities.get("restroom")) iv_restroom.setColorFilter(Color.WHITE);
-		if (place.amenities.get("cafe")) iv_cafe.setColorFilter(Color.WHITE);
-		if (place.amenities.get("restaurant")) iv_restaurant.setColorFilter(Color.WHITE);
-		if (place.amenities.get("busstop")) iv_bus_stop.setColorFilter(Color.WHITE);
-		if (place.amenities.get("parking")) iv_parking.setColorFilter(Color.WHITE);
+		int color = ContextCompat.getColor(view.getContext(), R.color.colorPrimaryDark);
+
+		if (place.amenities.get("restroom")) iv_restroom.setColorFilter(color);
+		if (place.amenities.get("cafe")) iv_cafe.setColorFilter(color);
+		if (place.amenities.get("restaurant")) iv_restaurant.setColorFilter(color);
+		if (place.amenities.get("busstop")) iv_bus_stop.setColorFilter(color);
+		if (place.amenities.get("parking")) iv_parking.setColorFilter(color);
 
 		try {
 			InputStream ims = getContext().getAssets().open(place.thumbnailPhoto);
 			Drawable d = Drawable.createFromStream(ims, null);
 			iv_thumbnail.setImageDrawable(d);
-		}
-		catch(IOException ex) {
-			ex.printStackTrace();
+		} catch(IOException e) {
+			e.printStackTrace();
 		}
 
 		tv_name.setText(place.name);
