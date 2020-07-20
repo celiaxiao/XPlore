@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.UCSDTripleC.XPloreUCSD.database.Landmark;
+import com.UCSDTripleC.XPloreUCSD.database.LandmarkDatabase;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -30,12 +32,12 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
  */
 public class TourOverviewPage extends AppCompatActivity implements RecyclerViewAdapterTourOverviewPage.RecyclerViewOnItemClickListener {
     private ArrayList<String> items; // ArrayList that provide items for the RecyclerView
+    private LandmarkDatabase database;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Button startButtonTourOverviewPage;
-    private String[] places = {"Geisel Library", "Price Center", "Fallen Star",
-            "Bear", "Biomedical Library", "Galbraith Hall"}; // Array of places
+    private String[] places = {"Geisel Library", "Price Center", "Fallen Star", "Biomedical Library", "Galbraith Hall"}; // Array of places
     private String tourName = "UC San Diego’s Landmark Tour";
     private String tourDescription = "A tour that highlights all must-see landmarks in UC San Diego";
     private String tourTime = "90 Min";
@@ -46,6 +48,7 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_overview_page);
         items = new ArrayList<>(Arrays.asList(places));
+        database = new LandmarkDatabase(this, "one by one");
 
 
         // Basic Layout Components set up, contents of the components are temporarily
@@ -58,8 +61,6 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         startButtonTourOverviewPage = (Button) findViewById(R.id.startButtonTourOverviewPage);
 
 
-
-
         tourImageView.setImageDrawable(getDrawable(R.drawable.geisel_pic));
         tourNameTextView.setText(tourName);
         tourDescriptionTextView.setText(tourDescription);
@@ -68,18 +69,26 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         startButtonTourOverviewPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), FeatureComingSoonActivity.class);
+//                Intent intent = new Intent(getApplicationContext(), FeatureComingSoonActivity.class);
+                //TODO
+                Intent intent = new Intent(getApplicationContext(), DuringTourActivity.class);
+                DuringTourActivity.tourArray = new DuringTourActivity.TourArray(items);
                 startActivity(intent);
             }
         });
         // --------------------------------
 
+        //
+        ArrayList<Landmark> landmarkArrayList = new ArrayList<>();
+        for(int i = 0; i < items.size(); i++){
+            landmarkArrayList.add(database.getByName(items.get(i)));
+        }
 
         // RecyclerView implementation
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_tour_overview_page);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mAdapter = new RecyclerViewAdapterTourOverviewPage(this, items, this);
+        mAdapter = new RecyclerViewAdapterTourOverviewPage(this, landmarkArrayList, this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(mRecyclerView); // Link the itemTouchHelper to the recyclerView to implement swipe function
         mRecyclerView.setAdapter(mAdapter);
@@ -116,6 +125,10 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
                     mRecyclerView.scrollToPosition(position); // Scroll back to the restored item
                 }
             }).show();
+
+            if(items.isEmpty()){
+                startButtonTourOverviewPage.setEnabled(false);
+            }
         }
 
         @Override
@@ -138,7 +151,9 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
     @Override
     public void OnItemClick(int position) {
         String item = items.get(position); // A reference to the clicked item just in case we need it
-        Intent intent = new Intent(getApplicationContext(), FeatureComingSoonActivity.class);
+//        Intent intent = new Intent(getApplicationContext(), FeatureComingSoonActivity.class);
+        Intent intent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
+        intent.putExtra("placeName", item);
         startActivity(intent);
     }
 }

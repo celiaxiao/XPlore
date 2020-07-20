@@ -35,5 +35,17 @@
   "videos": [
     "https://www.youtube.com/watch?v=9FPN1cSf540",
     "https://www.youtube.com/watch?v=52yrl2Iid2A"
+  ],
+  "history": [
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    },
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    }
   ]
 }

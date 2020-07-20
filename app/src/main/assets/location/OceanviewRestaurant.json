@@ -37,5 +37,17 @@
   },
   "descriptive": [
     "Must see"
+  ],
+  "history": [
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    },
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    }
   ]
 }
