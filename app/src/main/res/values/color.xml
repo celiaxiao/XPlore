@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#006A96</color>
-    <color name="colorPrimaryDark">#182B49</color>
+    <color name="primary">#006A96</color>
+    <color name="colorPrimaryDark">#162B49</color>
     <color name="colorSecondary">#FFCD00</color>
     <color name="colorAccent">#FC8900</color>
 
@@ -16,7 +16,6 @@
     <color name="black">#000000</color>
     <color name="shade">#2D000000</color>
     <color name="place_tag_text">#2D2D2D</color>
-    <color name="gold">#FECE07</color>
     <color name="orange">#ec8e23</color>
 
     <color name="mapboxwWhite">#ffffff</color>
