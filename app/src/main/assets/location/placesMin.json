@@ -378,6 +378,80 @@
     ],
     "name": "Dr. Seuss Statue",
     "thumbnailPhoto": "photos/DrSeussStatue.jpg"
+  },
+  "CareerServiceCenter": {
+    "about": "Situated in the center of campus, the Career Service Center serves as the one stop shop for every Triton looking to advance in their career by providing skills to find that ideal job, internship, or position.",
+    "amenities": {
+      "parking": false,
+      "cafe": false,
+      "busstop": true,
+      "restaurant": false,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "32.879071",
+      "second": "-117.238025"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Career Service Center",
+    "thumbnailPhoto": "photos/CareerServiceCenter.jpg"
+  },
+  "RIMACGym": {
+    "about": "RIMAC Gym is a sports complex on campus that is one of the two main gyms on campus, the other being Main Gym. It has a weight room and various other facilities. It is also the home arena of our men's and women's basketball and volleyball teams.",
+    "amenities": {
+      "parking": false,
+      "cafe": false,
+      "busstop": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "32.886143",
+      "second": "-117.238886"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "RIMAC Gym",
+    "thumbnailPhoto": "photos/RIMACGym.jpg"
+  },
+  "UCSDBookStore": {
+    "about": "The UCSD Bookstore is your place to go if you want to buy everything UCSD. From UCSD branded apparels, to laptops, and to other miscellaneous goods, the UCSD Bookstore has got it all.",
+    "amenities": {
+      "parking": false,
+      "cafe": false,
+      "busstop": true,
+      "restaurant": false,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "32.880288",
+      "second": "-117.237043"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "thumbnailPhoto": "photos/UCSDBookstore.jpg"
+  },
+  "YorkHall": {
+    "about": "York Hall, located on the eastern side of Revelle Plaza in Revelle College, functions as one of the main classroom facilities and hosts mainly lectures from the chemistry department and other physical sciences. One of York hall's defining features is the unique set of hexagonal breezeways that it shares with Mayer and Bonner hall, connecting the 3 lecture halls and providing an iconic, symmetrical aesthetic addition to the space. The facility is named after Herbert York, a famous nuclear physicist who served in numerous administrative and research positions within the government and was the founding Chancellor of UC San Diego.",
+    "amenities": {
+      "parking": false,
+      "cafe": false,
+      "busstop": true,
+      "restaurant": false,
+      "restroom": true
+    },
+    "coordinates": {
+      "first": "32.875138",
+      "second": "-117.240534"
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "thumbnailPhoto": "photos/YorkHall.jpg"
   }
 }
 

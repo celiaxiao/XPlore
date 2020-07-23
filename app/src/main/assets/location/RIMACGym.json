@@ -1,0 +1,51 @@
+{
+  "name": "RIMAC Gym",
+  "about": "RIMAC Gym is a sports complex on campus that is one of the two main gyms on campus, the other being Main Gym. It has a weight room and various other facilities. It is also the home arena of our men's and women's basketball and volleyball teams.",
+  "amenities": {
+    "parking": false,
+    "cafe": false,
+    "busstop": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "links": [
+    "Wikipedia: https://en.wikipedia.org/wiki/RIMAC",
+    "UCSD Recreation: https://recreation.ucsd.edu/"
+  ],
+  "thumbnailPhoto": "photos/RIMACGym.jpg",
+  "otherPhotos": [
+
+  ],
+  "relatedPlaces": [
+    "Main Gym",
+    "Rady School of Management"
+  ],
+  "videos": [
+    "https://www.youtube.com/watch?v=VSH7zFSPQws",
+    "https://www.youtube.com/watch?v=8__2ZM9qsb8"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "recordings/no_recording.mp3",
+  "coordinates": {
+    "first": "32.886143",
+    "second": "-117.238886"
+  },
+  "descriptive": [
+    "Must see"
+  ],
+  "history": [
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    },
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    }
+  ]
+}

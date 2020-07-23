@@ -1,0 +1,51 @@
+{
+  "name": "UCSD Bookstore",
+  "about": "The UCSD Bookstore is your place to go if you want to buy everything UCSD. From UCSD branded apparels, to laptops, and to other miscellaneous goods, the UCSD Bookstore has got it all.",
+  "amenities": {
+    "parking": false,
+    "cafe": false,
+    "busstop": true,
+    "restaurant": false,
+    "restroom": true
+  },
+  "links": [
+    "Official Page: https://ucsandiegobookstore.com/",
+    "Overview on Blink: https://blink.ucsd.edu/buy-pay/ways/campus-retailers/bookstore/overview.html"
+  ],
+  "thumbnailPhoto": "photos/UCSDBookstore.jpg",
+  "otherPhotos": [
+
+  ],
+  "relatedPlaces": [
+    "Price Center",
+    "Career Service Center",
+    "Geisel Library"
+  ],
+  "videos": [
+    "https://www.youtube.com/watch?v=SQ-SMNxouWI",
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "recordings/no_recording.mp3",
+  "coordinates": {
+    "first": "32.880288",
+    "second": "-117.237043"
+  },
+  "descriptive": [
+    "Must see"
+  ],
+  "history": [
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    },
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    }
+  ]
+}
