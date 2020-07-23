@@ -15,6 +15,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -95,6 +97,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     private RelatedToursAdapter relatedToursAdapter;
     private LinearLayoutManager layoutManager;
     private FloatingActionButton navButton;
+
 
     /**
      * The click tracker used in this fragment.
@@ -756,4 +759,6 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
             }
         }
     }
+
+
 }

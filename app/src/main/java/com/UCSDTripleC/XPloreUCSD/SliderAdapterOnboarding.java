@@ -19,19 +19,22 @@ public class SliderAdapterOnboarding extends PagerAdapter {
     LayoutInflater layoutInflater;
 
     int[] sliderGifs = {
-            R.drawable.customization,
-            R.drawable.landmark_shorten,
-            R.drawable.multimedia};
+            R.drawable.splash_1_2,
+            R.drawable.splash_2_2,
+            R.drawable.splash_3_2,
+            R.drawable.splash_3_2};
 
     String[] sliderTitles = {
-            "Customized Tour",
-            "Detailed Landmarks",
-            "Vivid Experience"};
+            "Nearby Adventures",
+            "Customized Tours",
+            "Quality Contents",
+            "Welcome to the first-ever touring app for UC San Diego"};
 
     String[] sliderDescriptions = {
-            "Tailor your tour just as you like based on your time constraint and interests",
-            "Must-see places with facts and architectural knowledge",
-            "Listen to tour guide audio as you walk, get multimedia experience"
+            "Start exploring nearby landmarks, tours, and amenities from anywhere on campus.",
+            "Choose from our preset tours or create your own tour that suits your interests.",
+            "Learn more about the campus with informative, multimedia contents carefully curated by student insiders.",
+            ""
     };
 
     public SliderAdapterOnboarding(Context context) {
@@ -58,8 +61,9 @@ public class SliderAdapterOnboarding extends PagerAdapter {
         ImageView gifImageView = (ImageView) view.findViewById(R.id.gifImageView);
         TextView gifNameTextView = (TextView) view.findViewById(R.id.gifNameTextView);
         TextView descriptionTextView = (TextView) view.findViewById(R.id.descriptionTextView);
-
-        Glide.with(this.context).load(sliderGifs[position]).into(gifImageView);
+        //not gif image
+        // Glide.with(this.context).load(sliderGifs[position]).into(gifImageView);
+        gifImageView.setImageResource(sliderGifs[position]);
         gifNameTextView.setText(sliderTitles[position]);
         descriptionTextView.setText(sliderDescriptions[position]);
 
@@ -67,7 +71,6 @@ public class SliderAdapterOnboarding extends PagerAdapter {
 
         return view;
     }
-
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {

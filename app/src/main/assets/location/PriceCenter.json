@@ -35,5 +35,17 @@
   "thumbnailPhoto": "photos/PriceCenter.jpg",
   "videos": [
     "https://www.youtube.com/watch?v=_XoSNlIsgy8"
+  ],
+  "history": [
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    },
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    }
   ]
 }

@@ -23,6 +23,7 @@ public class Landmark {
     public String audio;
     public ArrayList<String> videos;
     public ArrayList<String> links;
+    public ArrayList<History> history;
 
     public Landmark(String name, Pair coordinates, String about, String thumbnailPhoto,
                     ArrayList<String> otherPhotos, HashMap<String,Boolean> amenities,
@@ -89,6 +90,10 @@ public class Landmark {
 
     public ArrayList<String> getLinks() {
         return links;
+    }
+
+    public ArrayList<History> getHistory() {
+        return history;
     }
 }
 

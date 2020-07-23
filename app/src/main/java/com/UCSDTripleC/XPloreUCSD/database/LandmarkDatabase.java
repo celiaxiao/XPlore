@@ -96,7 +96,7 @@ public class LandmarkDatabase {
         else if(order.equals("whole")){
             Gson gson = new Gson();
             //"test.json" should be changed in future.
-            String jsonString = loadJSONFromAsset(context, "location/test.json");
+            String jsonString = loadJSONFromAsset(context, "location/placesMin.json");
             Type arraylistType = new TypeToken<ArrayList<Landmark>>(){}.getType();
             this.list = gson.fromJson(jsonString, arraylistType);
             for(int i = 0; i < this.list.size(); i++){
