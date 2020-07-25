@@ -123,9 +123,10 @@ public class SearchBarActivity extends AppCompatActivity  {
                 Landmark landmark = distancePair.get(i).first;
                 landmarkList.add(landmark);
                 // get amenity list from landmark
-                placesName[i] = landmark.name;
+                placesName[i] = landmark.getName();
                 for (int j = 0; j < dbAmentityList[0].length; j++) {
-                    dbAmentityList[i][j] = landmarkList.get(i).amenities.get(amenFilter[j]);
+                    // FIXME potential null pointer
+                    dbAmentityList[i][j] = landmarkList.get(i).getAmenities().get(amenFilter[j]);
                 }
                 // get the distance, current unit is meter
                 distances[i] = Geography.displayDistance(distancePair.get(i).second);
@@ -139,9 +140,10 @@ public class SearchBarActivity extends AppCompatActivity  {
                 Landmark landmark = gson.fromJson(jsonString, Landmark.class);
                 landmarkList.add(landmark);
                 // get amenity list from landmark
-                placesName[i] = landmark.name;
+                placesName[i] = landmark.getName();
                 for (int j = 0; j < dbAmentityList[0].length; j++) {
-                    dbAmentityList[i][j] = landmarkList.get(i).amenities.get(amenFilter[j]);
+                    // TODO potential null pointer
+                    dbAmentityList[i][j] = landmarkList.get(i).getAmenities().get(amenFilter[j]);
                 }
                 // hide the distance
                 distances[i] = "";
@@ -302,7 +304,7 @@ public class SearchBarActivity extends AppCompatActivity  {
                         filteredAmen = new ArrayList<PlacesDataClass>( );
 
                         for (int k = 0; k < listOfLocations.size( ); k++) {
-                            Log.i("list", listOfLocations.get(k).first.name);
+                            Log.i("list", listOfLocations.get(k).first.getName());
                             filteredAmen.add(new PlacesDataClass(listOfLocations.get(k)));
                         }
                     }

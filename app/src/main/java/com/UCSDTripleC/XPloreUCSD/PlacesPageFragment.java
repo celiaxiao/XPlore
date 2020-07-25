@@ -277,22 +277,22 @@ public final class PlacesPageFragment extends Fragment {
 			int color = ContextCompat.getColor(layout.getContext(), R.color.colorPrimaryDark);
 
 			// FIXME proper error handling
-			if (place.amenities != null) {
+			if (place.getAmenities() != null) {
 				Boolean result;
-				result = place.amenities.get("restroom");
+				result = place.getAmenities().get("restroom");
 				if (result != null && result) restroom.setColorFilter(color);
-				result = place.amenities.get("cafe");
+				result = place.getAmenities().get("cafe");
 				if (result != null && result) cafe.setColorFilter(color);
-				result = place.amenities.get("restaurant");
+				result = place.getAmenities().get("restaurant");
 				if (result != null && result) restaurant.setColorFilter(color);
-				result = place.amenities.get("busstop");
+				result = place.getAmenities().get("busstop");
 				if (result != null && result) bus_stop.setColorFilter(color);
-				result = place.amenities.get("parking");
+				result = place.getAmenities().get("parking");
 				if (result != null && result) parking.setColorFilter(color);
 			}
 
 			try {
-				InputStream ims = parent.getContext().getAssets().open(place.thumbnailPhoto);
+				InputStream ims = parent.getContext().getAssets().open(place.getThumbnailPhoto());
 				Drawable d = Drawable.createFromStream(ims, null);
 				thumbnail.setImageDrawable(d);
 			} catch (IOException e) {
@@ -300,13 +300,13 @@ public final class PlacesPageFragment extends Fragment {
 				e.printStackTrace();
 			}
 
-			name.setText(place.name);
-			about.setText(place.about);
+			name.setText(place.getName());
+			about.setText(place.getAbout());
 
 			View.OnClickListener listener = clickTracker.getOnClickListener(v -> {
 				Context view_context = v.getContext();
 				Intent intent = new Intent(view_context, LandmarkDetailsActivity.class);
-				intent.putExtra("placeName", place.name);
+				intent.putExtra("placeName", place.getName());
 				view_context.startActivity(intent);
 			});
 
@@ -398,8 +398,8 @@ public final class PlacesPageFragment extends Fragment {
 			if (holder instanceof CardViewHolder) {
 				CardViewHolder card_view_holder = (CardViewHolder) holder;
 				int index = position - 1;
-				card_view_holder.image.updatePhotoPath(landmarks[index].thumbnailPhoto);
-				card_view_holder.label.setText(landmarks[index].name);
+				card_view_holder.image.updatePhotoPath(landmarks[index].getThumbnailPhoto());
+				card_view_holder.label.setText(landmarks[index].getName());
 			}
 		}
 

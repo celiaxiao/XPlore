@@ -90,7 +90,7 @@ public class LandmarkDatabase {
                 String jsonString = loadJSONFromAsset(context, this.FILELIST[i]);
                 Landmark landmark = gson.fromJson(jsonString, Landmark.class);
                 this.list.add(landmark);
-                this.map.put(landmark.name, landmark);
+                this.map.put(landmark.getName(), landmark);
             }
         }
         else if(order.equals("whole")){
@@ -100,7 +100,7 @@ public class LandmarkDatabase {
             Type arraylistType = new TypeToken<ArrayList<Landmark>>(){}.getType();
             this.list = gson.fromJson(jsonString, arraylistType);
             for(int i = 0; i < this.list.size(); i++){
-                this.map.put(this.list.get(i).name, this.list.get(i));
+                this.map.put(this.list.get(i).getName(), this.list.get(i));
             }
         }
     }
@@ -140,8 +140,8 @@ public class LandmarkDatabase {
         if( landmark == null){
             return -1.0;
         }
-        String first = (String) landmark.coordinates.first;
-        String second = (String) landmark.coordinates.second;
+        String first = (String) landmark.getCoordinates().first;
+        String second = (String) landmark.getCoordinates().second;
         Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
         double dist = this.distanceBetween(userLocation, locationCoor);
         return dist;
@@ -202,8 +202,8 @@ public class LandmarkDatabase {
     public ArrayList<Pair<Landmark, Double>> nearestLocations(Pair<Double, Double>  userLocation, int num){
         ArrayList<Pair<Landmark, Double>> nearestList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
-            String first = (String) this.list.get(i).coordinates.first;
-            String second = (String) this.list.get(i).coordinates.second;
+            String first = (String) this.list.get(i).getCoordinates().first;
+            String second = (String) this.list.get(i).getCoordinates().second;
             Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
             double dist = this.distanceBetween(userLocation, locationCoor);
             int origin = nearestList.size();
@@ -235,8 +235,8 @@ public class LandmarkDatabase {
     public ArrayList<Pair<Landmark, Double>> locationWithDistance(Pair<Double, Double> userLocation) {
         ArrayList<Pair<Landmark, Double>> distanceList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
-            String first = (String) this.list.get(i).coordinates.first;
-            String second = (String) this.list.get(i).coordinates.second;
+            String first = (String) this.list.get(i).getCoordinates().first;
+            String second = (String) this.list.get(i).getCoordinates().second;
             Pair<Double, Double> locationCoor = new Pair<>(
                 Double.parseDouble(first),
                 Double.parseDouble(second)
@@ -323,7 +323,8 @@ public class LandmarkDatabase {
                 if( landmark != null ){
                     int weight = 0;
                     for( int z = 0; z < amenities.size(); z++ ){
-                        if( landmark.amenities.get(amenities.get(z)) == true ){
+                        // FIXME potential null pointer
+                        if( landmark.getAmenities().get(amenities.get(z)) == true ){
                             weight = (weight*10) + 5 - z;
                         }
                     }
@@ -386,7 +387,8 @@ public class LandmarkDatabase {
                 if( landmark != null ){
                     int weight = 0;
                     for( int z = 0; z < amenities.size(); z++ ){
-                        if( landmark.amenities.get(amenities.get(z)) == true ){
+                        // FIXME potential null pointer
+                        if( landmark.getAmenities().get(amenities.get(z)) == true ){
 //                            weight = (weight*10) + 5 - z;
                             weight += 1;
                         }
