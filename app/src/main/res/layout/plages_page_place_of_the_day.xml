@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="84dp">
+
+	<TextView
+		android:id="@+id/placesPlaceOfTheDay"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:lineHeight="24dp"
+		android:text="@string/placesPlaceOfTheDay"
+		android:textColor="@color/black"
+		android:textSize="20sp"
+		android:textStyle="bold"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<androidx.cardview.widget.CardView
+		android:id="@+id/cardViewPlaceOfTheDay"
+		android:layout_width="match_parent"
+		android:layout_height="170dp"
+		android:layout_marginTop="12dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/placesPlaceOfTheDay">
+
+		<ImageView
+			 android:id="@+id/places_page_place_of_the_day_thumbnail"
+			 android:layout_width="match_parent"
+			 android:layout_height="match_parent"
+			 android:scaleType="centerCrop"
+			 android:src="@drawable/biomed_lib" />
+
+	</androidx.cardview.widget.CardView>
+
+	<androidx.cardview.widget.CardView
+		android:id="@+id/cardViewPlaceOfTheDayDescription"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="12dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintHorizontal_bias="0"
+		app:layout_constraintTop_toBottomOf="@id/cardViewPlaceOfTheDay"
+		app:layout_constraintBottom_toBottomOf="parent">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			 android:layout_width="match_parent"
+			 android:layout_height="wrap_content" >
+
+			 <TextView
+				  android:id="@+id/places_page_place_of_the_day_name"
+				  android:layout_width="0dp"
+				  android:layout_height="wrap_content"
+				  android:layout_marginStart="16dp"
+				  android:layout_marginTop="12dp"
+				  android:letterSpacing="0.0125"
+				  android:text="Biomedical Library"
+				  android:textColor="@color/colorPrimaryDark"
+				  android:textSize="20sp"
+				  android:textFontWeight="600"
+				  app:layout_constraintEnd_toStartOf="@id/places_page_place_of_the_day_icons"
+				  app:layout_constraintHorizontal_bias="0.0"
+				  app:layout_constraintStart_toStartOf="parent"
+				  app:layout_constraintTop_toTopOf="parent" />
+
+			 <LinearLayout
+				  android:id="@+id/places_page_place_of_the_day_icons"
+				  android:layout_width="wrap_content"
+				  android:layout_height="16dp"
+				  android:layout_marginStart="16dp"
+				  android:layout_marginEnd="16dp"
+				  android:layout_marginTop="18dp"
+				  android:divider="@drawable/places_divider"
+				  android:showDividers="middle"
+				  app:layout_constraintEnd_toEndOf="parent"
+				  app:layout_constraintTop_toTopOf="parent" >
+
+				  <ImageView
+					  android:id="@+id/places_page_place_of_the_day_restroom"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:src="@drawable/ic_restroom"
+					  android:tint="#949292" />
+
+				  <ImageView
+					  android:id="@+id/places_page_place_of_the_day_cafe"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:src="@drawable/ic_local_cafe"
+					  android:tint="#949292" />
+
+				  <ImageView
+					  android:id="@+id/places_page_place_of_the_day_restaurant"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:src="@drawable/ic_restaurant"
+					  android:tint="#949292" />
+
+				  <ImageView
+					  android:id="@+id/places_page_place_of_the_day_bus_stop"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:src="@drawable/ic_directions_bus"
+					  android:tint="#949292" />
+
+				  <ImageView
+					  android:id="@+id/places_page_place_of_the_day_parking"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:src="@drawable/ic_local_parking"
+					  android:tint="#949292" />
+
+			 </LinearLayout>
+
+			 <TextView
+				  android:id="@+id/places_page_place_of_the_day_about"
+				  android:layout_width="0dp"
+				  android:layout_height="wrap_content"
+				  android:layout_marginStart="16dp"
+				  android:layout_marginTop="8dp"
+				  android:layout_marginEnd="16dp"
+				  android:lineSpacingMultiplier="1.2"
+				  android:maxLines="3"
+				  android:ellipsize="end"
+				  android:text="@string/places_card_description"
+				  android:textColor="@color/black"
+				  android:textSize="14sp"
+				  app:layout_constraintEnd_toEndOf="parent"
+				  app:layout_constraintStart_toStartOf="parent"
+				  app:layout_constraintTop_toBottomOf="@id/places_page_place_of_the_day_name" />
+
+			 <TextView
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:layout_gravity="bottom|right"
+				  android:layout_marginEnd="12dp"
+				  android:layout_marginTop="10dp"
+				  android:layout_marginBottom="10dp"
+				  android:lineSpacingMultiplier="1.2"
+				  android:text="@string/places_learn_more"
+				  android:textColor="@color/primary"
+				  android:textFontWeight="600"
+				  android:textSize="15sp"
+				  app:layout_constraintEnd_toEndOf="parent"
+				  app:layout_constraintTop_toBottomOf="@id/places_page_place_of_the_day_about"
+				  app:layout_constraintBottom_toBottomOf="parent" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

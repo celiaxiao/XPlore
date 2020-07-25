@@ -2,7 +2,6 @@ package com.UCSDTripleC.XPloreUCSD;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -17,14 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -48,33 +46,6 @@ public final class PlacesPageFragment extends Fragment {
 	 * Tracks if this page has been clicked; used to prevent multiple clicks.
 	 */
 	private ClickTracker clickTracker;
-
-	/**
-	 * A landmark block, consisting of an image resource and a name.
-	 */
-	private static final class LandmarkInfo {
-		/**
-		 * The path of the image of this landmark.
-		 */
-		private String photoPath;
-
-		/**
-		 * The name of this landmark.
-		 */
-		private String name;
-
-		/**
-		 * A convenient constructor.
-		 *
-		 * @param photoPath the path to the image
-		 * @param name the name of this landmark
-		 */
-		@SuppressWarnings("WeakerAccess")
-		public LandmarkInfo(String photoPath, String name) {
-			this.photoPath = photoPath;
-			this.name = name;
-		}
-	}
 
 	/**
 	 * A smarter {@code ImageView} that automatically resizes its internal upon size change.
@@ -151,8 +122,9 @@ public final class PlacesPageFragment extends Fragment {
 		 *
 		 * @param photoPath the new path to the photo
 		 */
-		public void setPhotoPath(String photoPath) {
+		public void updatePhotoPath(String photoPath) {
 			this.photoPath = photoPath;
+			// FIXME actually update the photo
 		}
 
 		/**
@@ -176,13 +148,44 @@ public final class PlacesPageFragment extends Fragment {
 	 * {@code RecyclerView}.
 	 */
 	private final class RecyclerAdapter
-		extends RecyclerView.Adapter<RecyclerAdapter.CardViewHolder>
+		extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 	{
+		/**
+		 * The type ID of a {@code PlaceOfTheDayHolder}.
+		 */
+		private final int TYPE_PLACE_OF_THE_DAY_HOLDER = 0;
+
+		/**
+		 * The type ID of a {@code CardViewHolder}.
+		 */
+		private final int TYPE_CARD_VIEW_HOLDER = 1;
 
 		/**
 		 * The data set.
 		 */
-		private LandmarkInfo[] landmarks;
+		private Landmark[] landmarks;
+
+		/**
+		 * Describes the Place of the Day layout and metadata about its place within the
+		 * {@code RecyclerView}.
+		 */
+		public class PlaceOfTheDayHolder extends RecyclerView.ViewHolder {
+
+			/**
+			 * The Place of the Day layout.
+			 */
+			public ConstraintLayout layout;
+
+			/**
+			 * Constructs a new {@code PlaceOfTheDayHolder}.
+			 *
+			 * @param layout the Place of the Day layout
+			 */
+			public PlaceOfTheDayHolder(ConstraintLayout layout) {
+				super(layout);
+				this.layout = layout;
+			}
+		}
 
 		/**
 		 * Describes a card view and metadata about its place within the {@code RecyclerView}.
@@ -222,9 +225,9 @@ public final class PlacesPageFragment extends Fragment {
 		/**
 		 * Constructs a new {@code RecyclerAdapter}.
 		 *
-		 * @param landmarks the {@code LandmarkInfo} array to display
+		 * @param landmarks the {@code Landmark} array to display
 		 */
-		public RecyclerAdapter(LandmarkInfo[] landmarks) {
+		public RecyclerAdapter(Landmark[] landmarks) {
 			this.landmarks = landmarks;
 		}
 
@@ -235,11 +238,97 @@ public final class PlacesPageFragment extends Fragment {
 		 * @param parent the {@code ViewGroup} into which the new {@code View} will be added after
 		 * it is bound to an adapter position.
 		 * @param viewType the view type of the new {@code View}
-		 * @return a newly constructed {@code View} that can represent the items of the given type
+		 * @return a newly constructed {@code ViewHolder} that can represent the items of the given
+		 * type
 		 */
 		// TODO support section title view type
+		@NonNull
 		@Override
-		public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+			switch (viewType) {
+				case TYPE_PLACE_OF_THE_DAY_HOLDER: return onCreatePlaceOfTheDayHolder(parent);
+				case TYPE_CARD_VIEW_HOLDER: return onCreateCardViewHolder(parent);
+				default: throw new IllegalStateException("view type must be valid");
+			}
+		}
+
+		/**
+		 * Called when {@code RecyclerView} needs a new {@code RecyclerAdapter.PlaceOfTheDayHolder}.
+		 *
+		 * @param parent the {@code ViewGroup} into which the new {@code View} will be added after
+		 * it is bound to an adapter position.
+		 * @return a newly constructed {@code CardViewHolder}
+		 */
+		private PlaceOfTheDayHolder onCreatePlaceOfTheDayHolder(@NonNull ViewGroup parent) {
+			ConstraintLayout layout = (ConstraintLayout) LayoutInflater
+				.from(parent.getContext())
+				.inflate(R.layout.plages_page_place_of_the_day, parent, false);
+
+			Landmark place = landmarks[hashDate(landmarks.length)];
+
+			ImageView iv_restroom = layout.findViewById(R.id.places_page_place_of_the_day_restroom);
+			ImageView iv_cafe = layout.findViewById(R.id.places_page_place_of_the_day_cafe);
+			ImageView iv_restaurant = layout.findViewById(R.id.places_page_place_of_the_day_restaurant);
+			ImageView iv_bus_stop = layout.findViewById(R.id.places_page_place_of_the_day_bus_stop);
+			ImageView iv_parking = layout.findViewById(R.id.places_page_place_of_the_day_parking);
+			ImageView iv_thumbnail = layout.findViewById(R.id.places_page_place_of_the_day_thumbnail);
+			TextView tv_name = layout.findViewById(R.id.places_page_place_of_the_day_name);
+			TextView tv_about = layout.findViewById(R.id.places_page_place_of_the_day_about);
+
+			int color = ContextCompat.getColor(layout.getContext(), R.color.colorPrimaryDark);
+
+			// FIXME proper error handling
+			if (place.amenities != null) {
+				Boolean result;
+				result = place.amenities.get("restroom");
+				if (result != null && result) iv_restroom.setColorFilter(color);
+				result = place.amenities.get("cafe");
+				if (result != null && result) iv_cafe.setColorFilter(color);
+				result = place.amenities.get("restaurant");
+				if (result != null && result) iv_restaurant.setColorFilter(color);
+				result = place.amenities.get("busstop");
+				if (result != null && result) iv_bus_stop.setColorFilter(color);
+				result = place.amenities.get("parking");
+				if (result != null && result) iv_parking.setColorFilter(color);
+			}
+
+			try {
+				InputStream ims = parent.getContext().getAssets().open(place.thumbnailPhoto);
+				Drawable d = Drawable.createFromStream(ims, null);
+				iv_thumbnail.setImageDrawable(d);
+			} catch (IOException e) {
+				// FIXME proper error handling
+				e.printStackTrace();
+			}
+
+			tv_name.setText(place.name);
+			tv_about.setText(place.about);
+
+			View.OnClickListener listener = clickTracker.getOnClickListener(v -> {
+				Context view_context = v.getContext();
+				Intent intent = new Intent(view_context, LandmarkDetailsActivity.class);
+				intent.putExtra("placeName", place.name);
+				view_context.startActivity(intent);
+			});
+
+			layout
+				.findViewById(R.id.cardViewPlaceOfTheDay)
+				.setOnClickListener(listener);
+			layout
+				.findViewById(R.id.cardViewPlaceOfTheDayDescription)
+				.setOnClickListener(listener);
+
+			return new PlaceOfTheDayHolder(layout);
+		}
+
+		/**
+		 * Called when {@code RecyclerView} needs a new {@code RecyclerAdapter.CardViewHolder}.
+		 *
+		 * @param parent the {@code ViewGroup} into which the new {@code View} will be added after
+		 * it is bound to an adapter position.
+		 * @return a newly constructed {@code CardViewHolder}
+		 */
+		private CardViewHolder onCreateCardViewHolder(@NonNull ViewGroup parent) {
 			// TODO make this a constant too somehow
 			final double ASPECT_RATIO = 5.0 / 4;
 			// TODO make all these constants in dimen
@@ -297,11 +386,38 @@ public final class PlacesPageFragment extends Fragment {
 			return new CardViewHolder(card, image, label);
 		}
 
+		/**
+		 * Called by {@code RecyclerView} to display the data at the specified position.  Updates
+		 * the contents of the {@code RecyclerView.ViewHolder.itemView} to reflect the item at the
+		 * given position.
+		 *
+		 * @param holder the {@code ViewHolder} to be updated to represent the contents of the item
+		 * at the given position in the data set
+		 * @param position the position of the item within the adapter's data set
+		 */
 		@Override
-		public void onBindViewHolder(CardViewHolder holder, int position) {
+		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 			// TODO consider doing resizing here?
-			holder.image.setPhotoPath(landmarks[position].photoPath);
-			holder.label.setText(landmarks[position].name);
+			// do nothing for PlaceOfTheDayHolder
+			if (holder instanceof CardViewHolder) {
+				CardViewHolder card_view_holder = (CardViewHolder) holder;
+				int index = position - 1;
+				card_view_holder.image.updatePhotoPath(landmarks[index].thumbnailPhoto);
+				card_view_holder.label.setText(landmarks[index].name);
+			}
+		}
+
+		/**
+		 * Return the view type of the item at position for the purposes of view recycling.
+		 *
+		 * @param position position to query
+		 * @return integer value identifying the type of the view needed to represent the item at
+		 * position (type codes need not be contiguous)
+		 */
+		@Override
+		public int getItemViewType(int position) {
+			if (position == 0) return TYPE_PLACE_OF_THE_DAY_HOLDER;
+			return TYPE_CARD_VIEW_HOLDER;
 		}
 
 		/**
@@ -311,7 +427,32 @@ public final class PlacesPageFragment extends Fragment {
 		 */
 		@Override
 		public int getItemCount() {
-			return landmarks.length;
+			// Place of the Day header and cards
+			return 1 + landmarks.length;
+		}
+
+		/**
+		 * Returns the {@code SpanSizeLookup} to use.
+		 *
+		 * @return the {@code SpanSizeLookup} to use.
+		 */
+		public GridLayoutManager.SpanSizeLookup getSpanSizeLookup() {
+			return new GridLayoutManager.SpanSizeLookup() {
+				/**
+				 * Returns the number of spans occupied by the item at {@code position}.
+				 *
+				 * @param position the adapter position of the item
+				 * @return the number of spans occupied by the item at the provided position
+				 */
+				@Override
+				public int getSpanSize(int position) {
+					switch (getItemViewType(position)) {
+						case TYPE_PLACE_OF_THE_DAY_HOLDER: return 2;
+						case TYPE_CARD_VIEW_HOLDER: return 1;
+						default: throw new IllegalStateException("invalid item view type");
+					}
+				}
+			};
 		}
 	}
 
@@ -379,70 +520,21 @@ public final class PlacesPageFragment extends Fragment {
 		search_view_parent.removeView(search_mag_icon);
 		search_view_parent.addView(search_mag_icon);
 
-		ArrayList<Landmark> locations = LandmarkDatabase.getLocations(getContext());
-		if (locations == null) return;
-		Landmark place = locations.get(hashDate(locations.size()));
-
-		ImageView iv_restroom = view.findViewById(R.id.places_page_place_of_the_day_restroom);
-		ImageView iv_cafe = view.findViewById(R.id.places_page_place_of_the_day_cafe);
-		ImageView iv_restaurant = view.findViewById(R.id.places_page_place_of_the_day_restaurant);
-		ImageView iv_bus_stop = view.findViewById(R.id.places_page_place_of_the_day_bus_stop);
-		ImageView iv_parking = view.findViewById(R.id.places_page_place_of_the_day_parking);
-		ImageView iv_thumbnail = view.findViewById(R.id.places_page_place_of_the_day_thumbnail);
-		TextView tv_name = view.findViewById(R.id.places_page_place_of_the_day_name);
-		TextView tv_about = view.findViewById(R.id.places_page_place_of_the_day_about);
-
-		int color = ContextCompat.getColor(view.getContext(), R.color.colorPrimaryDark);
-
-		if (place.amenities.get("restroom")) iv_restroom.setColorFilter(color);
-		if (place.amenities.get("cafe")) iv_cafe.setColorFilter(color);
-		if (place.amenities.get("restaurant")) iv_restaurant.setColorFilter(color);
-		if (place.amenities.get("busstop")) iv_bus_stop.setColorFilter(color);
-		if (place.amenities.get("parking")) iv_parking.setColorFilter(color);
-
-		try {
-			InputStream ims = getContext().getAssets().open(place.thumbnailPhoto);
-			Drawable d = Drawable.createFromStream(ims, null);
-			iv_thumbnail.setImageDrawable(d);
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-
-		tv_name.setText(place.name);
-		tv_about.setText(place.about);
-
-		View.OnClickListener listener = v -> {
-			if (!clickTracker.isClicked()) {
-				clickTracker.click();
-				Context view_context = v.getContext();
-				Intent intent = new Intent(view_context, LandmarkDetailsActivity.class);
-				intent.putExtra("placeName", place.name);
-				view_context.startActivity(intent);
-			}
-		};
-
-		view
-			.findViewById(R.id.cardViewPlaceOfTheDay)
-			.setOnClickListener(listener);
-		view
-			.findViewById(R.id.cardViewPlaceOfTheDayDescription)
-			.setOnClickListener(listener);
-
-		ArrayList<LandmarkInfo> landmarks = new ArrayList<>(locations.size());
-
-		for (Landmark loc : locations) {
-			 landmarks.add(new LandmarkInfo(loc.thumbnailPhoto, loc.name));
-		}
-
+		ArrayList<Landmark> landmarks = LandmarkDatabase.getLocations(getContext());
+		// empty the page on error
+		// FIXME proper error handling
+		if (landmarks == null) return;
 
 		RecyclerView landmark_recycler_view = view.findViewById(R.id.landmark_recycler_view);
+		GridLayoutManager layout_manager = new GridLayoutManager(getContext(), 2);
+		RecyclerAdapter adapter = new RecyclerAdapter(landmarks.toArray(new Landmark[0]));
 
 		landmark_recycler_view.setHasFixedSize(true);
-		landmark_recycler_view.setLayoutManager(new GridLayoutManager(getContext(), 2));
-		landmark_recycler_view.setAdapter(new RecyclerAdapter(landmarks.toArray(
-			new LandmarkInfo[0]))
-		);
+		layout_manager.setSpanSizeLookup(adapter.getSpanSizeLookup());
+		landmark_recycler_view.setLayoutManager(layout_manager);
+		landmark_recycler_view.setAdapter(adapter);
 
+		// FIXME delete dead code
 		// addLandmarks(getContext(), view, landmarks.toArray(new LandmarkInfo[0]));
 	}
 
@@ -462,6 +554,7 @@ public final class PlacesPageFragment extends Fragment {
 	 * @param view the view to put children in
 	 * @param landmarks the landmarks
 	 */
+	/*
 	private void addLandmarks(Context context, View view, LandmarkInfo[] landmarks) {
 		if (landmarks.length == 0) return;
 
@@ -478,8 +571,6 @@ public final class PlacesPageFragment extends Fragment {
 		int length = odd ? landmarks.length - 1 : landmarks.length - 2;
 
 		for (int i = 0; i < length; i += 2) {
-			// FIXME remove this code
-			/*
 			landmark_recycler_view.addView(getRow(
 				context,
 				ROW_MARGIN,
@@ -487,22 +578,16 @@ public final class PlacesPageFragment extends Fragment {
 				landmarks[i],
 				landmarks[i + 1]
 			));
-			 */
 		}
 
 		if (odd) {
-			// FIXME remove this code
-			/*
 			landmark_recycler_view.addView(getRow(
 				context,
 				BOTTOM_MARGIN,
 				GAP,
 				landmarks[landmarks.length - 1]
 			));
-			 */
 		} else {
-			// FIXME remove this code
-			/*
 			landmark_recycler_view.addView(getRow(
 				context,
 				BOTTOM_MARGIN,
@@ -510,9 +595,10 @@ public final class PlacesPageFragment extends Fragment {
 				landmarks[landmarks.length - 2],
 				landmarks[landmarks.length - 1]
 			));
-			 */
 		}
 	}
+	// FIXME remove dead code
+	*/
 
 	/**
 	 * Returns a new TableRow composed of 1 to 2 landmark blocks.
@@ -525,6 +611,8 @@ public final class PlacesPageFragment extends Fragment {
 	 * @return the new TableRow
 	 * @throws IllegalArgumentException when either {@code bottomMargin} or {@code gap} is negative
 	 */
+	/*
+	FIXME remove dead code
 	private TableRow getRow(
 		Context context,
 		final int bottomMargin,
@@ -641,6 +729,7 @@ public final class PlacesPageFragment extends Fragment {
 
 		return row;
 	}
+	*/
 
 	/**
 	 * Converts the DP amount to XP.
