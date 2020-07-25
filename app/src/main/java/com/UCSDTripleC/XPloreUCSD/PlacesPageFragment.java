@@ -64,6 +64,11 @@ public final class PlacesPageFragment extends Fragment {
 		private String photoPath;
 
 		/**
+		 * If {@code photoPath} has been updated.
+		 */
+		private boolean photoPathDirty;
+
+		/**
 		 * Constructs a {@code SmartImageView} with an image resource id and an aspect ratio.  It
 		 * also resizes the parent to the height of this image view plus the height of the label.
 		 *
@@ -86,23 +91,21 @@ public final class PlacesPageFragment extends Fragment {
 			this.getViewTreeObserver().addOnPreDrawListener(() -> {
 				int new_width = getWidth();
 
-				if (new_width != width) {
+				if (new_width != width || photoPathDirty) {
 					ViewGroup.LayoutParams layout = getLayoutParams();
 
 					layout.height = (int) (new_width / aspectRatio);
 					width = new_width;
 
 					if (this.photoPath != null) {
-						InputStream ims = null;
 						try {
-							ims = context.getAssets().open(this.photoPath);
+							InputStream input = context.getAssets().open(this.photoPath);
+							Bitmap src = BitmapFactory.decodeStream(input);
+							setBackground(resize(src, width, layout.height));
 						} catch (IOException e) {
-							// FIXME potential null pointer here?
+							// FIXME proper error handling
 							e.printStackTrace();
 						}
-						Bitmap src = BitmapFactory.decodeStream(ims);
-
-						setBackground(resize(src, width, layout.height));
 					}
 
 					// set the size of the parent instead of self as parent doesn't know its height
@@ -111,6 +114,8 @@ public final class PlacesPageFragment extends Fragment {
 					ViewGroup.LayoutParams params = parent.getLayoutParams();
 					params.height = layout.height + dpToXp(labelHeight);
 					parent.setLayoutParams(params);
+
+					photoPathDirty = false;
 
 					requestLayout();
 				}
@@ -126,7 +131,7 @@ public final class PlacesPageFragment extends Fragment {
 		 */
 		public void updatePhotoPath(String photoPath) {
 			this.photoPath = photoPath;
-			// FIXME actually update the photo
+			this.photoPathDirty = true;
 		}
 
 		/**
@@ -268,14 +273,15 @@ public final class PlacesPageFragment extends Fragment {
 
 			Landmark place = landmarks[hashDate(landmarks.length)];
 
-			ImageView iv_restroom = layout.findViewById(R.id.places_page_place_of_the_day_restroom);
-			ImageView iv_cafe = layout.findViewById(R.id.places_page_place_of_the_day_cafe);
-			ImageView iv_restaurant = layout.findViewById(R.id.places_page_place_of_the_day_restaurant);
-			ImageView iv_bus_stop = layout.findViewById(R.id.places_page_place_of_the_day_bus_stop);
-			ImageView iv_parking = layout.findViewById(R.id.places_page_place_of_the_day_parking);
-			ImageView iv_thumbnail = layout.findViewById(R.id.places_page_place_of_the_day_thumbnail);
-			TextView tv_name = layout.findViewById(R.id.places_page_place_of_the_day_name);
-			TextView tv_about = layout.findViewById(R.id.places_page_place_of_the_day_about);
+			ImageView restroom = layout.findViewById(R.id.places_page_place_of_the_day_restroom);
+			ImageView cafe = layout.findViewById(R.id.places_page_place_of_the_day_cafe);
+			ImageView restaurant =
+				layout.findViewById(R.id.places_page_place_of_the_day_restaurant);
+			ImageView bus_stop = layout.findViewById(R.id.places_page_place_of_the_day_bus_stop);
+			ImageView parking = layout.findViewById(R.id.places_page_place_of_the_day_parking);
+			ImageView thumbnail = layout.findViewById(R.id.places_page_place_of_the_day_thumbnail);
+			TextView name = layout.findViewById(R.id.places_page_place_of_the_day_name);
+			TextView about = layout.findViewById(R.id.places_page_place_of_the_day_about);
 
 			int color = ContextCompat.getColor(layout.getContext(), R.color.colorPrimaryDark);
 
@@ -283,28 +289,28 @@ public final class PlacesPageFragment extends Fragment {
 			if (place.amenities != null) {
 				Boolean result;
 				result = place.amenities.get("restroom");
-				if (result != null && result) iv_restroom.setColorFilter(color);
+				if (result != null && result) restroom.setColorFilter(color);
 				result = place.amenities.get("cafe");
-				if (result != null && result) iv_cafe.setColorFilter(color);
+				if (result != null && result) cafe.setColorFilter(color);
 				result = place.amenities.get("restaurant");
-				if (result != null && result) iv_restaurant.setColorFilter(color);
+				if (result != null && result) restaurant.setColorFilter(color);
 				result = place.amenities.get("busstop");
-				if (result != null && result) iv_bus_stop.setColorFilter(color);
+				if (result != null && result) bus_stop.setColorFilter(color);
 				result = place.amenities.get("parking");
-				if (result != null && result) iv_parking.setColorFilter(color);
+				if (result != null && result) parking.setColorFilter(color);
 			}
 
 			try {
 				InputStream ims = parent.getContext().getAssets().open(place.thumbnailPhoto);
 				Drawable d = Drawable.createFromStream(ims, null);
-				iv_thumbnail.setImageDrawable(d);
+				thumbnail.setImageDrawable(d);
 			} catch (IOException e) {
 				// FIXME proper error handling
 				e.printStackTrace();
 			}
 
-			tv_name.setText(place.name);
-			tv_about.setText(place.about);
+			name.setText(place.name);
+			about.setText(place.about);
 
 			View.OnClickListener listener = clickTracker.getOnClickListener(v -> {
 				Context view_context = v.getContext();
@@ -397,7 +403,6 @@ public final class PlacesPageFragment extends Fragment {
 		 */
 		@Override
 		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-			// TODO consider doing resizing here?
 			// do nothing for PlaceOfTheDayHolder
 			if (holder instanceof CardViewHolder) {
 				CardViewHolder card_view_holder = (CardViewHolder) holder;
