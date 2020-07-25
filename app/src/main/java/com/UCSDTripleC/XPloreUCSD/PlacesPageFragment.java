@@ -107,20 +107,11 @@ public final class PlacesPageFragment extends Fragment {
 					if (this.photoPath != null) {
 						SoftReference<Drawable> ref = imageCache.get(this.photoPath);
 						Drawable image = ref != null ? ref.get() : null;
-						if (image != null) {
-							setBackground(image);
-						} else {
-							try {
-								InputStream input = context.getAssets().open(this.photoPath);
-								Bitmap src = BitmapFactory.decodeStream(input);
-								image = resize(src, width, layout.height);
-								imageCache.put(this.photoPath, new SoftReference<>(image));
-								setBackground(image);
-							} catch (IOException e) {
-								// FIXME proper error handling
-								e.printStackTrace();
-							}
+						if (image == null) {
+							image = load(context, this.photoPath, width, layout.height);
 						}
+						// FIXME proper error handling
+						if (image != null) setBackground(image);
 					}
 
 					// set the size of the parent instead of self as parent doesn't know its height
@@ -147,21 +138,6 @@ public final class PlacesPageFragment extends Fragment {
 		public void updatePhotoPath(String photoPath) {
 			this.photoPath = photoPath;
 			this.photoPathDirty = true;
-		}
-
-		/**
-		 * Get a resized image.
-		 *
-		 * @param src the source of the bitmap
-		 * @param width the target width of the image
-		 * @param height the target height of the image
-		 * @return the resized image
-		 */
-		private Drawable resize(Bitmap src, int width, int height) {
-			return new BitmapDrawable(
-				getResources(),
-				Bitmap.createScaledBitmap(src, width, height, true
-			));
 		}
 	}
 
@@ -802,6 +778,48 @@ public final class PlacesPageFragment extends Fragment {
 		return row;
 	}
 	*/
+
+	/**
+	 * Get a resized image.
+	 *
+	 * @param src the source of the bitmap, must not be {@code null}
+	 * @param width the target width of the image
+	 * @param height the target height of the image
+	 * @return the resized image
+	 */
+	private Drawable resize(@NonNull Bitmap src, int width, int height) {
+		return new BitmapDrawable(
+			getResources(),
+			Bitmap.createScaledBitmap(src, width, height, true
+		));
+	}
+
+	/**
+	 * Loads an image from disk.
+	 *
+	 * @param context the context to use, must not be {@code null}
+	 * @param photoPath the path to the image, must not be {@code null}
+	 * @param width the width of the image to use
+	 * @param height the height of the image to use
+	 * @return the image, or {@code null} on error
+	 */
+	public Drawable load(
+		@NonNull Context context,
+		@NonNull String photoPath,
+		int width,
+		int height
+	) {
+		Drawable image = null;
+		try {
+			InputStream input = context.getAssets().open(photoPath);
+			Bitmap src = BitmapFactory.decodeStream(input);
+			image = resize(src, width, height);
+			imageCache.put(photoPath, new SoftReference<>(image));
+		} catch (IOException e) {
+			// ignore the error and return null
+		}
+		return image;
+	}
 
 	/**
 	 * Converts the DP amount to XP.
