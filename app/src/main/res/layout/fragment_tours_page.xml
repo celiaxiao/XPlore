@@ -242,7 +242,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="59dp"
             android:divider="@android:color/transparent"
             android:dividerHeight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
