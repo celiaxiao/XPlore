@@ -27,6 +27,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.UCSDTripleC.XPloreUCSD.database.LandmarkDatabase;
 import com.UCSDTripleC.XPloreUCSD.database.Landmark;
@@ -52,7 +54,7 @@ public final class PlacesPageFragment extends Fragment {
 	 */
 	private static final class LandmarkInfo {
 		/**
-		 * The resource ID of the image of this landmark.
+		 * The path of the image of this landmark.
 		 */
 		private String photoPath;
 
@@ -85,21 +87,29 @@ public final class PlacesPageFragment extends Fragment {
 		private int width;
 
 		/**
+		 * The path to the photo.
+		 */
+		private String photoPath;
+
+		/**
 		 * Constructs a {@code SmartImageView} with an image resource id and an aspect ratio.  It
 		 * also resizes the parent to the height of this image view plus the height of the label.
 		 *
 		 * @param context the context used to create this instance
-		 * @param photoPath the path of the image, if {@code null} the background is not set
+		 * @param photoPath the path of the image, if it is {@code null} the background is not set
 		 * @param aspectRatio the desired aspect ratio (width / height)
 		 * @param labelHeight the height of the label, in dp
 		 */
 		public SmartImageView(
 			Context context,
+			// TODO remove this from the constructor?
 			String photoPath,
 			double aspectRatio,
 			int labelHeight
 		) {
 			super(context);
+
+			this.photoPath = photoPath;
 
 			this.getViewTreeObserver().addOnPreDrawListener(() -> {
 				int new_width = getWidth();
@@ -110,16 +120,20 @@ public final class PlacesPageFragment extends Fragment {
 					layout.height = (int) (new_width / aspectRatio);
 					width = new_width;
 
-					InputStream ims = null;
-					try {
-						ims = context.getAssets().open(photoPath);
-					} catch (IOException e) {
-						e.printStackTrace();
+					if (this.photoPath != null) {
+						InputStream ims = null;
+						try {
+							ims = context.getAssets().open(this.photoPath);
+						} catch (IOException e) {
+							// FIXME potential null pointer here?
+							e.printStackTrace();
+						}
+						Bitmap src = BitmapFactory.decodeStream(ims);
+
+						setBackground(resize(src, width, layout.height));
 					}
-					Bitmap src = BitmapFactory.decodeStream(ims);
 
-					setBackground(resize(src, width, layout.height));
-
+					// TODO investigate: why set the size of the parent instead of self?
 					View parent = (View) getParent();
 					ViewGroup.LayoutParams params = parent.getLayoutParams();
 					params.height = layout.height + dpToXp(labelHeight);
@@ -133,6 +147,15 @@ public final class PlacesPageFragment extends Fragment {
 		}
 
 		/**
+		 * Updates the path to the photo.
+		 *
+		 * @param photoPath the new path to the photo
+		 */
+		public void setPhotoPath(String photoPath) {
+			this.photoPath = photoPath;
+		}
+
+		/**
 		 * Get a resized image.
 		 *
 		 * @param src the source of the bitmap
@@ -141,7 +164,154 @@ public final class PlacesPageFragment extends Fragment {
 		 * @return the resized image
 		 */
 		private Drawable resize(Bitmap src, int width, int height) {
-			return new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(src, width, height, true));
+			return new BitmapDrawable(
+				getResources(),
+				Bitmap.createScaledBitmap(src, width, height, true
+			));
+		}
+	}
+
+	/**
+	 * Provides a binding from an app-specific data set to views that are displayed within a
+	 * {@code RecyclerView}.
+	 */
+	private final class RecyclerAdapter
+		extends RecyclerView.Adapter<RecyclerAdapter.CardViewHolder>
+	{
+
+		/**
+		 * The data set.
+		 */
+		private LandmarkInfo[] landmarks;
+
+		/**
+		 * Describes a card view and metadata about its place within the {@code RecyclerView}.
+		 */
+		public class CardViewHolder extends RecyclerView.ViewHolder {
+
+			/**
+			 * The card.
+			 */
+			public CardView card;
+
+			/**
+			 * The image inside the card.
+			 */
+			public SmartImageView image;
+
+			/**
+			 * The label inside the card.
+			 */
+			public TextView label;
+
+			/**
+			 * Constructs a new {@code CardViewHolder}.
+			 *
+			 * @param card the card
+			 * @param image the image inside the card
+			 * @param label the label inside the card
+			 */
+			public CardViewHolder(CardView card, SmartImageView image, TextView label) {
+				super(card);
+				this.card = card;
+				this.image = image;
+				this.label = label;
+			}
+		}
+
+		/**
+		 * Constructs a new {@code RecyclerAdapter}.
+		 *
+		 * @param landmarks the {@code LandmarkInfo} array to display
+		 */
+		public RecyclerAdapter(LandmarkInfo[] landmarks) {
+			this.landmarks = landmarks;
+		}
+
+		/**
+		 * Called when {@code RecyclerView} needs a new {@code RecyclerView.ViewHolder} of the given
+		 * type to represent an item.
+		 *
+		 * @param parent the {@code ViewGroup} into which the new {@code View} will be added after
+		 * it is bound to an adapter position.
+		 * @param viewType the view type of the new {@code View}
+		 * @return a newly constructed {@code View} that can represent the items of the given type
+		 */
+		// TODO support section title view type
+		@Override
+		public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+			// TODO make this a constant too somehow
+			final double ASPECT_RATIO = 5.0 / 4;
+			// TODO make all these constants in dimen
+			final int LABEL_HEIGHT_DP = 49;
+			final int LABEL_SIDE_MARGIN_DP = 5;
+			// FIXME set side margin using item decoration
+			// final int SIDE_MARGIN_DP = 5;
+			final int CORNER_RADIUS_DP = 5;
+			final int TEXT_SIZE_SP = 15;
+
+			CardView card;
+			CardView.LayoutParams label_layout;
+			TextView label;
+
+			label_layout = new CardView.LayoutParams(
+				CardView.LayoutParams.MATCH_PARENT,
+				dpToXp(LABEL_HEIGHT_DP)
+			);
+			label_layout.gravity = Gravity.BOTTOM;
+			label_layout.leftMargin = dpToXp(LABEL_SIDE_MARGIN_DP);
+			label_layout.rightMargin = dpToXp(LABEL_SIDE_MARGIN_DP);
+
+			card = new CardView(parent.getContext());
+			card.setRadius(dpToXp(CORNER_RADIUS_DP));
+
+			label = new TextView(parent.getContext());
+			label.setBackgroundColor(0xFFFFFFFF);
+			// TODO load this from color.xml?
+			label.setTextColor(0xFF162B46);
+			label.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE_SP);
+			// this avoids font weight and looks similar enough
+			label.setTypeface(Typeface.DEFAULT_BOLD);
+			label.setGravity(Gravity.CENTER);
+			label.setMaxLines(2);
+			label.setEllipsize(TextUtils.TruncateAt.END);
+
+			// requires label
+			card.setOnClickListener(clickTracker.getOnClickListener(view -> {
+				Context context = view.getContext();
+				Intent intent = new Intent(context, LandmarkDetailsActivity.class);
+				intent.putExtra("placeName", label.getText());
+				context.startActivity(intent);
+			}));
+
+			SmartImageView image = new SmartImageView(
+				parent.getContext(),
+				null,
+				ASPECT_RATIO,
+				LABEL_HEIGHT_DP
+			);
+
+			card.addView(image);
+			card.addView(label, label_layout);
+
+			return new CardViewHolder(card, image, label);
+		}
+
+		@Override
+		public void onBindViewHolder(CardViewHolder holder, int position) {
+			// TODO consider doing resizing here?
+			holder.image.setPhotoPath(landmarks[position].photoPath);
+			holder.label.setText(landmarks[position].name);
+		}
+
+		/**
+		 * Returns the total number of items in the data set held by the adapter.
+		 *
+		 * @return the total number of items in the data set held by the adapter
+		 */
+		@Override
+		public int getItemCount() {
+			return landmarks.length;
 		}
 	}
 
@@ -264,7 +434,16 @@ public final class PlacesPageFragment extends Fragment {
 			 landmarks.add(new LandmarkInfo(loc.thumbnailPhoto, loc.name));
 		}
 
-		addLandmarks(getContext(), view, landmarks.toArray(new LandmarkInfo[0]));
+
+		RecyclerView landmark_recycler_view = view.findViewById(R.id.landmark_recycler_view);
+
+		landmark_recycler_view.setHasFixedSize(true);
+		landmark_recycler_view.setLayoutManager(new GridLayoutManager(getContext(), 2));
+		landmark_recycler_view.setAdapter(new RecyclerAdapter(landmarks.toArray(
+			new LandmarkInfo[0]))
+		);
+
+		// addLandmarks(getContext(), view, landmarks.toArray(new LandmarkInfo[0]));
 	}
 
 	/**
@@ -295,35 +474,43 @@ public final class PlacesPageFragment extends Fragment {
 		);
 		final int GAP = res.getDimensionPixelSize(R.dimen.places_page_fragment_grid_gap_margin);
 
-		TableLayout landmarkTableLayout = view.findViewById(R.id.landmarkTableLayout);
 		boolean odd = landmarks.length % 2 != 0;
 		int length = odd ? landmarks.length - 1 : landmarks.length - 2;
 
 		for (int i = 0; i < length; i += 2) {
-			landmarkTableLayout.addView(getRow(
+			// FIXME remove this code
+			/*
+			landmark_recycler_view.addView(getRow(
 				context,
 				ROW_MARGIN,
 				GAP,
 				landmarks[i],
 				landmarks[i + 1]
 			));
+			 */
 		}
 
 		if (odd) {
-			landmarkTableLayout.addView(getRow(
+			// FIXME remove this code
+			/*
+			landmark_recycler_view.addView(getRow(
 				context,
 				BOTTOM_MARGIN,
 				GAP,
 				landmarks[landmarks.length - 1]
 			));
+			 */
 		} else {
-			landmarkTableLayout.addView(getRow(
+			// FIXME remove this code
+			/*
+			landmark_recycler_view.addView(getRow(
 				context,
 				BOTTOM_MARGIN,
 				GAP,
 				landmarks[landmarks.length - 2],
 				landmarks[landmarks.length - 1]
 			));
+			 */
 		}
 	}
 
