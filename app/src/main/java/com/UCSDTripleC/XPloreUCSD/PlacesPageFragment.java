@@ -35,8 +35,10 @@ import com.UCSDTripleC.XPloreUCSD.utils.ClickTracker;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * This is the Places page which contains some places and a grid of landmarks.
@@ -47,6 +49,11 @@ public final class PlacesPageFragment extends Fragment {
 	 * Tracks if this page has been clicked; used to prevent multiple clicks.
 	 */
 	private ClickTracker clickTracker;
+
+	/**
+	 * Caches the images loaded from disk to prevent lag spikes when scrolling.
+	 */
+	private HashMap<String, SoftReference<Drawable>> imageCache;
 
 	/**
 	 * A smarter {@code ImageView} that automatically resizes its internal upon size change.
@@ -98,13 +105,21 @@ public final class PlacesPageFragment extends Fragment {
 					width = new_width;
 
 					if (this.photoPath != null) {
-						try {
-							InputStream input = context.getAssets().open(this.photoPath);
-							Bitmap src = BitmapFactory.decodeStream(input);
-							setBackground(resize(src, width, layout.height));
-						} catch (IOException e) {
-							// FIXME proper error handling
-							e.printStackTrace();
+						SoftReference<Drawable> ref = imageCache.get(this.photoPath);
+						Drawable image = ref != null ? ref.get() : null;
+						if (image != null) {
+							setBackground(image);
+						} else {
+							try {
+								InputStream input = context.getAssets().open(this.photoPath);
+								Bitmap src = BitmapFactory.decodeStream(input);
+								image = resize(src, width, layout.height);
+								imageCache.put(this.photoPath, new SoftReference<>(image));
+								setBackground(image);
+							} catch (IOException e) {
+								// FIXME proper error handling
+								e.printStackTrace();
+							}
 						}
 					}
 
@@ -545,6 +560,7 @@ public final class PlacesPageFragment extends Fragment {
 		Bundle savedInstanceState
 	) {
 		clickTracker = new ClickTracker();
+		imageCache = new HashMap<>();
 		return inflater.inflate(R.layout.fragment_places_page, container, false);
 	}
 
