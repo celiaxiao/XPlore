@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -571,6 +572,8 @@ public final class PlacesPageFragment extends Fragment {
 		// empty the page on error
 		// FIXME proper error handling
 		if (landmarks == null) return;
+
+		Collections.sort(landmarks);
 
 		RecyclerView landmark_recycler_view = view.findViewById(R.id.landmark_recycler_view);
 		GridLayoutManager layout_manager = new GridLayoutManager(getContext(), 2);
