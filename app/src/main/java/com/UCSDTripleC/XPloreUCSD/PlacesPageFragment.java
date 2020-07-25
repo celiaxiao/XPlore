@@ -478,7 +478,9 @@ public final class PlacesPageFragment extends Fragment {
 		}
 
 		/**
-		 * Retrieve any offsets for the given item.  Pads them on left, right, and bottom.
+		 * Retrieve any offsets for the given item.  Pads them by {@code margin} on left and right
+		 * and by {@code margin * 2} on the bottom.  Pads the first item (Place of the Day) on the
+		 * bottom only.
 		 *
 		 * @param outRect rect to receive the output
 		 * @param view the child view to decorate
@@ -486,14 +488,19 @@ public final class PlacesPageFragment extends Fragment {
 		 * @param state the current state of the {@code RecyclerView}
 		 */
 		public void getItemOffsets(
-			Rect outRect,
+			@NonNull Rect outRect,
 			@NonNull View view,
 			@NonNull RecyclerView parent,
 			@NonNull RecyclerView.State state
 		) {
-			outRect.left = margin;
-			outRect.right = margin;
-			outRect.bottom = margin;
+			if (parent.getChildAdapterPosition(view) == 0) {
+				outRect.left = 0;
+				outRect.right = 0;
+			} else {
+				outRect.left = margin;
+				outRect.right = margin;
+			}
+			outRect.bottom = margin * 2;
 		}
 	}
 
@@ -546,7 +553,7 @@ public final class PlacesPageFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		final int MARGIN_DP = 5;
+		final int MARGIN_DP = 7;
 
 		view
 			.findViewById(R.id.placesSearchBarMask)
