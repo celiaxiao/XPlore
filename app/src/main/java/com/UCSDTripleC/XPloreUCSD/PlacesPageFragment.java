@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -104,7 +105,8 @@ public final class PlacesPageFragment extends Fragment {
 						setBackground(resize(src, width, layout.height));
 					}
 
-					// TODO investigate: why set the size of the parent instead of self?
+					// set the size of the parent instead of self as parent doesn't know its height
+					// should change as a result of changes in its children
 					View parent = (View) getParent();
 					ViewGroup.LayoutParams params = parent.getLayoutParams();
 					params.height = layout.height + dpToXp(labelHeight);
@@ -334,8 +336,6 @@ public final class PlacesPageFragment extends Fragment {
 			// TODO make all these constants in dimen
 			final int LABEL_HEIGHT_DP = 49;
 			final int LABEL_SIDE_MARGIN_DP = 5;
-			// FIXME set side margin using item decoration
-			// final int SIDE_MARGIN_DP = 5;
 			final int CORNER_RADIUS_DP = 5;
 			final int TEXT_SIZE_SP = 15;
 
@@ -447,12 +447,53 @@ public final class PlacesPageFragment extends Fragment {
 				@Override
 				public int getSpanSize(int position) {
 					switch (getItemViewType(position)) {
-						case TYPE_PLACE_OF_THE_DAY_HOLDER: return 2;
-						case TYPE_CARD_VIEW_HOLDER: return 1;
-						default: throw new IllegalStateException("invalid item view type");
+						case TYPE_PLACE_OF_THE_DAY_HOLDER:
+							return 2;
+						case TYPE_CARD_VIEW_HOLDER:
+							return 1;
+						default:
+							throw new IllegalStateException("invalid item view type");
 					}
 				}
 			};
+		}
+	}
+
+	/**
+	 * Decorates the item by padding them.
+	 */
+	public static class MarginItemDecoration extends RecyclerView.ItemDecoration {
+
+		/**
+		 * The margin to pad the items by.
+		 */
+		private int margin;
+
+		/**
+		 * Constructs a new {@code MarginItemDecoration} with a {@code margin}.
+		 * @param margin the margin to pad the items by
+		 */
+		public MarginItemDecoration(int margin) {
+			this.margin = margin;
+		}
+
+		/**
+		 * Retrieve any offsets for the given item.  Pads them on left, right, and bottom.
+		 *
+		 * @param outRect rect to receive the output
+		 * @param view the child view to decorate
+		 * @param parent the {@code RecyclerView} this ItemDecoration is decorating
+		 * @param state the current state of the {@code RecyclerView}
+		 */
+		public void getItemOffsets(
+			Rect outRect,
+			@NonNull View view,
+			@NonNull RecyclerView parent,
+			@NonNull RecyclerView.State state
+		) {
+			outRect.left = margin;
+			outRect.right = margin;
+			outRect.bottom = margin;
 		}
 	}
 
@@ -505,6 +546,8 @@ public final class PlacesPageFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
+		final int MARGIN_DP = 5;
+
 		view
 			.findViewById(R.id.placesSearchBarMask)
 			.setOnClickListener(clickTracker.getOnClickListener(SearchBarActivity.class));
@@ -533,6 +576,7 @@ public final class PlacesPageFragment extends Fragment {
 		layout_manager.setSpanSizeLookup(adapter.getSpanSizeLookup());
 		landmark_recycler_view.setLayoutManager(layout_manager);
 		landmark_recycler_view.setAdapter(adapter);
+		landmark_recycler_view.addItemDecoration(new MarginItemDecoration(dpToXp(MARGIN_DP)));
 
 		// FIXME delete dead code
 		// addLandmarks(getContext(), view, landmarks.toArray(new LandmarkInfo[0]));
