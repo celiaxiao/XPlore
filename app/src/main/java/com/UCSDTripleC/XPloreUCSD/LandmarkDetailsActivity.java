@@ -1,5 +1,10 @@
 package com.UCSDTripleC.XPloreUCSD;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.app.Dialog;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -8,6 +13,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -48,6 +54,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
     private LandmarkImageAdapter landmarkImageAda;
     private LinearLayoutManager layoutManager;
     private int currItem = 0;
+    private Dialog dialog;
 
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
@@ -177,7 +184,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 holder.buttonLeft.setVisibility(View.VISIBLE);
                 holder.buttonRight.setVisibility(View.VISIBLE);
             }
-            Log.i("landmark image",""+position);
+            Log.i("landmarkImage loading: ",""+position);
             // load image
             try {
                 // get input stream
@@ -187,6 +194,24 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 Drawable d = Drawable.createFromStream(ims, null);
                     // set image to ImageView
                 holder.landmarkimage.setImageDrawable(d);
+
+                //  @source https://www.jianshu.com/p/c46020080034
+
+
+                holder.landmarkimage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("CLICK","click");
+                        Intent intent = new Intent(view.getContext(),ZoomImageActivity.class);
+                        intent.putExtra("imageResource", ""+currLandmark.getThumbnailPhoto());
+
+                        view.getContext().startActivity(
+                                intent,
+                                // 注意这里的sharedView
+                                // Content，View（动画作用view），String（和XML一样）
+                                ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), view, "sharedView").toBundle());
+                    }
+                });
 
             }
             catch(IOException ex) {
@@ -217,7 +242,6 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //zoom the image
-//
                     }
 
                 });
@@ -242,6 +266,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 });
 
             }
+
 
         }
 
