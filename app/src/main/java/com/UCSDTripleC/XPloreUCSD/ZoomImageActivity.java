@@ -55,31 +55,32 @@ public class ZoomImageActivity extends AppCompatActivity {
                 if(isScaling) ActivityCompat.finishAfterTransition(ZoomImageActivity.this);
             }
         });*/
-        zoomImage.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Log.i("IMAGE", "motion event: " + event.toString());
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        //zoomImage.setImageResource(R.drawable.button_hover);
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        //imageView.setImageResource(R.drawable.button);
-                        if(!isScaling) ActivityCompat.finishAfterTransition(ZoomImageActivity.this);
-                        isScaling=false;
-                    }
-                }
-                return true;
-            }
-        });
+//        zoomImage.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Log.i("IMAGE", "motion event: " + event.toString());
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_UP: {
+//                        //imageView.setImageResource(R.drawable.button);
+//                        if(!isScaling) ActivityCompat.finishAfterTransition(ZoomImageActivity.this);
+//                        isScaling=false;
+//                    }
+//                }
+//                return true;
+//            }
+//        });
 
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
     }
-    /*@Override
+    @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
         scaleGestureDetector.onTouchEvent(motionEvent);
+        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+            if(!isScaling) ActivityCompat.finishAfterTransition(ZoomImageActivity.this);
+            isScaling=false;
+        }
         return true;
-    }*/
+    }
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
         public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
@@ -101,7 +102,6 @@ public class ZoomImageActivity extends AppCompatActivity {
         @Override
         public void onScaleEnd(ScaleGestureDetector detector) {
             //super.onScaleEnd(detector);
-
         }
     }
 }
