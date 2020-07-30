@@ -5,6 +5,9 @@ import androidx.core.app.ActivityCompat;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -23,12 +26,15 @@ import java.io.InputStream;
  *                 //value of android:transitionName).toBundle());
  */
 public class ZoomImageActivity extends AppCompatActivity {
-
+    private ScaleGestureDetector scaleGestureDetector;
+    private float mScaleFactor = 1.0f;
+    ImageView zoomImage;
+    private boolean isScaling=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zoom_image);
-        ImageView zoomImage=findViewById(R.id.zoomImage);
+        zoomImage=findViewById(R.id.zoomImage);
         Bundle extras = getIntent().getExtras();
         String fileName = extras.getString("imageResource");
         InputStream ims = null;
@@ -42,12 +48,60 @@ public class ZoomImageActivity extends AppCompatActivity {
             e.printStackTrace( );
         }
 
-        zoomImage.setOnClickListener(new View.OnClickListener() {
+        /*zoomImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 注意这里不使用finish
-                ActivityCompat.finishAfterTransition(ZoomImageActivity.this);
+                // return to previous activity
+                if(isScaling) ActivityCompat.finishAfterTransition(ZoomImageActivity.this);
+            }
+        });*/
+        zoomImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.i("IMAGE", "motion event: " + event.toString());
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        //zoomImage.setImageResource(R.drawable.button_hover);
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        //imageView.setImageResource(R.drawable.button);
+                        if(!isScaling) ActivityCompat.finishAfterTransition(ZoomImageActivity.this);
+                        isScaling=false;
+                    }
+                }
+                return true;
             }
         });
+
+        scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
+    }
+    /*@Override
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        scaleGestureDetector.onTouchEvent(motionEvent);
+        return true;
+    }*/
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+        @Override
+        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
+            Log.i("touch","true");
+            mScaleFactor *= scaleGestureDetector.getScaleFactor();
+            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 10.0f));
+            zoomImage.setScaleX(mScaleFactor);
+            zoomImage.setScaleY(mScaleFactor);
+            return true;
+        }
+
+        @Override
+        public boolean onScaleBegin(ScaleGestureDetector detector) {
+            //return super.onScaleBegin(detector);
+            isScaling=true;
+            return true;
+        }
+
+        @Override
+        public void onScaleEnd(ScaleGestureDetector detector) {
+            //super.onScaleEnd(detector);
+
+        }
     }
 }
