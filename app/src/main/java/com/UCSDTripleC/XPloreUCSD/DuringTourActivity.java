@@ -146,9 +146,18 @@ public class DuringTourActivity extends AppCompatActivity {
         }
 
         // tourOverviewTextView onClick go back to tourOverviewPage
+        // Go back to the tourOverviewPage
+        tourOverViewTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
+                tourOverviewIntent.putExtra("Resume the tour", "Resume the tour");
+                startActivity(tourOverviewIntent);
+            }
+        });
         clickTracker = new ClickTracker();
-        Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
-        tourOverViewTextView.setOnClickListener(clickTracker.getOnClickListener(tourOverviewIntent));
+//        Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
+//        tourOverViewTextView.setOnClickListener(clickTracker.getOnClickListener(tourOverviewIntent));
 
         // TODO: previousStopTextView onClick go to previous stop
         // TODO: change this onclicklistener to clicktracker
@@ -188,7 +197,8 @@ public class DuringTourActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     if(tourArray.current().value.second == tourArray.size){
-
+                        Intent intent = new Intent(getApplicationContext(), TourFinish.class);
+                        startActivity(intent);
                     }
                     else{
                         Pair<String, Integer> pair = tourArray.next().value;
@@ -218,10 +228,19 @@ public class DuringTourActivity extends AppCompatActivity {
         });
 
         // detailsTextViewDuringTour onClick go to details page of this stop
-        Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
-        detailsIntent.putExtra("placeName", stopName);
-        detailsTextViewDuringTour.setOnClickListener(clickTracker.getOnClickListener(detailsIntent));
+//        Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
+//        System.out.println("Go to the landmark detail " + tourArray.current().value.first);
+//        detailsIntent.putExtra("placeName", tourArray.current().value.first);
+//        detailsTextViewDuringTour.setOnClickListener(clickTracker.getOnClickListener(detailsIntent));
 
+        detailsTextViewDuringTour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
+                detailsIntent.putExtra("placeName", tourArray.current().value.first);
+                startActivity(detailsIntent);
+            }
+        });
 
 
 

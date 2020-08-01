@@ -14,22 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.UCSDTripleC.XPloreUCSD.FeatureComingSoonActivity"></activity>
+        <activity android:name=".TourFinish"></activity>
+        <activity android:name=".FeatureComingSoonActivity" />
         <activity
-            android:name="com.UCSDTripleC.XPloreUCSD.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Material" />
         <activity
-            android:name="com.UCSDTripleC.XPloreUCSD.LandmarkDetailsActivity"
+            android:name=".LandmarkDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Material" />
         <activity
-            android:name="com.UCSDTripleC.XPloreUCSD.SearchBarActivity"
+            android:name=".SearchBarActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Material" />
         <activity
-            android:name="com.UCSDTripleC.XPloreUCSD.SplashPageActivity"
+            android:name=".SplashPageActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -39,15 +40,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.UCSDTripleC.XPloreUCSD.OnboardingActivity"
+            android:name=".OnboardingActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.UCSDTripleC.XPloreUCSD.TourOverviewPage"
+            android:name=".TourOverviewPage"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.UCSDTripleC.XPloreUCSD.DuringTourActivity"
+            android:name=".DuringTourActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
     </application>
