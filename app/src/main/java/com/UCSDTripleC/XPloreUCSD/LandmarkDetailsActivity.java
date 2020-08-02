@@ -173,8 +173,13 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
             currItem=position;
+            //if only one photo, hide the button
+            if(getItemCount()==1){
+                holder.buttonLeft.setVisibility(View.GONE);
+                holder.buttonRight.setVisibility(View.GONE);
+            }
             //set up the button
-            if (currItem == 0) {
+            else if (currItem == 0) {
                 holder.buttonLeft.setVisibility(View.GONE);
                 holder.buttonRight.setVisibility(View.VISIBLE);
             } else if (currItem == getItemCount( ) - 1) {
@@ -184,12 +189,18 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 holder.buttonLeft.setVisibility(View.VISIBLE);
                 holder.buttonRight.setVisibility(View.VISIBLE);
             }
+            String photoPath;
             Log.i("landmarkImage loading: ",""+position);
+            //if no other photos avaliable, use thumbnail instead
+            if(currLandmark.getOtherPhotos().size()==0){
+                photoPath=currLandmark.getThumbnailPhoto();
+            }
+             else photoPath=currLandmark.getOtherPhotos().get(position);
             // load image
             try {
                 // get input stream
                 //InputStream ims = getAssets().open(currLandmark.getOtherPhotos().get(position));
-                InputStream ims = getAssets().open(currLandmark.getThumbnailPhoto());
+                InputStream ims = getAssets().open(photoPath);
                 // load image as Drawable
                 Drawable d = Drawable.createFromStream(ims, null);
                     // set image to ImageView
@@ -203,12 +214,12 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Log.i("CLICK","click");
                         Intent intent = new Intent(view.getContext(),ZoomImageActivity.class);
-                        intent.putExtra("imageResource", ""+currLandmark.getThumbnailPhoto());
+                        intent.putExtra("imageResource", ""+photoPath);
 
                         view.getContext().startActivity(
                                 intent,
                                 // 注意这里的sharedView
-                                // Content，View（动画作用view），String（和XML一样）
+                                // Content View（动画作用view），String（和XML一样）
                                 ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), view, "sharedView").toBundle());
                     }
                 });
@@ -224,6 +235,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
+            if(currLandmark.getOtherPhotos().size()==0) return 1;
             return currLandmark.getOtherPhotos().size();
         }
 
