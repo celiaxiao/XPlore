@@ -23,9 +23,9 @@
   ],
   "name": "Geisel Library",
   "otherPhotos": [
-    "https://ucpa.ucsd.edu/images/work/_standard/geisel-wss-6.jpg",
-    "https://ucpa.ucsd.edu/images/work/_standard/geisel-wss-2.jpg",
-    "https://ucpa.ucsd.edu/images/work/_standard/geisel-wss-1.jpg"
+    "photos/Geisel/Geisel2.jpg",
+    "photos/Geisel/Geisel3.jpg",
+    "photos/Geisel/Geisel4.jpg"
   ],
   "relatedPlaces": [
     "Price Center",
@@ -35,7 +35,7 @@
     "the best tour",
     "the other best tour"
   ],
-  "thumbnailPhoto": "photos/Geisel.jpg",
+  "thumbnailPhoto": "photos/Geisel/Geisel.jpg",
   "videos": [
     "https://www.youtube.com/watch?v=EgJo8gW9jy0"
   ],

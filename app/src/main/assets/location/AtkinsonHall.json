@@ -13,11 +13,11 @@
     "UCSD Locations Page: https://library.ucsd.edu/news-events/events/locations/atkinson-hall-auditorium/",
     "Qualcomm Institute Tours Page: https://qi.ucsd.edu/tours/"
   ],
-  "thumbnailPhoto": "photos/AtkinsonHall.jpg",
+  "thumbnailPhoto": "photos/AtkinsonHall/AtkinsonHall.jpg",
   "otherPhotos": [
-    "https://qi.ucsd.edu/images/facilities/img-facilities-atkinsonhall2.png",
-    "https://blink.ucsd.edu/_images/sponsor-tab/Atkinson-Hall.jpg",
-    "https://live.staticflickr.com/3669/11377057254_8ca5feed7e_b.jpg"
+    "photos/AtkinsonHall/AtkinsonHall2.jpg",
+    "photos/AtkinsonHall/AtkinsonHall3.png",
+    "photos/AtkinsonHall/AtkinsonHall4.jpg"
 
   ],
   "relatedPlaces": [

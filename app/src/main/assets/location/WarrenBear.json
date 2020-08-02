@@ -21,11 +21,9 @@
   ],
   "name": "Warren Bear",
   "otherPhotos": [
-    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/Main_hawkinson-02.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-03.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-01.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-06.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-10.jpg"
+    "photos/Warrenbear/Warrenbear2.jpg",
+    "photos/Warrenbear/Warrenbear3.jpg",
+    "photos/Warrenbear/Warrenbear4.jpg"
   ],
   "relatedPlaces": [
     "Fallen Star",
@@ -35,7 +33,7 @@
     "the best tour",
     "the other best tour"
   ],
-  "thumbnailPhoto": "photos/Warrenbear.jpg",
+  "thumbnailPhoto": "photos/Warrenbear/Warrenbear.jpg",
   "videos": [
     "https://www.youtube.com/watch?v=hwnQAmprwM8",
     "https://www.youtube.com/watch?v=ZDT1sPrhEO0"

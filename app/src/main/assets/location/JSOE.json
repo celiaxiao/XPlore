@@ -13,12 +13,11 @@
     "UCSD official Website for JSOE: https://stuartcollection.ucsd.edu/artist/suh.html",
     "Wikipedia for Stutart Collection: https://en.wikipedia.org/wiki/Stuart_Collection"
   ],
-  "thumbnailPhoto": "photos/JSOE.jpg",
+  "thumbnailPhoto": "photos/JSOE/JSOE.jpg",
   "otherPhotos": [
-    "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-4.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-7.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-8.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/suh-fallenstar/Main_suh-1.jpg"
+    "photos/JSOE/JSOE1.jpg",
+    "photos/JSOE/JSOE2.jpg",
+    "photos/JSOE/JSOE3.jpg"
   ],
   "relatedPlaces": [
     "Warren Bear",
