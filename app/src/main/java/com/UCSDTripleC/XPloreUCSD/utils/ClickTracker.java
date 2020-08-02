@@ -68,4 +68,20 @@ public final class ClickTracker {
 			}
 		};
 	}
+
+	/**
+	 * Get a {@code OnClickListener} that calls {@code listener} iff the view has not been clicked
+	 * yet.
+	 *
+	 * @param listener the listener to call when view is clicked for the first time
+	 * @return a {@code OnClickListener} that wraps the passed-in {@code listener}
+	 */
+	public View.OnClickListener getOnClickListener(View.OnClickListener listener) {
+		return view -> {
+			if (!clicked) {
+				clicked = true;
+				listener.onClick(view);
+			}
+		};
+	}
 }

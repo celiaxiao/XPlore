@@ -24,7 +24,7 @@ public class PlacesDataClass {
     }
 
     public PlacesDataClass(Landmark landmark){
-        this.placesName= landmark.name;
+        this.placesName = landmark.getName();
         //for now hard code the distances and availability
         this.availability = "";
         //hide the distances
@@ -32,23 +32,25 @@ public class PlacesDataClass {
         //hard code amenities to be 5
         this.amenities=new boolean[5];
         // FIXME meaningless if and potential NullPointerException
-        for(int j = 0; j< landmark.amenities.size(); j++){
-            if(landmark.amenities != null) {
-                this.amenities[j] = landmark.amenities.get(amenFilter[j]);
+        for(int j = 0; j< landmark.getAmenities().size(); j++){
+            if (landmark.getAmenities() != null) {
+                // FIXME potential null pointer
+                this.amenities[j] = landmark.getAmenities().get(amenFilter[j]);
             }
         }
     }
 
     public PlacesDataClass(Pair<Landmark, Double> pair) {
-        placesName = pair.first.name;
+        placesName = pair.first.getName();
         // for now hard code the distances and availability
         availability = "";
         distances = Geography.displayDistance(pair.second);
         // hard code amenities to be 5
         amenities = new boolean[5];
-        for (int j = 0; j < pair.first.amenities.size(); j++) {
-            if (pair.first.amenities != null) {
-                this.amenities[j] = pair.first.amenities.get(amenFilter[j]);
+        for (int j = 0; j < pair.first.getAmenities().size(); j++) {
+            if (pair.first.getAmenities() != null) {
+                // FIXME potential null pointer
+                this.amenities[j] = pair.first.getAmenities().get(amenFilter[j]);
             }
         }
     }
