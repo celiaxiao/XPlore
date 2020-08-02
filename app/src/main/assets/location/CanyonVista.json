@@ -12,11 +12,11 @@
     "Official Website: https://hdh-web.ucsd.edu/dining/apps/diningservices/Restaurants/MenuItem/24",
     "UCSD Dining Services Website: https://hdh-web.ucsd.edu/dining/apps/diningservices/"
   ],
-  "thumbnailPhoto": "photos/CanyonVista.jpg",
+  "thumbnailPhoto": "photos/CanyonVista/CanyonVista.jpg",
   "otherPhotos": [
-    "https://ucsdnews.ucsd.edu/news_uploads/canyon-vista-marketplace-2.jpg",
-    "https://triton.news/wp-content/uploads/2018/06/god-bless-rohan-scaled.jpg",
-    "https://live.staticflickr.com/4447/26468003279_3d214c4ee8_b.jpg"
+    "photos/CanyonVista/CanyonVista2.jpg",
+    "photos/CanyonVista/CanyonVista3.jpg",
+    "photos/CanyonVista/CanyonVista4.jpg"
   ],
   "relatedPlaces": [
     "Warren Bear",

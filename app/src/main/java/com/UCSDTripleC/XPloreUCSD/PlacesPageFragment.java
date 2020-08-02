@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -408,6 +409,7 @@ public final class PlacesPageFragment extends Fragment {
 		label.setMaxLines(2);
 		label.setEllipsize(TextUtils.TruncateAt.END);
 
+		Log.d("WHICH", landmarks[0].photoPath);
 		card.addView(new SmartImageView(
 			context,
 			landmarks[0].photoPath,

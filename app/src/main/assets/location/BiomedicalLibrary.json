@@ -12,11 +12,11 @@
     "Open time: https://library.ucsd.edu/hours/?v=month&l=biomedical-library-building",
     "UCSD Library Home Page: https://library.ucsd.edu/"
   ],
-  "thumbnailPhoto": "photos/BiomedLibrary.jpg",
+  "thumbnailPhoto": "photos/BiomedLibrary/BiomedLibrary.jpg",
   "otherPhotos": [
-    "https://library.ucsd.edu/news-events/wp-content/uploads/2019/01/biomed.jpg",
-    "https://libraries.ucsd.edu/bmcl/building/photos/done/done_05.jpg",
-    "https://pfeifferpartners.com/wp-content/uploads/2016/01/pfeiffer-ucsd-biomed-ext-2-L.jpg"
+    "photos/BiomedLibrary/BiomedLibrary2.jpg",
+    "photos/BiomedLibrary/BiomedLibrary3.jpg",
+    "photos/BiomedLibrary/BiomedLibrary4.jpg"
   ],
   "relatedPlaces": [
     "Geisel Library"
