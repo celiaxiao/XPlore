@@ -20,8 +20,8 @@
   ],
   "name": "Sun God",
   "otherPhotos": [
-    "https://upload.wikimedia.org/wikipedia/en/a/a9/Sun_God_UC_San_Diego.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/de-saint-phalle-sungod/Main_de-saint-phalle-01.jpg"
+    "photos/SunGod/SunGod2.jpg",
+    "photos/SunGod/SunGod3.jpg"
   ],
   "relatedPlaces": [
     "Peterson Hall",
@@ -31,7 +31,7 @@
     "the best tour",
     "the other best tour"
   ],
-  "thumbnailPhoto": "photos/SunGod.png",
+  "thumbnailPhoto": "photos/SunGod/SunGod.png",
   "videos": [
     "https://www.youtube.com/watch?v=9FPN1cSf540",
     "https://www.youtube.com/watch?v=52yrl2Iid2A"
