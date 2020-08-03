@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -14,7 +15,9 @@ public class CurvedBottomNavigationViewTabLayout extends TabLayout {
     /**
      * the CURVE_CIRCLE_RADIUS represent the radius of the fab button
      */
-    private final int CURVE_CIRCLE_RADIUS = 256 / 2;
+    private int CURVE_CIRCLE_RADIUS = 256 / 2;
+    private final int DEFAULT_WIDTH = 1080;
+    private Context context;
     private Path mPath;
     private Paint mPaint;
     // the coordinates of the first curve
@@ -34,16 +37,19 @@ public class CurvedBottomNavigationViewTabLayout extends TabLayout {
 
     public CurvedBottomNavigationViewTabLayout(Context context) {
         super(context);
+        this.context = context;
         init();
     }
 
     public CurvedBottomNavigationViewTabLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         init();
     }
 
     public CurvedBottomNavigationViewTabLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
         init();
     }
 
@@ -53,6 +59,9 @@ public class CurvedBottomNavigationViewTabLayout extends TabLayout {
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mPaint.setColor(getResources().getColor(R.color.colorPrimaryDark));
         setBackgroundColor(Color.TRANSPARENT);
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        CURVE_CIRCLE_RADIUS = CURVE_CIRCLE_RADIUS * width / 1080;
     }
 
     @Override
