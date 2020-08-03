@@ -1,0 +1,50 @@
+{
+  "name": "Career Service Center",
+  "about": "Situated in the center of campus, the Career Service Center serves as the one stop shop for every Triton looking to advance in their career by providing skills to find that ideal job, internship, or position.",
+  "amenities": {
+    "parking": false,
+    "cafe": false,
+    "busstop": true,
+    "restaurant": false,
+    "restroom": true
+  },
+  "links": [
+    "UCSD Career Center: https://career.ucsd.edu/",
+    "Advising: https://career.ucsd.edu/advising/index.html"
+  ],
+  "thumbnailPhoto": "photos/CareerServiceCenter/CSC.jpg",
+  "otherPhotos": [
+
+  ],
+  "relatedPlaces": [
+    "Geisel Library",
+    "Price Center"
+  ],
+  "videos": [
+    "https://www.youtube.com/watch?v=QfNkl--SO-Y"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "recordings/no_recording.mp3",
+  "coordinates": {
+    "first": "32.879071",
+    "second": "-117.238025"
+  },
+  "descriptive": [
+    "Must see"
+  ],
+  "history": [
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    },
+    {
+      "title": "An amazing title for this landmark",
+      "articleType": "An equally amazing subtitle",
+      "content": "Now gather around the fireplace kiddo"
+    }
+  ]
+}

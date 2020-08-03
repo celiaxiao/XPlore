@@ -22,10 +22,7 @@
   ],
   "name": "64 Degrees",
   "otherPhotos": [
-    "https://lh3.googleusercontent.com/proxy/kYOC9Fdg4meiPuCdzGgLG17rIdClozDh_wFd-aNq_Cnr-5qAU7Q1rt9SXeamto3k7pkDbvglkSA-3Z7v4BSDShywJR7jf5lh_4FgQZNurE4PSHIx3arQD0Ir8G23tXm7DaO9gThPBa6I",
-    "https://hdh-web.ucsd.edu/images/Dining/64degrees/facility-64-Degrees.png",
-    "https://lh3.googleusercontent.com/proxy/ZsQNr3uP73ZS_9S78-VgJmSjOj_jinL5MP8_4ezyMY6tcUsUIfEuqYxx542idLUGPEu5zHIR9bHOuLLg3QRuOZ7fc2bRufuBrZtzvyBJPX_vruFI1HDA7dmGGSV6eaJpIU9XFMgh2YzGFw",
-    "https://lh3.googleusercontent.com/proxy/I26CHAFv5hptqvKGvMQeZRYGtMUT_WpiBfP1EVrv8-Ur_mvr0kEZWX6SvdKjcUpSuA47fdMrm8Xx1P20EJBFfsDRmGkbl21bVBz0ritlNxzpdqWvYv2usLQpY_msRVKN0zpqXIT-TQZskw"
+    "photos/64Degrees/64Degrees2.png"
   ],
   "relatedPlaces": [
     "Price Center",
@@ -39,7 +36,7 @@
     "the best tour",
     "the other best tour"
   ],
-  "thumbnailPhoto": "photos/64Degrees.jpg",
+  "thumbnailPhoto": "photos/64Degrees/64Degrees.jpg",
   "videos": [
     "https://www.youtube.com/watch?v=xPns6HDvP1M"
   ],
