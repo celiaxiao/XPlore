@@ -160,6 +160,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         }
         audioTitle = view.findViewById(R.id.overview_listen_title);
         audioTitle.setText("Introduction to " + currLandmark.getName());
+        audioTitle.setSelected(true);
 
         // Set up Seekbar
         int duration = mediaPlayer.getDuration();

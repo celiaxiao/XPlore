@@ -73,15 +73,16 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:layout_marginEnd="6dp"
-                            android:ellipsize="end"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
                             android:gravity="center"
-                            android:maxLines="1"
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/overview_listen_time"
                             app:layout_constraintStart_toEndOf="@id/overview_listen"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:singleLine="true" />
 
                         <TextView
                             android:id="@+id/overview_listen_time"
