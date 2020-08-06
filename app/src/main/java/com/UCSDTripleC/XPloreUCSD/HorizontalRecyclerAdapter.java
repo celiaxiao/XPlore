@@ -80,6 +80,7 @@ public class HorizontalRecyclerAdapter extends RecyclerView.Adapter<HorizontalRe
 		int text_width = item_size - (int) (18 * metrics.density);
 		adjustLayoutParam(holder.textView, text_width, text_height);
 		holder.textView.setText(names[position]);
+		holder.textView.setSelected(true);
 		adjustLayoutParam(holder.imageView, item_size, image_height);
 		if (urls != null) {
 			// load image
