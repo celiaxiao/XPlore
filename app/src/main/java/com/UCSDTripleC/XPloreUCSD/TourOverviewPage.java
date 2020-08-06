@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -51,6 +53,7 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_overview_page);
         items = new ArrayList<>(Arrays.asList(places));
+
         database = new LandmarkDatabase(this, "one by one");
 
 
@@ -68,6 +71,17 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
             String review = argument.getString("Resume the tour");
             if (review != null ) {
                 startButtonTourOverviewPage.setText("Resume the tour");
+            }
+
+            ArrayList<String> tourList = argument.getStringArrayList("tour array");
+            if(tourList != null){
+                for( int i = 0; i < tourList.size(); i++){
+                    System.out.println("Resume the tour, landmark: " + items.get(i));
+                }
+                for( int i = 0; i < places.length; i++ ){
+                    System.out.println("Original tour, landmark: " + places[i] );
+                }
+                items = tourList;
             }
         }
 
@@ -133,9 +147,6 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
                 tourPlaceNumberTextView.setText(String.valueOf(items.size()) + " stops");
             }
 
-
-
-
             Snackbar.make(mRecyclerView, deletedItem, Snackbar.LENGTH_LONG)
                     .setAction(Html.fromHtml("<font color=\"#FE372F\">Undo Delete</font>"), new View.OnClickListener() {
                 @Override
@@ -143,6 +154,8 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
                     landmarkArrayList.add(position,database.getByName(deletedItem));
 
                     items.add(position, deletedItem);
+                    startButtonTourOverviewPage.setEnabled(true);
+                    startButtonTourOverviewPage.setBackgroundColor(getColor(R.color.colorSecondary));
                     mAdapter.notifyItemInserted(position);
                     mRecyclerView.scrollToPosition(position); // Scroll back to the restored item
 
@@ -152,6 +165,7 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
 
             if(items.isEmpty()){
                 startButtonTourOverviewPage.setEnabled(false);
+                startButtonTourOverviewPage.setBackgroundColor(Color.GRAY);
             }
         }
 

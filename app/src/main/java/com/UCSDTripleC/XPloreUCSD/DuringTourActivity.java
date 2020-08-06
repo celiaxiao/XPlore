@@ -152,6 +152,15 @@ public class DuringTourActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
                 tourOverviewIntent.putExtra("Resume the tour", "Resume the tour");
+                ArrayList<String> tourList = new ArrayList<>();
+                TourArray.DoubleLink node = tourArray.first;
+                tourList.add(node.value.first);
+                while( tourList.size() < tourArray.size){
+                    tourList.add(node.next.value.first);
+                    tourList.add(node.value.first);
+                    node = node.next;
+                }
+                tourOverviewIntent.putStringArrayListExtra("tour array", tourList);
                 startActivity(tourOverviewIntent);
             }
         });
@@ -192,6 +201,14 @@ public class DuringTourActivity extends AppCompatActivity {
 
         // TODO: nextStopButton onClick go to next stop
         // TODO: change this onclicklistener to clicktracker
+        if ( tourArray.size == 2 ){
+            Pair<String, Integer> next = tourArray.next().value;
+            nextStopButton.setText("Last stop: " + next.first);
+            next = tourArray.prev().value;
+        }
+        else if(tourArray.size == 1){
+            nextStopButton.setText("Finish the tour");
+        }
         nextStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
