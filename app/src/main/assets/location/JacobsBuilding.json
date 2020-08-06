@@ -15,6 +15,7 @@
   ],
   "thumbnailPhoto": "photos/JacobsBuilding/JacobsBuilding.jpg",
   "otherPhotos": [
+    "photos/JacobsBuilding/JacobsBuilding.jpg"
   ],
   "relatedPlaces": [
     "Warren Bear",
@@ -38,14 +39,9 @@
   ],
   "history": [
     {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
-    },
-    {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
+      "title": "",
+      "articleType": "",
+      "content": "Engineering programs began at UCSD during the 1964 academic year with a broad applied science department in the areas of aerospace engineering, solid mechanics, bioengineering, and materials science. The first chair of the Department of Aeronautical (later Aerospace) and Mechanical Engineering Sciences (AMES), Sol Penner, recruited numerous experts in their fields from the California Institute of Technology and other established engineering schools, such as William Prager, Forman A. Williams and Paul A. Libby. He would later recollect that \"Roger Revelle's dream of building a State University with emphasis on distinguished graduate work had immediate appeal for me because it was consonant with what [he] had become familiar at the California Institute of Technology.\" These recruits included the second and third chairs of the department, John W. Miles and Eric Reissner. During Miles' tenure, the department would be renamed to the Department of Applied Mechanics and Engineering Sciences, distinguishing it from the second engineering department. Founded in 1965 by Henry G. Booker as the Department of Applied Electrophysics, it would be renamed the Department of Applied Physics and Information Science. Both departments quickly achieved international acclaim for the high-quality research they supported. Additionally, undergraduate engineering instruction began in 1968 with a BA degree in information and computer science."
     }
   ]
 }

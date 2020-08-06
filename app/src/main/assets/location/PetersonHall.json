@@ -21,7 +21,7 @@
   ],
   "name": "Peterson Hall",
   "otherPhotos": [
-    "photos/Peterson/Peterson2.jpg"
+    "photos/Peterson/Peterson.jpg",
   ],
   "relatedPlaces": [
     "Sun God",
@@ -38,14 +38,9 @@
   ],
   "history": [
     {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
-    },
-    {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
+      "title": "",
+      "articleType": "",
+      "content": "Peterson Hall contains two large lecture halls that seat 300 to 400 students, serving the instructional needs of the campus and providing a venue for lectures and events open to the outside community. Occupied in 1983, the building has an assignable area of 9,730 square feet and is located in Marshall College. The lecture hall is named for Robert O. Peterson, an early and generous benefactor of UC San Diego. A native of San Diego and active community member, Peterson is known for founding the Jack-In-The-Box restaurant chain in the early 1950s. Peterson’s gifts to the university include a major collection of impressionist paintings and several significant contributions to the Scripps Institution of Oceanography, the School of Medicine and the general campus. Additionally, Peterson was instrumental in establishing the UC San Diego Foundation.\n"
     }
   ]
 }
