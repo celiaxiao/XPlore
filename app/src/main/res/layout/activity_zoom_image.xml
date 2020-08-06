@@ -6,7 +6,7 @@
     android:background="@color/black"
     android:orientation="vertical">
     <!--sharedView should be the same as imageview in landmark_details_image-->
-    <ImageView
+    <com.UCSDTripleC.XPloreUCSD.utils.ZoomImageView
         android:id="@+id/zoomImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

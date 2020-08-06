@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,10 +39,14 @@ import com.UCSDTripleC.XPloreUCSD.database.Landmark;
 import com.UCSDTripleC.XPloreUCSD.utils.Utils;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
+
 
 /**
  * This activity temporary hardcodes the landmark details page.
@@ -108,6 +113,16 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         //soul of the recyclerview, auto snap to next position
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(multipleIamgeRecycler);
+        multipleIamgeRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == SCROLL_STATE_IDLE) {
+                    currItem = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+
+                }
+            }
+        });
 
 
         TabLayout tabLayout = findViewById(R.id.landmark_tablayout);
@@ -207,7 +222,6 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 holder.landmarkimage.setImageDrawable(d);
 
                 //  @source https://www.jianshu.com/p/c46020080034
-
 
                 holder.landmarkimage.setOnClickListener(new View.OnClickListener() {
                     @Override
