@@ -172,17 +172,17 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         public void onBindViewHolder(MyViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            currItem=position;
+            //currItem=position;
             //if only one photo, hide the button
             if(getItemCount()==1){
                 holder.buttonLeft.setVisibility(View.GONE);
                 holder.buttonRight.setVisibility(View.GONE);
             }
             //set up the button
-            else if (currItem == 0) {
+            else if (position == 0) {
                 holder.buttonLeft.setVisibility(View.GONE);
                 holder.buttonRight.setVisibility(View.VISIBLE);
-            } else if (currItem == getItemCount( ) - 1) {
+            } else if (position == getItemCount( ) - 1) {
                 holder.buttonLeft.setVisibility(View.VISIBLE);
                 holder.buttonRight.setVisibility(View.GONE);
             } else {
@@ -228,8 +228,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
             catch(IOException ex) {
                 ex.printStackTrace();
             }
-
-
+            Log.i("item count", "load: "+currItem);
         }
 
         // Return the size of your dataset (invoked by the layout manager)
@@ -261,6 +260,8 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 buttonLeft.setOnClickListener(new View.OnClickListener( ) {
                     @Override
                     public void onClick(View view) {
+                        Log.i("item count", "left: "+currItem);
+                        //if not the first picture
                         if (currItem - 1 != -1) {
                             multipleIamgeRecycler.smoothScrollToPosition(--currItem);
                             //updateButtons( );
@@ -271,6 +272,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 buttonRight.setOnClickListener(new View.OnClickListener( ) {
                     @Override
                     public void onClick(View view) {
+                        Log.i("item count", "right: "+currItem);
                         if (currItem + 1 != getItemCount()) {
                             multipleIamgeRecycler.smoothScrollToPosition(++currItem);
                         }
