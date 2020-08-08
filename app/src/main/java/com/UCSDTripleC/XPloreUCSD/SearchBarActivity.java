@@ -1,5 +1,6 @@
 package com.UCSDTripleC.XPloreUCSD;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -28,6 +29,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static com.UCSDTripleC.XPloreUCSD.database.LandmarkDatabase.FILELIST;
+
 public class SearchBarActivity extends AppCompatActivity  {
     private LandmarkDatabase sbdatebase;
     private SearchView searchBar;
@@ -43,30 +46,6 @@ public class SearchBarActivity extends AppCompatActivity  {
     private ArrayList<Landmark> landmarkList = new ArrayList<>( );
     ArrayList<Pair<Landmark, Double>> distancePair;
     ArrayList<String> amenList; //list of selected amenities
-    //list of json file name
-    private static String[] FILELIST = new String[]{
-            /*Change them in the future*/
-            "location/64Degrees.json",
-            "location/AtkinsonHall.json",
-            "location/BiomedicalLibrary.json",
-            "location/CanyonViewAquaticCenter.json",
-            "location/CanyonVista.json",
-            "location/ConradPrebysMusicCenter.json",
-            "location/GalbraithHall.json",
-            "location/Geisel.json",
-            "location/JSOE.json",
-            "location/MayerHall.json",
-            "location/OceanviewRestaurant.json",
-            "location/PetersonHall.json",
-            "location/PriceCenter.json",
-            "location/RadySchoolOfManagement.json",
-            "location/SunGod.json",
-            "location/WarrenBear.json",
-            "location/DrSeussStatue.json",
-            "location/MainGym.json",
-            "location/JacobsBuilding.json"
-    };
-
     private boolean checkPermission() {
         if (Build.VERSION.SDK_INT >= 23 &&
                 ContextCompat.checkSelfPermission(this,
@@ -135,8 +114,8 @@ public class SearchBarActivity extends AppCompatActivity  {
             }
         } else {
             // TODO: if no permission, hide the distance
-            for (int i = 0; i < this.FILELIST.length; i++) {
-                String jsonString = sbdatebase.loadJSONFromAsset(this, this.FILELIST[i]);
+            for (int i = 0; i < FILELIST.length; i++) {
+                String jsonString = sbdatebase.loadJSONFromAsset(this, FILELIST[i]);
                 Landmark landmark = gson.fromJson(jsonString, Landmark.class);
                 landmarkList.add(landmark);
                 // get amenity list from landmark
@@ -266,6 +245,7 @@ public class SearchBarActivity extends AppCompatActivity  {
                  * @param compoundButton
                  * @param b
                  */
+                
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 //                    placesAdaptor.filtered = origin;

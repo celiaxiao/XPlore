@@ -60,7 +60,7 @@ public class LandmarkDatabase {
      */
     private static String TAG = LandmarkDatabase.class.getName();
 
-    private static String[] FILELIST = new String[] {
+    public static String[] FILELIST = new String[] {
             /*Change them in the future*/
             "location/64Degrees.json",
             "location/AtkinsonHall.json",
@@ -360,7 +360,7 @@ public class LandmarkDatabase {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     public ArrayList<Pair<Landmark, Double>> filterWithDistance(ArrayList<String> locations, ArrayList<String> amen, Pair<Double, Double>  userLocation){
         ArrayList<Pair<Landmark, Integer>> trackingList = new ArrayList<>();
         ArrayList<Pair<Landmark, Double>> outputList = new ArrayList<>();
