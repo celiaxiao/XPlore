@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -42,12 +45,15 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
     private String tourDescription = "A tour that highlights all must-see landmarks in UC San Diego";
     private String tourTime = "90 Min";
     private String tourPlaceNumber = "5 Stops";
+    private ArrayList<Landmark> landmarkArrayList = new ArrayList<>();
+    private TextView tourPlaceNumberTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_overview_page);
         items = new ArrayList<>(Arrays.asList(places));
+
         database = new LandmarkDatabase(this, "one by one");
 
 
@@ -57,8 +63,27 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         TextView tourNameTextView = (TextView) findViewById(R.id.tourNameTextView);
         TextView tourDescriptionTextView = (TextView) findViewById(R.id.tourDescriptionTextView);
         TextView tourTimeTextView = (TextView) findViewById(R.id.tourTimeTextView);
-        TextView tourPlaceNumberTextView = (TextView) findViewById(R.id.tourPlaceNumberTextView);
+        tourPlaceNumberTextView = (TextView) findViewById(R.id.tourPlaceNumberTextView);
         startButtonTourOverviewPage = (Button) findViewById(R.id.startButtonTourOverviewPage);
+
+        Bundle argument = getIntent().getExtras();
+        if (argument != null){
+            String review = argument.getString("Resume the tour");
+            if (review != null ) {
+                startButtonTourOverviewPage.setText("Resume the tour");
+            }
+
+            ArrayList<String> tourList = argument.getStringArrayList("tour array");
+            if(tourList != null){
+                for( int i = 0; i < tourList.size(); i++){
+                    System.out.println("Resume the tour, landmark: " + items.get(i));
+                }
+                for( int i = 0; i < places.length; i++ ){
+                    System.out.println("Original tour, landmark: " + places[i] );
+                }
+                items = tourList;
+            }
+        }
 
 
         tourImageView.setImageDrawable(getDrawable(R.drawable.geisel_pic));
@@ -79,7 +104,7 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         // --------------------------------
 
         //
-        ArrayList<Landmark> landmarkArrayList = new ArrayList<>();
+//        ArrayList<Landmark> landmarkArrayList = new ArrayList<>();
         for(int i = 0; i < items.size(); i++){
             landmarkArrayList.add(database.getByName(items.get(i)));
         }
@@ -113,21 +138,34 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
             String deletedItem = items.get(position); // The deleted item
 
             items.remove(position);
+            landmarkArrayList.remove(position);
             mAdapter.notifyItemRemoved(position);
-
+            if ( items.size() <= 1 ){
+                tourPlaceNumberTextView.setText(String.valueOf(items.size()) + " stop");
+            }
+            else{
+                tourPlaceNumberTextView.setText(String.valueOf(items.size()) + " stops");
+            }
 
             Snackbar.make(mRecyclerView, deletedItem, Snackbar.LENGTH_LONG)
                     .setAction(Html.fromHtml("<font color=\"#FE372F\">Undo Delete</font>"), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    landmarkArrayList.add(position,database.getByName(deletedItem));
+
                     items.add(position, deletedItem);
+                    startButtonTourOverviewPage.setEnabled(true);
+                    startButtonTourOverviewPage.setBackgroundColor(getColor(R.color.colorSecondary));
                     mAdapter.notifyItemInserted(position);
                     mRecyclerView.scrollToPosition(position); // Scroll back to the restored item
+
+                    tourPlaceNumberTextView.setText(String.valueOf(items.size()) + " stops");
                 }
             }).show();
 
             if(items.isEmpty()){
                 startButtonTourOverviewPage.setEnabled(false);
+                startButtonTourOverviewPage.setBackgroundColor(Color.GRAY);
             }
         }
 

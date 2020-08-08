@@ -146,9 +146,27 @@ public class DuringTourActivity extends AppCompatActivity {
         }
 
         // tourOverviewTextView onClick go back to tourOverviewPage
+        // Go back to the tourOverviewPage
+        tourOverViewTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
+                tourOverviewIntent.putExtra("Resume the tour", "Resume the tour");
+                ArrayList<String> tourList = new ArrayList<>();
+                TourArray.DoubleLink node = tourArray.first;
+                tourList.add(node.value.first);
+                while( tourList.size() < tourArray.size){
+                    tourList.add(node.next.value.first);
+                    tourList.add(node.value.first);
+                    node = node.next;
+                }
+                tourOverviewIntent.putStringArrayListExtra("tour array", tourList);
+                startActivity(tourOverviewIntent);
+            }
+        });
         clickTracker = new ClickTracker();
-        Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
-        tourOverViewTextView.setOnClickListener(clickTracker.getOnClickListener(tourOverviewIntent));
+//        Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
+//        tourOverViewTextView.setOnClickListener(clickTracker.getOnClickListener(tourOverviewIntent));
 
         // TODO: previousStopTextView onClick go to previous stop
         // TODO: change this onclicklistener to clicktracker
@@ -183,12 +201,21 @@ public class DuringTourActivity extends AppCompatActivity {
 
         // TODO: nextStopButton onClick go to next stop
         // TODO: change this onclicklistener to clicktracker
+        if ( tourArray.size == 2 ){
+            Pair<String, Integer> next = tourArray.next().value;
+            nextStopButton.setText("Last stop: " + next.first);
+            next = tourArray.prev().value;
+        }
+        else if(tourArray.size == 1){
+            nextStopButton.setText("Finish the tour");
+        }
         nextStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
                     if(tourArray.current().value.second == tourArray.size){
-
+                        Intent intent = new Intent(getApplicationContext(), TourFinish.class);
+                        startActivity(intent);
                     }
                     else{
                         Pair<String, Integer> pair = tourArray.next().value;
@@ -218,10 +245,19 @@ public class DuringTourActivity extends AppCompatActivity {
         });
 
         // detailsTextViewDuringTour onClick go to details page of this stop
-        Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
-        detailsIntent.putExtra("placeName", stopName);
-        detailsTextViewDuringTour.setOnClickListener(clickTracker.getOnClickListener(detailsIntent));
+//        Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
+//        System.out.println("Go to the landmark detail " + tourArray.current().value.first);
+//        detailsIntent.putExtra("placeName", tourArray.current().value.first);
+//        detailsTextViewDuringTour.setOnClickListener(clickTracker.getOnClickListener(detailsIntent));
 
+        detailsTextViewDuringTour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
+                detailsIntent.putExtra("placeName", tourArray.current().value.first);
+                startActivity(detailsIntent);
+            }
+        });
 
 
 

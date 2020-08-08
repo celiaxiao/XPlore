@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 	};
 	private final String[] TAB_TITLES = {"Places", "", "Tours"};
 	private final int MAIN_PAGE_TAB_INDEX = 1;
+	private final int TOUR_PAGE_TAB_INDEX = 2;
 	private ViewPager mainPager;
 	private Location location;
 	private static final int PERMISSION_REQUEST_FINE_LOCATION = 1000;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 	private final String msg_2 = "Please turn on location services.";
 	private final String posBtnMsg = "SETTINGS";
 	private final String negBtnMsg = "CANCEL";
+	private final String tourKey = "toTour";
 	private static final int REQUEST_LOCATION_SETTING = 0;
 
 	@Override
@@ -92,7 +94,12 @@ public class MainActivity extends AppCompatActivity {
 
 			}
 		});
-		tabLayout.selectTab(mainPageTab);
+		if (getIntent().hasExtra(tourKey)) {
+			tabLayout.selectTab(tabLayout.getTabAt(TOUR_PAGE_TAB_INDEX));
+		}
+		else {
+			tabLayout.selectTab(mainPageTab);
+		}
 
 		CircularClickableImageView image_view = findViewById(R.id.main_page_tab_icon);
 		image_view.setView(mainPager);

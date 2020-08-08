@@ -122,7 +122,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tourTimeTextView"
         android:layout_marginTop="18dp"
-        android:backgroundTint="#EEC107"
+        android:background="#EEC107"
         />
 
     <androidx.recyclerview.widget.RecyclerView
