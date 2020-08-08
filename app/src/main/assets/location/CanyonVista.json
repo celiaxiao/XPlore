@@ -12,11 +12,12 @@
     "Official Website: https://hdh-web.ucsd.edu/dining/apps/diningservices/Restaurants/MenuItem/24",
     "UCSD Dining Services Website: https://hdh-web.ucsd.edu/dining/apps/diningservices/"
   ],
-  "thumbnailPhoto": "photos/CanyonVista.jpg",
+  "thumbnailPhoto": "photos/CanyonVista/CanyonVista.jpg",
   "otherPhotos": [
-    "https://ucsdnews.ucsd.edu/news_uploads/canyon-vista-marketplace-2.jpg",
-    "https://triton.news/wp-content/uploads/2018/06/god-bless-rohan-scaled.jpg",
-    "https://live.staticflickr.com/4447/26468003279_3d214c4ee8_b.jpg"
+    "photos/CanyonVista/CanyonVista.jpg",
+    "photos/CanyonVista/CanyonVista2.jpg",
+    "photos/CanyonVista/CanyonVista3.jpg",
+    "photos/CanyonVista/CanyonVista4.jpg"
   ],
   "relatedPlaces": [
     "Warren Bear",
@@ -42,14 +43,9 @@
   ],
   "history": [
     {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
-    },
-    {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
+      "title": "",
+      "articleType": "",
+      "content": "More than seven years ago, students from the Union of Jewish Students and the Muslim Student Association lobbied HDH, asking for more menu options that catered to their dietary needs, such as halal and kosher. Halal is an Arabic term meaning “permissible” and often references foods produced in accordance with Islamic law, specifically ethical butchering practices. While Marshall College’s OceanView restaurant has a kosher section as well as some halal ingredients, HDH saw the opportunity to design a fully halal eatery to be even more inclusive. HDH worked with the Islamic Food and Nutrition Council of America (IFANCA) to provide guidance on the halal certification process for Canyon Vista Marketplace. The dining team reviewed hundreds of recipes with IFANCA, vetting more than 1,000 ingredients across seven different vendors to ensure the recipes met the needs of the Muslim community.\nAs the first location on campus to combine a market and restaurant in one convenient location, Canyon Vista aims to be a healthy, one-stop shop. Earl’s, a market formerly located on the second floor, is now incorporated into the layout of the marketplace. Students can pick up living essentials and groceries at the same time as their lunch. The space formerly occupied by Earl’s now serves as home to the J. Kevin Wood Lounge, named for a Resident Dean (now referred to as Director of Residence Life) of Warren College from 1986 to 1992. With a staircase connecting the two levels, the facility offers students more study and lounge space.\n"
     }
   ]
 }

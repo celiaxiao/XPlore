@@ -22,8 +22,9 @@
   ],
   "name": "Price Center",
   "otherPhotos": [
-    "https://www.cannondesign.com/assets/Price2-e1515003090963.jpg",
-    "https://www.cannondesign.com/assets/Price5-e1515003196457.jpg"
+    "photos/PriceCenter/PriceCenter.jpg",
+    "photos/PriceCenter/PriceCenter2.jpg",
+    "photos/PriceCenter/PriceCenter3.jpg"
   ],
   "relatedPlaces": [
     "Geisel Library"
@@ -32,7 +33,7 @@
     "the best tour",
     "the other best tour"
   ],
-  "thumbnailPhoto": "photos/PriceCenter.jpg",
+  "thumbnailPhoto": "photos/PriceCenter/PriceCenter.jpg",
   "videos": [
     "https://www.youtube.com/watch?v=_XoSNlIsgy8"
   ],

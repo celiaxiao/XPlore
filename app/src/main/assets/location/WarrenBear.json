@@ -21,11 +21,10 @@
   ],
   "name": "Warren Bear",
   "otherPhotos": [
-    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/Main_hawkinson-02.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-03.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-01.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-06.jpg",
-    "https://stuartcollection.ucsd.edu/_images/artists/hawkinson-bear/hawkinson-10.jpg"
+    "photos/Warrenbear/Warrenbear.jpg",
+    "photos/Warrenbear/Warrenbear2.jpg",
+    "photos/Warrenbear/Warrenbear3.jpg",
+    "photos/Warrenbear/Warrenbear4.jpg"
   ],
   "relatedPlaces": [
     "Fallen Star",
@@ -35,21 +34,16 @@
     "the best tour",
     "the other best tour"
   ],
-  "thumbnailPhoto": "photos/Warrenbear.jpg",
+  "thumbnailPhoto": "photos/Warrenbear/Warrenbear.jpg",
   "videos": [
     "https://www.youtube.com/watch?v=hwnQAmprwM8",
     "https://www.youtube.com/watch?v=ZDT1sPrhEO0"
   ],
   "history": [
     {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
-    },
-    {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
+      "title": "",
+      "articleType": "",
+      "content": "San Diego is home to the world’s only two-story-tall, 180-ton teddy bear, a whimsical, floppy-looking totem made of hand-picked granite boulders.\n“Bear” is both a technical feat and a leap of the imagination − an immense surprise seated in a University of California San Diego courtyard framed by three sleek buildings,\n“Ursa very major,” is how the Stuart Collection’s director, Mary Beebe, described the commissioned piece.\nTim Hawkinson, the internationally renowned artist who created “Bear” at the Stuart Collection’s invitation, has been called “one of the most original sculptors working in America today” by New York’s Whitney Museum. He first visualized stuffed-animal forms in Arizona’s weathered rocks; this is his first permanent outdoor public art project.\nAfter engineers certified Hawkinson’s stacked boulders as earthquake-safe, powerful trucks delivered the rocks, and cranes began hoisting them in place. Near the end, Hawkinson turned the bear’s head a little to give it more life.\nIs it a monument to the California state bear? A nostalgic emblem in dangerous times?\n“I like to leave it open to interpretation,” Hawkinson, 50, told The San Diego Union-Tribune in 2005, when he broke a bottle of champagne over a gargantuan granite arm.\nBut, he added later, “Now I’m seeing bears everywhere …”\n"
     }
   ]
 }

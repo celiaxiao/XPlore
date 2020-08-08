@@ -22,7 +22,7 @@ public class SliderAdapterOnboarding extends PagerAdapter {
             R.drawable.splash_1_2,
             R.drawable.splash_2_2,
             R.drawable.splash_3_2,
-            R.drawable.splash_3_2};
+            R.drawable.splash_page_4_1};
 
     String[] sliderTitles = {
             "Nearby Adventures",

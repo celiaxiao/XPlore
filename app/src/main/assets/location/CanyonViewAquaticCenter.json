@@ -12,10 +12,11 @@
     "UCSD News: https://ucsdtritons.com/news/2010/8/8/220885.aspx",
     "Wikipedia: https://en.wikipedia.org/wiki/Canyonview_Aquatic_Center"
   ],
-  "thumbnailPhoto": "photos/CanyonviewPool.jpg",
+  "thumbnailPhoto": "photos/CanyonviewPool/CanyonviewPool.jpg",
   "otherPhotos": [
-    "https://ucsdtritons.com/images/2020/1/17/WWP_Huddle.jpg",
-    "https://recreation.ucsd.edu/wp-content/uploads/2018/03/Canyonview.jpg"
+    "photos/CanyonviewPool/CanyonviewPool.jpg",
+    "photos/CanyonviewPool/CanyonviewPool2.jpg",
+    "photos/CanyonviewPool/CanyonviewPool3.jpg"
   ],
   "relatedPlaces": [
     "Fallen Star",
@@ -37,14 +38,9 @@
   ],
   "history": [
     {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
-    },
-    {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
+      "title": "",
+      "articleType": "",
+      "content": "In June 1982, construction began on a recreation center to supplement the forthcoming student housing in Earl Warren College and ease pressure on the original Natatorium facility in Muir College. This recreation center would include a 50-meter Olympic-size pool, an outdoor whirlpool bath, four racquetball courts, and locker rooms with showers. Upon its completion in spring 1983, the $1.8 million project housed the only publicly accessible long-course pool in San Diego.In 1995, two racquetball courts were converted into an indoor climbing and bouldering facility. In 2003, citing increased strain on the Natatorium and existing pool, UCSD began construction on a second long-course pool which would include seating for 1,000 and a new weight room and allow for more recreational swim hours. This West Pool was completed in February 2006."
     }
   ]
 }

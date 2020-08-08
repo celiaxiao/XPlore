@@ -22,10 +22,8 @@
   ],
   "name": "64 Degrees",
   "otherPhotos": [
-    "https://lh3.googleusercontent.com/proxy/kYOC9Fdg4meiPuCdzGgLG17rIdClozDh_wFd-aNq_Cnr-5qAU7Q1rt9SXeamto3k7pkDbvglkSA-3Z7v4BSDShywJR7jf5lh_4FgQZNurE4PSHIx3arQD0Ir8G23tXm7DaO9gThPBa6I",
-    "https://hdh-web.ucsd.edu/images/Dining/64degrees/facility-64-Degrees.png",
-    "https://lh3.googleusercontent.com/proxy/ZsQNr3uP73ZS_9S78-VgJmSjOj_jinL5MP8_4ezyMY6tcUsUIfEuqYxx542idLUGPEu5zHIR9bHOuLLg3QRuOZ7fc2bRufuBrZtzvyBJPX_vruFI1HDA7dmGGSV6eaJpIU9XFMgh2YzGFw",
-    "https://lh3.googleusercontent.com/proxy/I26CHAFv5hptqvKGvMQeZRYGtMUT_WpiBfP1EVrv8-Ur_mvr0kEZWX6SvdKjcUpSuA47fdMrm8Xx1P20EJBFfsDRmGkbl21bVBz0ritlNxzpdqWvYv2usLQpY_msRVKN0zpqXIT-TQZskw"
+    "photos/64Degrees/64Degrees.jpg",
+    "photos/64Degrees/64Degrees2.png"
   ],
   "relatedPlaces": [
     "Price Center",
@@ -39,20 +37,20 @@
     "the best tour",
     "the other best tour"
   ],
-  "thumbnailPhoto": "photos/64Degrees.jpg",
+  "thumbnailPhoto": "photos/64Degrees/64Degrees.jpg",
   "videos": [
     "https://www.youtube.com/watch?v=xPns6HDvP1M"
   ],
   "history": [
     {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
+      "title": "",
+      "articleType": "general history",
+      "content": "Located at the heart of UCSD's student residences in Revelle College, this reimagined facility is a complete renovation of the 1966 Revelle Dining Commons, the campus's original dining destination. In addition to transforming a dated “cafeteria”-style facility into a modern, vibrant dining venue, combined with a market and café, 64 Degrees creates a place for the Revelle College community to embrace as a hub for congregating and socializing.\n"
     },
     {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
+      "title": "",
+      "articleType": "architecture",
+      "content": " In designing the project, Studio E Architects sought to create a dining experience that brought the kitchen from the back of house to the front of house, integrating the experience of eating with the preparation of food. Several exhibition food platforms distributed throughout 64 Degrees provide a unique and interactive experience. Inserting natural light, appropriately-scaled design elements, and activity, the design organized the existing building's disparate spaces into one cohesive dining environment.\n"
     }
   ]
 }

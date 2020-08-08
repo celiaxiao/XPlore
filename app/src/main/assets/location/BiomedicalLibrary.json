@@ -12,11 +12,12 @@
     "Open time: https://library.ucsd.edu/hours/?v=month&l=biomedical-library-building",
     "UCSD Library Home Page: https://library.ucsd.edu/"
   ],
-  "thumbnailPhoto": "photos/BiomedLibrary.jpg",
+  "thumbnailPhoto": "photos/BiomedLibrary/BiomedLibrary.jpg",
   "otherPhotos": [
-    "https://library.ucsd.edu/news-events/wp-content/uploads/2019/01/biomed.jpg",
-    "https://libraries.ucsd.edu/bmcl/building/photos/done/done_05.jpg",
-    "https://pfeifferpartners.com/wp-content/uploads/2016/01/pfeiffer-ucsd-biomed-ext-2-L.jpg"
+    "photos/BiomedLibrary/BiomedLibrary.jpg",
+    "photos/BiomedLibrary/BiomedLibrary2.jpg",
+    "photos/BiomedLibrary/BiomedLibrary3.jpg",
+    "photos/BiomedLibrary/BiomedLibrary4.jpg"
   ],
   "relatedPlaces": [
     "Geisel Library"
@@ -38,14 +39,9 @@
   ],
   "history": [
     {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
-    },
-    {
-      "title": "An amazing title for this landmark",
-      "articleType": "An equally amazing subtitle",
-      "content": "Now gather around the fireplace kiddo"
+      "title": "",
+      "articleType": "",
+      "content": "As UCSD and the San Diego region began to emerge as an internationally recognized leader in health sciences education, bio-engineering and life sciences research, the University saw the need to renovate and significantly expand it’s Biomedical Library. Hired to program, plan and design the library’s renovation and expansion, Pfeiffer’s concept doubles the size of the existing facility, bringing together collection and staff resources with a variety of spaces for study and learning. Pfeiffer’s design approach was to complement rather than compete with Robert Evans Alexander’s landmark structure, designed in 1966. The existing roofline is matched by the wide concrete roof overhang of the new addition, while the upturned roof at the southwest corner gives the building a dramatic presence at the entrance to the campus. Glowing in the evening hours, the building serves as a landmark to students and visitors alike.\n"
     }
   ]
 }
