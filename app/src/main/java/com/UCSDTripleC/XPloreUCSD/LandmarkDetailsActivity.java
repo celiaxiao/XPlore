@@ -1,5 +1,10 @@
 package com.UCSDTripleC.XPloreUCSD;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.app.Dialog;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -8,10 +13,12 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,10 +39,14 @@ import com.UCSDTripleC.XPloreUCSD.database.Landmark;
 import com.UCSDTripleC.XPloreUCSD.utils.Utils;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
+
 
 /**
  * This activity temporary hardcodes the landmark details page.
@@ -48,6 +59,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
     private LandmarkImageAdapter landmarkImageAda;
     private LinearLayoutManager layoutManager;
     private int currItem = 0;
+    private Dialog dialog;
 
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
@@ -101,6 +113,16 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         //soul of the recyclerview, auto snap to next position
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(multipleIamgeRecycler);
+        multipleIamgeRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == SCROLL_STATE_IDLE) {
+                    currItem = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+
+                }
+            }
+        });
 
 
         TabLayout tabLayout = findViewById(R.id.landmark_tablayout);
@@ -165,40 +187,68 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         public void onBindViewHolder(MyViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            currItem=position;
+            //currItem=position;
+            //if only one photo, hide the button
+            if(getItemCount()==1){
+                holder.buttonLeft.setVisibility(View.GONE);
+                holder.buttonRight.setVisibility(View.GONE);
+            }
             //set up the button
-            if (currItem == 0) {
+            else if (position == 0) {
                 holder.buttonLeft.setVisibility(View.GONE);
                 holder.buttonRight.setVisibility(View.VISIBLE);
-            } else if (currItem == getItemCount( ) - 1) {
+            } else if (position == getItemCount( ) - 1) {
                 holder.buttonLeft.setVisibility(View.VISIBLE);
                 holder.buttonRight.setVisibility(View.GONE);
             } else {
                 holder.buttonLeft.setVisibility(View.VISIBLE);
                 holder.buttonRight.setVisibility(View.VISIBLE);
             }
-            Log.i("landmark image",""+position);
+            String photoPath;
+            Log.i("landmarkImage loading: ",""+position);
+            //if no other photos avaliable, use thumbnail instead
+            if(currLandmark.getOtherPhotos().size()==0){
+                photoPath=currLandmark.getThumbnailPhoto();
+            }
+             else photoPath=currLandmark.getOtherPhotos().get(position);
             // load image
             try {
                 // get input stream
                 //InputStream ims = getAssets().open(currLandmark.getOtherPhotos().get(position));
-                InputStream ims = getAssets().open(currLandmark.getThumbnailPhoto());
+                InputStream ims = getAssets().open(photoPath);
                 // load image as Drawable
                 Drawable d = Drawable.createFromStream(ims, null);
                     // set image to ImageView
                 holder.landmarkimage.setImageDrawable(d);
 
+                //  @source https://www.jianshu.com/p/c46020080034
+
+                holder.landmarkimage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.i("CLICK","click");
+                        Intent intent = new Intent(view.getContext(),ZoomImageActivity.class);
+                        intent.putExtra("imageResource", ""+photoPath);
+
+                        view.getContext().startActivity(
+                                intent,
+                                // 注意这里的sharedView
+                                // Content View（动画作用view），String（和XML一样）
+                                ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(), view, "sharedView").toBundle());
+                    }
+                });
+
             }
             catch(IOException ex) {
                 ex.printStackTrace();
             }
-
-
+            Log.i("item count", "load: "+currItem);
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
+            if(currLandmark.getOtherPhotos().size()==0) return 1;
             return currLandmark.getOtherPhotos().size();
         }
 
@@ -217,7 +267,6 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //zoom the image
-//
                     }
 
                 });
@@ -225,6 +274,8 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 buttonLeft.setOnClickListener(new View.OnClickListener( ) {
                     @Override
                     public void onClick(View view) {
+                        Log.i("item count", "left: "+currItem);
+                        //if not the first picture
                         if (currItem - 1 != -1) {
                             multipleIamgeRecycler.smoothScrollToPosition(--currItem);
                             //updateButtons( );
@@ -235,6 +286,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 buttonRight.setOnClickListener(new View.OnClickListener( ) {
                     @Override
                     public void onClick(View view) {
+                        Log.i("item count", "right: "+currItem);
                         if (currItem + 1 != getItemCount()) {
                             multipleIamgeRecycler.smoothScrollToPosition(++currItem);
                         }
@@ -242,6 +294,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 });
 
             }
+
 
         }
 
