@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ZoomImageActivity"></activity>
         <activity android:name=".TourFinish"></activity>
         <activity android:name=".FeatureComingSoonActivity" />
         <activity
