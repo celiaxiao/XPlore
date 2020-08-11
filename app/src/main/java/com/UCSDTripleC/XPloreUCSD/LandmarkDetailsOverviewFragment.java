@@ -96,8 +96,6 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     private RecyclerView relatedToursRecycler;
     private RelatedToursAdapter relatedToursAdapter;
     private LinearLayoutManager layoutManager;
-    private FloatingActionButton navButton;
-
 
     /**
      * The click tracker used in this fragment.
@@ -221,31 +219,6 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         amenitiesRecycler.setLayoutManager(new GridLayoutManager(getContext(), AMENITIES_NUM_COL));
         amenitiesRecycler.setAdapter(amenitiesAdapter);
         amenitiesRecycler.setNestedScrollingEnabled(false);
-
-
-        // Nav button redirects to Google Maps to provide directions from user's location to currLandmark
-        navButton = view.findViewById(R.id.overview_nav_button);
-        navButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = currLandmark.getName(); // Should be the name of the location
-                String latitude = (String) currLandmark.getCoordinates().first; // Should be the latitude of the location
-                String longitude = (String) currLandmark.getCoordinates().second; // Should be the longitude of the location
-
-                // Use the coordinates to set up directions in Google Maps with (default mode=walking)
-                Uri gmmIntentUri = Uri.parse("geo:" + latitude + ", " + longitude + "?q=" + latitude + ", " + longitude + "(" + name + ")");
-
-                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                // Make the Intent explicit by setting the Google Maps package
-                mapIntent.setPackage("com.google.android.apps.maps");
-
-                if (mapIntent.resolveActivity(getContext().getPackageManager()) != null) {
-                    // Attempt to start an activity that can handle the Intent
-                    getContext().startActivity(mapIntent);
-                }
-            }
-        });
 
         // Set up related videos
         relatedVideosRecycler = view.findViewById(R.id.related_videos_recycler);
