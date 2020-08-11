@@ -15,6 +15,10 @@ public class Geography {
 	public static String displayDistance(double distance) {
 		String unit;
 		double n;
+		//use >10 mi for long distance
+		if(distance >16093.44) {
+			return "> 10 mi";
+		}
 		// use feet when less than 0.1 miles
 		if (distance < 160.9344) {
 			n = distance / 0.3048;
