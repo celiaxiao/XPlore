@@ -118,7 +118,7 @@ public class LandmarkDetailsHistoryFragment extends Fragment {
             seperator.setVisibility(View.GONE);
             downButton.setVisibility(View.GONE);
         }
-        if (currItem == 0) {
+        else if (currItem == 0) {
             upButton.setVisibility(View.GONE);
             seperator.setVisibility(View.GONE);
             downButton.setVisibility(View.VISIBLE);
