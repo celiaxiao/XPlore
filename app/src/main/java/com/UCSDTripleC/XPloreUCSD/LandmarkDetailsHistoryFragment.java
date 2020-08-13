@@ -93,6 +93,7 @@ public class LandmarkDetailsHistoryFragment extends Fragment {
         seperator = view.findViewById(R.id.history_up_down_divider);
 
         setContent(0);
+        updateButtons();
 
         upButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +113,12 @@ public class LandmarkDetailsHistoryFragment extends Fragment {
     }
 
     private void updateButtons() {
-        if (currItem == 0) {
+        if (titleSet.length == 1) {
+            upButton.setVisibility(View.GONE);
+            seperator.setVisibility(View.GONE);
+            downButton.setVisibility(View.GONE);
+        }
+        else if (currItem == 0) {
             upButton.setVisibility(View.GONE);
             seperator.setVisibility(View.GONE);
             downButton.setVisibility(View.VISIBLE);
