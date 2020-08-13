@@ -147,7 +147,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
                 case 0:
                     return LandmarkDetailsOverviewFragment.newInstance(currLandmark, database);
                 case 1:
-                    return LandmarkDetailsHistoryFragment.newInstance("","");
+                    return LandmarkDetailsHistoryFragment.newInstance(currLandmark);
             }
             return new MainPageFragment();
         }

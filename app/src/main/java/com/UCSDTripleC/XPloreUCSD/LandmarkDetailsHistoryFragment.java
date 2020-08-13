@@ -11,6 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.UCSDTripleC.XPloreUCSD.database.History;
+import com.UCSDTripleC.XPloreUCSD.database.Landmark;
+
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,12 +29,11 @@ public class LandmarkDetailsHistoryFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Landmark currLandmark;
 
     private String[] titleSet = {"Great Research Starts Here", "A Brutalist Icon"};
     private String[] descriptionSet = {"Geisel Library’s Foundation ・3 Min Read", "Architecture・2 Min Read"};
-    private int[] storySet = {R.string.history_1, R.string.history_2};
+    private String[] storySet = {"Story 1", "Story 2"};
     private int currItem = 0;
 
     private TextView textViewTitle, textViewDescription, textViewNumber, textViewContent;
@@ -45,26 +49,26 @@ public class LandmarkDetailsHistoryFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param currLandmark Current landmark.
      * @return A new instance of fragment LandmarkDetailsOverviewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LandmarkDetailsHistoryFragment newInstance(String param1, String param2) {
+    public static LandmarkDetailsHistoryFragment newInstance(Landmark currLandmark) {
         LandmarkDetailsHistoryFragment fragment = new LandmarkDetailsHistoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.setLocation(currLandmark);
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    private void setLocation(Landmark currLandmark) {
+        this.currLandmark = currLandmark;
+        ArrayList<History> histories = currLandmark.getHistory();
+        titleSet = new String[histories.size()];
+        descriptionSet = new String[histories.size()];
+        storySet = new String[histories.size()];
+        for (int i = 0; i < histories.size(); i++) {
+            titleSet[i] = histories.get(i).getTitle();
+            descriptionSet[i] = histories.get(i).getArticleType();
+            storySet[i] = histories.get(i).getContent();
         }
     }
 
