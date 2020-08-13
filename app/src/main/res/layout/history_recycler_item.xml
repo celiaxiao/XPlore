@@ -13,12 +13,14 @@
         <TextView
             android:id="@+id/history_title"
             style="@style/SectionTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
             android:text="Great Research Starts Here"
+            android:textAlignment="textStart"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/history_number"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
