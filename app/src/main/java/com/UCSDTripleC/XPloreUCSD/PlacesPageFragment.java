@@ -1,5 +1,6 @@
 package com.UCSDTripleC.XPloreUCSD;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -192,6 +193,12 @@ public final class PlacesPageFragment extends Fragment {
 		private char[] letters;
 
 		/**
+		 * Maps a letter to the index of the alphabet heading (# => 0 & A-Z => 1-26).  A -1 marks
+		 * that no such heading exists.
+		 */
+		private int[] first;
+
+		/**
 		 * The letter of the alphabet separating ranges of cards.
 		 */
 		public class AlphabetHolder extends RecyclerView.ViewHolder {
@@ -285,6 +292,8 @@ public final class PlacesPageFragment extends Fragment {
 			types = new byte[capacity];
 			letters = new char[capacity];
 			indices = new int[capacity];
+			first = new int[27];
+			Arrays.fill(first, -1);
 
 			int index = 0;
 			char last = '\0';
@@ -305,6 +314,7 @@ public final class PlacesPageFragment extends Fragment {
 					last = c;
 					types[size] = TYPE_ALPHABET;
 					letters[size] = c;
+					first[c == '#' ? 0 : c - 'A' + 1] = size;
 					++size;
 				}
 				types[size] = TYPE_CARD;
@@ -565,6 +575,14 @@ public final class PlacesPageFragment extends Fragment {
 				}
 			};
 		}
+
+		/**
+		 * Returns the position of the alphabet heading associated with {@code letter}.
+		 * @param letter the letter to find
+		 */
+		public int getPosition(char letter) {
+			return first[letter == '#' ? 0 : letter - 'A' + 1];
+		}
 	}
 
 	/**
@@ -673,6 +691,8 @@ public final class PlacesPageFragment extends Fragment {
 	 * @param view the created view
 	 * @param savedInstanceState the saved instance state
 	 */
+	// we don't need click functionality in side bar
+	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -712,6 +732,36 @@ public final class PlacesPageFragment extends Fragment {
 		landmark_recycler_view.setLayoutManager(layout_manager);
 		landmark_recycler_view.setAdapter(adapter);
 		landmark_recycler_view.addItemDecoration(new MarginItemDecoration(dpToXp(MARGIN_DP)));
+
+		// side bar setup
+
+		LinearLayout side_bar = view.findViewById(R.id.places_page_side_bar);
+
+		side_bar.setOnTouchListener((v, event) -> {
+			// performance can be improved by using some sort of binary search
+			int[] coordinates = new int[2];
+			float x = event.getRawX(), y = event.getRawY();
+			for (int j = 0; j < side_bar.getChildCount(); ++j) {
+				View letter = side_bar.getChildAt(j);
+				letter.getLocationOnScreen(coordinates);
+
+				int view_x = coordinates[0], view_y = coordinates[1];
+
+				if (x > view_x && x < (view_x + letter.getWidth())
+					&& y > view_y && y < (view_y + letter.getHeight())
+				) {
+					// there must be at least a character inside each text view
+					char c = ((TextView) letter).getText().charAt(0);
+					int pos = adapter.getPosition(c);
+					if (pos != -1) {
+						final int OFFSET_DP = 50;
+						layout_manager.scrollToPositionWithOffset(pos, dpToXp(OFFSET_DP));
+					}
+					break;
+				}
+			}
+			return true;
+		});
 	}
 
 	/**
