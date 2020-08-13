@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -186,9 +187,10 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
             // - get element from your dataset at this position
-            // - replace the contents of the view with that element
+            // - replace the contents of the view with that elemente
             //currItem=position;
             //if only one photo, hide the button
+
             if(getItemCount()==1){
                 holder.buttonLeft.setVisibility(View.GONE);
                 holder.buttonRight.setVisibility(View.GONE);
