@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -344,7 +345,7 @@ public final class PlacesPageFragment extends Fragment {
 		private PlaceOfTheDayHolder onCreatePlaceOfTheDayHolder(@NonNull ViewGroup parent) {
 			ConstraintLayout layout = (ConstraintLayout) LayoutInflater
 				.from(parent.getContext())
-				.inflate(R.layout.plages_page_place_of_the_day, parent, false);
+				.inflate(R.layout.places_page_place_of_the_day, parent, false);
 
 			Landmark place = landmarks[hashDate(landmarks.length)];
 
@@ -678,6 +679,8 @@ public final class PlacesPageFragment extends Fragment {
 
 		final int MARGIN_DP = 7;
 
+		// search bar setup
+
 		view
 			.findViewById(R.id.placesSearchBarMask)
 			.setOnClickListener(clickTracker.getOnClickListener(SearchBarActivity.class));
@@ -692,6 +695,8 @@ public final class PlacesPageFragment extends Fragment {
 		// to put the icon at the end instead of the front
 		search_view_parent.removeView(search_mag_icon);
 		search_view_parent.addView(search_mag_icon);
+
+		// recycler view setup
 
 		ArrayList<Landmark> landmarks = LandmarkDatabase.getLocations(getContext());
 		// empty the page on error
