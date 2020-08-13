@@ -406,10 +406,10 @@ public final class PlacesPageFragment extends Fragment {
 			});
 
 			layout
-				.findViewById(R.id.cardViewPlaceOfTheDay)
+				.findViewById(R.id.card_view_place_of_the_day)
 				.setOnClickListener(listener);
 			layout
-				.findViewById(R.id.cardViewPlaceOfTheDayDescription)
+				.findViewById(R.id.card_view_place_of_the_day_description)
 				.setOnClickListener(listener);
 
 			return new PlaceOfTheDayHolder(layout);
