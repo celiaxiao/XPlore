@@ -154,6 +154,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
+            if(currLandmark.getHistory().size()==0) return 1;
             return 2;
         }
 
