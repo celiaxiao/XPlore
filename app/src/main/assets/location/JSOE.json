@@ -1,11 +1,11 @@
 {
   "name": "Fallen Star",
-  "about": "Fallen Star is an art installation by South Korean artist Do Ho Suh on the grounds of the University of California San Diego. It is a cottage perched at an angle off the edge of Jacobs Hall.",
+  "about": "Artist Do Ho Suh’s work explores the notions of home, cultural displacement, one’s perception of space and how one builds a memory of it. A small cottage has been picked up, as if by some mysterious force, and “landed” atop Jacobs Hall, where it sits crooked on one corner, cantilevered out over the ground seven stories below. There is a startling sense of wonder when one spots Fallen Star: What is it? How did it get there? It invites us to take a closer look.",
   "amenities": {
     "parking": false,
-    "cafe": true,
+    "cafe": false,
     "busstop": false,
-    "restaurant": true,
+    "restaurant": false,
     "restroom": true
   },
   "links": [

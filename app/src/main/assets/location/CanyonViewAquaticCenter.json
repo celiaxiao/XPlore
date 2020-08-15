@@ -4,13 +4,15 @@
   "amenities": {
     "parking": true,
     "cafe": true,
-    "busstop": false,
+    "busstop": true,
     "restaurant": true,
     "restroom": true
   },
   "links": [
     "UCSD News: https://ucsdtritons.com/news/2010/8/8/220885.aspx",
-    "Wikipedia: https://en.wikipedia.org/wiki/Canyonview_Aquatic_Center"
+    "Wikipedia: https://en.wikipedia.org/wiki/Canyonview_Aquatic_Center",
+    "Recreation site: https://recreation.ucsd.edu/facilities/",
+    "CanyonView Aquatic center site: https://ucsdtritons.com/facilities/canyonview-aquatic-center/4"
   ],
   "thumbnailPhoto": "photos/CanyonviewPool/CanyonviewPool.jpg",
   "otherPhotos": [

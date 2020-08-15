@@ -4,7 +4,7 @@
   "amenities": {
     "parking": true,
     "cafe": false,
-    "busstop": false,
+    "busstop": true,
     "restaurant": false,
     "restroom": true
   },
