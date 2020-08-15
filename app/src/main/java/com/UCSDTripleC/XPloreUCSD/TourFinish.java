@@ -38,7 +38,6 @@ public class TourFinish extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TourOverviewPage.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

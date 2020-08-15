@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="76dp"
                 android:text="@string/main_page_must_see_landmarks_title"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -199,8 +199,10 @@
                 android:layout_height="136dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="14dp"
+                android:layout_marginEnd="24dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/main_page_academic_spots_subtitle_text_view">
 
@@ -267,21 +269,21 @@
                 android:id="@+id/main_page_academic_spots_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="12dp"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
                 android:overScrollMode="never"
                 android:paddingBottom="16dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/main_page_academic_highlights_tour_card_view" />
 
             <TextView
                 android:id="@+id/main_page_campus_life_title_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="38dp"
-                android:layout_marginEnd="16dp"
                 android:text="@string/main_page_campus_life_title"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -307,22 +309,24 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/main_page_one_day_as_student_tour_card_view"
-                app:cardBackgroundColor="@color/orange"
                 android:layout_width="match_parent"
                 android:layout_height="136dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="14dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="24dp"
+                app:cardBackgroundColor="@color/orange"
                 app:cardCornerRadius="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/main_page_campus_life_subtitle_text_view">
 
                 <ImageView
                     android:layout_width="105dp"
                     android:layout_height="105dp"
-                    android:layout_marginEnd="13dp"
                     android:layout_gravity="bottom|end"
-                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="13dp"
                     android:rotation="6.12121875259"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/one_day_as_student_tour" />
 
                 <TextView
@@ -380,14 +384,17 @@
                 android:id="@+id/main_page_campus_life_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
                 android:clipToPadding="false"
                 android:orientation="horizontal"
                 android:overScrollMode="never"
                 android:paddingBottom="16dp"
-                app:layout_constraintTop_toBottomOf="@id/main_page_one_day_as_student_tour_card_view"
-                app:layout_constraintBottom_toTopOf="@id/main_page_auto_bottom_navigation_space_holder_guideline" />
+                app:layout_constraintBottom_toTopOf="@id/main_page_auto_bottom_navigation_space_holder_guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_page_one_day_as_student_tour_card_view" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/main_page_auto_bottom_navigation_space_holder_guideline"
