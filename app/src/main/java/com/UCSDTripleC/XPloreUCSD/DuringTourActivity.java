@@ -223,6 +223,7 @@ public class DuringTourActivity extends AppCompatActivity {
                     if(tourArray.current().value.second == tourArray.size){
                         Intent intent = new Intent(getApplicationContext(), TourFinish.class);
                         startActivity(intent);
+                        finish();
                     }
                     else{
                         Pair<String, Integer> pair = tourArray.next().value;

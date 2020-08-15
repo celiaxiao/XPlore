@@ -7,71 +7,64 @@
     tools:context=".TourFinish"
     android:background="#182B49">
 
+
     <Button
         android:id="@+id/tour_finish_other_tours"
-        android:layout_width="258dp"
-        android:layout_height="65dp"
-        android:layout_marginBottom="64dp"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="30dp"
         android:background="#FECE07"
         android:text="See Other Tours"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tour_finish_celebration"
-        app:layout_constraintVertical_bias="0.915" />
-
-    <TextView
-        android:id="@+id/tour_finish1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="280dp"
-        android:text="Congratulation!"
-        android:textColor="#FECE07"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tour_finish_celebration"
-        app:layout_constraintVertical_bias="0.679" />
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tour_finish2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="You finished the tour"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/tour_finish_other_tours"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tour_finish1"
-        app:layout_constraintVertical_bias="0.255" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/tour_finish1" />
 
     <ImageView
         android:id="@+id/tour_finish_celebration"
-        android:layout_width="317dp"
-        android:layout_height="274dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="325dp"
+        android:layout_height="319dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.175" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tour_finish1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="264dp"
+        android:text="Congratulation!"
+        android:textColor="#FECE07"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tour_finish_celebration" />
 
     <ImageButton
         android:id="@+id/tour_finish_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:background="@color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@drawable/ic_tour_finish_close" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
