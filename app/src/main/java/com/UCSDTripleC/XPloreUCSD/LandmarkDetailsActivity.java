@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -38,6 +39,7 @@ import com.UCSDTripleC.XPloreUCSD.database.LandmarkDatabase;
 import com.UCSDTripleC.XPloreUCSD.database.Landmark;
 import com.UCSDTripleC.XPloreUCSD.utils.Utils;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 
@@ -68,6 +70,7 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
     private String currLocationName;
     private static final String DEFAULT_LOCATION = "Fallen Star";
 
+    private FloatingActionButton navButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,12 +127,35 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
             }
         });
 
-
         TabLayout tabLayout = findViewById(R.id.landmark_tablayout);
         landmarkPager = findViewById(R.id.landmark_viewpager);
         LandmarkAdapter pagerAdapter = new LandmarkAdapter(getSupportFragmentManager());
         landmarkPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(landmarkPager);
+
+        // Nav button redirects to Google Maps to provide directions from user's location to currLandmark
+        navButton = findViewById(R.id.overview_nav_button);
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = currLandmark.getName(); // Should be the name of the location
+                String latitude = (String) currLandmark.getCoordinates().first; // Should be the latitude of the location
+                String longitude = (String) currLandmark.getCoordinates().second; // Should be the longitude of the location
+
+                // Use the coordinates to set up directions in Google Maps with (default mode=walking)
+                Uri gmmIntentUri = Uri.parse("geo:" + latitude + ", " + longitude + "?q=" + latitude + ", " + longitude + "(" + name + ")");
+
+                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                // Make the Intent explicit by setting the Google Maps package
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                    // Attempt to start an activity that can handle the Intent
+                    startActivity(mapIntent);
+                }
+            }
+        });
     }
 
     private class LandmarkAdapter extends FragmentStatePagerAdapter {

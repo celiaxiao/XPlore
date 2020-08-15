@@ -90,6 +90,7 @@
             android:textColor="@color/history_description"
             android:text="Open"
             android:textSize="14sp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="6dp"
