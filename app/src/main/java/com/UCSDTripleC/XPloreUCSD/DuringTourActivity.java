@@ -199,6 +199,13 @@ public class DuringTourActivity extends AppCompatActivity {
             }
         });
 
+        if(tourArray.current().value.second == 1){
+            previousStopTextView.setVisibility(View.INVISIBLE);
+        }
+        else{
+            previousStopTextView.setVisibility(View.VISIBLE);
+        }
+
         // TODO: nextStopButton onClick go to next stop
         // TODO: change this onclicklistener to clicktracker
         if ( tourArray.size == 2 ){
@@ -306,6 +313,12 @@ public class DuringTourActivity extends AppCompatActivity {
             stopNameTextView.setText(index + "th" + " Stop: " + stopName); // TODO: dynamically set the ranking of the stop; Set up the name for this stop
         }
 
+        if(tourArray.current().value.second == 1){
+            previousStopTextView.setVisibility(View.INVISIBLE);
+        }
+        else{
+            previousStopTextView.setVisibility(View.VISIBLE);
+        }
 
         stopDescriptionTextView.setText(landmark.getAbout()); // TODO: Dynamically Set up the descriptions for this stop
         stopDescriptionTextView.setMovementMethod(new ScrollingMovementMethod()); // Making this textView scrollable
