@@ -30,6 +30,7 @@ public class TourFinish extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("toTour", 2);
                 startActivity(intent);
+                finish();
             }
         });
         seeOther.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +38,7 @@ public class TourFinish extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TourOverviewPage.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

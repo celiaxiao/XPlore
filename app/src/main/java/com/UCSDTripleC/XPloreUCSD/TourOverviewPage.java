@@ -64,6 +64,12 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         TextView tourDescriptionTextView = (TextView) findViewById(R.id.tourDescriptionTextView);
         TextView tourTimeTextView = (TextView) findViewById(R.id.tourTimeTextView);
         tourPlaceNumberTextView = (TextView) findViewById(R.id.tourPlaceNumberTextView);
+        if ( items.size() <= 1 ){
+            tourPlaceNumberTextView.setText(items.size() + " stop");
+        }
+        else{
+            tourPlaceNumberTextView.setText(items.size() + " stops");
+        }
         startButtonTourOverviewPage = (Button) findViewById(R.id.startButtonTourOverviewPage);
 
         Bundle argument = getIntent().getExtras();
@@ -76,12 +82,18 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
             ArrayList<String> tourList = argument.getStringArrayList("tour array");
             if(tourList != null){
                 for( int i = 0; i < tourList.size(); i++){
-                    System.out.println("Resume the tour, landmark: " + items.get(i));
+                    System.out.println("Resume the tour, landmark: " + tourList.get(i));
                 }
                 for( int i = 0; i < places.length; i++ ){
                     System.out.println("Original tour, landmark: " + places[i] );
                 }
                 items = tourList;
+                if ( items.size() <= 1 ){
+                    tourPlaceNumberTextView.setText(String.valueOf(items.size()) + " stop");
+                }
+                else{
+                    tourPlaceNumberTextView.setText(String.valueOf(items.size()) + " stops");
+                }
             }
         }
 
@@ -90,7 +102,7 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         tourNameTextView.setText(tourName);
         tourDescriptionTextView.setText(tourDescription);
         tourTimeTextView.setText(tourTime);
-        tourPlaceNumberTextView.setText(tourPlaceNumber);
+//        tourPlaceNumberTextView.setText(tourPlaceNumber);
         startButtonTourOverviewPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +111,7 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
                 Intent intent = new Intent(getApplicationContext(), DuringTourActivity.class);
                 DuringTourActivity.tourArray = new DuringTourActivity.TourArray(items);
                 startActivity(intent);
+                finish();
             }
         });
         // --------------------------------
@@ -146,6 +159,7 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
             else{
                 tourPlaceNumberTextView.setText(String.valueOf(items.size()) + " stops");
             }
+
 
             Snackbar.make(mRecyclerView, deletedItem, Snackbar.LENGTH_LONG)
                     .setAction(Html.fromHtml("<font color=\"#FE372F\">Undo Delete</font>"), new View.OnClickListener() {
