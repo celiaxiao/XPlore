@@ -154,14 +154,13 @@ public class DuringTourActivity extends AppCompatActivity {
                 tourOverviewIntent.putExtra("Resume the tour", "Resume the tour");
                 ArrayList<String> tourList = new ArrayList<>();
                 TourArray.DoubleLink node = tourArray.first;
-                tourList.add(node.value.first);
-                while( tourList.size() < tourArray.size){
-                    tourList.add(node.next.value.first);
+                for(int i = 1; i <= tourArray.size; i++){
                     tourList.add(node.value.first);
                     node = node.next;
                 }
                 tourOverviewIntent.putStringArrayListExtra("tour array", tourList);
                 startActivity(tourOverviewIntent);
+                finish();
             }
         });
         clickTracker = new ClickTracker();
