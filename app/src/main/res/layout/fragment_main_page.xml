@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="38dp"
                 android:text="@string/main_page_must_see_landmarks_title"
                 android:textAlignment="center"
                 android:textColor="@color/black"
