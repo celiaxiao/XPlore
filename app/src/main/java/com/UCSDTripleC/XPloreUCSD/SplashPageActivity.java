@@ -28,11 +28,12 @@ public class SplashPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_page);
 
-
-        String appNameMultiColor = "<b><font color=#F0C308>X</font><font color=#162B49>plore UCSD</font></b>";
-        TextView appNameTextView = (TextView) findViewById(R.id.AppNameTextView);
-        appNameTextView.setText(Html.fromHtml(appNameMultiColor));
-
+        String app_name = getString(R.string.app_name);
+        // assume it is at least one character long
+        String app_name_with_color = "<b><font color=#F0C308>" + app_name.charAt(0)
+            + "</font><font color=#162B49>" + app_name.substring(1) + "</font></b>";
+        TextView app_name_text_view = findViewById(R.id.app_name_text_view);
+        app_name_text_view.setText(Html.fromHtml(app_name_with_color));
 
         ImageView splashPageGifImageView = (ImageView) findViewById(R.id.SplashPageGifImageView);
         Glide.with(this).load(getDrawable(R.drawable.dots_loading)).into(splashPageGifImageView);
