@@ -30,10 +30,8 @@
     "the other best tour"
   ],
   "audio": "recordings/Ocean_View_Restaurant.mp3",
-  "coordinates": {
-    "first": "32.883284",
-    "second": "-117.242788"
-  },
+  "latitude": 32.883284,
+  "longitude": -117.242788,
   "descriptive": [
     "Must see"
   ],

@@ -12,7 +12,8 @@ import java.util.HashMap;
  */
 public class Landmark implements Comparable<Landmark> {
     private String name;
-    private Pair<String, String> coordinates;
+    private double latitude;
+    private double longitude;
     private String about;
     // path
     private String thumbnailPhoto;
@@ -30,7 +31,8 @@ public class Landmark implements Comparable<Landmark> {
 
     public Landmark(
         String name,
-        Pair<String, String> coordinates,
+        double latitude,
+        double longitude,
         String about,
         String thumbnailPhoto,
         ArrayList<String> otherPhotos,
@@ -44,7 +46,8 @@ public class Landmark implements Comparable<Landmark> {
         ArrayList<History> history
     ) {
         this.name = name;
-        this.coordinates = coordinates;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.about = about;
         this.thumbnailPhoto = thumbnailPhoto;
         this.otherPhotos = otherPhotos;
@@ -62,8 +65,12 @@ public class Landmark implements Comparable<Landmark> {
         return name;
     }
 
-    public Pair<String, String> getCoordinates() {
-        return coordinates;
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 
     public String getAbout() {

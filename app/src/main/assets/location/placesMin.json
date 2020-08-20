@@ -8,10 +8,8 @@
       "restaurant": true,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -27,10 +25,8 @@
       "restaurant": true,
       "restroom": true
     },
-    "coordinates": {
-      "first": "0",
-      "second": "1"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -46,10 +42,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -65,10 +59,8 @@
       "restaurant": true,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -84,10 +76,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -103,10 +93,8 @@
       "restaurant": true,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -122,10 +110,8 @@
       "restaurant": true,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -141,10 +127,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -160,10 +144,8 @@
       "restaurant": true,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -179,10 +161,8 @@
       "restaurant": true,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -198,10 +178,8 @@
       "restaurant": true,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -217,10 +195,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -236,10 +212,8 @@
       "restaurant": true,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -255,10 +229,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -274,10 +246,8 @@
       "restaurant": false,
       "restroom": false
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -293,10 +263,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -312,10 +280,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "x-coord",
-      "second": "y-coord"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -331,10 +297,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "32.882562",
-      "second": "-117.235634"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -350,10 +314,8 @@
       "restaurant": false,
       "restroom": false
     },
-    "coordinates": {
-      "first": "32.881423",
-      "second": "-117.237537"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -369,10 +331,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "32.879071",
-      "second": "-117.238025"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -388,10 +348,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "32.886143",
-      "second": "-117.238886"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -407,10 +365,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "32.880288",
-      "second": "-117.237043"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],
@@ -426,10 +382,8 @@
       "restaurant": false,
       "restroom": true
     },
-    "coordinates": {
-      "first": "32.875138",
-      "second": "-117.240534"
-    },
+	"latitude": 0,
+	"longitude": 0,
     "descriptive": [
       "Must see"
     ],

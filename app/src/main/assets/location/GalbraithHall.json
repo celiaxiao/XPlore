@@ -32,10 +32,8 @@
     "the other best tour"
   ],
   "audio": "recordings/Galbraith_Hall.mp3",
-  "coordinates": {
-    "first": "32.873863",
-    "second": "-117.240940"
-  },
+  "latitude": 32.873863,
+  "longitude": -117.240940,
   "descriptive": [
     "Must see"
   ],

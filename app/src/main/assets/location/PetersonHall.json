@@ -8,10 +8,8 @@
     "restroom": true
   },
   "audio": "recordings/Peterson_Hall.mp3",
-  "coordinates": {
-    "first": "32.880234",
-    "second": "-117.240222"
-  },
+  "latitude": 32.880234,
+  "longitude": -117.240222,
   "descriptive": [
     "Must see"
   ],

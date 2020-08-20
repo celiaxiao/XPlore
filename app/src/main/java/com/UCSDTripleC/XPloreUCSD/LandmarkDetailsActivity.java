@@ -140,8 +140,8 @@ public class LandmarkDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = currLandmark.getName(); // Should be the name of the location
-                String latitude = (String) currLandmark.getCoordinates().first; // Should be the latitude of the location
-                String longitude = (String) currLandmark.getCoordinates().second; // Should be the longitude of the location
+                double latitude = currLandmark.getLatitude();
+                double longitude = currLandmark.getLongitude();
 
                 // Use the coordinates to set up directions in Google Maps with (default mode=walking)
                 Uri gmmIntentUri = Uri.parse("geo:" + latitude + ", " + longitude + "?q=" + latitude + ", " + longitude + "(" + name + ")");

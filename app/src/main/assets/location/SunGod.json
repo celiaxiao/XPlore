@@ -8,10 +8,8 @@
     "restroom": false
   },
   "audio": "recordings/Sun_God_Statue.mp3",
-  "coordinates": {
-    "first": "32.878741",
-    "second": "-117.239750"
-  },
+  "latitude": 32.878741,
+  "longitude": -117.239750,
   "descriptive": [
     "Must see"
   ],

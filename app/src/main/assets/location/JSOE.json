@@ -35,10 +35,8 @@
     "the other best tour"
   ],
   "audio": "recordings/Fallen_Star.mp3",
-  "coordinates": {
-    "first": "32.881751",
-    "second": "-117.235473"
-  },
+  "latitude": 32.881751,
+  "longitude": -117.235473,
   "descriptive": [
     "Must see"
   ],

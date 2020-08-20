@@ -34,10 +34,8 @@
     "the other best tour"
   ],
   "audio": "recordings/Canyon_Vista.mp3",
-  "coordinates": {
-    "first": "32.884078",
-    "second": "-117.233301"
-  },
+  "latitude": 32.884078,
+  "longitude": -117.233301,
   "descriptive": [
     "Must see"
   ],

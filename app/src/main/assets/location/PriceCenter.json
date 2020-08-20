@@ -8,10 +8,8 @@
     "restroom": true
   },
   "audio": "recordings/Price_Center.mp3",
-  "coordinates": {
-    "first": "32.879928",
-    "second": "-117.236195"
-  },
+  "latitude": 32.879928,
+  "longitude": -117.236195,
   "descriptive": [
     "Must see"
   ],

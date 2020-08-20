@@ -9,10 +9,8 @@
     "restroom": true
   },
   "audio": "recordings/64_Degrees.mp3",
-  "coordinates": {
-    "first": "32.874971",
-    "second": "-117.241959"
-  },
+  "latitude": 32.874971,
+  "longitude": -117.241959,
   "descriptive": [
     "Must see"
   ],

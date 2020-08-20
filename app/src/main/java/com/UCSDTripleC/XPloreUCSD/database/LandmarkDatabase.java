@@ -145,11 +145,11 @@ public class LandmarkDatabase {
         if( landmark == null){
             return -1.0;
         }
-        String first = (String) landmark.getCoordinates().first;
-        String second = (String) landmark.getCoordinates().second;
-        Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
-        double dist = this.distanceBetween(userLocation, locationCoor);
-        return dist;
+        double latitude = landmark.getLatitude();
+        double longitude = landmark.getLongitude();
+        Pair<Double, Double> coordinate = new Pair<>(latitude, longitude);
+        // TODO use latitude and longitude explicitly
+        return distanceBetween(userLocation, coordinate);
     }
 
     /**
@@ -207,10 +207,12 @@ public class LandmarkDatabase {
     public ArrayList<Pair<Landmark, Double>> nearestLocations(Pair<Double, Double>  userLocation, int num){
         ArrayList<Pair<Landmark, Double>> nearestList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
-            String first = (String) this.list.get(i).getCoordinates().first;
-            String second = (String) this.list.get(i).getCoordinates().second;
-            Pair locationCoor = new Pair<Double, Double>(Double.parseDouble(first), Double.parseDouble(second));
-            double dist = this.distanceBetween(userLocation, locationCoor);
+            Landmark landmark = list.get(i);
+            double latitude = landmark.getLatitude();
+            double longitude = landmark.getLongitude();
+            Pair<Double, Double> coordinate = new Pair<>(latitude, longitude);
+            // TODO use latitude and longitude explicitly
+            double dist = distanceBetween(userLocation, coordinate);
             int origin = nearestList.size();
             for( int j = 0; j < nearestList.size(); j++ ){
                 if( dist < nearestList.get(j).second ){
@@ -240,13 +242,12 @@ public class LandmarkDatabase {
     public ArrayList<Pair<Landmark, Double>> locationWithDistance(Pair<Double, Double> userLocation) {
         ArrayList<Pair<Landmark, Double>> distanceList = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++){
-            String first = (String) this.list.get(i).getCoordinates().first;
-            String second = (String) this.list.get(i).getCoordinates().second;
-            Pair<Double, Double> locationCoor = new Pair<>(
-                Double.parseDouble(first),
-                Double.parseDouble(second)
-            );
-            double dist = this.distanceBetween(userLocation, locationCoor);
+            Landmark landmark = list.get(i);
+            double latitude = landmark.getLatitude();
+            double longitude = landmark.getLongitude();
+            Pair<Double, Double> coordinate = new Pair<>(latitude, longitude);
+            // TODO use latitude and longitude explicitly
+            double dist = distanceBetween(userLocation, coordinate);
             distanceList.add(new Pair<>(this.list.get(i), dist));
         }
         for( int i = 0; i < distanceList.size()-1; i++ ){
