@@ -87,7 +87,7 @@ public class ToursPageFragment extends Fragment {
         sv.smoothScrollTo(0, 0);
 
 //        Intent featureComingSoonIntent = new Intent(getContext(), FeatureComingSoonActivity.class);
-        Intent featureComingSoonIntent = new Intent(getContext(), TourOverviewPage.class);
+        Intent featureComingSoonIntent = new Intent(getContext(), FeatureComingSoonActivity.class);
         getView()
             .findViewById(R.id.cardViewCustomizeTour)
             .setOnClickListener(clickTracker.getOnClickListener(featureComingSoonIntent));
