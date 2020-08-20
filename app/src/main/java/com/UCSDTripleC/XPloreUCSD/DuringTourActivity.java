@@ -154,14 +154,13 @@ public class DuringTourActivity extends AppCompatActivity {
                 tourOverviewIntent.putExtra("Resume the tour", "Resume the tour");
                 ArrayList<String> tourList = new ArrayList<>();
                 TourArray.DoubleLink node = tourArray.first;
-                tourList.add(node.value.first);
-                while( tourList.size() < tourArray.size){
-                    tourList.add(node.next.value.first);
+                for(int i = 1; i <= tourArray.size; i++){
                     tourList.add(node.value.first);
                     node = node.next;
                 }
                 tourOverviewIntent.putStringArrayListExtra("tour array", tourList);
                 startActivity(tourOverviewIntent);
+                finish();
             }
         });
         clickTracker = new ClickTracker();
@@ -199,6 +198,13 @@ public class DuringTourActivity extends AppCompatActivity {
             }
         });
 
+        if(tourArray.current().value.second == 1){
+            previousStopTextView.setVisibility(View.INVISIBLE);
+        }
+        else{
+            previousStopTextView.setVisibility(View.VISIBLE);
+        }
+
         // TODO: nextStopButton onClick go to next stop
         // TODO: change this onclicklistener to clicktracker
         if ( tourArray.size == 2 ){
@@ -216,6 +222,7 @@ public class DuringTourActivity extends AppCompatActivity {
                     if(tourArray.current().value.second == tourArray.size){
                         Intent intent = new Intent(getApplicationContext(), TourFinish.class);
                         startActivity(intent);
+                        finish();
                     }
                     else{
                         Pair<String, Integer> pair = tourArray.next().value;
@@ -306,6 +313,12 @@ public class DuringTourActivity extends AppCompatActivity {
             stopNameTextView.setText(index + "th" + " Stop: " + stopName); // TODO: dynamically set the ranking of the stop; Set up the name for this stop
         }
 
+        if(tourArray.current().value.second == 1){
+            previousStopTextView.setVisibility(View.INVISIBLE);
+        }
+        else{
+            previousStopTextView.setVisibility(View.VISIBLE);
+        }
 
         stopDescriptionTextView.setText(landmark.getAbout()); // TODO: Dynamically Set up the descriptions for this stop
         stopDescriptionTextView.setMovementMethod(new ScrollingMovementMethod()); // Making this textView scrollable

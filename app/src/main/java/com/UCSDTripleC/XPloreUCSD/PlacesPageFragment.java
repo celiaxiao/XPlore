@@ -1,5 +1,6 @@
 package com.UCSDTripleC.XPloreUCSD;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -44,6 +47,21 @@ import java.util.HashMap;
  * This is the Places page which contains some places and a grid of landmarks.
  */
 public final class PlacesPageFragment extends Fragment {
+
+	/**
+	 * The type ID of a {@code PlaceOfTheDayHolder}.
+	 */
+	private static final byte TYPE_PLACE_OF_THE_DAY = 1;
+
+	/**
+	 * The type ID of a {@code AlphabetHolder}.
+	 */
+	private static final byte TYPE_ALPHABET = 2;
+
+	/**
+	 * The type ID of a {@code CardViewHolder}.
+	 */
+	private static final byte TYPE_CARD = 3;
 
 	/**
 	 * Tracks if this page has been clicked; used to prevent multiple clicks.
@@ -148,20 +166,58 @@ public final class PlacesPageFragment extends Fragment {
 	private final class RecyclerAdapter
 		extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 	{
-		/**
-		 * The type ID of a {@code PlaceOfTheDayHolder}.
-		 */
-		private final int TYPE_PLACE_OF_THE_DAY_HOLDER = 0;
-
-		/**
-		 * The type ID of a {@code CardViewHolder}.
-		 */
-		private final int TYPE_CARD_VIEW_HOLDER = 1;
 
 		/**
 		 * The data set.
 		 */
 		private Landmark[] landmarks;
+
+		/**
+		 * The total number of elements.
+		 */
+		private int size;
+
+		/**
+		 * The array mapping position to type.
+		 */
+		private byte[] types;
+
+		/**
+		 * Maps the position of a landmark to the index.
+		 */
+		private int[] indices;
+
+		/**
+		 * Maps the position of a given alphabet section to its letter.
+		 */
+		private char[] letters;
+
+		/**
+		 * Maps a letter to the index of the alphabet heading (# => 0 & A-Z => 1-26).  A -1 marks
+		 * that no such heading exists.
+		 */
+		private int[] first;
+
+		/**
+		 * The letter of the alphabet separating ranges of cards.
+		 */
+		public class AlphabetHolder extends RecyclerView.ViewHolder {
+
+			/**
+			 * The letter.
+			 */
+			public TextView letter;
+
+			/**
+			 * Constructs a new {@code AlphabetHolder}.
+			 *
+			 * @param letter the letter
+			 */
+			public AlphabetHolder(TextView letter) {
+				super(letter);
+				this.letter = letter;
+			}
+		}
 
 		/**
 		 * Describes the Place of the Day layout and metadata about its place within the
@@ -227,6 +283,44 @@ public final class PlacesPageFragment extends Fragment {
 		 */
 		public RecyclerAdapter(Landmark[] landmarks) {
 			this.landmarks = landmarks;
+
+			Arrays.sort(landmarks);
+
+			// place of the day, #, A-Z, landmarks
+			int capacity = 1 + 1 + 26 + landmarks.length;
+
+			types = new byte[capacity];
+			letters = new char[capacity];
+			indices = new int[capacity];
+			first = new int[27];
+			Arrays.fill(first, -1);
+
+			int index = 0;
+			char last = '\0';
+
+			types[0] = TYPE_PLACE_OF_THE_DAY;
+			size = 1;
+
+			for (Landmark landmark: landmarks) {
+				// assume the names are not null and have at least 1 character
+				// and assume they can only be 0-9A-Za-z
+				char c = landmark.getName().charAt(0);
+				if (c >= '0' && c <= '9') {
+					c = '#';
+				} else if (c >= 'a' && c <= 'z') {
+					c -= 'a' + 'A';
+				}
+				if (c != last) {
+					last = c;
+					types[size] = TYPE_ALPHABET;
+					letters[size] = c;
+					first[c == '#' ? 0 : c - 'A' + 1] = size;
+					++size;
+				}
+				types[size] = TYPE_CARD;
+				indices[size] = index++;
+				++size;
+			}
 		}
 
 		/**
@@ -244,8 +338,9 @@ public final class PlacesPageFragment extends Fragment {
 		@Override
 		public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			switch (viewType) {
-				case TYPE_PLACE_OF_THE_DAY_HOLDER: return onCreatePlaceOfTheDayHolder(parent);
-				case TYPE_CARD_VIEW_HOLDER: return onCreateCardViewHolder(parent);
+				case TYPE_PLACE_OF_THE_DAY: return onCreatePlaceOfTheDayHolder(parent);
+				case TYPE_ALPHABET: return onCreateAlphabetHolder(parent);
+				case TYPE_CARD: return onCreateCardViewHolder(parent);
 				default: throw new IllegalStateException("view type must be valid");
 			}
 		}
@@ -260,7 +355,7 @@ public final class PlacesPageFragment extends Fragment {
 		private PlaceOfTheDayHolder onCreatePlaceOfTheDayHolder(@NonNull ViewGroup parent) {
 			ConstraintLayout layout = (ConstraintLayout) LayoutInflater
 				.from(parent.getContext())
-				.inflate(R.layout.plages_page_place_of_the_day, parent, false);
+				.inflate(R.layout.places_page_place_of_the_day, parent, false);
 
 			Landmark place = landmarks[hashDate(landmarks.length)];
 
@@ -311,20 +406,44 @@ public final class PlacesPageFragment extends Fragment {
 			});
 
 			layout
-				.findViewById(R.id.cardViewPlaceOfTheDay)
+				.findViewById(R.id.card_view_place_of_the_day)
 				.setOnClickListener(listener);
 			layout
-				.findViewById(R.id.cardViewPlaceOfTheDayDescription)
+				.findViewById(R.id.card_view_place_of_the_day_description)
 				.setOnClickListener(listener);
 
 			return new PlaceOfTheDayHolder(layout);
 		}
 
 		/**
+		 * Called when {@code RecyclerView} needs a new {@code RecyclerAdapter.AlphabetHolder}.
+		 *
+		 * @param parent the {@code ViewGroup} into which the new {@code View} will be added after
+		 * it is bound to an adapter position
+		 * @return a newly constructed {@code AlphabetHolder}
+		 */
+		private AlphabetHolder onCreateAlphabetHolder(@NonNull ViewGroup parent) {
+			// TODO make all these constants in dimen
+			final int TEXT_SIZE_SP = 18;
+
+			TextView letter;
+
+			letter = new TextView(parent.getContext());
+			letter.setBackgroundColor(0xFFFFFFFF);
+			// TODO load this from color.xml?
+			letter.setTextColor(0xFF162B46);
+			letter.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE_SP);
+			// this avoids font weight and looks similar enough
+			letter.setTypeface(Typeface.DEFAULT_BOLD);
+
+			return new AlphabetHolder(letter);
+		}
+
+		/**
 		 * Called when {@code RecyclerView} needs a new {@code RecyclerAdapter.CardViewHolder}.
 		 *
 		 * @param parent the {@code ViewGroup} into which the new {@code View} will be added after
-		 * it is bound to an adapter position.
+		 * it is bound to an adapter position
 		 * @return a newly constructed {@code CardViewHolder}
 		 */
 		private CardViewHolder onCreateCardViewHolder(@NonNull ViewGroup parent) {
@@ -397,9 +516,12 @@ public final class PlacesPageFragment extends Fragment {
 			// do nothing for PlaceOfTheDayHolder
 			if (holder instanceof CardViewHolder) {
 				CardViewHolder card_view_holder = (CardViewHolder) holder;
-				int index = position - 1;
-				card_view_holder.image.updatePhotoPath(landmarks[index].getThumbnailPhoto());
-				card_view_holder.label.setText(landmarks[index].getName());
+				Landmark landmark = landmarks[indices[position]];
+				card_view_holder.image.updatePhotoPath(landmark.getThumbnailPhoto());
+				card_view_holder.label.setText(landmark.getName());
+			} else if (holder instanceof AlphabetHolder) {
+				AlphabetHolder alphabet_holder = (AlphabetHolder) holder;
+				alphabet_holder.letter.setText(String.valueOf(letters[position]));
 			}
 		}
 
@@ -412,8 +534,7 @@ public final class PlacesPageFragment extends Fragment {
 		 */
 		@Override
 		public int getItemViewType(int position) {
-			if (position == 0) return TYPE_PLACE_OF_THE_DAY_HOLDER;
-			return TYPE_CARD_VIEW_HOLDER;
+			return types[position];
 		}
 
 		/**
@@ -423,8 +544,8 @@ public final class PlacesPageFragment extends Fragment {
 		 */
 		@Override
 		public int getItemCount() {
-			// Place of the Day header and cards
-			return 1 + landmarks.length;
+			// Place of the Day header, letters, and cards
+			return size;
 		}
 
 		/**
@@ -443,9 +564,10 @@ public final class PlacesPageFragment extends Fragment {
 				@Override
 				public int getSpanSize(int position) {
 					switch (getItemViewType(position)) {
-						case TYPE_PLACE_OF_THE_DAY_HOLDER:
+						case TYPE_ALPHABET:
+						case TYPE_PLACE_OF_THE_DAY:
 							return 2;
-						case TYPE_CARD_VIEW_HOLDER:
+						case TYPE_CARD:
 							return 1;
 						default:
 							throw new IllegalStateException("invalid item view type");
@@ -453,12 +575,20 @@ public final class PlacesPageFragment extends Fragment {
 				}
 			};
 		}
+
+		/**
+		 * Returns the position of the alphabet heading associated with {@code letter}.
+		 * @param letter the letter to find
+		 */
+		public int getPosition(char letter) {
+			return first[letter == '#' ? 0 : letter - 'A' + 1];
+		}
 	}
 
 	/**
 	 * Decorates the item by padding them.
 	 */
-	public static class MarginItemDecoration extends RecyclerView.ItemDecoration {
+	public class MarginItemDecoration extends RecyclerView.ItemDecoration {
 
 		/**
 		 * The margin to pad the items by.
@@ -475,8 +605,8 @@ public final class PlacesPageFragment extends Fragment {
 
 		/**
 		 * Retrieve any offsets for the given item.  Pads them by {@code margin} on left and right
-		 * and by {@code margin * 2} on the bottom.  Pads the first item (Place of the Day) on the
-		 * bottom only.
+		 * and by {@code margin * 2} on the bottom.  Pads Place of the Day on the bottom only.
+		 * Pads the letters on the left, top, and bottom.
 		 *
 		 * @param outRect rect to receive the output
 		 * @param view the child view to decorate
@@ -489,14 +619,29 @@ public final class PlacesPageFragment extends Fragment {
 			@NonNull RecyclerView parent,
 			@NonNull RecyclerView.State state
 		) {
-			if (parent.getChildAdapterPosition(view) == 0) {
-				outRect.left = 0;
-				outRect.right = 0;
-			} else {
-				outRect.left = margin;
-				outRect.right = margin;
+			// TODO make it a constant in XML
+			final int LABEL_MARGIN_DP = 16;
+			// adapter must not be null
+			//noinspection ConstantConditions
+			switch (parent.getAdapter().getItemViewType(parent.getChildAdapterPosition(view))) {
+				case TYPE_PLACE_OF_THE_DAY:
+					outRect.left = 0;
+					outRect.right = 0;
+					outRect.bottom = margin * 2;
+					break;
+				case TYPE_ALPHABET:
+					outRect.left = margin;
+					outRect.top = dpToXp(LABEL_MARGIN_DP);
+					outRect.bottom = dpToXp(LABEL_MARGIN_DP);
+					break;
+				case TYPE_CARD:
+					outRect.left = margin;
+					outRect.right = margin;
+					outRect.bottom = margin * 2;
+					break;
+				default:
+					throw new IllegalStateException("view type must be valid");
 			}
-			outRect.bottom = margin * 2;
 		}
 	}
 
@@ -546,11 +691,15 @@ public final class PlacesPageFragment extends Fragment {
 	 * @param view the created view
 	 * @param savedInstanceState the saved instance state
 	 */
+	// we don't need click functionality in side bar
+	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		final int MARGIN_DP = 7;
+
+		// search bar setup
 
 		view
 			.findViewById(R.id.placesSearchBarMask)
@@ -567,6 +716,8 @@ public final class PlacesPageFragment extends Fragment {
 		search_view_parent.removeView(search_mag_icon);
 		search_view_parent.addView(search_mag_icon);
 
+		// recycler view setup
+
 		ArrayList<Landmark> landmarks = LandmarkDatabase.getLocations(getContext());
 		// empty the page on error
 		// FIXME proper error handling
@@ -581,6 +732,36 @@ public final class PlacesPageFragment extends Fragment {
 		landmark_recycler_view.setLayoutManager(layout_manager);
 		landmark_recycler_view.setAdapter(adapter);
 		landmark_recycler_view.addItemDecoration(new MarginItemDecoration(dpToXp(MARGIN_DP)));
+
+		// side bar setup
+
+		LinearLayout side_bar = view.findViewById(R.id.places_page_side_bar);
+
+		side_bar.setOnTouchListener((v, event) -> {
+			// performance can be improved by using some sort of binary search
+			int[] coordinates = new int[2];
+			float x = event.getRawX(), y = event.getRawY();
+			for (int j = 0; j < side_bar.getChildCount(); ++j) {
+				View letter = side_bar.getChildAt(j);
+				letter.getLocationOnScreen(coordinates);
+
+				int view_x = coordinates[0], view_y = coordinates[1];
+
+				if (x > view_x && x < (view_x + letter.getWidth())
+					&& y > view_y && y < (view_y + letter.getHeight())
+				) {
+					// there must be at least a character inside each text view
+					char c = ((TextView) letter).getText().charAt(0);
+					int pos = adapter.getPosition(c);
+					if (pos != -1) {
+						final int OFFSET_DP = 50;
+						layout_manager.scrollToPositionWithOffset(pos, dpToXp(OFFSET_DP));
+					}
+					break;
+				}
+			}
+			return true;
+		});
 	}
 
 	/**
