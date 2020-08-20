@@ -740,16 +740,14 @@ public final class PlacesPageFragment extends Fragment {
 		side_bar.setOnTouchListener((v, event) -> {
 			// performance can be improved by using some sort of binary search
 			int[] coordinates = new int[2];
-			float x = event.getRawX(), y = event.getRawY();
+			float y = event.getRawY();
 			for (int j = 0; j < side_bar.getChildCount(); ++j) {
 				View letter = side_bar.getChildAt(j);
 				letter.getLocationOnScreen(coordinates);
 
-				int view_x = coordinates[0], view_y = coordinates[1];
+				int view_y = coordinates[1];
 
-				if (x > view_x && x < (view_x + letter.getWidth())
-					&& y > view_y && y < (view_y + letter.getHeight())
-				) {
+				if (y >= view_y && y <= view_y + letter.getHeight()) {
 					// there must be at least a character inside each text view
 					char c = ((TextView) letter).getText().charAt(0);
 					int pos = adapter.getPosition(c);
