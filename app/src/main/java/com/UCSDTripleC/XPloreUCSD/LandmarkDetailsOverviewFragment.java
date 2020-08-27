@@ -405,8 +405,6 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         private ArrayList<Integer> icons = new ArrayList<Integer>() {
             {
                 add(R.drawable.ic_wc_24dp);
-                add(R.drawable.ic_bus_24dp);
-                add(R.drawable.ic_local_parking_24dp);
                 add(R.drawable.ic_restaurant_24dp);
                 add(R.drawable.ic_breakfast_24dp);
             }
@@ -414,13 +412,11 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         private ArrayList<String> names = new ArrayList<String>() {
             {
                 add("Restroom");
-                add("Bus Stop");
-                add("Parking");
                 add("Restaurant");
                 add("Cafe");
             }
         };
-        private String[] nameMap = {"restroom","busstop","parking","restaurant","cafe"};
+        private String[] nameMap = {"restroom", "restaurant","cafe"};
 
         public void setAmenities(HashMap<String, Boolean> amenities) {
             for (int i = nameMap.length - 1; i >= 0; i--) {

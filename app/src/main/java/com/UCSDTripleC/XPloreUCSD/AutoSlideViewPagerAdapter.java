@@ -44,7 +44,7 @@ public class AutoSlideViewPagerAdapter extends PagerAdapter {
     private ImageView imageView;
     private TextView textName;
     private TextView textDistance;
-    private String[] nameMap = {"restroom","cafe","restaurant","busstop","parking"};
+    private String[] nameMap = {"restroom","cafe","restaurant"};
 
 
     public AutoSlideViewPagerAdapter(Context context) {
