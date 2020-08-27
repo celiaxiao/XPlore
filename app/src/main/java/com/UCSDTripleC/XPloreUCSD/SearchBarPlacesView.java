@@ -29,8 +29,7 @@ public class SearchBarPlacesView extends ArrayAdapter {
     private final String[] distance;//default to string, could replace to int/Integer
     private final boolean[][] amentities;
     private static final String[] amenFilter=
-            new String[]{"Amentity_bathromm","Amentity_cafe","Amentity_resturant",
-                    "Amentity_bus","Amentity_parking"};
+            new String[]{"Amentity_bathromm","Amentity_cafe","Amentity_resturant"};
     private ArrayList<PlacesDataClass> places;
     private Activity context;
     private Filter filter;
@@ -68,8 +67,6 @@ public class SearchBarPlacesView extends ArrayAdapter {
         ImageView bathroomIcon=(ImageView)rowView.findViewById(R.id.bathroomIcon);
         ImageView resturantIcon=(ImageView)rowView.findViewById(R.id.resturantIcon);
         ImageView cafeIcon=(ImageView)rowView.findViewById(R.id.cafeIcon);
-        ImageView busStationIcon=(ImageView)rowView.findViewById(R.id.busStationIcon);
-        ImageView parkingIcon=(ImageView)rowView.findViewById(R.id.parkingIcon);
 
         //initialize places information
         nameText.setText(filtered.get(position).getPlacesName());
@@ -80,8 +77,6 @@ public class SearchBarPlacesView extends ArrayAdapter {
         if(amen[0]) bathroomIcon.setImageResource(R.drawable.b1);
         if(amen[1]) cafeIcon.setImageResource(R.drawable.b2);
         if(amen[2]) resturantIcon.setImageResource(R.drawable.b3);
-        if(amen[3]) busStationIcon.setImageResource(R.drawable.b4);
-        if(amen[4]) parkingIcon.setImageResource(R.drawable.b5);
 
         //setup direction button onclick listener
         // TODO: change this to use ClickTracker to prevent double click problem

@@ -142,40 +142,7 @@
                      />
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/busCard"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/resturantCard"
-                android:layout_marginEnd="21dp"
-                app:cardElevation="5dp">
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/bus"
-                    style="@style/AmenityChip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Bus Stop"
-                    app:checkedIconVisible="false" />
-            </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/parkingCard"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/busCard"
-                android:layout_marginEnd="15dp"
-                app:cardElevation="5dp">
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/parking"
-                    style="@style/AmenityChip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Parking"
-                    app:checkedIconVisible="false"
-                     />
-            </androidx.cardview.widget.CardView>
 
 
         </RelativeLayout>
