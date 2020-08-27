@@ -84,7 +84,6 @@ public class LandmarkDatabase {
             "location/UCSDBookstore.json",
             "location/YorkHall.json",
             "location/CareerServiceCenter.json",
-            "location/UCSDBookstore.json",
             "location/RIMACGym.json",
             "location/PinesRoots.json",
             "location/CafeVentanas.json",

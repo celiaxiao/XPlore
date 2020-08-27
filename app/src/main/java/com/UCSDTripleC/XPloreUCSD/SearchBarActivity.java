@@ -81,7 +81,7 @@ public class SearchBarActivity extends AppCompatActivity  {
 
         //get main context from json file
         Gson gson = new Gson();
-        boolean[][] dbAmentityList = new boolean[FILELIST.length][5];
+        boolean[][] dbAmentityList = new boolean[FILELIST.length][3];
         String[] placesName = new String[FILELIST.length];
         String[] availability = new String[FILELIST.length];
         String[] distances = new String[FILELIST.length];
@@ -229,12 +229,10 @@ public class SearchBarActivity extends AppCompatActivity  {
         });
 
         //get the checked list from 5 filter chips
-        Chip[] chipgroup=new Chip[5];
+        Chip[] chipgroup=new Chip[3];
         chipgroup[0]=(Chip)findViewById(R.id.bathroom) ;
         chipgroup[1]=(Chip)findViewById(R.id.cafe) ;
         chipgroup[2]=(Chip)findViewById(R.id.resturant) ;
-        chipgroup[3]=(Chip)findViewById(R.id.bus) ;
-        chipgroup[4]=(Chip)findViewById(R.id.parking) ;
         amenList = new ArrayList<String>( );
         for (int i = 0; i < chipgroup.length; i++) {
             Chip ameChip =  chipgroup[i];
