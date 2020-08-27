@@ -2,9 +2,7 @@
   "name": "Career Service Center",
   "about": "Situated in the center of campus, the Career Service Center serves as the one stop shop for every Triton looking to advance in their career by providing skills to find that ideal job, internship, or position.",
   "amenities": {
-    "parking": false,
     "cafe": false,
-    "busstop": true,
     "restaurant": false,
     "restroom": true
   },

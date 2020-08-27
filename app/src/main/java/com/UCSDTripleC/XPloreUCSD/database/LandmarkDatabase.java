@@ -84,7 +84,11 @@ public class LandmarkDatabase {
             "location/UCSDBookstore.json",
             "location/YorkHall.json",
             "location/CareerServiceCenter.json",
-            "location/RIMACGym.json"
+            "location/RIMACGym.json",
+            "location/PinesRoots.json",
+            "location/CafeVentanas.json",
+            "location/TheBistro.json",
+            "location/StudentServicesCenter.json"
     };
 
     public LandmarkDatabase(Context context, String order){

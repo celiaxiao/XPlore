@@ -1,9 +1,7 @@
 {
   "about": "Price Center is a student center located in the center of the University of California San Diego campus, just south of Geisel Library. As one of the largest student centers in the country, Price Center serves more than 30,000 visitors a day. ",
   "amenities": {
-    "parking": true,
     "cafe": true,
-    "busstop": true,
     "restaurant": true,
     "restroom": true
   },

@@ -2,9 +2,7 @@
   "name": "UCSD Bookstore",
   "about": "The UCSD Bookstore is your place to go if you want to buy everything UCSD. From UCSD branded apparels, to laptops, and to other miscellaneous goods, the UCSD Bookstore has got it all.",
   "amenities": {
-    "parking": false,
     "cafe": false,
-    "busstop": true,
     "restaurant": false,
     "restroom": true
   },

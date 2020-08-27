@@ -2,9 +2,7 @@
   "name": "York Hall",
   "about": "York Hall, located on the eastern side of Revelle Plaza in Revelle College, functions as one of the main classroom facilities and hosts mainly lectures from the chemistry department and other physical sciences. One of York hall's defining features is the unique set of hexagonal breezeways that it shares with Mayer and Bonner hall, connecting the 3 lecture halls and providing an iconic, symmetrical aesthetic addition to the space. The facility is named after Herbert York, a famous nuclear physicist who served in numerous administrative and research positions within the government and was the founding Chancellor of UC San Diego.",
   "amenities": {
-    "parking": false,
     "cafe": false,
-    "busstop": true,
     "restaurant": false,
     "restroom": true
   },

@@ -2,9 +2,7 @@
   "name": "Canyon Vista",
   "about": "Canyon Vista Marketplace is the largest halal-certified residential dining facility in the nation. Their menu features healthy, sustainable menu offerings and groceries. Stations include Fusion Grill, Fresh, Three-Sixty and Earl's Coffee House.",
   "amenities": {
-    "parking": true,
     "cafe": true,
-    "busstop": false,
     "restaurant": true,
     "restroom": true
   },

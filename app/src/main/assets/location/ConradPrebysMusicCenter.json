@@ -2,10 +2,8 @@
   "name": "Conrad Prebys Music Center",
   "about": "Conrad Prebys Concert Hall was designed by famed acoustician Cyril M. Harris, this 350-seat concert hall is a world-class venue for contemporary chamber and small ensemble music. Its experimental theater, a 150-seat concert and theatrical space with a “black box” design, features a configurable room acoustic made possible by Meyer Sound’s Constellation electroacoustic architecture. Inside the building includes a 150-seat auditorium designed for intimate performances and lectures with the added functionality of surround sound diffusion when desired.",
   "amenities": {
-    "parking": true,
-    "cafe": true,
-    "busstop": true,
-    "restaurant": true,
+    "cafe": false,
+    "restaurant": false,
     "restroom": true
   },
   "links": [
