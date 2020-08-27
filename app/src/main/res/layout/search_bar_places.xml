@@ -67,25 +67,6 @@
                 android:layout_marginStart="2dp"
 
                 android:src="@drawable/g3" />
-            <ImageView
-                android:id="@+id/busStationIcon"
-                android:layout_width="19dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="2dp"
-
-
-
-                android:src="@drawable/g4" />
-
-            <ImageView
-                android:id="@+id/parkingIcon"
-                android:layout_width="19dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/g5" />
 
 
         </LinearLayout>

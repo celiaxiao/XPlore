@@ -12,8 +12,7 @@ public class PlacesDataClass {
     private String availability;
     private String distances;
     private static final String[] amenFilter=
-            new String[]{"restroom","cafe","restaurant",
-                    "busstop","parking"};
+            new String[]{"restroom","cafe","restaurant"};
     private boolean[] amenities;
 
     public PlacesDataClass(String name, String availability, String distance, boolean[] amenities) {
@@ -30,7 +29,7 @@ public class PlacesDataClass {
         //hide the distances
         this.distances="";
         //hard code amenities to be 5
-        this.amenities=new boolean[5];
+        this.amenities=new boolean[3];
         // FIXME meaningless if and potential NullPointerException
         for(int j = 0; j< landmark.getAmenities().size(); j++){
             if (landmark.getAmenities() != null) {
@@ -46,8 +45,8 @@ public class PlacesDataClass {
         availability = "";
         distances = Geography.displayDistance(pair.second);
         // hard code amenities to be 5
-        amenities = new boolean[5];
-        for (int j = 0; j < pair.first.getAmenities().size(); j++) {
+        amenities = new boolean[3];
+        for (int j = 0; j < amenities.length; j++) {
             if (pair.first.getAmenities() != null) {
                 // FIXME potential null pointer
                 this.amenities[j] = pair.first.getAmenities().get(amenFilter[j]);
