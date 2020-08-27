@@ -363,8 +363,6 @@ public final class PlacesPageFragment extends Fragment {
 			ImageView cafe = layout.findViewById(R.id.places_page_place_of_the_day_cafe);
 			ImageView restaurant =
 				layout.findViewById(R.id.places_page_place_of_the_day_restaurant);
-			ImageView bus_stop = layout.findViewById(R.id.places_page_place_of_the_day_bus_stop);
-			ImageView parking = layout.findViewById(R.id.places_page_place_of_the_day_parking);
 			ImageView thumbnail = layout.findViewById(R.id.places_page_place_of_the_day_thumbnail);
 			TextView name = layout.findViewById(R.id.places_page_place_of_the_day_name);
 			TextView about = layout.findViewById(R.id.places_page_place_of_the_day_about);
@@ -380,10 +378,6 @@ public final class PlacesPageFragment extends Fragment {
 				if (result != null && result) cafe.setColorFilter(color);
 				result = place.getAmenities().get("restaurant");
 				if (result != null && result) restaurant.setColorFilter(color);
-				result = place.getAmenities().get("busstop");
-				if (result != null && result) bus_stop.setColorFilter(color);
-				result = place.getAmenities().get("parking");
-				if (result != null && result) parking.setColorFilter(color);
 			}
 
 			try {
