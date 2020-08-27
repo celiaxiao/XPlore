@@ -30,10 +30,8 @@
     "the other best tour"
   ],
   "audio": "recordings/Biomedical_Library.mp3",
-  "coordinates": { 
-    "first": "32.875477",
-    "second": "-117.236983"
-  },
+  "latitude": 32.875477,
+  "longitude": -117.236983,
   "descriptive": [ 
     "Must see"
   ],

@@ -31,10 +31,8 @@
     "the other best tour"
   ],
   "audio": "recordings/Canyonview_Aquatic_Center.mp3",
-  "coordinates": {
-    "first": "32.880751",
-    "second": "-117.231873"
-  },
+  "latitude": 32.880751,
+  "longitude": -117.231873,
   "descriptive": [
     "Must see"
   ],

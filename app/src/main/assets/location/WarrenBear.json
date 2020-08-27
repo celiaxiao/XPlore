@@ -8,10 +8,8 @@
     "restroom": true
   },
   "audio": "recordings/Warren_Bear.mp3",
-  "coordinates": {
-    "first": "32.882189",
-    "second": "-117.234193"
-  },
+  "latitude": 32.882189,
+  "longitude": -117.234193,
   "descriptive": [
     "Must see"
   ],

@@ -34,10 +34,8 @@
     "the other best tour"
   ],
   "audio": "recordings/no_recording.mp3",
-  "coordinates": { 
-    "first": "32.882728",
-    "second": "-117.234704"
-  },
+  "latitude": 32.882728,
+  "longitude": -117.234704,
   "descriptive": [ 
     "Must see"
   ],

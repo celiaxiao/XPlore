@@ -31,10 +31,8 @@
     "the other best tour"
   ],
   "audio": "recordings/Rady_School_of_Management.mp3",
-  "coordinates": {
-    "first": "32.886803",
-    "second": "-117.241215"
-  },
+  "latitude": 32.886803,
+  "longitude": -117.241215,
   "descriptive": [
     "Must see"
   ],

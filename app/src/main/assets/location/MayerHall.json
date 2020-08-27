@@ -30,10 +30,8 @@
     "the other best tour"
   ],
   "audio": "recordings/Mayer_Hall.mp3",
-  "coordinates": {
-    "first": "32.875988",
-    "second": " -117.239862"
-  },
+  "latitude": 32.875988,
+  "longitude":  -117.239862,
   "descriptive": [
     "Must see"
   ],

@@ -94,9 +94,8 @@ public class SearchBarPlacesView extends ArrayAdapter {
                 Landmark clickedLandmark = sbdatebase.getByName(name);
                 Log.i("name", name);
                 //this is name of the location: name
-                //this is the coordinates pair (latitude, longitude) for the clicked location:
-                String latitude = (String) clickedLandmark.getCoordinates().first;
-                String longitude = (String) clickedLandmark.getCoordinates().second;
+                double latitude = clickedLandmark.getLatitude();
+                double longitude = clickedLandmark.getLongitude();
 
                 // Use the coordinates to set up directions in Google Maps with (default mode=walking)
                 Uri gmmIntentUri = Uri.parse("geo:" + latitude + ", " + longitude + "?q=" + latitude + ", " + longitude + "(" + name + ")");

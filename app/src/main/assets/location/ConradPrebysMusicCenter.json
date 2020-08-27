@@ -32,10 +32,8 @@
     "the other best tour"
   ],
   "audio": "recordings/Conrad_Prebys_Music_Center.mp3",
-  "coordinates": {
-    "first": "32.878030",
-    "second": "-117.234728"
-  },
+  "latitude": 32.878030,
+  "longitude": -117.234728,
   "descriptive": [
     "Must see"
   ],
