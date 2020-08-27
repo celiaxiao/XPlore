@@ -1,0 +1,43 @@
+{
+  "about": "Pines is the dining hall of John Muir College, which offers a little bit of everything - hot breakfast, stir-fry, sushi, salad bar, and awesome desserts. Roots is one of the more unique dining halls on campus, which offers students the choice of vegan cuisine.",
+  "amenities": {
+    "cafe": true,
+    "restaurant": true,
+    "restroom": true
+  },
+  "audio": "recordings/no_recording.mp3",
+  "latitude": 32.879154,
+  "longitude": -117.242568,
+  "descriptive": [
+    "Must see"
+  ],
+  "links": [
+    "Pines Official Page: https://hdh-web.ucsd.edu/dining/apps/diningservices/Restaurants/MenuItem/01",
+    "Roots: https://hdh-web.ucsd.edu/dining/apps/diningservices/Restaurants/MenuItem/32"
+  ],
+  "name": "Pines/Roots",
+  "otherPhotos": [
+    "photos/PinesRoots/Pines.jpg",
+    "photos/PinesRoots/Roots.jpg"
+  ],
+  "relatedPlaces": [
+    "Sun God",
+    "Geisel Library",
+    "Price Center"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "thumbnailPhoto":"photos/PinesRoots/Pines.jpg",
+  "videos": [
+    "https://www.youtube.com/watch?v=hQqdNd0tfKI"
+  ],
+  "history": [
+    {
+      "title": "Construction of Roots",
+      "articleType": "Architecture・1 Min Read",
+      "content": "Barnhart-Reese, with joint venture partner Black IPO, completed renovation of the Roots Restaurant for the University of California, San Diego. The renovation included a complete overhaul of the dining and kitchen areas in the Stewart Commons residence hall to accommodate the restaurant’s new organic menu.\n\nThe Roots Restaurant is located in the lower level of an existing dining facility and had numerous logistical challenges that were handled adeptly by the design and construction team. Collaboration between all members of the team was required to resolve issues uncovered during the interior demolition of this 40-year-old building while competing with the construction of the upstairs dining facility by a different general contractor. Issues such as meeting the deadlines on this fast-paced project and maintaining an active construction project while school was in session are some of the challenges that the team faced during the five-month construction period. Reference: http://www.debconstruct.com/portfolio-items/ucsd-roots-restaurant-renovation/"
+    }
+  ]
+}

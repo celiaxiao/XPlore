@@ -2,9 +2,7 @@
   "name": "Galbraith Hall",
   "about": "Occupied in September 1965 in Revelle College, Galbraith Hall was UC San Diego’s first central library. Today the building’s primary occupants are the Center for Library & Instructional Services (CLICS) and the department of theatre and dance. Galbraith Hall was renovated and is now the center of operations for the Department of Theatre & Dance. Galbraith Hall houses faculty and graduate student offices, four large rehearsal rooms, a 99-seat theatre (Arthur Wagner Theatre) with dressing rooms and a stage management booth, and lab facilities for our undergraduate and graduate designers. The lecture hall and study rooms are frequented by students and faculty alike.",
   "amenities": {
-    "parking": true,
     "cafe": true,
-    "busstop": true,
     "restaurant": true,
     "restroom": true
   },

@@ -2,9 +2,7 @@
   "64Degrees": {
     "about": "Located in UCSD’s Revelle College, 64 Degrees is the first dining hall at UCSD and is still one of the best dining options",
     "amenities": {
-      "parking": true,
       "cafe": true,
-      "busstop": true,
       "restaurant": true,
       "restroom": true
     },
@@ -19,9 +17,7 @@
   "canyonVista": {
     "about": "Canyon Vista Marketplace is the largest halal-certified residential dining facility in the nation. Their menu features healthy, sustainable menu offerings and groceries. Stations include Fusion Grill, Fresh, Three-Sixty and Earl's Coffee House.",
     "amenities": {
-      "parking": true,
       "cafe": true,
-      "busstop": false,
       "restaurant": true,
       "restroom": true
     },
@@ -36,9 +32,7 @@
   "BiomedicalLibrary": {
     "about": "A Library of UC San Diego specified in biomedical area, the second largest library of UCSD.",
     "amenities": {
-      "parking": true,
       "cafe": true,
-      "busstop": true,
       "restaurant": false,
       "restroom": true
     },
@@ -53,9 +47,7 @@
   "CanyonViewAquaticCenter": {
     "about": "Located on the eastern end of campus between Eleanor Roosevelt College and Warren College, the Canyonview Aquatic Center features two outdoor, Olympic-sized pools, each of which can be divided into eight lanes of 50 meters in length, or 19 lanes of 25 yards in length. The aquatic center also features a state-of-the-art weight room. Canyonview is home to the UCSD men's and women's water polo teams, as well as the men's and women's swimming and diving programs.",
     "amenities": {
-      "parking": true,
       "cafe": true,
-      "busstop": false,
       "restaurant": true,
       "restroom": true
     },
@@ -70,9 +62,7 @@
   "AtkinsonHall": {
     "about": "The Rady School of Management was created due to a need expressed to the school's founders by the San Diego business community. Experiential learning is at the core of all programs, providing students the opportunity to graduate with both an education and applied experience.",
     "amenities": {
-      "parking": true,
       "cafe": true,
-      "busstop": false,
       "restaurant": false,
       "restroom": true
     },
@@ -87,9 +77,7 @@
   "ConradPrebysMusicCenter": {
     "about": "The Music Center houses the university's music department, and is anchored by the 400-seat Concert Hall, in addition to the 170-seat Recital Hall and an Experimental Theatre with variable digital acoustics system.",
     "amenities": {
-      "parking": true,
       "cafe": true,
-      "busstop": true,
       "restaurant": true,
       "restroom": true
     },
@@ -104,9 +92,7 @@
   "GalbraithHall": {
     "about": "Occupied in September 1965 in Revelle College, Galbraith Hall was UC San Diego’s first central library. Today the building’s primary occupants are the Center for Library & Instructional Services (CLICS) and the department of theatre and dance.",
     "amenities": {
-      "parking": true,
       "cafe": true,
-      "busstop": true,
       "restaurant": true,
       "restroom": true
     },
@@ -121,9 +107,7 @@
   "Geisel": {
     "about": "Geisel Library is the main library building of the University of California San Diego Library. It is named in honor of Audrey and Theodor Seuss Geisel. Theodor is better known as children's author Dr. Seuss",
     "amenities": {
-      "parking": false,
       "cafe": true,
-      "busstop": false,
       "restaurant": false,
       "restroom": true
     },
@@ -138,9 +122,7 @@
   "JSOE": {
     "about": "Fallen Star is an art installation by South Korean artist Do Ho Suh on the grounds of the University of California San Diego. It is a cottage perched at an angle off the edge of Jacobs Hall.",
     "amenities": {
-      "parking": false,
       "cafe": true,
-      "busstop": false,
       "restaurant": true,
       "restroom": true
     },
@@ -155,9 +137,7 @@
   "MayerHall": {
     "about": "Mayer Hall is a five story research building in Revelle College. The facility has an assignable area of 58,447 square feet, primarily serving the department of physics. First occupied in 1963, the building was later renamed to honor former UC San Diego professors Maria and Joseph Mayer. ",
     "amenities": {
-      "parking": true,
       "cafe": true,
-      "busstop": true,
       "restaurant": true,
       "restroom": true
     },
@@ -172,9 +152,7 @@
   "OceanViewRestaurant": {
     "about": "Oceanview is one of the biggest dining halls on campus, and people can enjoy the best view when dining: Ocean! Oceanview is also the first dining hall that offers 24/7 services.",
     "amenities": {
-      "parking": false,
       "cafe": true,
-      "busstop": false,
       "restaurant": true,
       "restroom": true
     },
@@ -189,9 +167,7 @@
   "PetersonHall": {
     "about": "Peterson Hall is named for Robert O. Peterson, an early and generous benefactor of UC San Diego who is known for founding the Jack-In-The-Box restaurant chain in the early 1950s. Peterson Hall contains two large lecture halls that seat 300 to 400 students, serving the instructional needs of the campus and providing a venue for lectures and events open to the outside community. ",
     "amenities": {
-      "parking": true,
       "cafe": false,
-      "busstop": false,
       "restaurant": false,
       "restroom": true
     },
@@ -206,9 +182,7 @@
   "PriceCenter": {
     "about": "Price Center is a student center located in the center of the University of California San Diego campus, just south of Geisel Library. As one of the largest student centers in the country, Price Center serves more than 30,000 visitors a day. ",
     "amenities": {
-      "parking": true,
       "cafe": true,
-      "busstop": true,
       "restaurant": true,
       "restroom": true
     },
@@ -223,9 +197,7 @@
   "RadySchoolOfManagement": {
     "about": "The Rady School of Management was created due to a need expressed to the school's founders by the San Diego business community. Experiential learning is at the core of all programs, providing students the opportunity to graduate with both an education and applied experience.",
     "amenities": {
-      "parking": true,
       "cafe": true,
-      "busstop": false,
       "restaurant": false,
       "restroom": true
     },
@@ -240,9 +212,7 @@
   "SunGod": {
     "about": "Sun God is a monumental statue by French-American sculptor Niki de Saint Phalle located on the campus of the University of California San Diego. The figurative sculpture is a 14-foot multicolored bird-like creature, perched atop a 15-foot tall arch-shaped, vine-covered concrete pedestal.",
     "amenities": {
-      "parking": true,
       "cafe": false,
-      "busstop": false,
       "restaurant": false,
       "restroom": false
     },
@@ -257,9 +227,7 @@
   "WarrenBear": {
     "about": "Warren Bear is a statue created by Tim Hawkinson, and it is part of the Stuart Collection of UC San Diego",
     "amenities": {
-      "parking": true,
       "cafe": false,
-      "busstop": false,
       "restaurant": false,
       "restroom": true
     },
@@ -274,9 +242,7 @@
   "MainGym": {
     "about": "The Main Gym is one of the many gyms on campus for students and faculty to use. The facility provides for activities such as volleyball, basketball, martial arts, dance, as well as many other activities. It has even been used to host final exams before! The Main Gym was previously the home court for the UCSD NCAA Men’s and Women’s Volleyball, Basketball, and Fencing teams. Additionally, numerous concert and lecture events, summer camps, and non-University events — such as the workouts for the 1992 Olympic Dream Team — have been hosted in this complex.",
     "amenities": {
-      "parking": true,
       "cafe": false,
-      "busstop": false,
       "restaurant": false,
       "restroom": true
     },
@@ -291,9 +257,7 @@
   "JacobsBuilding": {
     "about": "Officially known as the Irwin and Joan Jacobs School of Engineering, it is the undergraduate and graduate engineer school of UCSD and it has six distinct engineering departments, offering eighteen undergraduate majors and sixteen master's degrees. Its departments are as follows: Bioengineering, Computer Science and Engineering, Electrical and Computer Engineering, mechanical and Aerospace Engineering, NanoEngineering, and Structural Engineering.",
     "amenities": {
-      "parking": true,
       "cafe": false,
-      "busstop": false,
       "restaurant": false,
       "restroom": true
     },
@@ -308,9 +272,7 @@
   "DrSeussStatue": {
     "about": "The whimsical statue of Dr. Seuss and his iconic Cat in the Hat is located on Geisel Library and it was created in 2004 on the 100th anniversary of the birth of Dr. Seuss. The statue itself features Dr. Seuss seated comfortably in a chair with the Cat in the Hat standing over his shoulder while holding an umbrella.",
     "amenities": {
-      "parking": false,
       "cafe": false,
-      "busstop": false,
       "restaurant": false,
       "restroom": false
     },
@@ -325,9 +287,7 @@
   "CareerServiceCenter": {
     "about": "Situated in the center of campus, the Career Service Center serves as the one stop shop for every Triton looking to advance in their career by providing skills to find that ideal job, internship, or position.",
     "amenities": {
-      "parking": false,
       "cafe": false,
-      "busstop": true,
       "restaurant": false,
       "restroom": true
     },
@@ -342,9 +302,7 @@
   "RIMACGym": {
     "about": "RIMAC Gym is a sports complex on campus that is one of the two main gyms on campus, the other being Main Gym. It has a weight room and various other facilities. It is also the home arena of our men's and women's basketball and volleyball teams.",
     "amenities": {
-      "parking": false,
       "cafe": false,
-      "busstop": false,
       "restaurant": false,
       "restroom": true
     },
@@ -359,9 +317,7 @@
   "UCSDBookStore": {
     "about": "The UCSD Bookstore is your place to go if you want to buy everything UCSD. From UCSD branded apparels, to laptops, and to other miscellaneous goods, the UCSD Bookstore has got it all.",
     "amenities": {
-      "parking": false,
       "cafe": false,
-      "busstop": true,
       "restaurant": false,
       "restroom": true
     },
@@ -376,9 +332,7 @@
   "YorkHall": {
     "about": "York Hall, located on the eastern side of Revelle Plaza in Revelle College, functions as one of the main classroom facilities and hosts mainly lectures from the chemistry department and other physical sciences. One of York hall's defining features is the unique set of hexagonal breezeways that it shares with Mayer and Bonner hall, connecting the 3 lecture halls and providing an iconic, symmetrical aesthetic addition to the space. The facility is named after Herbert York, a famous nuclear physicist who served in numerous administrative and research positions within the government and was the founding Chancellor of UC San Diego.",
     "amenities": {
-      "parking": false,
       "cafe": false,
-      "busstop": true,
       "restaurant": false,
       "restroom": true
     },
@@ -389,6 +343,60 @@
     ],
     "name": "York Hall",
     "thumbnailPhoto": "photos/YorkHall/YorkHall.jpg"
+  },
+  "PinesRoots": {
+    "about": "Pines is the dining hall of John Muir College, which offers a little bit of everything - hot breakfast, stir-fry, sushi, salad bar, and awesome desserts. Roots is one of the more unique dining halls on campus, which offers students the choice of vegan cuisine.",
+    "amenities": {
+      "cafe": true,
+      "restaurant": true,
+      "restroom": true
+    },
+    "latitude": 32.879154,
+    "longitude": -117.242568,
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "Pines/Roots",
+    "thumbnailPhoto":"photos/PinesRoots/Pines.jpg"
+  },
+  "TheBistro": {
+    "about": "A modern eatery featuring an open kitchen, sushi bar, and an exciting Pacific Rim-inspired menu. Our chefs draw from various Asian cultures to serve up the freshest seafood, crisp greens, local produce inspired vegetarian fare, and noodle dishes. The ideal experience focuses on tasting a variety of flavors and sharing plates with friends.",
+    "amenities": {
+      "cafe": true,
+      "restaurant": true,
+      "restroom": true
+    },
+    "latitude": 32.888203,
+    "longitude": -117.242061,
+    "descriptive": [
+      "Must see"
+    ],
+    "name": "The Bistro",
+    "thumbnailPhoto":"photos/TheBistro/TheBistro.png"
+  },
+  "CafeVentanas": {
+    "about": "Know for its station 'World's Fare Your Way', enjoy globally inspired and customizable dishes. Café V is nice and airy, with a large outdoor dining patio.",
+    "amenities": {
+      "cafe": true,
+      "restaurant": true,
+      "restroom": true
+    },
+    "latitude": 32.886175,
+    "longitude": -117.242585,
+    "name": "Cafe Ventanas",
+    "thumbnailPhoto":"photos/CafeVentanas/CafeVentanas.jpg"
+  },
+  "StudentServicesCenter": {
+    "about": "The Student Services Center is a one-stop resource located in the heart of campus. Most student business offices are located here, so students can conveniently access multiple services in one location.\n\nThe SSC also serves as the gateway to UC San Diego, with over 40,000 visitors annually passing through. Students visit the SSC with their families as prospective students, and continue to visit as they make the transition to admitted, then current UC San Diego Tritons.",
+    "amenities": {
+      "cafe": false,
+      "restaurant": true,
+      "restroom": false
+    },
+    "latitude": 32.878929,
+    "longitude": -117.235891,
+    "name": "Student Services Center",
+    "thumbnailPhoto":"photos/StudentServicesCenter/StudentServicesCenter.jpg"
   }
 }
 

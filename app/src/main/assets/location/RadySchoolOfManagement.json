@@ -2,9 +2,7 @@
   "name": "Rady School of Management",
   "about": "The Rady School of Management was created due to a need expressed to the school's founders by the San Diego business community. Experiential learning is at the core of all programs, providing students the opportunity to graduate with both an education and applied experience.",
   "amenities": {
-    "parking": true,
     "cafe": true,
-    "busstop": false,
     "restaurant": false,
     "restroom": true
   },

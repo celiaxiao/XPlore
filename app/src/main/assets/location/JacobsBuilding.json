@@ -2,9 +2,7 @@
   "name": "Jacobs Building",
   "about": "Officially known as the Irwin and Joan Jacobs School of Engineering, it is the undergraduate and graduate engineer school of UCSD and it has six distinct engineering departments, offering eighteen undergraduate majors and sixteen master's degrees. Its departments are as follows: Bioengineering, Computer Science and Engineering, Electrical and Computer Engineering, mechanical and Aerospace Engineering, NanoEngineering, and Structural Engineering.",
   "amenities": {
-    "parking": true,
     "cafe": false,
-    "busstop": true,
     "restaurant": false,
     "restroom": true
   },

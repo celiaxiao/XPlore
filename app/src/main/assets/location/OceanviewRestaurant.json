@@ -2,9 +2,7 @@
   "name": "Oceanview Restaurant",
   "about": "Oceanview is one of the biggest dining halls on campus, and people can enjoy the best view when dining: Ocean! Oceanview is also the first dining hall that offers 24/7 services.",
   "amenities": {
-    "parking": false,
     "cafe": true,
-    "busstop": false,
     "restaurant": true,
     "restroom": true
   },

@@ -2,9 +2,7 @@
   "name": "Atkinson Hall",
   "about": "The 250,000sf Atkinson Hall was named in honor of former UCSD Chancellor and University of California President Richard C. Atkinson (who maintains an office in the building). Atkinson Hall is the headquarters of the Qualcomm Institute, and the building was constructed as part of the State of California's investment in the two-campus California Institute for Telecommunications and Information Technology (Calit2) at UC San Diego and UC Irvine",
   "amenities": {
-    "parking": true,
     "cafe": true,
-    "busstop": true,
     "restaurant": false,
     "restroom": true
   },

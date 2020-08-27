@@ -1,9 +1,7 @@
 {
   "about": "Peterson Hall is named for Robert O. Peterson, an early and generous benefactor of UC San Diego who is known for founding the Jack-In-The-Box restaurant chain in the early 1950s. Peterson Hall contains two large lecture halls that seat 300 to 400 students, serving the instructional needs of the campus and providing a venue for lectures and events open to the outside community. ",
   "amenities": {
-    "parking": true,
     "cafe": false,
-    "busstop": false,
     "restaurant": false,
     "restroom": true
   },
