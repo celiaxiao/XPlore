@@ -2,8 +2,8 @@
   "name": "Mayer Hall",
   "about": "Mayer Hall is a five story research building in Revelle College. The facility has an assignable area of 58,447 square feet, primarily serving the department of physics. First occupied in 1963, the building was later renamed to honor former UC San Diego professors Maria and Joseph Mayer. Mayer Hall is a five story research building in Revelle College. The facility has an assignable area of 58,447 square feet, primarily serving the department of physics. First occupied in 1963, the building was later renamed to honor former UC San Diego professors Maria and Joseph Mayer. Maria Mayer was a distinguished physicist whose legacy includes developing the nuclear shell model of atomic nuclei, an achievement she was later honored for when she received the Nobel Prize for physics in 1963. Her husband, Joseph Mayer, was a renowned physical chemist.",
   "amenities": {
-    "cafe": true,
-    "restaurant": true,
+    "cafe": false,
+    "restaurant": false,
     "restroom": true
   },
   "links": [

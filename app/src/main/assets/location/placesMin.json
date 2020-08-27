@@ -32,7 +32,7 @@
   "BiomedicalLibrary": {
     "about": "A Library of UC San Diego specified in biomedical area, the second largest library of UCSD.",
     "amenities": {
-      "cafe": true,
+      "cafe": false,
       "restaurant": false,
       "restroom": true
     },
@@ -47,8 +47,8 @@
   "CanyonViewAquaticCenter": {
     "about": "Located on the eastern end of campus between Eleanor Roosevelt College and Warren College, the Canyonview Aquatic Center features two outdoor, Olympic-sized pools, each of which can be divided into eight lanes of 50 meters in length, or 19 lanes of 25 yards in length. The aquatic center also features a state-of-the-art weight room. Canyonview is home to the UCSD men's and women's water polo teams, as well as the men's and women's swimming and diving programs.",
     "amenities": {
-      "cafe": true,
-      "restaurant": true,
+      "cafe": false,
+      "restaurant": false,
       "restroom": true
     },
 	"latitude": 0,
@@ -62,7 +62,7 @@
   "AtkinsonHall": {
     "about": "The Rady School of Management was created due to a need expressed to the school's founders by the San Diego business community. Experiential learning is at the core of all programs, providing students the opportunity to graduate with both an education and applied experience.",
     "amenities": {
-      "cafe": true,
+      "cafe": false,
       "restaurant": false,
       "restroom": true
     },
@@ -77,8 +77,8 @@
   "ConradPrebysMusicCenter": {
     "about": "The Music Center houses the university's music department, and is anchored by the 400-seat Concert Hall, in addition to the 170-seat Recital Hall and an Experimental Theatre with variable digital acoustics system.",
     "amenities": {
-      "cafe": true,
-      "restaurant": true,
+      "cafe": false,
+      "restaurant": false,
       "restroom": true
     },
 	"latitude": 0,
@@ -92,8 +92,8 @@
   "GalbraithHall": {
     "about": "Occupied in September 1965 in Revelle College, Galbraith Hall was UC San Diego’s first central library. Today the building’s primary occupants are the Center for Library & Instructional Services (CLICS) and the department of theatre and dance.",
     "amenities": {
-      "cafe": true,
-      "restaurant": true,
+      "cafe": false,
+      "restaurant": false,
       "restroom": true
     },
 	"latitude": 0,
@@ -137,8 +137,8 @@
   "MayerHall": {
     "about": "Mayer Hall is a five story research building in Revelle College. The facility has an assignable area of 58,447 square feet, primarily serving the department of physics. First occupied in 1963, the building was later renamed to honor former UC San Diego professors Maria and Joseph Mayer. ",
     "amenities": {
-      "cafe": true,
-      "restaurant": true,
+      "cafe": false,
+      "restaurant": false,
       "restroom": true
     },
 	"latitude": 0,
@@ -197,7 +197,7 @@
   "RadySchoolOfManagement": {
     "about": "The Rady School of Management was created due to a need expressed to the school's founders by the San Diego business community. Experiential learning is at the core of all programs, providing students the opportunity to graduate with both an education and applied experience.",
     "amenities": {
-      "cafe": true,
+      "cafe": false,
       "restaurant": false,
       "restroom": true
     },
