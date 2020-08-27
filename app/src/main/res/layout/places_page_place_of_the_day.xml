@@ -107,20 +107,6 @@
 					  android:src="@drawable/ic_restaurant"
 					  android:tint="#949292" />
 
-				  <ImageView
-					  android:id="@+id/places_page_place_of_the_day_bus_stop"
-					  android:layout_width="wrap_content"
-					  android:layout_height="wrap_content"
-					  android:src="@drawable/ic_directions_bus"
-					  android:tint="#949292" />
-
-				  <ImageView
-					  android:id="@+id/places_page_place_of_the_day_parking"
-					  android:layout_width="wrap_content"
-					  android:layout_height="wrap_content"
-					  android:src="@drawable/ic_local_parking"
-					  android:tint="#949292" />
-
 			 </LinearLayout>
 
 			 <TextView
