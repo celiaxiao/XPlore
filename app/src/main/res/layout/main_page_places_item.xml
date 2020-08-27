@@ -70,18 +70,6 @@
                 android:tint="@color/amenityChip"
                 android:src="@drawable/ic_restaurant_24dp" />
 
-            <ImageView
-                android:layout_width="@dimen/main_card_icon_size"
-                android:layout_height="@dimen/main_card_icon_size"
-                android:tint="@color/amenityChip"
-                android:src="@drawable/ic_bus_24dp" />
-
-            <ImageView
-                android:layout_width="@dimen/main_card_icon_size"
-                android:layout_height="@dimen/main_card_icon_size"
-                android:tint="@color/amenityChip"
-                android:src="@drawable/ic_local_parking_24dp" />
-
         </LinearLayout>
 
         <TextView
