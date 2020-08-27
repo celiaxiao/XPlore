@@ -3,7 +3,7 @@
   "amenities": {
     "cafe": false,
     "restaurant": false,
-    "restroom": true
+    "restroom": false
   },
   "audio": "recordings/Warren_Bear.mp3",
   "latitude": 32.882189,
