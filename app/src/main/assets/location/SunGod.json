@@ -1,5 +1,5 @@
 {
-  "about": "Sun God is a monumental statue by French-American sculptor Niki de Saint Phalle located on the campus of the University of California San Diego. The figurative sculpture is a 14-foot multicolored bird-like creature, perched atop a 15-foot tall arch-shaped, vine-covered concrete pedestal.",
+  "about": "Sun God is a monumental statue by French-American sculptor Niki de Saint Phalle located on the campus of the University of California San Diego.De Saint Phalle's Sun God was the first work commissioned by the Stuart Collection and was her first outdoor commission in America. The exuberantly colored, fourteen-foot bird is placed atop a fifteen-foot concrete arch and sited on a grassy area between the Faculty Club and Mandeville Auditorium. The students started the Sun God Festival in 1984 after the statue. It has become one of the largest annual campus events.",
   "amenities": {
     "cafe": false,
     "restaurant": false,
@@ -12,7 +12,8 @@
     "Must see"
   ],
   "links": [
-    "Wikipedia Page: https://en.wikipedia.org/wiki/Sun_God_(statue)"
+    "Wikipedia Page: https://en.wikipedia.org/wiki/Sun_God_(statue)",
+    "Official Stuart Collection Page: https://stuartcollection.ucsd.edu/artist/de-saint-phalle.html"
   ],
   "name": "Sun God",
   "otherPhotos": [
