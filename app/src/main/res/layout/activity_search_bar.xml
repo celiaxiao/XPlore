@@ -102,6 +102,11 @@
                     style="@style/AmenityChip"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    app:chipIcon="@drawable/ic_restroom"
+                    app:chipIconVisible="true"
+                    app:iconStartPadding="6dp"
+                    app:chipIconSize="20dp"
+                    app:chipIconTint="@color/text_chip_state_list"
                     android:text="Restroom"
                     app:checkedIconVisible="false" />
             </androidx.cardview.widget.CardView>
@@ -117,6 +122,11 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/cafe"
                     style="@style/AmenityChip"
+                    app:chipIcon="@drawable/icon_cafe_white"
+                    app:chipIconVisible="true"
+                    app:iconStartPadding="6dp"
+                    app:chipIconSize="22dp"
+                    app:chipIconTint="@color/text_chip_state_list"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Café"
@@ -130,6 +140,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/cafeCard"
+
                 android:layout_marginEnd="21dp"
                 app:cardElevation="5dp">
                 <com.google.android.material.chip.Chip
@@ -138,6 +149,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Restaurant"
+                    app:chipIcon="@drawable/ic_restaurant"
+                    app:chipIconVisible="true"
+                    app:iconStartPadding="6dp"
+                    app:chipIconSize="20dp"
+                    app:chipIconTint="@color/text_chip_state_list"
                     app:checkedIconVisible="false"
                      />
             </androidx.cardview.widget.CardView>
