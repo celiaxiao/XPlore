@@ -88,14 +88,15 @@ public class LandmarkDatabase {
             "location/PinesRoots.json",
             "location/CafeVentanas.json",
             "location/TheBistro.json",
-            "location/StudentServicesCenter.json"
+            "location/StudentServicesCenter.json",
+            "location/StudentHealthCenter.json"
     };
 
     public LandmarkDatabase(Context context, String order){
         if(order.equals("one by one")){
             Gson gson = new Gson();
-            for(int i = 0; i < this.FILELIST.length; i++){
-                String jsonString = loadJSONFromAsset(context, this.FILELIST[i]);
+            for (String s : FILELIST) {
+                String jsonString = loadJSONFromAsset(context, s);
                 Landmark landmark = gson.fromJson(jsonString, Landmark.class);
                 this.list.add(landmark);
                 this.map.put(landmark.getName(), landmark);

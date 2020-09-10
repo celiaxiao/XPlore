@@ -1,0 +1,36 @@
+{
+  "name" : "Student Health Center",
+  "about": "Student Health Services (SHS) invites you to utilize our healthcare services for a variety of your medical needs. Our facility is located in the center of campus, just west of Library Walk and the Price Center Bookstore. All students paying registration fees have access to SHS. Our staff of physicians, nurse practitioners, registered nurses, optometrists, health educators, and other health care professionals is committed to helping students maintain healthy lifestyles. Most outpatient primary care medical services at SHS are provided to you at no cost while you are a registered student. Remember us when you need medical care, and best wishes for a healthy academic year.",
+  "amenities":{
+    "cafe": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "links":[
+      "https://wellness.ucsd.edu/studenthealth/Pages/default.aspx"
+  ],
+  "thumbnailPhoto" : "photos/StudentHealthCenter/StudentHealthCenter.jpg",
+  "otherPhotos": [
+    "photos/StudentHealthCenter/StudentHealthCenter2.png",
+    "photos/StudentHealthCenter/StudentHealthCenter.jpg"
+  ],
+  "relatedPlaces": ["Geisel Library", "Price Center"],
+  "videos":[
+    "https://www.youtube.com/watch?v=PDY2FzIWtO8"
+  ],
+  "relatedTours" : [],
+  "audio": "recordings/no_recording.mp3",
+  "latitude": 32.8794333,
+  "longitude": -117.2380343,
+  "descriptive": [
+    "Must see"
+  ],
+  "history": [
+    {
+      "title": "History of Student Health Center",
+      "articleType": "General history・3 Min Read",
+      "content": "1961, Governor Edmund (“Pat”) Brown says that the next University of California medical school will be built in San Diego next to the new county hospital.\n1974, One of the nation’s top cancer researchers, Dr. Sol Spiegelman, joins the faculty with plans to establish an institute of molecular medicine.\n  The federally sponsored General Clinical Research Center is established.\n1986, UC San Diego is designated one of eight national centers for research and treatment of HIV/AIDS. The Eating Disorders Clinic begins treating individuals with bulimia and other eating disorders associated with body image issues.\n1995, The Anne and Abraham Ratner Children’s Eye Center opens to deliver specialized care for children. Construction of Cellular and Molecular Medicine East Building is completed. The facility houses research laboratories for the Gene Therapy Program, Ludwig Institute for Cancer Research-San Diego, Center for Human Reproduction and the Cancer Center.\n2009, UC San Diego Medical Center is the first hospital in the region to offer microwave technology to destroy liver tumors.\n  Moores Cancer Center is the first hospital-based program in California to receive accreditation from the National Accreditation Program for Breast Centers, administered by the American College of Surgeons.\n  The San Diego Epigenome Center at Ludwig Institute for Cancer Research at UC San Diego is established and is one of four federally supported Reference Epigenome Mapping Centers.\n2018, The Koman Family Outpatient Pavilion opens to patient care in March, 2018.\n\nReference: https://health.ucsd.edu/about/Pages/history.aspx"
+    }
+  ]
+
+}
