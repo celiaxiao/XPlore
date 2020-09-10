@@ -89,7 +89,8 @@ public class LandmarkDatabase {
             "location/CafeVentanas.json",
             "location/TheBistro.json",
             "location/StudentServicesCenter.json",
-            "location/StudentHealthCenter.json"
+            "location/StudentHealthCenter.json",
+            "location/ScrippsInstituteofOceanography.json"
     };
 
     public LandmarkDatabase(Context context, String order){
