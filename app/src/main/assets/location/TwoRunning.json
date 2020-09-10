@@ -1,3 +1,4 @@
+
 {
   "name": "Two Running Violet V Forms",
   "about": "The Giraffe Traps, or what is officially known as Two Running Violet V Forms, was the second piece in the Stuart Collection at University of California San Diego (UCSD). Commissioned in 1983 and produced by Robert Irwin, the odd fence resides in the eucalyptus grove between Mandeville Auditorium and Central Library.",
@@ -22,15 +23,13 @@
     "Vices & Virtues"
   ],
   "videos": [
-    "https://www.youtube.com/watch?v=jbL4jsC0itw",
-    "https://www.youtube.com/watch?v=jbVAv2AENfI",
-    "https://www.youtube.com/watch?v=1gNrq7HtQvM"
+    "https://youtu.be/Vuge1JvrOIM"
   ],
   "relatedTours": [
     "the best tour",
     "the other best tour"
   ],
-  "audio": "recordings/Fallen_Star.mp3",
+  "audio": "recordings/no_recording.mp3",
   "latitude": 32.878939,
   "longitude": -117.238796,
   "descriptive": [

@@ -1,11 +1,8 @@
 package com.UCSDTripleC.XPloreUCSD.database;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 import android.util.Pair;
-
-import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -88,7 +85,11 @@ public class LandmarkDatabase {
             "location/PinesRoots.json",
             "location/CafeVentanas.json",
             "location/TheBistro.json",
-            "location/StudentServicesCenter.json"
+            "location/StudentServicesCenter.json",
+            "location/Mandeville.json",
+            "location/VicesVirtues.json",
+            "location/TwoRunning.json",
+            "location/WhatHathGodWrought.json"
     };
 
     public LandmarkDatabase(Context context, String order){
