@@ -1,10 +1,8 @@
 {
   "name": "RIMAC Gym",
-  "about": "RIMAC Gym is a sports complex on campus that is one of the two main gyms on campus, the other being Main Gym. It has a weight room and various other facilities. It is also the home arena of our men's and women's basketball and volleyball teams.",
+  "about": " It has various athletic spaces including a newly renovated weight room, squash courts, and dance practice rooms. It has various athletic spaces including a newly renovated weight room, squash courts, and dance practice rooms.",
   "amenities": {
-    "parking": false,
-    "cafe": false,
-    "busstop": false,
+    "cafe": true,
     "restaurant": false,
     "restroom": true
   },

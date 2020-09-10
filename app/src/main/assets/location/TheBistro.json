@@ -1,0 +1,41 @@
+{
+  "about": "A modern eatery featuring an open kitchen, sushi bar, and an exciting Pacific Rim-inspired menu. Our chefs draw from various Asian cultures to serve up the freshest seafood, crisp greens, local produce inspired vegetarian fare, and noodle dishes. The ideal experience focuses on tasting a variety of flavors and sharing plates with friends.",
+  "amenities": {
+    "cafe": true,
+    "restaurant": true,
+    "restroom": true
+  },
+  "audio": "recordings/no_recording.mp3",
+  "latitude": 32.888203,
+  "longitude": -117.242061,
+  "descriptive": [
+    "Must see"
+  ],
+  "links": [
+    "The Bistro Official Page: https://hdh-web.ucsd.edu/dining/apps/diningservices/Restaurants/MenuItem/27"
+  ],
+  "name": "The Bistro",
+  "otherPhotos": [
+    "photos/TheBistro/TheBistro2.jpg"
+  ],
+  "relatedPlaces": [
+    "Pines/Roots",
+    "Canyon Vista",
+    "Cafe Ventanas"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "thumbnailPhoto":"photos/TheBistro/TheBistro.png",
+  "videos": [
+    "https://www.youtube.com/watch?v=BWUFsh79Fxw"
+  ],
+  "history": [
+    {
+      "title": "",
+      "articleType": "",
+      "contten": ""
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "about": "Know for its station 'World's Fare Your Way', enjoy globally inspired and customizable dishes. Café V is nice and airy, with a large outdoor dining patio.",
+  "amenities": {
+    "cafe": true,
+    "restaurant": true,
+    "restroom": true
+  },
+  "audio": "recordings/no_recording.mp3",
+  "latitude": 32.886175,
+  "longitude": -117.242585,
+  "descriptive": [
+    "Must see"
+  ],
+  "links": [
+    "Cafe V Official Page: https://hdh-web.ucsd.edu/dining/apps/diningservices/Restaurants/MenuItem/18"
+  ],
+  "name": "Cafe Ventanas",
+  "otherPhotos": [
+  ],
+  "relatedPlaces": [
+    "Pines/Roots",
+    "Canyon Vista",
+    "Price Center"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "thumbnailPhoto":"photos/CafeVentanas/CafeVentanas.jpg",
+  "videos": [
+    "https://www.youtube.com/watch?v=BWUFsh79Fxw"
+  ],
+  "history": [
+    {
+      "title": "",
+      "articleType": "",
+      "contten": ""
+    }
+  ]
+}

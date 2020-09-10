@@ -1,0 +1,42 @@
+{
+  "about": "The Student Services Center is a one-stop resource located in the heart of campus. Most student business offices are located here, so students can conveniently access multiple services in one location.\n\nThe SSC also serves as the gateway to UC San Diego, with over 40,000 visitors annually passing through. Students visit the SSC with their families as prospective students, and continue to visit as they make the transition to admitted, then current UC San Diego Tritons.",
+  "amenities": {
+    "cafe": false,
+    "restaurant": true,
+    "restroom": false
+  },
+  "audio": "recordings/no_recording.mp3",
+  "latitude": 32.878929,
+  "longitude": -117.235891,
+  "descriptive": [
+    "Must see"
+  ],
+  "links": [
+    "Student Services Center Official Page: https://students.ucsd.edu/sponsor/ssc/",
+    "Campus Support: https://ucsd.edu/campus-life/student-support.html"
+  ],
+  "name": "Student Services Center",
+  "otherPhotos": [
+    "photos/StudentServicesCenter/StudentServicesCenter.jpg"
+  ],
+  "relatedPlaces": [
+    "Career Service Center",
+    "Geisel Library",
+    "Price Center"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "thumbnailPhoto":"photos/StudentServicesCenter/StudentServicesCenter.jpg",
+  "videos": [
+    "https://www.youtube.com/watch?v=WzBEYLOzp6M"
+  ],
+  "history": [
+    {
+      "title": "",
+      "articleType": "",
+      "content": ""
+    }
+  ]
+}

@@ -2,9 +2,7 @@
   "name": "Biomedical Library",
   "about": "A Library of UC San Diego specified in biomedical area, the second largest library of UCSD. Glowing in the evening hours, the building serves as a landmark to students and visitors alike. The library includes 24/7 computer reading rooms, touchdown stations for semi-private research, group study/consultation rooms, and training facilities.",
   "amenities": {
-    "parking": true,
-    "cafe": true,
-    "busstop": true,
+    "cafe": false,
     "restaurant": false,
     "restroom": true
   },

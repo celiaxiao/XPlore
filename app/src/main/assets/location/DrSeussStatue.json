@@ -2,9 +2,7 @@
   "name": "Dr. Seuss Statue",
   "about": "The whimsical statue of Dr. Seuss and his iconic Cat in the Hat is located on Geisel Library and it was created in 2004 on the 100th anniversary of the birth of Dr. Seuss. The statue itself features Dr. Seuss seated comfortably in a chair with the Cat in the Hat standing over his shoulder while holding an umbrella.",
   "amenities": {
-    "parking": false,
     "cafe": false,
-    "busstop": false,
     "restaurant": false,
     "restroom": false
   },

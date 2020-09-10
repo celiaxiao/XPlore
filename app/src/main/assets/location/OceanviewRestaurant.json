@@ -1,10 +1,8 @@
 {
   "name": "Oceanview Restaurant",
-  "about": "Oceanview is one of the biggest dining halls on campus, and people can enjoy the best view when dining: Ocean! Oceanview is also the first dining hall that offers 24/7 services.",
+  "about": "Oceanview Terrace features stone hearth pizzas, salads, chicken wings, freshly baked desserts, gelato and a full espresso bar. Check out their Spice station, which offers globally inspired, certified kosher menus options. The aesthetic dining hall is washed in white and tinged with yellow, and provides a view of the ocean, as its name suggests.” \nParking should be “true",
   "amenities": {
-    "parking": false,
     "cafe": true,
-    "busstop": false,
     "restaurant": true,
     "restroom": true
   },
