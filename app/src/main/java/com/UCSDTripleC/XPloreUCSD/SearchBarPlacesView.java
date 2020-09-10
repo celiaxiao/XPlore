@@ -28,8 +28,6 @@ public class SearchBarPlacesView extends ArrayAdapter {
     private final String[] availability;
     private final String[] distance;//default to string, could replace to int/Integer
     private final boolean[][] amentities;
-    private static final String[] amenFilter=
-            new String[]{"Amentity_bathromm","Amentity_cafe","Amentity_resturant"};
     private ArrayList<PlacesDataClass> places;
     private Activity context;
     private Filter filter;
