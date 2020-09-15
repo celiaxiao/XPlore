@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,11 @@ import android.widget.LinearLayout;
  * user for the first time, and it provides some introduction to the app
  */
 public class OnboardingActivity extends AppCompatActivity {
+    public static final String ONBOARDING = "onboarding";
+    public static final String ONBOARDING_VERSION_CODE = "version_code";
+    public static final String ONBOARDING_VERSION_NAME = "version_name";
+    public static final String ONBOARDING_COMPLETED = "completed";
+
     private ViewPager mViewPagerOnboarding; // Store Gifs
     private LinearLayout mDotLayout; // linearLayout to display dot indicators
     private SliderAdapterOnboarding sliderAdapter; // Adapter for viewPager
@@ -71,7 +77,6 @@ public class OnboardingActivity extends AppCompatActivity {
                 // Set the corresponding dot as active
                 mDots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.dots_indicator_active));
 
-
                 // startButton visible only on the last page
                 if (position != sliderAdapter.getCount() - 1) {
                     startButton.setVisibility(View.INVISIBLE);
@@ -81,28 +86,19 @@ public class OnboardingActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) { }
+            public void onPageScrollStateChanged(int state) {}
         });
 
-
-
-
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish(); // Close this onboarding activity after launching MainActivity
-            }
+        startButton.setOnClickListener(view -> {
+            getSharedPreferences(ONBOARDING, MODE_PRIVATE)
+                .edit()
+                .putBoolean(ONBOARDING_COMPLETED, true)
+                .putInt(ONBOARDING_VERSION_CODE, BuildConfig.VERSION_CODE)
+                .putString(ONBOARDING_VERSION_NAME, BuildConfig.VERSION_NAME)
+                .apply();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
         });
-
-
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
 }
