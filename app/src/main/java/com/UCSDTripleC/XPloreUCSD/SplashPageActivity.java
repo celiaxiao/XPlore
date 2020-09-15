@@ -14,14 +14,15 @@ import com.bumptech.glide.Glide;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 /**
  * This is the SplashPageActivity which would show up for a constant time
  * each time the app starts
  */
 public class SplashPageActivity extends AppCompatActivity {
     public static final int SPLASH_TIME_OUT = 1500;
-    public static final String APP_FIRST_RUN = "App first run";
+    public static final String ONBOARDING = "onboarding";
+    public static final String ONBOARDING_VERSION_CODE = "version_code";
+    public static final String ONBOARDING_COMPLETED = "completed";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +43,21 @@ public class SplashPageActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-                if (sharedPreferences.getBoolean(APP_FIRST_RUN, true)) {
-                    Intent intent = new Intent(getApplicationContext(), OnboardingActivity.class);
-                    startActivity(intent);
-                    finish(); // Close onboarding
-                    sharedPreferences.edit().putBoolean(APP_FIRST_RUN, false).commit(); // Tell the app it has already finished its first run
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("Splash", true);
-                    startActivity(intent);
-                    finish();
-                }
+                // v1.1 (code 2) legacy config
+                SharedPreferences legacy_preferences = getPreferences(MODE_PRIVATE);
+                legacy_preferences.edit().clear().apply();
 
+                SharedPreferences onboarding = getSharedPreferences(ONBOARDING, MODE_PRIVATE);
+                if (onboarding.getBoolean(ONBOARDING_COMPLETED, false)
+                    // version 1.1 (code 2) or above
+                    && onboarding.getInt(ONBOARDING_VERSION_CODE, 0) >= 2
+                ) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), OnboardingActivity.class));
+                }
+                finish();
             }
         }, SPLASH_TIME_OUT);
-
     }
 }

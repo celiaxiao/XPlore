@@ -1,0 +1,38 @@
+{
+  "name" : "Jacobs Medical Center",
+  "about": "Jacobs Medical Center is the embodiment of moving medicine forward through building design, innovative healthcare delivery and smart technology. These three elements work seamlessly together to create an environment where patients can heal and doctors can spend time on care—resulting in optimal outcomes.",
+  "amenities":{
+    "cafe": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "links":[
+    "https://health.ucsd.edu/patients/Pages/visitors.aspx"
+  ],
+  "thumbnailPhoto" : "photos/JacobsMedicalCenter/JacobsMedicalCenter.png",
+  "otherPhotos": [
+    "photos/JacobsMedicalCenter/JacobsMedicalCenter.png",
+    "photos/JacobsMedicalCenter/JacobsMedicalCenter2.jpg",
+    "photos/JacobsMedicalCenter/JacobsMedicalCenter3.jpg"
+  ],
+  "relatedPlaces": ["Geisel Library", "Student Health Center"],
+  "videos":[
+    "https://www.youtube.com/watch?v=jSOHcjgEi6Y",
+    "https://www.youtube.com/watch?v=dUCv-2Wjqtw"
+  ],
+  "relatedTours" : [],
+  "audio": "recordings/no_recording.mp3",
+  "latitude": 32.878285,
+  "longitude": -117.2275427,
+  "descriptive": [
+    "Must see"
+  ],
+  "history": [
+    {
+      "title": "Info of Jacobs Medical Center",
+      "articleType": "General history・1 Min Read",
+      "content": "Jacobs Medical Center is a teaching hospital on the University of California San Diego campus in La Jolla, San Diego. Along with the UC San Diego Medical Center, Hillcrest, it serves as a flagship hospital of UC San Diego Health and the primary teaching hospital for the UC San Diego School of Medicine. The facility, which offers specialized care not previously available in San Diego County, opened on November 20, 2016.\n  Jacobs Medical Center comprises three specialty pavilions. The A. Vassiliadis Family Pavilion for Advanced Surgery occupies floors two and three. Floors four through six are reserved for the Pauline and Stanley Foster Pavilion for Cancer Care, and the eighth through tenth floors are occupied by the Rady Pavilion for Women and Infants. Jacobs Medical Center and the existing Thornton Pavilion share a first, second and third floor and are connected to Sulpizio Cardiovascular Center, the Perlman Medical Offices, and the Altman Clinical and Translational Research Institute building via footbridges.\n\nReference: https://en.wikipedia.org/wiki/Jacobs_Medical_Center#:~:text=Thornton%20Hospital%20opened%20in%201993,care%20facility%20that%20exists%20today."
+    }
+  ]
+
+}

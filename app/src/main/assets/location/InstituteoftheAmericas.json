@@ -1,0 +1,37 @@
+{
+  "name" : "Institute of the Americas",
+  "about": "The Institute is an independent, inter-American organization that promotes cooperation between the public and private sectors to improve the economic, political and social well-being of people in the Americas.",
+  "amenities":{
+    "cafe": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "links":[
+    "https://scripps.ucsd.edu/postdocs/opportunities/resources/links"
+  ],
+  "thumbnailPhoto" : "photos/InstituteoftheAmericas/InstituteoftheAmericas.jpeg",
+  "otherPhotos": [
+    "photos/InstituteoftheAmericas/InstituteoftheAmericas.jpeg",
+    "photos/InstituteoftheAmericas/InstituteoftheAmericas2.jpg",
+    "photos/InstituteoftheAmericas/InstituteoftheAmericas3.png"
+  ],
+  "relatedPlaces": ["Geisel Library"],
+  "videos":[
+    "https://www.youtube.com/watch?v=Ybq2WeEVCrw"
+  ],
+  "relatedTours" : [],
+  "audio": "recordings/no_recording.mp3",
+  "latitude": 32.8853407,
+  "longitude": -117.2432529,
+  "descriptive": [
+    "Must see"
+  ],
+  "history": [
+    {
+      "title": "History of Institute of the Americas",
+      "articleType": "General history・2 Min Read",
+      "content": "February 12, 1981, The Institute of the Americas is Founded. 1983 The IOA is founded by Ted Gildred, US Ambassador to Argentina.\nMay 29, 1987, Raúl Alfonsín receives the first IOA Award for Democracy and Peace. 1987 Alfonsín was Argentina’s first democratically elected president after seven years of dictatorship.\n  May 22, 1990, First La Jolla Energy Conference takes place. In 1990 First La Jolla Energy Conference takes place. In 1991 the Multi-Year Environmental Project starts with Environmental Technology Conference\nApril 21, 1992, IOA second major expansion. Gildred and Paul H. Boeker, the second President of the IOA, oversee the second major expansion.\nMay 29, 1992, IOA Award for Democracy and Peace. Patricio Aylwin, Chile’s first democratically elected president after almost 20 years of dictatorship, receives Award for Democracy and Peace.\nJune 21, 2001, Zedillo receives Award for Democracy and Peace. President Ernesto Zedillo of Mexico receives Award for Democracy and Peace\nApril 15, 2004, Ricardo Lagos of Chile receives Award. President Ricardo Lagos of Chile receives Award for Democracy and Peace.\nMarch 16, 2005, President Álvaro Uribe of Colombia receives Award for Democracy and Peace.\nApril 12, 2007, President Vicente Fox of Mexico receives Award for Democracy and Peace.\nJune 11, 2010, First STEM Summer Camp. Since this 2010, more than 500 students have graduated from our program.\nMarch 31, 2014, First Innovation Workshop. Irwin Jacobs, co-founder of Qualcomm, delivers a presentation to workshop participants from throughout the Americas.\nAugust 8, 2014, First STEM Workshop for High School teachers. Since 2014, this program has expanded to Mexico and Argentina.\nMay 24, 2016, XXV Annual La Jolla Energy Conference.\nNovember 11, 2016, IOA Launches Innovation & Entrepreneurship Program. OECD Secretary-General Ángel Gurría delivers the keynote speech at the launch event. He is shown here with Ambassador Jamal Khokhar, former President and CEO of the IOA.\n  June 15, 2018, Launch of Energy Transition Initiative.\nNovember 19, 2018, The Board appointed Mr. Theodore E. Gildred III as the new President of the Institute.\n\nReference: https://www.iamericas.org/about-us/"
+    }
+  ]
+
+}
