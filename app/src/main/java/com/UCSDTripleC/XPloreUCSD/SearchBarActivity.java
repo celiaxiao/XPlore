@@ -38,8 +38,7 @@ public class SearchBarActivity extends AppCompatActivity  {
     private android.location.Location currentLocation;
     //private LinearLayout amenityLinearLayout;
     private static final String[] amenFilter =
-            new String[]{"restroom", "cafe", "restaurant",
-                    "busstop", "parking"};
+            new String[]{"restroom", "cafe", "restaurant"};
     private TextView chipBadge;
     private TextView noResultsFoundText;
     //dynamic location list from database

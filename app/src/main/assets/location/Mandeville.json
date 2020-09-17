@@ -1,0 +1,46 @@
+{
+  "name": "Mandeville Auditorium",
+  "about": "UC San Diego's Mandeville Auditorium is San Diego's leading mid-size  performance venue. This 764 seat space is suitable for a full range of performing arts including dance, concerts, and theater, as well as special events such as conferences and lectures. The auditorium has hosted productions that include Wynton Marsalis, David Feherty, Woody Allen, John Lithgow, David Sedaris, the Kronos Quartet, Ravi Shankar, and Spike & Mike's Festival of Animation. Local groups that take advantage of the venue include La Jolla Symphony & Chorus, San Diego Ballet, and UC San Diego's Wind Ensemble, Chamber Orchestra, and Gospel Choir.",
+  "amenities": {
+    "cafe": false,
+    "restaurant": false,
+    "restroom": true
+  },
+  "links": [
+    "Official Page: https://mandeville.ucsd.edu/",
+    "Rental Information: https://mandeville.ucsd.edu/facilities/rental.html",
+    "Event Calendar: https://mandeville.ucsd.edu/calendar/index.html"
+  ],
+  "thumbnailPhoto": "photos/Mandeville/mandeville_01.jpg",
+  "otherPhotos": [
+    "photos/Mandeville/mandeville_01.jpg",
+    "photos/Mandeville/mandeville_02.jpg",
+    "photos/Mandeville/mandeville_03.jpg",
+    "photos/Mandeville/mandeville_04.jpg",
+    "photos/Mandeville/mandeville_05.jpg"
+  ],
+  "relatedPlaces": [
+    "Conrad Prebys Music Center",
+    "Career Service Center"
+  ],
+  "videos": [
+    "https://www.youtube.com/watch?v=BSb8PiweNKg"
+  ],
+  "relatedTours": [
+    "the best tour",
+    "the other best tour"
+  ],
+  "audio": "recordings/no_recording.mp3",
+  "latitude": 32.878082,
+  "longitude": -117.239483,
+  "descriptive": [
+    "Must see"
+  ],
+  "history": [
+    {
+      "title": "From the beginning, UC San Diego's Department of Music set a non-traditional course",
+      "articleType": "General history・8 Min Read",
+      "content": "Muir College Provost John Stewart believed that \"practicing the arts gave an insider's comprehension that was almost impossible to get through books and lectures.\" As UC San Diego began constructing its new music program, Stewart consulted modernist composer Ernst Krenek to help shape the department's mission. The emphasis was to be on composing and performing new and experimental music, as well as on developing innovative musical research and theory.\n \nIn 1965, Krenek, then a former professor at Hamline University in Minneapolis, recommended his former student Will Ogdon (at left) as the department's founding chairman. Two more of Krenek's onetime students, composer Robert Erickson and conductor Tom Nee, soon joined Ogdon as UC San Diego's founding music faculty.\n \n\"We wanted to make a rather different music department, one with a lot of daily contact between teachers and students, but without the usual packaging into degrees, units, grades and other trivia,\" Erickson recalled during an interview in the 1990s (he passed away in 1997).\n \nWhen classes began in the fall of 1967, quarters for the progressive new department were far from cutting-edge: instead, they consisted of a few vacated wood buildings and Quonset huts left behind by the U.S. Marines after the university acquired the 1,000-acre Camp Matthews for its new campus. Inside these World War II-era structures, isolated from East Coast, Midwestern, and European musical traditions, the department set up classrooms, offices, and, eventually, electronic music studios. This rustic setting, surrounded by acres of scrubby mesa land where live ordnance could still be found, would serve for several years, until Mandeville Center opened in 1975. \n \n1967 was a significant year for the music department as several more key faculty members arrived. Ogdon hired individuals who were broad-based, rather than specialists. In addition to serving as a founding department faculty member, Nee became the conductor of La Jolla Symphony & Chorus, which often performed new faculty works and gave student musicians the chance to perform alongside seasoned professionals. (Current faculty member and percussionist Steven Schick is the present LJS&C artistic director some 40 years later.)\n \nTrombonist John Silber's broad training at Southern Methodist University informed his approach at UC San Diego, where his undergraduate Music 1 course encompassed elements of music, dance, theatre, and visual arts. Collaboration between artists from different disciplines was then and continues to be part of the department's mission.\n \nWhen the Department of Music began in the late sixties, a single computer was so large that it filled an entire (air-conditioned) room. Roger Reynolds joined the faculty in 1969 and spearheaded the creation of the Center for Music Experiment. Faculty members Pauline Oliveros, Kenneth Gaburo, and James Campbell also introduced students to the CME and computer music. Their efforts were later augmented by those of Gerald Balzano and Richard Moore.\n \nMeanwhile, on the performance side, faculty members Bertram Turetzky (contrassbass), Jean-Charles Francois (percussion), Carol Plantamura (voice), Cecil Lytle (piano), Ed Harkins (trumpet), Philip Larson (voice), and Janos Negyesy (violin) pushed past traditional boundaries. Faculty ensembles like KIVA and SONOR were formed during the department's early years as vehicles for new and experimental music.\n \nThe department moved from its old marine buildings to the new Mandeville Center in 1975. But the sound in the center's performance venues (including the 792-seat Mandeville Auditorium) was not well suited to music production and performance. The auditorium was designed as a general purpose facility to accommodate all manner of functions. \n \nAfter decades of considering a new building, the UC system finally approved financing for a new music center in late 2006 and construction teams broke ground in 2007. The new building opened in 2009 and was named for San Diego developer Conrad Prebys, who contributed $6 million as the building's naming donor and another $3 million as the naming donor for the building's superb 400-seat concert hall.\n \nWith the new building and state-of-the-art performance spaces, the department dramatically increased its number of concerts during the opening season, 2010-2011. Two of the most popular series continue to be Camera Lucida (a chamber music ensemble established in collaboration with the San Diego Symphony) and Wednesdays@7, a showcase for innovative music by faculty composers and performers.\n \nCarrying forward the explorative tradition of the CME, the Department of Music offers a graduate degree in computer music research (as well as in composition, performance, and integrative studies). Many faculty and graduate composers collaborate with artists and techies at the Center for Research in Computing and the Arts (CRCA), which is housed within UC San Diego's California Institute for Telecommunications and Information Technologies (Calit2). \n \nToday, there is every indication that current faculty members David Borgo, Anthony Burr, Erik Carlson, Amy Cimini, Charles Curtis, Anthony Davis, Natacha Diels, Mark Dresser, Shlomo Dubnov, Tom Erbe, Nancy Guy, Sarah Hankins, Aleck Karis, Philip Larson, Lei Liang, Susan Narucki, Jann Pasler, Miller Puckette, Roger Reynolds, Stephanie Richards, Katharina Rosenberger, Steven Schick, Tamara Smyth, Rand Steiger, Wilfrido Terrazas, Chinary Ung and Shahrokh Yadegari will sustain the department‘s identity as a world leader in new and experimental music.\n \nSummary written by Dirk Sutro\n \nReferenence: https://music-cms.ucsd.edu/about/history.html#History\n"
+    }
+  ]
+}
