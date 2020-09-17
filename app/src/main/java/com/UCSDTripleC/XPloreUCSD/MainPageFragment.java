@@ -1,8 +1,13 @@
 package com.UCSDTripleC.XPloreUCSD;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -155,6 +160,29 @@ public class MainPageFragment extends Fragment {
 
 		database = new LandmarkDatabase(getContext(), "one by one");
 		fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+
+		BroadcastReceiver gpsSwitchStateReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+
+				if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(intent.getAction())) {
+
+					displayPlacesNearYou();
+
+//					LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+//					boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+//					boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+//
+//					if (isGpsEnabled || isNetworkEnabled) {
+//						// Handle Location turned ON
+//						displayPlacesNearYou();
+//					} else {
+//						// Handle Location turned OFF
+//					}
+				}
+			}
+		};
+		getContext().registerReceiver(gpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
 		String[] must_see_landmarks = new String[]{"Fallen Star", "Sun God", "Dr. Seuss Statue"};
 		String[] academic_spots = new String[]{
