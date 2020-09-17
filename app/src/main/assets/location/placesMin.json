@@ -397,6 +397,69 @@
     "longitude": -117.235891,
     "name": "Student Services Center",
     "thumbnailPhoto":"photos/StudentServicesCenter/StudentServicesCenter.jpg"
+  },
+  "Mandeville": {
+    "about": "UC San Diego's Mandeville Auditorium is San Diego's leading mid-size  performance venue. This 764 seat space is suitable for a full range of performing arts including dance, concerts, and theater, as well as special events such as conferences and lectures. The auditorium has hosted productions that include Wynton Marsalis, David Feherty, Woody Allen, John Lithgow, David Sedaris, the Kronos Quartet, Ravi Shankar, and Spike & Mike's Festival of Animation. Local groups that take advantage of the venue include La Jolla Symphony & Chorus, San Diego Ballet, and UC San Diego's Wind Ensemble, Chamber Orchestra, and Gospel Choir.",
+    "amenities": {
+      "cafe": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "latitude": 32.878082,
+    "longitude": -117.239483,
+    "name": "Mandeville Auditorium",
+    "thumbnailPhoto": "photos/Mandeville/mandeville_01.jpg"
+  },
+  "VicesVirtues": {
+    "about": "Nauman's Vices and Virtues for the Stuart Collection consists of seven pairs of words superimposed in blinking neon, which run like a frieze around the top of the Charles Lee Powell Structural Systems Laboratory. Seven vices alternate with seven virtues: FAITH/LUST, HOPE/ENVY, CHARITY/SLOTH, PRUDENCE/PRIDE, JUSTICE/AVARICE, TEMPERANCE/GLUTTONY, and FORTITUDE/ANGER.",
+    "amenities": {
+      "cafe": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "latitude": 32.880747,
+    "longitude": -117.234892,
+    "name": "Vices & Virtues",
+    "thumbnailPhoto": "photos/VicesVirtue/main_nauman_1.jpg"
+  },
+  "TwoRunning": {
+    "about": "The Giraffe Traps, or what is officially known as Two Running Violet V Forms, was the second piece in the Stuart Collection at University of California San Diego (UCSD). Commissioned in 1983 and produced by Robert Irwin, the odd fence resides in the eucalyptus grove between Mandeville Auditorium and Central Library.",
+    "amenities": {
+      "cafe": false,
+      "restaurant": false,
+      "restroom": false
+    },
+    "descriptive": [
+      "Must see"
+    ],
+    "latitude": 32.878939,
+    "longitude": -117.238796,
+    "name": "Two Running Violet V Forms",
+    "thumbnailPhoto": "photos/TwoRunningVioletVForms/Main_irwin-01.jpg"
+  },
+  "WhatHathGodWrought": {
+
+    "about": "“What Hath God Wrought” was conceived by Los Angeles-based artist Mark Bradford (b. 1961). The 199-foot tall metal flag-pole-like sculpture—now considered the tallest structure on the University’s campus—is mounted with a flashing light which playfully spells out “What Hath God Wrought” in Morse Code. The titular phrase is notably the first message Samuel Morse tested and transmitted across 41-miles, over the communication system he’d newly designed with partner Alfred Vail, from Baltimore to Washington in 1844.",
+    "amenities": {
+      "cafe": false,
+      "restaurant": false,
+      "restroom": false
+    },
+
+    "latitude": 32.875403,
+    "longitude": -117.240753,
+    "name": "What Hath God Wrought",
+    "thumbnailPhoto": "photos/WhatHathGodWrought/bradford_3.jpg",
+    "descriptive": [
+      "Must see"
+    ]
   }
+
 }
 
