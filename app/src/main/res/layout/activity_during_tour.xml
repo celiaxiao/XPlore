@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@id/imageViewDuringTour" />
 
     <TextView
-        android:id="@+id/tourOverviewTextView"
+        android:id="@+id/previousStopTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -236,7 +236,7 @@
                 />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/detailsTextViewDuringTour"
+                android:id="@+id/detailsButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
