@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.UCSDTripleC.XPloreUCSD.R.id.busstopIconDuringTourImageView;
-
 /**
  * This is the DuringTourActivity which provides some descriptions about the
  * stop being viewed, a directionsButton leading to Google Maps and show the
@@ -99,8 +97,6 @@ public class DuringTourActivity extends AppCompatActivity {
     private ImageView restroomIconDuringTourImageView;
     private ImageView cafeIconDuringTourImageView;
     private ImageView restaurantIconDuringTourImageView;
-    private ImageView busstopIconDuringTourImageView;
-    private ImageView parkinglotIconDuringTourImageView;
     private Button directionsButton;
     private TextView detailsTextViewDuringTour;
     private Button nextStopButton;
@@ -122,13 +118,10 @@ public class DuringTourActivity extends AppCompatActivity {
         tourNameTextView = (TextView) findViewById(R.id.tourNameTextView);
         tourOverViewTextView = (TextView) findViewById(R.id.tourOverviewTextView);
         stopNameTextView = (TextView) findViewById(R.id.stopNameTextView);
-        previousStopTextView = (TextView) findViewById(R.id.previousStopTextView);
         stopDescriptionTextView = (TextView) findViewById(R.id.stopDescriptionTextView);
         restroomIconDuringTourImageView = (ImageView) findViewById(R.id.restroomIconDuringTourImageView);
         cafeIconDuringTourImageView = (ImageView) findViewById(R.id.cafeIconDuringTourImageView);
         restaurantIconDuringTourImageView = (ImageView) findViewById(R.id.restaurantIconDuringTourImageView);
-        busstopIconDuringTourImageView = (ImageView) findViewById(R.id.busstopIconDuringTourImageView);
-        parkinglotIconDuringTourImageView = (ImageView) findViewById(R.id.parkinglotIconDuringTourImageView);
         directionsButton = (Button) findViewById(R.id.directionsButton);
         detailsTextViewDuringTour = (TextView) findViewById(R.id.detailsTextViewDuringTour);
         nextStopButton = (Button) findViewById(R.id.nextStopButton);
@@ -323,38 +316,24 @@ public class DuringTourActivity extends AppCompatActivity {
         stopDescriptionTextView.setText(landmark.getAbout()); // TODO: Dynamically Set up the descriptions for this stop
         stopDescriptionTextView.setMovementMethod(new ScrollingMovementMethod()); // Making this textView scrollable
 
-        String[] strArray = {"parking", "cafe", "busstop", "restaurant", "restroom"};
+        String[] strArray = {"cafe", "restaurant", "restroom"};
         HashMap<String,Boolean> hashMap = landmark.getAmenities();
 
         if(hashMap.get(strArray[0])){
-            parkinglotIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restroom_white));
-            parkinglotIconDuringTourImageView.setColorFilter(Color.WHITE);
-        }
-        else {
-            parkinglotIconDuringTourImageView.setColorFilter(Color.GRAY);
-        }
-        if(hashMap.get(strArray[1])){
             cafeIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_cafe_white));
             cafeIconDuringTourImageView.setColorFilter(Color.WHITE);
         }
         else{
             cafeIconDuringTourImageView.setColorFilter(Color.GRAY);
         }
-        if(hashMap.get(strArray[2])){
-            busstopIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_busstop_white));
-            busstopIconDuringTourImageView.setColorFilter(Color.WHITE);
-        }
-        else{
-            busstopIconDuringTourImageView.setColorFilter(Color.GRAY);
-        }
-        if(hashMap.get(strArray[3])){
+        if(hashMap.get(strArray[1])){
             restaurantIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restaurant_white));
             restaurantIconDuringTourImageView.setColorFilter(Color.WHITE);
         }
         else{
             restaurantIconDuringTourImageView.setColorFilter(Color.GRAY);
         }
-        if(hashMap.get(strArray[4])){
+        if(hashMap.get(strArray[2])){
             restroomIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restroom_white));
             restroomIconDuringTourImageView.setColorFilter(Color.WHITE);
         }
