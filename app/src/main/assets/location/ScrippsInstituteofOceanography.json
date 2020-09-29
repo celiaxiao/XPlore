@@ -1,0 +1,37 @@
+{
+  "name" : "Scripps Institute of Oceanography",
+  "about": "Founded in 1903, Scripps Institution of Oceanography at the University of California San Diego is one of the most important centers for global earth science research and education in the world. With cutting-edge research programs under way on every continent and in every ocean, Scripps scientists work to understand and protect the planet by investigating our oceans, Earth, and atmosphere to find solutions to our greatest environmental challenges. Scripps leads research in climate change impacts and adaptation, resilience to hazards, conservation and biodiversity, oceans and human health, national security, and innovative technology to observe the planet.",
+  "amenities":{
+    "cafe": true,
+    "restaurant": true,
+    "restroom": true
+  },
+  "links":[
+    "https://scripps.ucsd.edu/postdocs/opportunities/resources/links"
+  ],
+  "thumbnailPhoto" : "photos/ScrippsInstituteofOceanography/ScrippsInstituteofOceanography.jpg",
+  "otherPhotos": [
+    "photos/ScrippsInstituteofOceanography/ScrippsInstituteofOceanography.jpg",
+    "photos/ScrippsInstituteofOceanography/ScrippsInstituteofOceanography2.jpg",
+    "photos/ScrippsInstituteofOceanography/ScrippsInstituteofOceanography3.jpg"
+  ],
+  "relatedPlaces": ["Geisel Library"],
+  "videos":[
+    "https://www.youtube.com/watch?time_continue=14&v=0jQf8-b6ZFo"
+  ],
+  "relatedTours" : [],
+  "audio": "recordings/no_recording.mp3",
+  "latitude": 32.8681401,
+  "longitude": -117.252512,
+  "descriptive": [
+    "Must see"
+  ],
+  "history": [
+    {
+      "title": "The Beginning of Scripps Institute of Oceanography",
+      "articleType": "General history・3 Min Read",
+      "content": "William Ritter joined the faculty of the University of California Berkeley in 1891. Fascinated by the vast unknowns of the oceans, he immediately set out to find a place where he could easily collect marine life specimens while leading summer classes. He finally settled on San Diego. He would write to the San Diego Chamber of Commerce at one point that “there can be no doubt that a laboratory capable of great things (for biological science) might be built at San Diego.” An enthusiastic group of townspeople had been determined to make Ritter’s decision an easy one.  In 1903, they formed the Marine Biological Association of San Diego and named Ritter the scientific director. The association raised money for the construction of a small laboratory at La Jolla Cove and by 1907, La Jolla became the permanent location of the new biological station. As much as Ritter, the philanthropist Ellen Browning Scripps and her brother, the newspaper magnate E.W. Scripps, were architects of the fledgling institution. She secured the 170-acre parcel on which Scripps Oceanography now stands, funded the construction of its first laboratory, its iconic pier, and Ritter’s residence, and bankrolled its early operating expenses. Scripps Oceanography is only one of several entities around Southern California including the Bishop’s School in La Jolla, Scripps Health and the Scripps Research Institute in San Diego, and Scripps College in Claremont, Calif that she helped establish with her support.\n\nReference: https://scripps.ucsd.edu/about/history#:~:text=In%201903%2C%20members%20of%20the,University%20of%20California%20in%201912."
+    }
+  ]
+
+}

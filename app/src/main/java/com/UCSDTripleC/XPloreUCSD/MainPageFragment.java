@@ -1,10 +1,15 @@
 package com.UCSDTripleC.XPloreUCSD;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -26,6 +31,9 @@ import com.UCSDTripleC.XPloreUCSD.database.LandmarkDatabase;
 import com.UCSDTripleC.XPloreUCSD.utils.ClickTracker;
 import com.UCSDTripleC.XPloreUCSD.utils.Utils;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
@@ -156,11 +164,21 @@ public class MainPageFragment extends Fragment {
 		database = new LandmarkDatabase(getContext(), "one by one");
 		fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
+		BroadcastReceiver gpsSwitchStateReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(intent.getAction())) {
+					displayPlacesNearYou();
+				}
+			}
+		};
+		getContext().registerReceiver(gpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
+
 		String[] must_see_landmarks = new String[]{"Fallen Star", "Sun God", "Dr. Seuss Statue"};
 		String[] academic_spots = new String[]{
-				"Biomedical Library",
-				"Jacobs Building",
-				"Peterson Hall"
+			"Biomedical Library",
+			"Jacobs Building",
+			"Peterson Hall"
 		};
 		String[] one_day_as_student = new String[]{"Price Center", "Main Gym", "64 Degrees"};
 
@@ -201,7 +219,14 @@ public class MainPageFragment extends Fragment {
 	}
 
 	private void displayPlacesNearYou() {
-		if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+		if (ActivityCompat.checkSelfPermission(
+				getContext(),
+				Manifest.permission.ACCESS_FINE_LOCATION
+			) != PackageManager.PERMISSION_GRANTED
+			&& ActivityCompat.checkSelfPermission(
+				getContext(),
+				Manifest.permission.ACCESS_COARSE_LOCATION
+			) != PackageManager.PERMISSION_GRANTED) {
 			// TODO: Consider calling
 			//    ActivityCompat#requestPermissions
 			// here to request the missing permissions, and then overriding
@@ -213,23 +238,40 @@ public class MainPageFragment extends Fragment {
 			autoSlideViewPager.setVisibility(View.GONE);
 		} else {
 			fusedLocationClient
-					.getLastLocation()
-					.addOnSuccessListener(getActivity(), location -> {
-						// Got last known location. In some rare situations this can be null.
-						if (location != null) {
-							placesNearText.setVisibility(View.VISIBLE);
-							autoSlideViewPager.setVisibility(View.VISIBLE);
-							ArrayList<Pair<Landmark, Double>> arrayList = database.nearestLocations(
-									new Pair<>(location.getLatitude(), location.getLongitude()), 3
-							);
-							Log.d("Near", arrayList.size() + "");
-							autoSlideViewPagerAdapter.setContent(arrayList);
-						}
-						else {
-							placesNearText.setVisibility(View.GONE);
-							autoSlideViewPager.setVisibility(View.GONE);
-						}
-					});
+				.getLastLocation()
+				.addOnSuccessListener(getActivity(), location -> {
+					// Got last known location. In some rare situations this can be null.
+					if (location != null) {
+						placesNearText.setVisibility(View.VISIBLE);
+						autoSlideViewPager.setVisibility(View.VISIBLE);
+						ArrayList<Pair<Landmark, Double>> arrayList = database.nearestLocations(
+								new Pair<>(location.getLatitude(), location.getLongitude()), 3
+						);
+						autoSlideViewPagerAdapter.setContent(arrayList);
+					} else {
+						placesNearText.setVisibility(View.GONE);
+						autoSlideViewPager.setVisibility(View.GONE);
+						LocationRequest request = LocationRequest
+							.create()
+							.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+						LocationCallback callback = new LocationCallback() {
+							@Override
+							public void onLocationResult(LocationResult result) {
+								// assume the result is non-null, the API doc wasn't exactly
+								// clear
+								Location new_loc = result.getLastLocation();
+								if (new_loc == null) return;
+								placesNearText.setVisibility(View.VISIBLE);
+								autoSlideViewPager.setVisibility(View.VISIBLE);
+								ArrayList<Pair<Landmark, Double>> list = database.nearestLocations(
+									new Pair<>(new_loc.getLatitude(), new_loc.getLongitude()), 3
+								);
+								autoSlideViewPagerAdapter.setContent(list);
+							}
+						};
+						fusedLocationClient.requestLocationUpdates(request, callback, null);
+					}
+				});
 		}
 	}
 }

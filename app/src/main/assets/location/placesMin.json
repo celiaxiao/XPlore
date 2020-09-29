@@ -444,7 +444,6 @@
     "thumbnailPhoto": "photos/TwoRunningVioletVForms/Main_irwin-01.jpg"
   },
   "WhatHathGodWrought": {
-
     "about": "“What Hath God Wrought” was conceived by Los Angeles-based artist Mark Bradford (b. 1961). The 199-foot tall metal flag-pole-like sculpture—now considered the tallest structure on the University’s campus—is mounted with a flashing light which playfully spells out “What Hath God Wrought” in Morse Code. The titular phrase is notably the first message Samuel Morse tested and transmitted across 41-miles, over the communication system he’d newly designed with partner Alfred Vail, from Baltimore to Washington in 1844.",
     "amenities": {
       "cafe": false,
@@ -459,6 +458,63 @@
     "descriptive": [
       "Must see"
     ]
+  },
+  "InstitueOfTheAmericas": {
+    "about": "The Institute is an independent, inter-American organization that promotes cooperation between the public and private sectors to improve the economic, political and social well-being of people in the Americas.",
+    "amenities":{
+      "cafe": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "name" : "Institute of the Americas",
+    "latitude": 32.8853407,
+    "longitude": -117.2432529,
+    "thumbnailPhoto" : "photos/InstituteoftheAmericas/InstituteoftheAmericas.jpeg"
+  },
+  "JacobsMedicalCenter": {
+    "about": "Jacobs Medical Center is the embodiment of moving medicine forward through building design, innovative healthcare delivery and smart technology. These three elements work seamlessly together to create an environment where patients can heal and doctors can spend time on care—resulting in optimal outcomes.",
+    "amenities":{
+      "cafe": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "name" : "Jacobs Medical Center",
+    "latitude": 32.878285,
+    "longitude": -117.2275427,
+    "descriptive": [
+      "Must see"
+    ],
+    "thumbnailPhoto" : "photos/JacobsMedicalCenter/JacobsMedicalCenter.png"
+  },
+  "ScrippsInstituteOfOceanography": {
+    "about": "Founded in 1903, Scripps Institution of Oceanography at the University of California San Diego is one of the most important centers for global earth science research and education in the world. With cutting-edge research programs under way on every continent and in every ocean, Scripps scientists work to understand and protect the planet by investigating our oceans, Earth, and atmosphere to find solutions to our greatest environmental challenges. Scripps leads research in climate change impacts and adaptation, resilience to hazards, conservation and biodiversity, oceans and human health, national security, and innovative technology to observe the planet.",
+    "amenities":{
+      "cafe": true,
+      "restaurant": true,
+      "restroom": true
+    },
+    "name" : "Scripps Institute of Oceanography",
+    "latitude": 32.8681401,
+    "longitude": -117.252512,
+    "descriptive": [
+      "Must see"
+    ],
+    "thumbnailPhoto" : "photos/ScrippsInstituteofOceanography/ScrippsInstituteofOceanography.jpg"
+  },
+  "StudentHealthCenter": {
+    "about": "Student Health Services (SHS) invites you to utilize our healthcare services for a variety of your medical needs. Our facility is located in the center of campus, just west of Library Walk and the Price Center Bookstore. All students paying registration fees have access to SHS. Our staff of physicians, nurse practitioners, registered nurses, optometrists, health educators, and other health care professionals is committed to helping students maintain healthy lifestyles. Most outpatient primary care medical services at SHS are provided to you at no cost while you are a registered student. Remember us when you need medical care, and best wishes for a healthy academic year.",
+    "amenities":{
+      "cafe": false,
+      "restaurant": false,
+      "restroom": true
+    },
+    "name" : "Student Health Center",
+    "latitude": 32.8794333,
+    "longitude": -117.2380343,
+    "descriptive": [
+      "Must see"
+    ],
+    "thumbnailPhoto" : "photos/StudentHealthCenter/StudentHealthCenter.jpg"
   }
 
 }
