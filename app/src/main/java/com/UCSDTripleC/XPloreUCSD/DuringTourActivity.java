@@ -98,7 +98,7 @@ public class DuringTourActivity extends AppCompatActivity {
     private ImageView cafeIconDuringTourImageView;
     private ImageView restaurantIconDuringTourImageView;
     private Button directionsButton;
-    private TextView detailsTextViewDuringTour;
+    private Button detailsViewDuringTour;
     private Button nextStopButton;
 
     /**
@@ -113,17 +113,17 @@ public class DuringTourActivity extends AppCompatActivity {
 
         database = new LandmarkDatabase(this, "one by one");
 
-
+        previousStopTextView = (TextView) findViewById(R.id.previousStopTextView);
         imageViewDuringTour = (ImageView) findViewById(R.id.imageViewDuringTour);
         tourNameTextView = (TextView) findViewById(R.id.tourNameTextView);
-        tourOverViewTextView = (TextView) findViewById(R.id.tourOverviewTextView);
+        tourOverViewTextView = (TextView) findViewById(R.id.tourNameTextView);
         stopNameTextView = (TextView) findViewById(R.id.stopNameTextView);
         stopDescriptionTextView = (TextView) findViewById(R.id.stopDescriptionTextView);
         restroomIconDuringTourImageView = (ImageView) findViewById(R.id.restroomIconDuringTourImageView);
         cafeIconDuringTourImageView = (ImageView) findViewById(R.id.cafeIconDuringTourImageView);
         restaurantIconDuringTourImageView = (ImageView) findViewById(R.id.restaurantIconDuringTourImageView);
         directionsButton = (Button) findViewById(R.id.directionsButton);
-        detailsTextViewDuringTour = (TextView) findViewById(R.id.detailsTextViewDuringTour);
+        detailsViewDuringTour = findViewById(R.id.detailsButton);
         nextStopButton = (Button) findViewById(R.id.nextStopButton);
 
         try {
@@ -156,6 +156,7 @@ public class DuringTourActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         clickTracker = new ClickTracker();
 //        Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
 //        tourOverViewTextView.setOnClickListener(clickTracker.getOnClickListener(tourOverviewIntent));
@@ -244,13 +245,9 @@ public class DuringTourActivity extends AppCompatActivity {
             }
         });
 
-        // detailsTextViewDuringTour onClick go to details page of this stop
-//        Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
-//        System.out.println("Go to the landmark detail " + tourArray.current().value.first);
-//        detailsIntent.putExtra("placeName", tourArray.current().value.first);
-//        detailsTextViewDuringTour.setOnClickListener(clickTracker.getOnClickListener(detailsIntent));
+        // detailsViewDuringTour onClick go to details page of this stop
 
-        detailsTextViewDuringTour.setOnClickListener(new View.OnClickListener() {
+        detailsViewDuringTour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
