@@ -13,6 +13,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +31,28 @@ public class TransportationGuideActivity extends AppCompatActivity {
     // Related Links
     private RecyclerView parkingLinksRecycler;
     private ParkingLinksAdapter parkingLinksAdapter;
+
+    private RecyclerView busLinksRecycler;
+    private ParkingLinksAdapter busLinksAdapter;
+
+    private RecyclerView shuttleLinksRecycler;
+    private ParkingLinksAdapter shuttleLinksAdapter;
+
+    private RecyclerView trolleyLinksRecycler;
+    private ParkingLinksAdapter trolleyLinksAdapter;
+
     private LinearLayoutManager layoutManager;
-    private String[] parkingarray=new String[]{"Find Parking Lots Near Me: https://www.google.com/maps/search/parking+lot+ucsd/@32.8743262,-117.2308927,14z/data=!3m1!4b1",
+    private String[] parking_array=new String[]{"Find Parking Lots Near Me: https://www.google.com/maps/search/parking+lot+ucsd/@32.8743262,-117.2308927,14z/data=!3m1!4b1",
     "How to Park: https://transportation.ucsd.edu/parking/visitor/index.html",
-    "Park with ParkMobile App: https://transportation.ucsd.edu/parking/pay-by-app.html"};
-    private ArrayList<String> parkinglist=new ArrayList<String>(Arrays.asList(parkingarray));
+    "<font color=#006a96>Park with</font> <u><font color=#45d554>ParkMobile App</font></u>: https://transportation.ucsd.edu/parking/pay-by-app.html"};
+    private String[] bus_array=new String[]{"Bus Stations Near Me: ",
+            "Bus Routes Around UC San Diego: https://www.sdmts.com/schedules-real-time-maps-and-routes/bus-routes"};
+    private String[] shuttle_array=new String[]{"On-Campus Shuttle Schedule: https://transportation.ucsd.edu/shuttles/index.html"};
+    private String[] trolley_array=new String[]{"San Diego Trolley Schedule: https://www.sdmts.com/schedules-real-time-maps-and-routes/trolley"};
+    private ArrayList<String> parkinglist=new ArrayList<String>(Arrays.asList(parking_array));
+    private ArrayList<String> buslist=new ArrayList<String>(Arrays.asList(bus_array));
+    private ArrayList<String> shuttlelist=new ArrayList<String>(Arrays.asList(shuttle_array));
+    private ArrayList<String> trolleylist=new ArrayList<String>(Arrays.asList(trolley_array));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,15 +75,50 @@ public class TransportationGuideActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
 
         //
-        // Set up related links
+        // Set up related links for parking
         parkingLinksRecycler = findViewById(R.id.parking_recycler);
         parkingLinksRecycler.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         parkingLinksRecycler.setLayoutManager(layoutManager);
         parkingLinksAdapter = new ParkingLinksAdapter();
         parkingLinksAdapter.setLinks(parkinglist);
+        //set up divider
         parkingLinksRecycler.addItemDecoration(getRecyclerViewDivider(R.drawable.trans_guide_divider));
         parkingLinksRecycler.setAdapter(parkingLinksAdapter);
+
+        // Set up related links for bus
+        busLinksRecycler = findViewById(R.id.guide_bus_recycler);
+        busLinksRecycler.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        busLinksRecycler.setLayoutManager(layoutManager);
+        busLinksAdapter = new ParkingLinksAdapter();
+        busLinksAdapter.setLinks(buslist);
+        //set up divider
+        busLinksRecycler.addItemDecoration(getRecyclerViewDivider(R.drawable.trans_guide_divider));
+        busLinksRecycler.setAdapter(busLinksAdapter);
+
+        // Set up related links for shuttle
+        shuttleLinksRecycler = findViewById(R.id.guide_shuttle_recycler);
+        shuttleLinksRecycler.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        shuttleLinksRecycler.setLayoutManager(layoutManager);
+        shuttleLinksAdapter = new ParkingLinksAdapter();
+        shuttleLinksAdapter.setLinks(shuttlelist);
+        //set up divider
+        shuttleLinksRecycler.addItemDecoration(getRecyclerViewDivider(R.drawable.trans_guide_divider));
+        shuttleLinksRecycler.setAdapter(shuttleLinksAdapter);
+
+        // Set up related links for trolley
+        trolleyLinksRecycler = findViewById(R.id.guide_Trolley_recycler);
+        trolleyLinksRecycler.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        trolleyLinksRecycler.setLayoutManager(layoutManager);
+        trolleyLinksAdapter = new ParkingLinksAdapter();
+        trolleyLinksAdapter.setLinks(trolleylist);
+        //set up divider
+        trolleyLinksRecycler.addItemDecoration(getRecyclerViewDivider(R.drawable.trans_guide_divider));
+        trolleyLinksRecycler.setAdapter(trolleyLinksAdapter);
+
     }
     /**
      * get the divider
@@ -79,6 +132,7 @@ public class TransportationGuideActivity extends AppCompatActivity {
         return itemDecoration;
     }
 
+    //set up recyclerview adapter class
     private class ParkingLinksAdapter extends RecyclerView.Adapter<ParkingLinksAdapter.MyViewHolder> {
 
         private ArrayList<String> Links = new ArrayList<>();
@@ -112,7 +166,14 @@ public class TransportationGuideActivity extends AppCompatActivity {
             else {
                 split = new String[]{"Link", link};
             }
-            holder.linkText.setText(split[0]);
+            //set up text with different colors
+            if(!split[0].startsWith("<font")){
+                holder.linkText.setText(split[0]);
+            }
+            else{
+                holder.linkText.setText(Html.fromHtml(split[0]));
+            }
+
             holder.linkText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

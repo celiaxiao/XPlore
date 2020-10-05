@@ -31,7 +31,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="top"
-                android:layout_marginBottom="48dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/Theme.MaterialComponents.Light"/>
 
@@ -42,7 +41,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="214dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:overScrollMode="never">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,32 +84,100 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:text="Public Transportation"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/parking_card" />
 
+
+                <TextView
+                    android:id="@+id/guide_bus_title"
+                    style="@style/SubSectionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Bus"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/public_trans_title"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/guide_bus_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="17dp"
+                    app:cardElevation="4dp"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintTop_toBottomOf="@id/guide_bus_title">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/guide_bus_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:overScrollMode="never" />
+
+                </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/guide_shuttle_title"
+                style="@style/SubSectionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="24dp"
+                android:text="Shuttle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guide_bus_card"/>
+
             <androidx.cardview.widget.CardView
-                android:id="@+id/public_trans_card"
+                android:id="@+id/guide_shuttle_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                app:cardCornerRadius="4dp"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="17dp"
                 app:cardElevation="4dp"
-                app:layout_constraintTop_toBottomOf="@id/public_trans_title">
-
+                android:layout_marginEnd="24dp"
+                app:layout_constraintTop_toBottomOf="@id/guide_shuttle_title">
 
                 <androidx.recyclerview.widget.RecyclerView
-                     android:id="@+id/public_trans_recycler"
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     android:descendantFocusability="blocksDescendants"
-                     android:overScrollMode="never" />
+                    android:id="@+id/guide_shuttle_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never" />
 
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:id="@+id/guide_Trolley_title"
+                style="@style/SubSectionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="24dp"
+                android:text="Trolley"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guide_shuttle_card"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/guide_Trolley_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginBottom="40dp"
+                app:cardElevation="4dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guide_Trolley_title">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/guide_Trolley_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never" />
+
+            </androidx.cardview.widget.CardView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
