@@ -437,23 +437,21 @@ public class LandmarkDatabase {
     }
 
 
-    /*
-		Function that reads in a file and then spits out their json string
-	 */
+    /**
+     *
+     * @param context context of the current activity
+     * @param filename name of the file being read
+     * @return
+     */
     public String loadJSONFromAsset(Context context, String filename) {
         String json = null;
-        Log.d("WHAT", "I'm in this function call");
         try {
-            Log.d("WHAT", "in try block");
             InputStream is = context.getAssets().open(filename);
-            Log.d("WHAT","after opening file");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            Log.d("WHAT", "finished reading buffer");
             json = new String(buffer, "UTF-8");
-            Log.d("WHAT", json);
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
