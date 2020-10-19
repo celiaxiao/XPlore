@@ -1,0 +1,11 @@
+{
+    "name": "Study Spaces On Campus",
+    "type": "Study Spaces Tour",
+    "places": [
+        "Price center",
+        "Geisel Library",
+        "OG Student Center",
+        "Galbraith Hall",
+        "Biomedical Library"
+    ]
+}
