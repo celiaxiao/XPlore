@@ -16,6 +16,11 @@ public final class CircularClickableImageView extends androidx.appcompat.widget.
 	private View view;
 
 	/**
+	 * The ratio of content to length (calculated based on the shortest side)
+	 */
+	private float ratio = 1;
+
+	/**
 	 * Constructor that just delegates to super.
 	 * @see androidx.appcompat.widget.AppCompatImageView
 	 */
@@ -39,6 +44,13 @@ public final class CircularClickableImageView extends androidx.appcompat.widget.
 		super(context, attrs, defStyleAttr);
 	}
 
+	/**
+	 * Set the ratio of content to length (calculated based on the shortest side).
+	 * @param ratio the ratio of content to length (calculated based on the shortest side)
+	 */
+	public void setContentRatio(float ratio) {
+		this.ratio = ratio;
+	}
 
 	/**
 	 * Sets the "next in line" view.
@@ -52,9 +64,10 @@ public final class CircularClickableImageView extends androidx.appcompat.widget.
 	public boolean onTouchEvent(MotionEvent event) {
 		if (event.getAction() != MotionEvent.ACTION_UP) return true;
 		float radius = Math.min(getWidth(), getHeight()) * 0.5f;
+		// use radius as both x and y coordinate
 		float dx = event.getX() - radius;
 		float dy = event.getY() - radius;
-		if (Math.sqrt(dx * dx + dy * dy) <= radius) {
+		if (Math.sqrt(dx * dx + dy * dy) <= radius * ratio) {
 			performClick();
 			return true;
 		}

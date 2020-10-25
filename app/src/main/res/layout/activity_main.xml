@@ -15,12 +15,12 @@
 
     <com.UCSDTripleC.XPloreUCSD.CircularClickableImageView
         android:id="@+id/main_page_tab_icon"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/main_page_tab_icon_active"
+        android:layout_width="74dp"
+        android:layout_height="79dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/main_page_tab_icon_active"
         android:clickable="true"
         android:focusable="true"
-        android:layout_marginBottom="9dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
