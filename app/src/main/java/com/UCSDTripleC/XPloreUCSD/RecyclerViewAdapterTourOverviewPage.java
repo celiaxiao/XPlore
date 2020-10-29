@@ -32,8 +32,7 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
         ImageView restroomIconTourOverview;
         ImageView cafeIconTourOverview;
         ImageView restaurantIconTourOverview;
-        ImageView busstopIconTourOverview;
-        ImageView parkinglotIconTourOverview;
+
 
         RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
 
@@ -53,8 +52,7 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
             restroomIconTourOverview = (ImageView) itemView.findViewById(R.id.restroomIconTourOverview);
             cafeIconTourOverview = (ImageView) itemView.findViewById(R.id.cafeIconTourOverview);
             restaurantIconTourOverview = (ImageView) itemView.findViewById(R.id.restaurantIconTourOverview);
-            busstopIconTourOverview = (ImageView) itemView.findViewById(R.id.busstopIconTourOverview);
-            parkinglotIconTourOverview = (ImageView) itemView.findViewById(R.id.parkinglotIconTourOverview);
+
         }
 
         @Override
@@ -77,36 +75,23 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
         String item = items.get(position).getName();
         holder.placeNameTextView.setText(item.toString());
 
-        String[] strArray = {"parking", "cafe", "busstop", "restaurant", "restroom"};
+        String[] strArray = {"cafe",  "restaurant", "restroom"};
+
         if(items.get(position).getAmenities().get(strArray[0])){
-            holder.parkinglotIconTourOverview.setImageDrawable(context.getDrawable(R.drawable.icon_restroom_white));
-            holder.parkinglotIconTourOverview.setColorFilter(Color.WHITE);
-        }
-        else {
-            holder.parkinglotIconTourOverview.setColorFilter(Color.GRAY);
-        }
-        if(items.get(position).getAmenities().get(strArray[1])){
             holder.cafeIconTourOverview.setImageDrawable(context.getDrawable(R.drawable.icon_cafe_white));
             holder.cafeIconTourOverview.setColorFilter(Color.WHITE);
         }
         else{
             holder.cafeIconTourOverview.setColorFilter(Color.GRAY);
         }
-        if(items.get(position).getAmenities().get(strArray[2])){
-            holder.busstopIconTourOverview.setImageDrawable(context.getDrawable(R.drawable.icon_busstop_white));
-            holder.busstopIconTourOverview.setColorFilter(Color.WHITE);
-        }
-        else{
-            holder.busstopIconTourOverview.setColorFilter(Color.GRAY);
-        }
-        if(items.get(position).getAmenities().get(strArray[3])){
+        if(items.get(position).getAmenities().get(strArray[1])){
             holder.restaurantIconTourOverview.setImageDrawable(context.getDrawable(R.drawable.icon_restaurant_white));
             holder.restaurantIconTourOverview.setColorFilter(Color.WHITE);
         }
         else{
             holder.restaurantIconTourOverview.setColorFilter(Color.GRAY);
         }
-        if(items.get(position).getAmenities().get(strArray[4])){
+        if(items.get(position).getAmenities().get(strArray[2])){
             holder.restroomIconTourOverview.setImageDrawable(context.getDrawable(R.drawable.icon_restroom_white));
             holder.restroomIconTourOverview.setColorFilter(Color.WHITE);
         }

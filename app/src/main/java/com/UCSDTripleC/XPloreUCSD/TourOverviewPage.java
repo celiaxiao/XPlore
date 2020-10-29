@@ -44,7 +44,6 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
     private String tourName = "UC San Diego’s Landmark Tour";
     private String tourDescription = "A tour that highlights all must-see landmarks in UC San Diego";
     private String tourTime = "90 Min";
-    private String tourPlaceNumber = "5 Stops";
     private ArrayList<Landmark> landmarkArrayList = new ArrayList<>();
     private TextView tourPlaceNumberTextView;
 
@@ -84,8 +83,8 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
                 for( int i = 0; i < tourList.size(); i++){
                     System.out.println("Resume the tour, landmark: " + tourList.get(i));
                 }
-                for( int i = 0; i < places.length; i++ ){
-                    System.out.println("Original tour, landmark: " + places[i] );
+                for( int i = 0; i < items.size(); i++ ){
+                    System.out.println("Original tour, landmark: " + items.get(i) );
                 }
                 items = tourList;
                 if ( items.size() <= 1 ){
