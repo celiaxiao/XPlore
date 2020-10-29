@@ -15,6 +15,7 @@ public class Tour {
     private ArrayList<String> graphicsWithBackground;
     private ArrayList<String> graphicsWithoutBackground;
 
+
     /**
      * Constructor for the tour
      *

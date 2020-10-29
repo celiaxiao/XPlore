@@ -13,7 +13,17 @@ public class TourDatabase {
 
     private HashMap<String, Tour> map = new HashMap<>();
     public static String[] FILELIST  = new String[] {
-
+            "tours/AlumniTour.json",
+            "tours/CampusLifeTour.json",
+            "tours/ERCCollegeTour.json",
+            "tours/MarshallCollegeTour.json",
+            "tours/MuirCollegeTour.json",
+            "tours/RevelleCollegeTour.json",
+            "tours/SignatureTour.json",
+            "tours/SixthCollegeTour.json",
+            "tours/StudySpacesTour.json",
+            "tours/TheStuartCollectionTour.json",
+            "tours/WarrenCollegeTour.json"
     };
 
     /**
