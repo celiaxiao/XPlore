@@ -75,7 +75,8 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
         String item = items.get(position).getName();
         holder.placeNameTextView.setText(item.toString());
 
-        String[] strArray = {"cafe",  "restaurant", "restroom"};
+
+        String[] strArray = {"cafe", "restaurant", "restroom"};
 
         if(items.get(position).getAmenities().get(strArray[0])){
             holder.cafeIconTourOverview.setImageDrawable(context.getDrawable(R.drawable.icon_cafe_white));

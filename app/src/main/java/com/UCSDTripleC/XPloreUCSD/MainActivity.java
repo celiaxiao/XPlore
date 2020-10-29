@@ -79,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
 			public void onTabSelected(TabLayout.Tab tab) {
 				if (tab.getPosition() != MAIN_PAGE_TAB_INDEX) return;
 				ImageView image_view = findViewById(R.id.main_page_tab_icon);
-				image_view.setBackgroundResource(R.drawable.main_page_tab_icon_active);
+				image_view.setImageResource(R.drawable.main_page_tab_icon_active);
 			}
 
 			@Override
 			public void onTabUnselected(TabLayout.Tab tab) {
 				if (tab.getPosition() != MAIN_PAGE_TAB_INDEX) return;
 				ImageView image_view = findViewById(R.id.main_page_tab_icon);
-				image_view.setBackgroundResource(R.drawable.main_page_tab_icon_inactive);
+				image_view.setImageResource(R.drawable.main_page_tab_icon_inactive);
 			}
 
 			@Override
@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
 		CircularClickableImageView image_view = findViewById(R.id.main_page_tab_icon);
 		image_view.setView(mainPager);
+		image_view.setContentRatio(280f / 297f);
 		image_view.setOnClickListener(view -> {
 			tabLayout.selectTab(tabLayout.getTabAt(MAIN_PAGE_TAB_INDEX));
 		});

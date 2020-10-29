@@ -3,15 +3,21 @@ package com.UCSDTripleC.XPloreUCSD;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.PowerManager;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.UCSDTripleC.XPloreUCSD.database.Landmark;
@@ -21,8 +27,7 @@ import com.UCSDTripleC.XPloreUCSD.utils.ClickTracker;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static com.UCSDTripleC.XPloreUCSD.R.id.busstopIconDuringTourImageView;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This is the DuringTourActivity which provides some descriptions about the
@@ -99,11 +104,20 @@ public class DuringTourActivity extends AppCompatActivity {
     private ImageView restroomIconDuringTourImageView;
     private ImageView cafeIconDuringTourImageView;
     private ImageView restaurantIconDuringTourImageView;
-    private ImageView busstopIconDuringTourImageView;
-    private ImageView parkinglotIconDuringTourImageView;
     private Button directionsButton;
-    private TextView detailsTextViewDuringTour;
+    private Button detailsViewDuringTour;
     private Button nextStopButton;
+
+
+    // Audio playing related fields
+    private MediaPlayer mediaPlayer;
+    private ImageButton audioButton;
+    private SeekBar audioSeek;
+    private boolean isAudioPlaying = false;
+    private TextView audioProgressText, audioTitle;
+    private Handler seekBarUpdateHandler;
+    private Runnable seekBarRunnable;
+    private final int UPDATE_INTERVAL = 50;
 
     /**
      * Prevents the problem of double clicks opening activity twice.
@@ -117,23 +131,22 @@ public class DuringTourActivity extends AppCompatActivity {
 
         database = new LandmarkDatabase(this, "one by one");
 
-
+        previousStopTextView = (TextView) findViewById(R.id.previousStopTextView);
         imageViewDuringTour = (ImageView) findViewById(R.id.imageViewDuringTour);
         tourNameTextView = (TextView) findViewById(R.id.tourNameTextView);
-        tourOverViewTextView = (TextView) findViewById(R.id.tourOverviewTextView);
+        tourOverViewTextView = (TextView) findViewById(R.id.tourNameTextView);
         stopNameTextView = (TextView) findViewById(R.id.stopNameTextView);
-        previousStopTextView = (TextView) findViewById(R.id.previousStopTextView);
         stopDescriptionTextView = (TextView) findViewById(R.id.stopDescriptionTextView);
         restroomIconDuringTourImageView = (ImageView) findViewById(R.id.restroomIconDuringTourImageView);
         cafeIconDuringTourImageView = (ImageView) findViewById(R.id.cafeIconDuringTourImageView);
         restaurantIconDuringTourImageView = (ImageView) findViewById(R.id.restaurantIconDuringTourImageView);
-        busstopIconDuringTourImageView = (ImageView) findViewById(R.id.busstopIconDuringTourImageView);
-        parkinglotIconDuringTourImageView = (ImageView) findViewById(R.id.parkinglotIconDuringTourImageView);
         directionsButton = (Button) findViewById(R.id.directionsButton);
-        detailsTextViewDuringTour = (TextView) findViewById(R.id.detailsTextViewDuringTour);
+        detailsViewDuringTour = findViewById(R.id.detailsButton);
         nextStopButton = (Button) findViewById(R.id.nextStopButton);
 
+
         try {
+
             Pair<String, Integer> pair = tourArray.current().value;
             if(pair != null){
                 System.out.println("This place is "+pair.first);
@@ -144,6 +157,8 @@ public class DuringTourActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
         // tourOverviewTextView onClick go back to tourOverviewPage
         // Go back to the tourOverviewPage
@@ -163,16 +178,25 @@ public class DuringTourActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         clickTracker = new ClickTracker();
 //        Intent tourOverviewIntent = new Intent(getApplicationContext(), TourOverviewPage.class);
 //        tourOverViewTextView.setOnClickListener(clickTracker.getOnClickListener(tourOverviewIntent));
 
-        // TODO: previousStopTextView onClick go to previous stop
-        // TODO: change this onclicklistener to clicktracker
+        /*
+         *
+         *
+         * Set the previous stop button
+         *
+         *
+         */
         previousStopTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
+                    if(isAudioPlaying){
+                        stopAudio();
+                    }
                     Pair<String, Integer> pair = tourArray.prev().value;
                     System.out.println("This place is "+pair.first);
                     if(pair != null && indexOfStop != 1){
@@ -205,8 +229,13 @@ public class DuringTourActivity extends AppCompatActivity {
             previousStopTextView.setVisibility(View.VISIBLE);
         }
 
-        // TODO: nextStopButton onClick go to next stop
-        // TODO: change this onclicklistener to clicktracker
+        /*
+         *
+         *
+         * Set the next stop button
+         *
+         *
+         */
         if ( tourArray.size == 2 ){
             Pair<String, Integer> next = tourArray.next().value;
             nextStopButton.setText("Last stop: " + next.first);
@@ -219,6 +248,9 @@ public class DuringTourActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
+                    if(isAudioPlaying){
+                        stopAudio();
+                    }
                     if(tourArray.current().value.second == tourArray.size){
                         Intent intent = new Intent(getApplicationContext(), TourFinish.class);
                         startActivity(intent);
@@ -251,15 +283,14 @@ public class DuringTourActivity extends AppCompatActivity {
             }
         });
 
-        // detailsTextViewDuringTour onClick go to details page of this stop
-//        Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
-//        System.out.println("Go to the landmark detail " + tourArray.current().value.first);
-//        detailsIntent.putExtra("placeName", tourArray.current().value.first);
-//        detailsTextViewDuringTour.setOnClickListener(clickTracker.getOnClickListener(detailsIntent));
+        // detailsViewDuringTour onClick go to details page of this stop
 
-        detailsTextViewDuringTour.setOnClickListener(new View.OnClickListener() {
+        detailsViewDuringTour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                stopAudio();
+
                 Intent detailsIntent = new Intent(getApplicationContext(), LandmarkDetailsActivity.class);
                 detailsIntent.putExtra("placeName", tourArray.current().value.first);
                 startActivity(detailsIntent);
@@ -282,6 +313,7 @@ public class DuringTourActivity extends AppCompatActivity {
         // Click on directions button would lead to Google Maps app
         if (mapIntent.resolveActivity(getPackageManager()) != null) {
             // Attempt to start an activity that can handle the Intent
+
             directionsButton.setOnClickListener(clickTracker.getOnClickListener(mapIntent));
         }
     }
@@ -291,6 +323,27 @@ public class DuringTourActivity extends AppCompatActivity {
         super.onResume();
         // Reset the status of the clickTracker
         clickTracker.reset();
+        stopAudio();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        stopAudio();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null){
+            mediaPlayer.release();
+        }
+        if (seekBarUpdateHandler != null) {
+            if (seekBarRunnable != null) {
+                seekBarUpdateHandler.removeCallbacks(seekBarRunnable);
+            }
+            seekBarUpdateHandler = null;
+        }
     }
 
     protected void setView(Landmark landmark, int index) throws IOException {
@@ -298,6 +351,75 @@ public class DuringTourActivity extends AppCompatActivity {
         // TODO: dynamically set up basic components in this activity
         stopName = landmark.getName();
 
+        // Set up Music player*****************
+        // Set up audio
+        if (mediaPlayer != null){
+            mediaPlayer.release();
+        }
+        mediaPlayer = new MediaPlayer();
+        isAudioPlaying = false;
+        mediaPlayer.setWakeMode(this, PowerManager.PARTIAL_WAKE_LOCK);
+        try {
+            AssetFileDescriptor afd = getAssets().openFd(landmark.getAudio());
+            mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            mediaPlayer.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        audioTitle = findViewById(R.id.tour_listen_title);
+        audioTitle.setText("Introduction to " + landmark.getName());
+        audioTitle.setSelected(true);
+
+        // Set up Seekbar
+        int duration = mediaPlayer.getDuration();
+        audioProgressText = findViewById(R.id.tour_listen_time);
+        audioProgressText.setText(formatTime(duration));
+        audioSeek = findViewById(R.id.tour_listen_seekbar);
+        audioSeek.setMax(duration);
+        audioSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    mediaPlayer.seekTo(progress);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.pause();
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                if (isAudioPlaying) {
+                    startAudio();
+                }
+            }
+        });
+
+        // Set up audio control button
+        audioButton = findViewById(R.id.tour_listen_play_button);
+        audioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isAudioPlaying) {
+                    pauseAudio();
+                }
+                else {
+                    startAudio();
+                }
+            }
+        });
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                pauseAudio();
+            }
+        });
+        // *********************************
+
+        // *********************************
         Drawable drawable = Drawable.createFromStream(getAssets().open(landmark.getThumbnailPhoto()), null);
 
         imageViewDuringTour.setImageDrawable(drawable);
@@ -323,43 +445,69 @@ public class DuringTourActivity extends AppCompatActivity {
         stopDescriptionTextView.setText(landmark.getAbout()); // TODO: Dynamically Set up the descriptions for this stop
         stopDescriptionTextView.setMovementMethod(new ScrollingMovementMethod()); // Making this textView scrollable
 
-        String[] strArray = {"parking", "cafe", "busstop", "restaurant", "restroom"};
+        String[] strArray = {"cafe", "restaurant", "restroom"};
         HashMap<String,Boolean> hashMap = landmark.getAmenities();
 
         if(hashMap.get(strArray[0])){
-            parkinglotIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restroom_white));
-            parkinglotIconDuringTourImageView.setColorFilter(Color.WHITE);
-        }
-        else {
-            parkinglotIconDuringTourImageView.setColorFilter(Color.GRAY);
-        }
-        if(hashMap.get(strArray[1])){
             cafeIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_cafe_white));
             cafeIconDuringTourImageView.setColorFilter(Color.WHITE);
         }
         else{
             cafeIconDuringTourImageView.setColorFilter(Color.GRAY);
         }
-        if(hashMap.get(strArray[2])){
-            busstopIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_busstop_white));
-            busstopIconDuringTourImageView.setColorFilter(Color.WHITE);
-        }
-        else{
-            busstopIconDuringTourImageView.setColorFilter(Color.GRAY);
-        }
-        if(hashMap.get(strArray[3])){
+        if(hashMap.get(strArray[1])){
             restaurantIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restaurant_white));
             restaurantIconDuringTourImageView.setColorFilter(Color.WHITE);
         }
         else{
             restaurantIconDuringTourImageView.setColorFilter(Color.GRAY);
         }
-        if(hashMap.get(strArray[4])){
+        if(hashMap.get(strArray[2])){
             restroomIconDuringTourImageView.setImageDrawable(getDrawable(R.drawable.icon_restroom_white));
             restroomIconDuringTourImageView.setColorFilter(Color.WHITE);
         }
         else{
             restroomIconDuringTourImageView.setColorFilter(Color.GRAY);
         }
+    }
+
+
+    private void startAudio() {
+        isAudioPlaying = true;
+        audioButton.setImageResource(R.drawable.ic_pause_24dp);
+        mediaPlayer.start();
+        if (seekBarUpdateHandler == null) {
+            seekBarUpdateHandler = new Handler();
+            seekBarRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    int currTime = mediaPlayer.getCurrentPosition();
+                    audioProgressText.setText(formatTime(currTime));
+                    audioSeek.setProgress(currTime);
+                    seekBarUpdateHandler.postDelayed(this, UPDATE_INTERVAL);
+                }
+            };
+            seekBarUpdateHandler.post(seekBarRunnable);
+        }
+    }
+
+    private void pauseAudio() {
+        isAudioPlaying = false;
+        audioButton.setImageResource(R.drawable.ic_play_arrow_24dp);
+        mediaPlayer.pause();
+    }
+
+    private void stopAudio() {
+        isAudioPlaying = false;
+        audioButton.setImageResource(R.drawable.ic_play_arrow_24dp);
+        mediaPlayer.stop();
+    }
+
+    private String formatTime(int currTime) {
+        return String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(currTime),
+                TimeUnit.MILLISECONDS.toSeconds(currTime) % TimeUnit.MINUTES.toSeconds(1));
+//        return String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(currTime),
+//                TimeUnit.MILLISECONDS.toMinutes(currTime) % TimeUnit.HOURS.toMinutes(1),
+//                TimeUnit.MILLISECONDS.toSeconds(currTime) % TimeUnit.MINUTES.toSeconds(1));
     }
 }

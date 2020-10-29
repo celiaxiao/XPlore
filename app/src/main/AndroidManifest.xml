@@ -54,7 +54,8 @@
         <activity
             android:name=".DuringTourActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Material" />
     </application>
 
 </manifest>
