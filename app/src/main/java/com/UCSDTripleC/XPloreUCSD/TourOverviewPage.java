@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.UCSDTripleC.XPloreUCSD.database.Landmark;
 import com.UCSDTripleC.XPloreUCSD.database.LandmarkDatabase;
+import com.UCSDTripleC.XPloreUCSD.database.Tour;
+import com.UCSDTripleC.XPloreUCSD.database.TourDatabase;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -34,8 +36,9 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
  * cardViews for different stops in the tour.
  */
 public class TourOverviewPage extends AppCompatActivity implements RecyclerViewAdapterTourOverviewPage.RecyclerViewOnItemClickListener {
-    private ArrayList<String> items; // ArrayList that provide items for the RecyclerView
     private LandmarkDatabase database;
+    private ArrayList<String> items; // ArrayList that provide items for the RecyclerView
+    private TourDatabase tourDatabase;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -51,10 +54,21 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_overview_page);
+        //default places lists
         items = new ArrayList<>(Arrays.asList(places));
 
         database = new LandmarkDatabase(this, "one by one");
-
+        tourDatabase=new TourDatabase(this);
+        //get the passed in tour name and picture source
+        Bundle argument = getIntent().getExtras();
+        Tour tour;
+        int phtotsrc;
+        if (argument != null) {
+            String tourname =argument.getString("tour name");
+            tour=tourDatabase.getByName(tourname);
+            phtotsrc=argument.getInt("picture src");
+            items=tour.getPlaces();
+        }
 
         // Basic Layout Components set up, contents of the components are temporarily
         // hardcoded using predefined constants
@@ -71,7 +85,7 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         }
         startButtonTourOverviewPage = (Button) findViewById(R.id.startButtonTourOverviewPage);
 
-        Bundle argument = getIntent().getExtras();
+
         if (argument != null){
             String review = argument.getString("Resume the tour");
             if (review != null ) {

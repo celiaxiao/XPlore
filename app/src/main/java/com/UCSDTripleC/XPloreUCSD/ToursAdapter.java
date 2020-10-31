@@ -67,7 +67,8 @@ public class ToursAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), TourOverviewPage.class);
                 //TODO: get the tour string
-                intent.putExtra("placeName", "");
+                intent.putExtra("tour name", name);
+                intent.putExtra("picture src", photo);
                 v.getContext().startActivity(intent);
             }
         });

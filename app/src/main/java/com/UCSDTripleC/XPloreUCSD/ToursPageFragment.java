@@ -11,12 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.UCSDTripleC.XPloreUCSD.database.Tour;
+import com.UCSDTripleC.XPloreUCSD.database.TourDatabase;
 import com.UCSDTripleC.XPloreUCSD.utils.ClickTracker;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ToursPageFragment extends Fragment {
+
+    //tour database
+    TourDatabase tourDatabase;
 
     ListViewForScrollView v;
     ScrollView sv;
@@ -34,12 +39,7 @@ public class ToursPageFragment extends Fragment {
     private String[] timeSetCollegeTours = {"30 Min", "15 Min", "55 Min", "45 Min", "45 Min", "10 Min"};
     private String[] timeSetAcademicSpots={"45 Min"};
     private String[] timeSetCampusLife={"1 Hour 50 Min"};
-    private int[] stopsSetSignatureTour = {15};
-    private int[] stopsSetJourneyThruArt = {9};
-    private int[] stopsSetAlumniTours = {12};
-    private int[] stopsSetCollegeTours = {5, 2, 7, 5, 5, 2};
-    private int[] stopsSetAcademicSpots = {5};
-    private int[] stopsSetCampusLife = {16};
+
     private int[] picturesSignatureTour = {R.drawable.tour_signature_landmark};
     private int[] picturesJourneyThruArt = {R.drawable.tour_journey_stuart};
     private int[] picturesAlumniTours = {R.drawable.tour_alumni_2000};
@@ -76,23 +76,73 @@ public class ToursPageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //set up tour database
+        tourDatabase=new TourDatabase(getContext());
+
+        //dynamically set up tour overview details
+        String[] timeset=new String[nameSetSignatureTour.length];
+        int[] stopsset=new int[nameSetSignatureTour.length];
+        for(int i=0;i<nameSetSignatureTour.length;i++){
+            Tour tour=tourDatabase.getByName(nameSetSignatureTour[i]);
+            stopsset[i]= tour.getPlaces().size();
+            timeset[i]=convertTime(stopsset[i]);
+        }
         v = (ListViewForScrollView) getView().findViewById(R.id.signature_tour_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetSignatureTour, timeSetSignatureTour, stopsSetSignatureTour, picturesSignatureTour);
+        a = new ToursAdapter(this.getActivity(), nameSetSignatureTour, timeset, stopsset, picturesSignatureTour);
         v.setAdapter(a);
+         timeset=new String[nameSetAlumniTours.length];
+         stopsset=new int[nameSetAlumniTours.length];
+        for(int i=0;i<nameSetAlumniTours.length;i++){
+            Tour tour=tourDatabase.getByName(nameSetAlumniTours[i]);
+            stopsset[i]= tour.getPlaces().size();
+            timeset[i]=convertTime(stopsset[i]);
+        }
         v = (ListViewForScrollView) getView().findViewById(R.id.alumniTours_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetAlumniTours, timeSetAlumniTours, stopsSetAlumniTours, picturesAlumniTours);
+        a = new ToursAdapter(this.getActivity(), nameSetAlumniTours, timeset, stopsset, picturesAlumniTours);
         v.setAdapter(a);
+
+        timeset=new String[nameSetAcademicSpots.length];
+        stopsset=new int[nameSetAcademicSpots.length];
+        for(int i=0;i<nameSetAcademicSpots.length;i++){
+            Tour tour=tourDatabase.getByName(nameSetAcademicSpots[i]);
+            stopsset[i]= tour.getPlaces().size();
+            timeset[i]=convertTime(stopsset[i]);
+        }
         v = (ListViewForScrollView) getView().findViewById(R.id.academic_spots_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetAcademicSpots, timeSetAcademicSpots, stopsSetAcademicSpots, picturesAcademicSpots);
+        a = new ToursAdapter(this.getActivity(), nameSetAcademicSpots, timeset, stopsset, picturesAcademicSpots);
         v.setAdapter(a);
+
+        timeset=new String[nameSetCampusLife.length];
+        stopsset=new int[nameSetCampusLife.length];
+        for(int i=0;i<nameSetCampusLife.length;i++){
+            Tour tour=tourDatabase.getByName(nameSetCampusLife[i]);
+            stopsset[i]= tour.getPlaces().size();
+            timeset[i]=convertTime(stopsset[i]);
+        }
         v = (ListViewForScrollView) getView().findViewById(R.id.campus_life_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetCampusLife, timeSetCampusLife, stopsSetCampusLife, picturesCampusLife);
+        a = new ToursAdapter(this.getActivity(), nameSetCampusLife, timeset, stopsset, picturesCampusLife);
         v.setAdapter(a);
+
+        timeset=new String[nameSetJourneyThruArt.length];
+        stopsset=new int[nameSetJourneyThruArt.length];
+        for(int i=0;i<nameSetJourneyThruArt.length;i++){
+            Tour tour=tourDatabase.getByName(nameSetJourneyThruArt[i]);
+            stopsset[i]= tour.getPlaces().size();
+            timeset[i]=convertTime(stopsset[i]);
+        }
         v = (ListViewForScrollView) getView().findViewById(R.id.journey_through_arts_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetJourneyThruArt, timeSetJourneyThruArt, stopsSetJourneyThruArt, picturesJourneyThruArt);
+        a = new ToursAdapter(this.getActivity(), nameSetJourneyThruArt, timeset, stopsset, picturesJourneyThruArt);
         v.setAdapter(a);
+
+        timeset=new String[nameSetCollegeTours.length];
+        stopsset=new int[nameSetCollegeTours.length];
+        for(int i=0;i<nameSetCollegeTours.length;i++){
+            Tour tour=tourDatabase.getByName(nameSetCollegeTours[i]);
+            stopsset[i]= tour.getPlaces().size();
+            timeset[i]=convertTime(stopsset[i]);
+        }
         v = (ListViewForScrollView) getView().findViewById(R.id.ucsd_special_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetCollegeTours, timeSetCollegeTours, stopsSetCollegeTours, picturesCollegeTours);
+        a = new ToursAdapter(this.getActivity(), nameSetCollegeTours, timeset, stopsset, picturesCollegeTours);
         v.setAdapter(a);
 
         // Adjustment for ListViewForScrollView
@@ -107,5 +157,12 @@ public class ToursPageFragment extends Fragment {
         getView()
             .findViewById(R.id.start_button)
             .setOnClickListener(clickTracker.getOnClickListener(featureComingSoonIntent));
+    }
+    String convertTime(int numStop){
+        String time;
+        if(numStop<3) time= 20*numStop+" Min";
+        else if(numStop<6) time=20*numStop/60+" Hour "+20*numStop%60+" Min";
+        else time=20*numStop/60+" Hours "+20*numStop%60+" Min";
+        return time;
     }
 }
