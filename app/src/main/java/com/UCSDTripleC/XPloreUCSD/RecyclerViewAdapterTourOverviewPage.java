@@ -32,8 +32,7 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
         ImageView restroomIconTourOverview;
         ImageView cafeIconTourOverview;
         ImageView restaurantIconTourOverview;
-        ImageView busstopIconTourOverview;
-        ImageView parkinglotIconTourOverview;
+
 
         RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
 
@@ -53,8 +52,7 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
             restroomIconTourOverview = (ImageView) itemView.findViewById(R.id.restroomIconTourOverview);
             cafeIconTourOverview = (ImageView) itemView.findViewById(R.id.cafeIconTourOverview);
             restaurantIconTourOverview = (ImageView) itemView.findViewById(R.id.restaurantIconTourOverview);
-            busstopIconTourOverview = (ImageView) itemView.findViewById(R.id.busstopIconTourOverview);
-            parkinglotIconTourOverview = (ImageView) itemView.findViewById(R.id.parkinglotIconTourOverview);
+
         }
 
         @Override
@@ -77,7 +75,9 @@ public class RecyclerViewAdapterTourOverviewPage extends RecyclerView.Adapter<Re
         String item = items.get(position).getName();
         holder.placeNameTextView.setText(item.toString());
 
+
         String[] strArray = {"cafe", "restaurant", "restroom"};
+
         if(items.get(position).getAmenities().get(strArray[0])){
             holder.cafeIconTourOverview.setImageDrawable(context.getDrawable(R.drawable.icon_cafe_white));
             holder.cafeIconTourOverview.setColorFilter(Color.WHITE);

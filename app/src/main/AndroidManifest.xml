@@ -14,8 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ZoomImageActivity"></activity>
-        <activity android:name=".TourFinish"></activity>
+        <activity android:name=".TransportationGuideActivity">
+
+        </activity>
+        <activity android:name=".ZoomImageActivity" />
+        <activity android:name=".TourFinish" />
         <activity android:name=".FeatureComingSoonActivity" />
         <activity
             android:name=".MainActivity"
