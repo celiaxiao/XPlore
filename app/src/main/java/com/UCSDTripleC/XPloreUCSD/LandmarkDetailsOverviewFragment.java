@@ -212,12 +212,26 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         amenitiesAdapter = new AmenitiesAdapter();
         amenitiesAdapter.setAmenities(currLandmark.getAmenities());
         DividerItemDecoration dividerItemDecorationAmenities = new DividerItemDecoration(getContext(),
-                LinearLayoutManager.VERTICAL);
+            LinearLayoutManager.VERTICAL);
         dividerItemDecorationAmenities.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_12dp));
         amenitiesRecycler.addItemDecoration(dividerItemDecorationAmenities);
         amenitiesRecycler.setLayoutManager(new GridLayoutManager(getContext(), AMENITIES_NUM_COL));
         amenitiesRecycler.setAdapter(amenitiesAdapter);
         amenitiesRecycler.setNestedScrollingEnabled(false);
+
+        boolean flag = false;
+        for (boolean available: currLandmark.getAmenities().values()) {
+            if (available) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            amenitiesRecycler.setVisibility(View.GONE);
+            view
+                .findViewById(R.id.landmark_details_overview_amenities_empty_text_view)
+                .setVisibility(View.VISIBLE);
+        }
 
         int top_divider_id = R.id.landmark_details_overview_amenities_divider;
 
