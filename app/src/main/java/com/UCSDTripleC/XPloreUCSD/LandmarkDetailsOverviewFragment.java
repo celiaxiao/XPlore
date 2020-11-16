@@ -15,7 +15,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -38,7 +38,6 @@ import com.UCSDTripleC.XPloreUCSD.utils.ClickTracker;
 import com.UCSDTripleC.XPloreUCSD.utils.DownloadImageSaveTask;
 import com.UCSDTripleC.XPloreUCSD.utils.Utils;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -135,7 +134,7 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_landmark_detail_overview_fv, container, false);
+        View view = inflater.inflate(R.layout.fragment_landmark_detail_overview, container, false);
         return view;
     }
 
@@ -213,12 +212,28 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         amenitiesAdapter = new AmenitiesAdapter();
         amenitiesAdapter.setAmenities(currLandmark.getAmenities());
         DividerItemDecoration dividerItemDecorationAmenities = new DividerItemDecoration(getContext(),
-                LinearLayoutManager.VERTICAL);
+            LinearLayoutManager.VERTICAL);
         dividerItemDecorationAmenities.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_12dp));
         amenitiesRecycler.addItemDecoration(dividerItemDecorationAmenities);
         amenitiesRecycler.setLayoutManager(new GridLayoutManager(getContext(), AMENITIES_NUM_COL));
         amenitiesRecycler.setAdapter(amenitiesAdapter);
         amenitiesRecycler.setNestedScrollingEnabled(false);
+
+        boolean flag = false;
+        for (boolean available: currLandmark.getAmenities().values()) {
+            if (available) {
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            amenitiesRecycler.setVisibility(View.GONE);
+            view
+                .findViewById(R.id.landmark_details_overview_amenities_empty_text_view)
+                .setVisibility(View.VISIBLE);
+        }
+
+        int top_divider_id = R.id.landmark_details_overview_amenities_divider;
 
         // Set up related videos
         relatedVideosRecycler = view.findViewById(R.id.related_videos_recycler);
@@ -244,44 +259,26 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedVideosAdapter.setLinks(currLandmark.getVideos());
         relatedVideosRecycler.setAdapter(relatedVideosAdapter);
 
-//        // Set up related stories
-//        relatedStoriesRecycler = view.findViewById(R.id.related_stories_recycler);
-//        relatedStoriesRecycler.setHasFixedSize(true);
-//        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-//        DividerItemDecoration dividerItemDecorationRelatedStories = new DividerItemDecoration(relatedStoriesRecycler.getContext(),
-//                LinearLayoutManager.VERTICAL) {
-//            @Override
-//            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-//                int position = parent.getChildAdapterPosition(view);
-//                // hide the divider for the last child
-//                if (position == state.getItemCount() - 1) {
-//                    outRect.set(0, 0, 0, 0);
-//                } else {
-//                    super.getItemOffsets(outRect, view, parent, state);
-//                }
-//            }
-//        };
-//        dividerItemDecorationRelatedStories.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_16dp));
-//        relatedStoriesRecycler.addItemDecoration(dividerItemDecorationRelatedStories);
-//        relatedStoriesRecycler.setLayoutManager(layoutManager);
-//        relatedStoriesAdapter = new RelatedStoriesAdapter();
-//        relatedStoriesRecycler.setAdapter(relatedStoriesAdapter);
-//
-//        moreStoriesBtn = view.findViewById(R.id.story_view_more);
-//        moreStoriesBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!isExpanded) {
-//                    moreStoriesBtn.setText("Collapse");
-//                    relatedStoriesAdapter.setExpand(true);
-//                }
-//                else {
-//                    moreStoriesBtn.setText("View More(13)");
-//                    relatedStoriesAdapter.setExpand(false);
-//                }
-//                isExpanded = !isExpanded;
-//            }
-//        });
+        // hide this section if empty
+        if (currLandmark.getVideos().size() == 0) {
+            view.findViewById(R.id.videos_title).setVisibility(View.GONE);
+            relatedVideosRecycler.setVisibility(View.GONE);
+            view.findViewById(R.id.landmark_details_overview_videos_divider).setVisibility(View.GONE);
+            ConstraintLayout layout = view.findViewById(
+                R.id.landmark_details_overview_constraint_layout
+            );
+            ConstraintSet constraint_set = new ConstraintSet();
+            constraint_set.clone(layout);
+            constraint_set.connect(
+                R.id.more_info_title,
+                ConstraintSet.TOP,
+                top_divider_id,
+                ConstraintSet.BOTTOM
+            );
+            constraint_set.applyTo(layout);
+        } else {
+            top_divider_id = R.id.landmark_details_overview_videos_divider;
+        }
 
         // Set up related links
         relatedLinksRecycler = view.findViewById(R.id.related_links_recycler);
@@ -291,6 +288,27 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedLinksAdapter = new RelatedLinksAdapter();
         relatedLinksAdapter.setLinks(currLandmark.getLinks());
         relatedLinksRecycler.setAdapter(relatedLinksAdapter);
+
+        // hide this section if empty
+        if (currLandmark.getLinks().size() == 0) {
+            view.findViewById(R.id.more_info_title).setVisibility(View.GONE);
+            relatedLinksRecycler.setVisibility(View.GONE);
+            view.findViewById(R.id.landmark_details_overview_more_info_divider).setVisibility(View.GONE);
+            ConstraintLayout layout = view.findViewById(
+                R.id.landmark_details_overview_constraint_layout
+            );
+            ConstraintSet constraint_set = new ConstraintSet();
+            constraint_set.clone(layout);
+            constraint_set.connect(
+                R.id.related_places_title,
+                ConstraintSet.TOP,
+                top_divider_id,
+                ConstraintSet.BOTTOM
+            );
+            constraint_set.applyTo(layout);
+        } else {
+            top_divider_id = R.id.landmark_details_overview_more_info_divider;
+        }
 
         // Set up the related places
         relatedPlacesRecycler = view.findViewById(R.id.related_places_recycler);
@@ -320,28 +338,13 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         relatedPlacesAdapter.setContent(related_places, urls);
         relatedPlacesRecycler.setAdapter(relatedPlacesAdapter);
 
-//        // Set up related tours
-//        relatedToursRecycler = view.findViewById(R.id.related_tours_recycler);
-//        relatedToursRecycler.setHasFixedSize(true);
-//        layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-//        DividerItemDecoration dividerItemDecorationRelatedTours = new DividerItemDecoration(relatedToursRecycler.getContext(),
-//                LinearLayoutManager.VERTICAL) {
-//            @Override
-//            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-//                int position = parent.getChildAdapterPosition(view);
-//                // hide the divider for the last child
-//                if (position == state.getItemCount() - 1) {
-//                    outRect.set(0, 0, 0, 0);
-//                } else {
-//                    super.getItemOffsets(outRect, view, parent, state);
-//                }
-//            }
-//        };
-//        dividerItemDecorationRelatedTours.setDrawable(getResources().getDrawable(R.drawable.horizontal_divider_16dp));
-//        relatedToursRecycler.addItemDecoration(dividerItemDecorationRelatedTours);
-//        relatedToursRecycler.setLayoutManager(layoutManager);
-//        relatedToursAdapter = new RelatedToursAdapter();
-//        relatedToursRecycler.setAdapter(relatedToursAdapter);
+        // hide this section if empty
+        if (currLandmark.getRelatedPlaces().size() == 0) {
+            view.findViewById(R.id.related_places_title).setVisibility(View.GONE);
+            relatedPlacesRecycler.setVisibility(View.GONE);
+            // since the last section is empty hide the hanging divider
+            view.findViewById(top_divider_id).setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -673,7 +676,12 @@ public class LandmarkDetailsOverviewFragment extends Fragment {
         private String[] nameSet = {"Geisel Library", "Price Center", "Fallen Star", "Jacobs School of Engineering"};
         private String[] timeSet = {"30min", "30min", "30min", "30min"};
         private String[] StopSet = {"5", "3", "4", "1"};
-        private int[] pictures = {R.drawable.geisel_landmark, R.drawable.price_center_east, R.drawable.fallen_star, R.drawable.ucsd};
+        private int[] pictures = {
+            R.drawable.geisel_landmark,
+            R.drawable.price_center_east,
+            R.drawable.fallen_star,
+            R.drawable.ucsd
+        };
 
         public RelatedToursAdapter() {
         }
