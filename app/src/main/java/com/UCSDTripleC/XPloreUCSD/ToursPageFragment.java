@@ -2,6 +2,7 @@ package com.UCSDTripleC.XPloreUCSD;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,20 @@ public class ToursPageFragment extends Fragment {
     private int[] picturesCollegeTours = {R.drawable.tour_college_revelle, R.drawable.tour_college_marshall, R.drawable.tour_college_warren, R.drawable.tour_college_muir, R.drawable.tour_college_erc, R.drawable.tour_college_six};
     private int[] picturesAcademicSpots={R.drawable.tour_academic_studyspace};
     private int[] picturesCampusLife={R.drawable.tour_campus_life};
+
+    private int[] OVpicturesSignatureTour = {R.drawable.tour_signature_landmark};
+    private int[] OVpicturesJourneyThruArt = {R.drawable.tour_journey_stuart};
+    private int[] OVpicturesAlumniTours = {R.drawable.tour_alumni_2000};
+    private int[] OVpicturesCollegeTours = {R.drawable.tour_college_revelle, R.drawable.tour_college_marshall, R.drawable.tour_college_warren, R.drawable.tour_college_muir, R.drawable.tour_college_erc, R.drawable.tour_college_six};
+    private int[] OVpicturesAcademicSpots={R.drawable.tour_academic_studyspace};
+    private int[] OVpicturesCampusLife={R.drawable.tour_campus_life};
+
+    private int[] No_bg_picturesSignatureTour = {R.drawable.no_bg_geisel};
+    private int[] No_bg_picturesJourneyThruArt = {R.drawable.no_bg_staurt_collection};
+    private int[] No_bg_picturesAlumniTours = {R.drawable.no_bg_alumni};
+    private int[] No_bg_picturesCollegeTours = {R.drawable.no_bg_revelle, R.drawable.no_bg_marshall, R.drawable.no_bg_warren, R.drawable.no_bg_muir, R.drawable.no_bg_erc, R.drawable.no_bg_sixth};
+    private int[] No_bg_picturesAcademicSpots={R.drawable.no_bg_academic_sopts};
+    private int[] No_bg_picturesCampusLife={R.drawable.no_bg_campus_life};
     // Tracks if this page has been clicked; used to prevent multiple clicks.
     private ClickTracker clickTracker;
 
@@ -88,7 +103,7 @@ public class ToursPageFragment extends Fragment {
             timeset[i]=convertTime(stopsset[i]);
         }
         v = (ListViewForScrollView) getView().findViewById(R.id.signature_tour_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetSignatureTour, timeset, stopsset, picturesSignatureTour);
+        a = new ToursAdapter(this.getActivity(), nameSetSignatureTour, timeset, stopsset, picturesSignatureTour,No_bg_picturesSignatureTour);
         v.setAdapter(a);
          timeset=new String[nameSetAlumniTours.length];
          stopsset=new int[nameSetAlumniTours.length];
@@ -98,29 +113,34 @@ public class ToursPageFragment extends Fragment {
             timeset[i]=convertTime(stopsset[i]);
         }
         v = (ListViewForScrollView) getView().findViewById(R.id.alumniTours_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetAlumniTours, timeset, stopsset, picturesAlumniTours);
+        a = new ToursAdapter(this.getActivity(), nameSetAlumniTours, timeset, stopsset, picturesAlumniTours,No_bg_picturesAlumniTours);
         v.setAdapter(a);
 
         timeset=new String[nameSetAcademicSpots.length];
         stopsset=new int[nameSetAcademicSpots.length];
         for(int i=0;i<nameSetAcademicSpots.length;i++){
             Tour tour=tourDatabase.getByName(nameSetAcademicSpots[i]);
+            Log.e("nameSet",nameSetAcademicSpots[i] );
             stopsset[i]= tour.getPlaces().size();
             timeset[i]=convertTime(stopsset[i]);
         }
         v = (ListViewForScrollView) getView().findViewById(R.id.academic_spots_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetAcademicSpots, timeset, stopsset, picturesAcademicSpots);
+        a = new ToursAdapter(this.getActivity(), nameSetAcademicSpots, timeset, stopsset, picturesAcademicSpots, No_bg_picturesAcademicSpots);
         v.setAdapter(a);
 
         timeset=new String[nameSetCampusLife.length];
         stopsset=new int[nameSetCampusLife.length];
         for(int i=0;i<nameSetCampusLife.length;i++){
             Tour tour=tourDatabase.getByName(nameSetCampusLife[i]);
+            if(tour==null) {
+                Log.e("nameSet",nameSetCampusLife[i] );
+                break;
+            }
             stopsset[i]= tour.getPlaces().size();
             timeset[i]=convertTime(stopsset[i]);
         }
         v = (ListViewForScrollView) getView().findViewById(R.id.campus_life_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetCampusLife, timeset, stopsset, picturesCampusLife);
+        a = new ToursAdapter(this.getActivity(), nameSetCampusLife, timeset, stopsset, picturesCampusLife,No_bg_picturesCampusLife);
         v.setAdapter(a);
 
         timeset=new String[nameSetJourneyThruArt.length];
@@ -131,7 +151,7 @@ public class ToursPageFragment extends Fragment {
             timeset[i]=convertTime(stopsset[i]);
         }
         v = (ListViewForScrollView) getView().findViewById(R.id.journey_through_arts_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetJourneyThruArt, timeset, stopsset, picturesJourneyThruArt);
+        a = new ToursAdapter(this.getActivity(), nameSetJourneyThruArt, timeset, stopsset, picturesJourneyThruArt, No_bg_picturesJourneyThruArt);
         v.setAdapter(a);
 
         timeset=new String[nameSetCollegeTours.length];
@@ -142,7 +162,7 @@ public class ToursPageFragment extends Fragment {
             timeset[i]=convertTime(stopsset[i]);
         }
         v = (ListViewForScrollView) getView().findViewById(R.id.ucsd_special_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetCollegeTours, timeset, stopsset, picturesCollegeTours);
+        a = new ToursAdapter(this.getActivity(), nameSetCollegeTours, timeset, stopsset, picturesCollegeTours, No_bg_picturesCollegeTours);
         v.setAdapter(a);
 
         // Adjustment for ListViewForScrollView
@@ -158,11 +178,21 @@ public class ToursPageFragment extends Fragment {
             .findViewById(R.id.start_button)
             .setOnClickListener(clickTracker.getOnClickListener(featureComingSoonIntent));
     }
-    String convertTime(int numStop){
+    static String convertTime(int numStop){
         String time;
         if(numStop<3) time= 20*numStop+" Min";
-        else if(numStop<6) time=20*numStop/60+" Hour "+20*numStop%60+" Min";
-        else time=20*numStop/60+" Hours "+20*numStop%60+" Min";
+        else if(numStop<6) {
+            if(numStop==3) {
+                time=20*numStop/60+" Hour";
+            }
+            else time=20*numStop/60+" Hour "+20*numStop%60+" Min";
+        }
+        else {
+            if(numStop%3==0){
+                time=20*numStop/60+" Hours";
+            }
+            else time=20*numStop/60+" Hours "+20*numStop%60+" Min";
+        }
         return time;
     }
 }

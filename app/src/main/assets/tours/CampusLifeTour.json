@@ -1,5 +1,5 @@
 {
-    "name": "Triton’s Campus Life",
+    "name": "Triton’s Campus Life Tour",
     "type": "Campus Life Tour",
     "places": [
         "Price Center",
@@ -11,11 +11,11 @@
         "Oceanview Restaurant",
         "Cafe Ventanas",
         "The Bistro",
-        "RIMAC",
-        "Spanos",
+        "RIMAC Gym",
+
         "Canyon Vista",
-        "Canyonview Pool",
+        "Canyonview Aquatic Center",
         "Student Health Center",
-        "Bookstore"
+        "UCSD Bookstore"
     ]
 }

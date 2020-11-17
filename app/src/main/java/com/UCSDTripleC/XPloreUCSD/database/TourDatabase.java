@@ -1,6 +1,7 @@
 package com.UCSDTripleC.XPloreUCSD.database;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -66,6 +67,9 @@ public class TourDatabase {
         ArrayList<Landmark> landmarkArrayList = new ArrayList<>();
         for(String landmark : landmarks){
             landmarkArrayList.add(db.getByName(landmark));
+            if(db.getByName(landmark)==null){
+                Log.e("nullLandmark",landmark);
+            }
         }
         tour.setLandmarks(landmarkArrayList);
     }

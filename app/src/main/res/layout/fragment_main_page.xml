@@ -296,14 +296,14 @@
                 android:id="@+id/main_page_campus_life_subtitle_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="9dp"
                 android:text="@string/main_page_campus_life_subtitle"
                 android:gravity="start"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:letterSpacing="0.017"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/main_page_campus_life_title_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/main_page_campus_life_title_text_view" />
 

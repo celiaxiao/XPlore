@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,11 +44,12 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Button startButtonTourOverviewPage;
+    private Tour tour; //tour object for this page
     private String[] places = {"Geisel Library", "Price Center", "Fallen Star", "Biomedical Library", "Galbraith Hall"}; // Array of places
     private String tourName = "UC San Diego’s Landmark Tour";
     private String tourDescription = "A tour that highlights all must-see landmarks in UC San Diego";
     private String tourTime = "90 Min";
-    private ArrayList<Landmark> landmarkArrayList = new ArrayList<>();
+    private ArrayList<Landmark> landmarkArrayList ;
     private TextView tourPlaceNumberTextView;
 
     @Override
@@ -55,19 +57,23 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_overview_page);
         //default places lists
-        items = new ArrayList<>(Arrays.asList(places));
+        //items = new ArrayList<>(Arrays.asList(places));
 
         database = new LandmarkDatabase(this, "one by one");
         tourDatabase=new TourDatabase(this);
         //get the passed in tour name and picture source
         Bundle argument = getIntent().getExtras();
-        Tour tour;
-        int phtotsrc;
+        int phtotsrc = 0;
         if (argument != null) {
             String tourname =argument.getString("tour name");
             tour=tourDatabase.getByName(tourname);
             phtotsrc=argument.getInt("picture src");
+            landmarkArrayList=tour.getLandmarks();
+            this.tourName=tourname;
             items=tour.getPlaces();
+            //tourTime=ToursPageFragment.convertTime(items.size());
+            tourTime=items.size()*20+" Min";
+            if(items==null) Log.e("tourname",tourname);
         }
 
         // Basic Layout Components set up, contents of the components are temporarily
@@ -77,11 +83,11 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         TextView tourDescriptionTextView = (TextView) findViewById(R.id.tourDescriptionTextView);
         TextView tourTimeTextView = (TextView) findViewById(R.id.tourTimeTextView);
         tourPlaceNumberTextView = (TextView) findViewById(R.id.tourPlaceNumberTextView);
-        if ( items.size() <= 1 ){
-            tourPlaceNumberTextView.setText(items.size() + " stop");
+        if ( landmarkArrayList.size() <= 1 ){
+            tourPlaceNumberTextView.setText(landmarkArrayList.size() + " stop");
         }
         else{
-            tourPlaceNumberTextView.setText(items.size() + " stops");
+            tourPlaceNumberTextView.setText(landmarkArrayList.size() + " stops");
         }
         startButtonTourOverviewPage = (Button) findViewById(R.id.startButtonTourOverviewPage);
 
@@ -100,7 +106,7 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
                 for( int i = 0; i < items.size(); i++ ){
                     System.out.println("Original tour, landmark: " + items.get(i) );
                 }
-                items = tourList;
+                items = tour.getPlaces();;
                 if ( items.size() <= 1 ){
                     tourPlaceNumberTextView.setText(String.valueOf(items.size()) + " stop");
                 }
@@ -109,11 +115,16 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
                 }
             }
         }
-
-
-        tourImageView.setImageDrawable(getDrawable(R.drawable.geisel_pic));
+        
+        if(phtotsrc!=0){
+            tourImageView.setImageDrawable(getDrawable(phtotsrc));
+        }
+        else tourImageView.setImageDrawable(getDrawable(R.drawable.geisel_pic));
         tourNameTextView.setText(tourName);
+        //hide the tour description for now
         tourDescriptionTextView.setText(tourDescription);
+        tourDescriptionTextView.setVisibility(View.GONE);
+        
         tourTimeTextView.setText(tourTime);
 //        tourPlaceNumberTextView.setText(tourPlaceNumber);
         startButtonTourOverviewPage.setOnClickListener(new View.OnClickListener() {
@@ -131,9 +142,17 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
 
         //
 //        ArrayList<Landmark> landmarkArrayList = new ArrayList<>();
-        for(int i = 0; i < items.size(); i++){
-            landmarkArrayList.add(database.getByName(items.get(i)));
+        if(landmarkArrayList==null){
+            landmarkArrayList=new ArrayList<>();
+            for(int i = 0; i < items.size(); i++){
+                landmarkArrayList.add(database.getByName(items.get(i)));
+                if(landmarkArrayList.get(i)==null){
+                    Log.e("item name",items.get(i));
+                }
+            }
+
         }
+
 
         // RecyclerView implementation
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_tour_overview_page);

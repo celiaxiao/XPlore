@@ -17,14 +17,16 @@ public class ToursAdapter extends BaseAdapter {
     private String[] timeSet;
     private int[] stopsSet;
     private int[] pictures;
+    private int[] no_bg_pictures;
 
     private LayoutInflater mInflater;
 
-    public ToursAdapter(Context c, String[] n, String[] t, int[] s, int[] p){
+    public ToursAdapter(Context c, String[] n, String[] t, int[] s, int[] p,int[] no_bg_p){
         nameSet = n;
         timeSet = t;
         stopsSet = s;
         pictures = p;
+        no_bg_pictures=no_bg_p;
         PLACE_NUMBER = n.length;
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -56,7 +58,8 @@ public class ToursAdapter extends BaseAdapter {
         String name = nameSet[i];
         String time = timeSet[i];
         String stops = stopsSet[i] + " Stops";
-        int photo = pictures[i];
+        int no_bg_photo = no_bg_pictures[i];
+        int photo =pictures[i];
 
         nameTV.setText(name);
         timeTV.setText(time);
@@ -68,7 +71,7 @@ public class ToursAdapter extends BaseAdapter {
                 Intent intent = new Intent(v.getContext(), TourOverviewPage.class);
                 //TODO: get the tour string
                 intent.putExtra("tour name", name);
-                intent.putExtra("picture src", photo);
+                intent.putExtra("picture src", no_bg_photo);
                 v.getContext().startActivity(intent);
             }
         });
