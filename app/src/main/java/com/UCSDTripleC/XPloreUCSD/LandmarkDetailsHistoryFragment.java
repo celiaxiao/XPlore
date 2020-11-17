@@ -16,7 +16,6 @@ import com.UCSDTripleC.XPloreUCSD.database.Landmark;
 
 import java.util.ArrayList;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link LandmarkDetailsHistoryFragment#newInstance} factory method to
