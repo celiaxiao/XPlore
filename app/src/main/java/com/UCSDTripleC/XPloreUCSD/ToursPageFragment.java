@@ -48,13 +48,6 @@ public class ToursPageFragment extends Fragment {
     private int[] picturesAcademicSpots={R.drawable.tour_academic_studyspace};
     private int[] picturesCampusLife={R.drawable.tour_campus_life};
 
-    private int[] OVpicturesSignatureTour = {R.drawable.tour_signature_landmark};
-    private int[] OVpicturesJourneyThruArt = {R.drawable.tour_journey_stuart};
-    private int[] OVpicturesAlumniTours = {R.drawable.tour_alumni_2000};
-    private int[] OVpicturesCollegeTours = {R.drawable.tour_college_revelle, R.drawable.tour_college_marshall, R.drawable.tour_college_warren, R.drawable.tour_college_muir, R.drawable.tour_college_erc, R.drawable.tour_college_six};
-    private int[] OVpicturesAcademicSpots={R.drawable.tour_academic_studyspace};
-    private int[] OVpicturesCampusLife={R.drawable.tour_campus_life};
-
     private int[] No_bg_picturesSignatureTour = {R.drawable.no_bg_geisel};
     private int[] No_bg_picturesJourneyThruArt = {R.drawable.no_bg_staurt_collection};
     private int[] No_bg_picturesAlumniTours = {R.drawable.no_bg_alumni};
