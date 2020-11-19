@@ -11,5 +11,7 @@
         "Sun God",
         "What Hath God Wrought",
         "UCSD Bookstore"
-    ]
+    ],
+    "graphicsWithBackground": "tours/photos/bg/tour_stuart_collection.png",
+    "graphicsWithoutBackground": "tours/photos/nbg/no_bg_stuart_collection.png"
 }

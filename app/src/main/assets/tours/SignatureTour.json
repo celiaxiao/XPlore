@@ -17,5 +17,7 @@
         "Career Service Center",
         "Student Health Center",
         "UCSD Bookstore"
-    ]
+    ],
+    "graphicsWithBackground": "tours/photos/bg/tour_signature_landmark.png",
+    "graphicsWithoutBackground": "tours/photos/nbg/no_bg_geisel.png"
 }

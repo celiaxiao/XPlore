@@ -7,5 +7,7 @@
         "Sun God",
         "Main Gym",
         "Pines/Roots"
-    ]
+    ],
+    "graphicsWithBackground": "tours/photos/bg/tour_college_muir.png",
+    "graphicsWithoutBackground": "tours/photos/nbg/no_bg_muir.png"
 }

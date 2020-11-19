@@ -9,5 +9,7 @@
         "Warren Bear",
         "Atkinson Hall",
         "Canyon Vista"
-    ]
+    ],
+    "graphicsWithBackground": "tours/photos/bg/tour_college_warren.png",
+    "graphicsWithoutBackground": "tours/photos/nbg/no_bg_warren.png"
 }

@@ -14,5 +14,7 @@
         "64 Degrees",
         "Conrad Prebys Music Center",
         "UCSD Bookstore"
-    ]
+    ],
+    "graphicsWithBackground": "tours/photos/bg/tour_alumni_2000.png",
+    "graphicsWithoutBackground": "tours/photos/nbg/no_bg_alumni.png"
 }

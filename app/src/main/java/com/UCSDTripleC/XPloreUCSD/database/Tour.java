@@ -12,8 +12,8 @@ public class Tour {
     private ArrayList<Landmark> landmarks;
     //strings of places to be converted to landmark objects (if need be)
     private ArrayList<String> places;
-    private ArrayList<String> graphicsWithBackground;
-    private ArrayList<String> graphicsWithoutBackground;
+    private String graphicsWithBackground;
+    private String graphicsWithoutBackground;
 
 
     /**
@@ -28,8 +28,8 @@ public class Tour {
      */
     public Tour(String name, String type, ArrayList<Landmark> landmarks,
                 ArrayList<String> places,
-                ArrayList<String> graphicsWithBackground,
-                ArrayList<String> graphicsWithoutBackground) {
+                String graphicsWithBackground,
+                String graphicsWithoutBackground) {
         this.name = name;
         this.type = type;
         this.landmarks = landmarks;
@@ -52,11 +52,11 @@ public class Tour {
         return places;
     }
 
-    public ArrayList<String> getGraphicsWithBackground() {
+    public String getGraphicsWithBackground() {
         return graphicsWithBackground;
     }
 
-    public ArrayList<String> getGraphicsWithoutBackground() {
+    public String getGraphicsWithoutBackground() {
         return graphicsWithoutBackground;
     }
 

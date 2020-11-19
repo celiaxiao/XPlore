@@ -4,5 +4,7 @@
     "places": [
         "Peterson Hall",
         "Oceanview Restaurant"
-    ]
+    ],
+    "graphicsWithBackground": "tours/photos/bg/tour_college_marshall.png",
+    "graphicsWithoutBackground": "tours/photos/nbg/no_bg_marshall.png"
 }

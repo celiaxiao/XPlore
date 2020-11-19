@@ -7,5 +7,7 @@
         "Student Services Center",
         "Galbraith Hall",
         "Biomedical Library"
-    ]
+    ],
+    "graphicsWithBackground": "tours/photos/bg/tour_academic_study_space.png",
+    "graphicsWithoutBackground": "tours/photos/nbg/no_bg_academic_space.png"
 }

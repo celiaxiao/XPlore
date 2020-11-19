@@ -7,5 +7,7 @@
         "York Hall",
         "Galbraith Hall",
         "64 Degrees"
-    ]
+    ],
+    "graphicsWithBackground": "tours/photos/bg/tour_college_revelle.png",
+    "graphicsWithoutBackground": "tours/photos/nbg/no_bg_revelle.png"
 }

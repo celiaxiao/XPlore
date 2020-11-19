@@ -17,5 +17,7 @@
         "Canyonview Aquatic Center",
         "Student Health Center",
         "UCSD Bookstore"
-    ]
+    ],
+    "graphicsWithBackground": "tours/photos/bg/tour_campus_life.png",
+    "graphicsWithoutBackground": "tours/photos/nbg/no_bg_campus_life.png"
 }
