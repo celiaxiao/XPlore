@@ -7,5 +7,7 @@
         "Cafe Ventanas",
         "Rady School of Management",
         "The Bistro"
-    ]
+    ],
+  "graphicsWithBackground": "tours/photos/bg/tour_college_erc.png",
+  "graphicsWithoutBackground": "tours/photos/nbg/no_bg_erc.png"
 }

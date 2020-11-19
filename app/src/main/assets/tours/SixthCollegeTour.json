@@ -4,5 +4,7 @@
     "places": [
         "Conrad Prebys Music Center",
         "Student Services Center"
-    ]
+    ],
+    "graphicsWithBackground": "tours/photos/bg/tour_college_six.png",
+    "graphicsWithoutBackground": "tours/photos/nbg/no_bg_sixth.png"
 }
