@@ -2,12 +2,17 @@ package com.UCSDTripleC.XPloreUCSD;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.UCSDTripleC.XPloreUCSD.database.*;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class ToursAdapter extends BaseAdapter {
 
@@ -16,17 +21,17 @@ public class ToursAdapter extends BaseAdapter {
     private String[] nameSet;
     private String[] timeSet;
     private int[] stopsSet;
-    private int[] pictures;
-    private int[] no_bg_pictures;
+    private Drawable[] pictures;
+
 
     private LayoutInflater mInflater;
 
-    public ToursAdapter(Context c, String[] n, String[] t, int[] s, int[] p,int[] no_bg_p){
+    public ToursAdapter(Context c, String[] n, String[] t, int[] s, Drawable[] p){
         nameSet = n;
         timeSet = t;
         stopsSet = s;
         pictures = p;
-        no_bg_pictures=no_bg_p;
+
         PLACE_NUMBER = n.length;
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -58,20 +63,22 @@ public class ToursAdapter extends BaseAdapter {
         String name = nameSet[i];
         String time = timeSet[i];
         String stops = stopsSet[i] + " Stops";
-        int no_bg_photo = no_bg_pictures[i];
-        int photo =pictures[i];
+        Drawable photo=pictures[i];
+
 
         nameTV.setText(name);
         timeTV.setText(time);
         stopsTV.setText(stops);
-        photoIV.setImageResource(photo);
-        v.setOnClickListener(new View.OnClickListener() {
+        photoIV.setImageDrawable(photo);
+
+
+            v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), TourOverviewPage.class);
                 //TODO: get the tour string
                 intent.putExtra("tour name", name);
-                intent.putExtra("picture src", no_bg_photo);
+
                 v.getContext().startActivity(intent);
             }
         });

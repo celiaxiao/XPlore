@@ -12,6 +12,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -26,6 +27,8 @@ import com.UCSDTripleC.XPloreUCSD.database.Tour;
 import com.UCSDTripleC.XPloreUCSD.database.TourDatabase;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -63,11 +66,12 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
         tourDatabase=new TourDatabase(this);
         //get the passed in tour name and picture source
         Bundle argument = getIntent().getExtras();
-        int phtotsrc = 0;
+        String photosrc ="";
         if (argument != null) {
             String tourname =argument.getString("tour name");
             tour=tourDatabase.getByName(tourname);
-            phtotsrc=argument.getInt("picture src");
+            //phtotsrc=argument.getInt("picture src");
+            photosrc=tour.getGraphicsWithoutBackground();
             landmarkArrayList=tour.getLandmarks();
             this.tourName=tourname;
             items=tour.getPlaces();
@@ -116,8 +120,19 @@ public class TourOverviewPage extends AppCompatActivity implements RecyclerViewA
             }
         }
         
-        if(phtotsrc!=0){
-            tourImageView.setImageDrawable(getDrawable(phtotsrc));
+        if(photosrc!=null){
+            try {
+                // get input stream
+                //InputStream ims = getAssets().open(currLandmark.getOtherPhotos().get(position));
+                InputStream ims = getAssets().open(photosrc);
+                // load image as Drawable
+                Drawable d = Drawable.createFromStream(ims, null);
+                // set image to ImageView
+                tourImageView.setImageDrawable(d);
+            }
+            catch(IOException ex) {
+                ex.printStackTrace();
+            }
         }
         else tourImageView.setImageDrawable(getDrawable(R.drawable.geisel_pic));
         tourNameTextView.setText(tourName);

@@ -1,12 +1,17 @@
 package com.UCSDTripleC.XPloreUCSD;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +20,9 @@ import androidx.fragment.app.Fragment;
 import com.UCSDTripleC.XPloreUCSD.database.Tour;
 import com.UCSDTripleC.XPloreUCSD.database.TourDatabase;
 import com.UCSDTripleC.XPloreUCSD.utils.ClickTracker;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,26 +42,11 @@ public class ToursPageFragment extends Fragment {
     private String[] nameSetCollegeTours = {"Revelle College Tour", "Marshall College Tour", "Warren College Tour", "Muir College Tour", "Eleanor Roosevelt College Tour",  "Sixth College Tour"};
     private String[] nameSetAcademicSpots={"Study Spaces On Campus Tour"};
     private String[] nameSetCampusLife={"Triton’s Campus Life Tour"};
-    private String[] timeSetSignatureTour = {"1 Hour 30 Min"};
-    private String[] timeSetJourneyThruArt = {"1 Hour"};
-    private String[] timeSetAlumniTours = {"1 Hour 30 Min"};
-    private String[] timeSetCollegeTours = {"30 Min", "15 Min", "55 Min", "45 Min", "45 Min", "10 Min"};
-    private String[] timeSetAcademicSpots={"45 Min"};
-    private String[] timeSetCampusLife={"1 Hour 50 Min"};
 
-    private int[] picturesSignatureTour = {R.drawable.tour_signature_landmark};
-    private int[] picturesJourneyThruArt = {R.drawable.tour_journey_stuart};
-    private int[] picturesAlumniTours = {R.drawable.tour_alumni_2000};
-    private int[] picturesCollegeTours = {R.drawable.tour_college_revelle, R.drawable.tour_college_marshall, R.drawable.tour_college_warren, R.drawable.tour_college_muir, R.drawable.tour_college_erc, R.drawable.tour_college_six};
-    private int[] picturesAcademicSpots={R.drawable.tour_academic_studyspace};
-    private int[] picturesCampusLife={R.drawable.tour_campus_life};
-
-    private int[] No_bg_picturesSignatureTour = {R.drawable.no_bg_geisel};
-    private int[] No_bg_picturesJourneyThruArt = {R.drawable.no_bg_staurt_collection};
-    private int[] No_bg_picturesAlumniTours = {R.drawable.no_bg_alumni};
-    private int[] No_bg_picturesCollegeTours = {R.drawable.no_bg_revelle, R.drawable.no_bg_marshall, R.drawable.no_bg_warren, R.drawable.no_bg_muir, R.drawable.no_bg_erc, R.drawable.no_bg_sixth};
-    private int[] No_bg_picturesAcademicSpots={R.drawable.no_bg_academic_sopts};
-    private int[] No_bg_picturesCampusLife={R.drawable.no_bg_campus_life};
+    private String[][] tours_nameSet={nameSetSignatureTour,nameSetJourneyThruArt,nameSetCampusLife,nameSetAcademicSpots,
+                                        nameSetAlumniTours,nameSetCollegeTours};
+    private int[] recyclerviewId={R.id.signature_tour_lv,R.id.journey_through_arts_lv,R.id.campus_life_lv,
+                                        R.id.academic_spots_lv,R.id.alumniTours_lv,R.id.ucsd_special_lv};
     // Tracks if this page has been clicked; used to prevent multiple clicks.
     private ClickTracker clickTracker;
 
@@ -88,75 +81,35 @@ public class ToursPageFragment extends Fragment {
         tourDatabase=new TourDatabase(getContext());
 
         //dynamically set up tour overview details
-        String[] timeset=new String[nameSetSignatureTour.length];
-        int[] stopsset=new int[nameSetSignatureTour.length];
-        for(int i=0;i<nameSetSignatureTour.length;i++){
-            Tour tour=tourDatabase.getByName(nameSetSignatureTour[i]);
-            stopsset[i]= tour.getPlaces().size();
-            timeset[i]=convertTime(stopsset[i]);
-        }
-        v = (ListViewForScrollView) getView().findViewById(R.id.signature_tour_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetSignatureTour, timeset, stopsset, picturesSignatureTour,No_bg_picturesSignatureTour);
-        v.setAdapter(a);
-         timeset=new String[nameSetAlumniTours.length];
-         stopsset=new int[nameSetAlumniTours.length];
-        for(int i=0;i<nameSetAlumniTours.length;i++){
-            Tour tour=tourDatabase.getByName(nameSetAlumniTours[i]);
-            stopsset[i]= tour.getPlaces().size();
-            timeset[i]=convertTime(stopsset[i]);
-        }
-        v = (ListViewForScrollView) getView().findViewById(R.id.alumniTours_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetAlumniTours, timeset, stopsset, picturesAlumniTours,No_bg_picturesAlumniTours);
-        v.setAdapter(a);
+        for(int k=0;k<tours_nameSet.length;k++) {
+            String[] nameset=tours_nameSet[k];
+            String[] timeset = new String[nameset.length];
+            int[] stopsset = new int[nameset.length];
+            Drawable[] graphicWithBg = new Drawable[nameset.length];
 
-        timeset=new String[nameSetAcademicSpots.length];
-        stopsset=new int[nameSetAcademicSpots.length];
-        for(int i=0;i<nameSetAcademicSpots.length;i++){
-            Tour tour=tourDatabase.getByName(nameSetAcademicSpots[i]);
-            Log.e("nameSet",nameSetAcademicSpots[i] );
-            stopsset[i]= tour.getPlaces().size();
-            timeset[i]=convertTime(stopsset[i]);
-        }
-        v = (ListViewForScrollView) getView().findViewById(R.id.academic_spots_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetAcademicSpots, timeset, stopsset, picturesAcademicSpots, No_bg_picturesAcademicSpots);
-        v.setAdapter(a);
-
-        timeset=new String[nameSetCampusLife.length];
-        stopsset=new int[nameSetCampusLife.length];
-        for(int i=0;i<nameSetCampusLife.length;i++){
-            Tour tour=tourDatabase.getByName(nameSetCampusLife[i]);
-            if(tour==null) {
-                Log.e("nameSet",nameSetCampusLife[i] );
-                break;
+            for (int i = 0; i < nameset.length; i++) {
+                Tour tour = tourDatabase.getByName(nameset[i]);
+                stopsset[i] = tour.getPlaces().size();
+                timeset[i] = convertTime(stopsset[i]);
+                String graphic = tour.getGraphicsWithBackground();
+                try {
+                    // get input stream
+                    //InputStream ims = getAssets().open(currLandmark.getOtherPhotos().get(position));
+                    InputStream ims = getContext().getAssets().open(graphic);
+                    // load image as Drawable
+                    Drawable d = Drawable.createFromStream(ims, null);
+                    // set image to ImageView
+                    graphicWithBg[i]=d;
+                }
+                catch(IOException ex) {
+                    ex.printStackTrace();
+                }
             }
-            stopsset[i]= tour.getPlaces().size();
-            timeset[i]=convertTime(stopsset[i]);
+            v = (ListViewForScrollView) getView().findViewById(recyclerviewId[k]);
+            a = new ToursAdapter(this.getActivity(), nameset, timeset, stopsset, graphicWithBg);
+            v.setAdapter(a);
         }
-        v = (ListViewForScrollView) getView().findViewById(R.id.campus_life_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetCampusLife, timeset, stopsset, picturesCampusLife,No_bg_picturesCampusLife);
-        v.setAdapter(a);
 
-        timeset=new String[nameSetJourneyThruArt.length];
-        stopsset=new int[nameSetJourneyThruArt.length];
-        for(int i=0;i<nameSetJourneyThruArt.length;i++){
-            Tour tour=tourDatabase.getByName(nameSetJourneyThruArt[i]);
-            stopsset[i]= tour.getPlaces().size();
-            timeset[i]=convertTime(stopsset[i]);
-        }
-        v = (ListViewForScrollView) getView().findViewById(R.id.journey_through_arts_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetJourneyThruArt, timeset, stopsset, picturesJourneyThruArt, No_bg_picturesJourneyThruArt);
-        v.setAdapter(a);
-
-        timeset=new String[nameSetCollegeTours.length];
-        stopsset=new int[nameSetCollegeTours.length];
-        for(int i=0;i<nameSetCollegeTours.length;i++){
-            Tour tour=tourDatabase.getByName(nameSetCollegeTours[i]);
-            stopsset[i]= tour.getPlaces().size();
-            timeset[i]=convertTime(stopsset[i]);
-        }
-        v = (ListViewForScrollView) getView().findViewById(R.id.ucsd_special_lv);
-        a = new ToursAdapter(this.getActivity(), nameSetCollegeTours, timeset, stopsset, picturesCollegeTours, No_bg_picturesCollegeTours);
-        v.setAdapter(a);
 
         // Adjustment for ListViewForScrollView
         sv = (ScrollView) getView().findViewById(R.id.tours_sv);
@@ -188,4 +141,5 @@ public class ToursPageFragment extends Fragment {
         }
         return time;
     }
+
 }
